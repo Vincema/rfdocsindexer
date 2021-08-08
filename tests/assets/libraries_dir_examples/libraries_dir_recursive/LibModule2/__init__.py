@@ -5,7 +5,7 @@ ROBOT_LIBRARY_VERSION = "1.2.3"
 
 @library
 class LibModule2CustomName:
-    """LibModule1 library"""
+    """LibModule2CustomName library"""
 
     def __init__(self):
         pass

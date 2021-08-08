@@ -1,5 +1,4 @@
 .coverage
-.hypothesis
 .mypy_cache
 .tox
 .vscode

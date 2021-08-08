@@ -1,11 +1,8 @@
+from pathlib import Path
 from typing import List
-from unittest import mock
 
 import pydantic
 import pytest
-import toml
-from hypothesis import assume, given
-from hypothesis import strategies as st
 
 from rfdocsindexer.config import (
     ROBOTFRAMEWORK_EXTERNAL_RESOURCES,
@@ -15,23 +12,32 @@ from rfdocsindexer.config import (
 )
 
 # Example config dicts
-CONFIG_DICT_OTHER_SECTION = {"section1": {"key1": "value1", "key2": "value2"}}
-CONFIG_DICT_VALID_RFDOCSINDEXER_SECTION = {
-    "rfdocsindexer": {"library_paths": ["path1", "path2"]}
-}
-CONFIG_DICT_UNKNOWN_KEY_RFDOCSINDEXER_SECTION = {
-    "rfdocsindexer": {"invalidkey": "invalidvalue"}
-}
-CONFIG_DICT_EMPTY_RFDOCSINDEXER_SECTION = {"rfdocsindexer": None}
-CONFIG_DICT_WITHOUT_RFDOCSINDEXER_SECTION = {**CONFIG_DICT_OTHER_SECTION}
-CONFIG_DICT_VALID_RFDOCSINDEXER_SECTION = {
-    **CONFIG_DICT_OTHER_SECTION,
-    **CONFIG_DICT_VALID_RFDOCSINDEXER_SECTION,
-}
-CONFIG_DICT_INVALID_RFDOCSINDEXER_SECTION = {
-    **CONFIG_DICT_OTHER_SECTION,
-    **CONFIG_DICT_UNKNOWN_KEY_RFDOCSINDEXER_SECTION,
-}
+OTHER_SECTION = """
+[section1]
+key1 = "value1"
+key2 = "value2"
+"""
+RFDOCSINDEXER_SECTION = """
+[rfdocsindexer]
+"""
+VALID_KEY = """
+library_paths = ["path1", "path2"]
+"""
+INVALID_KEY = """
+invalidkey = "value"
+"""
+TOML_BAD_KEY_VALUE = """
+bad_value = True
+"""
+CONFIG_WITHOUT_RFDOCSINDEXER_SECTION = OTHER_SECTION
+CONFIG_BAD_KEY_VALUE = OTHER_SECTION + TOML_BAD_KEY_VALUE
+CONFIG_WITH_EMPTY_RFDOCSINDEXER_SECTION = OTHER_SECTION + RFDOCSINDEXER_SECTION
+CONFIG_WITH_RFDOCSINDEXER_SECTION_VALID = (
+    CONFIG_WITH_EMPTY_RFDOCSINDEXER_SECTION + VALID_KEY
+)
+CONFIG_WITH_RFDOCSINDEXER_SECTION_INVALID = (
+    CONFIG_WITH_RFDOCSINDEXER_SECTION_VALID + INVALID_KEY
+)
 
 
 def test_parse_configfile_no_file():
@@ -39,61 +45,58 @@ def test_parse_configfile_no_file():
     assert ret == Config()
 
 
-@mock.patch("toml.load")
-def test_parse_configfile_decode_error(mocked_toml_load, tmp_path):
-    for err in (toml.TomlDecodeError, TypeError, FileNotFoundError):
-        mocked_toml_load.side_effect = err
+def test_parse_configfile_decode_error(tmp_path: Path):
+    config_file = tmp_path / "config.toml"
+    config_file.write_text(CONFIG_BAD_KEY_VALUE)
 
-        with pytest.raises(RuntimeError) as raised_err:
-            parse_configfile(tmp_path)
-        assert "Decoding error: " in str(raised_err.value), "Invalid error message"
-
-        mocked_toml_load.assert_called_once_with(
-            tmp_path
-        ), "toml.load() not called once or with wrong args"
-
-        mocked_toml_load.reset_mock()
-
-
-@mock.patch("toml.load", return_value=CONFIG_DICT_WITHOUT_RFDOCSINDEXER_SECTION)
-def test_parse_configfile_no_rfdocsindexer_section(mocked_toml_load, tmp_path):
     with pytest.raises(RuntimeError) as raised_err:
-        parse_configfile(tmp_path)
+        parse_configfile(config_file)
+    assert "Decoding error:" in str(raised_err.value), "Invalid error message"
+
+
+def test_parse_configfile_no_rfdocsindexer_section(tmp_path: Path):
+    config_file = tmp_path / "config.toml"
+    config_file.write_text(CONFIG_WITHOUT_RFDOCSINDEXER_SECTION)
+
+    with pytest.raises(RuntimeError) as raised_err:
+        parse_configfile(config_file)
     assert 'The config file does not contain a section named "rfdocsindexer"' in str(
         raised_err.value
     ), "Invalid error message"
 
 
-@mock.patch("toml.load", return_value=CONFIG_DICT_EMPTY_RFDOCSINDEXER_SECTION)
-def test_parse_configfile_empty_rfdocsindexer_section(mocked_toml_load, tmp_path):
-    ret = parse_configfile(tmp_path)
+def test_parse_configfile_empty_rfdocsindexer_section(tmp_path: Path):
+    config_file = tmp_path / "config.toml"
+    config_file.write_text(CONFIG_WITH_EMPTY_RFDOCSINDEXER_SECTION)
+
+    ret = parse_configfile(config_file)
     assert ret == Config()
 
 
-@mock.patch("toml.load", return_value=CONFIG_DICT_VALID_RFDOCSINDEXER_SECTION)
-def test_parse_configfile_valid_rfdocsindexer_section(mocked_toml_load, tmp_path):
-    ret = parse_configfile(tmp_path)
-    assert ret == Config(**CONFIG_DICT_VALID_RFDOCSINDEXER_SECTION["rfdocsindexer"])
+def test_parse_configfile_valid(tmp_path: Path):
+    config_file = tmp_path / "config.toml"
+    config_file.write_text(CONFIG_WITH_RFDOCSINDEXER_SECTION_VALID)
+
+    ret = parse_configfile(config_file)
+    assert ret == Config(library_paths=["path1", "path2"])
 
 
-@mock.patch("toml.load", return_value=CONFIG_DICT_INVALID_RFDOCSINDEXER_SECTION)
-def test_parse_configfile_invalid_rfdocsindexer_section(mocked_toml_load, tmp_path):
+def test_parse_configfile_invalid_rfdocsindexer_section(tmp_path: Path):
+    config_file = tmp_path / "config.toml"
+    config_file.write_text(CONFIG_WITH_RFDOCSINDEXER_SECTION_INVALID)
+
     with pytest.raises(RuntimeError) as raised_err:
-        parse_configfile(tmp_path)
+        parse_configfile(config_file)
     assert "Bad configuration: " in str(raised_err.value), "Invalid error message"
 
 
-@given(st.lists(st.from_regex(r"^[a-zA-Z0-9_.]+$")))
-def test_config_validator_library_names_are_module_name(val_list: List[str]):
-    for val in val_list:
-        assume(val != "")
-        assume(not val.startswith(".") and not val.endswith(".") and ".." not in val)
-
-    Config(library_names=val_list)
+@pytest.mark.parametrize("name", ["Ab1", "Ab1.cD2.Ef3"])
+def test_config_validator_library_names_are_module_name(name: List[str]):
+    Config(library_names=["ABCdef123", name])
 
 
 @pytest.mark.parametrize("name", ["abc.", ".def", "hij..klm", "abc!def"])
-def test_config_validator_library_names_not_module_name(name):
+def test_config_validator_library_names_not_module_name(name: str):
     with pytest.raises(pydantic.ValidationError) as raised_err:
         Config(library_names=["abc", "def.ghi", "test1", name])
     assert "Invalid module name: " in str(raised_err.value), "Invalid error message"

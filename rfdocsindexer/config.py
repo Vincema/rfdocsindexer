@@ -35,8 +35,8 @@ class Config(BaseModel):
 
     library_paths: List[str] = []
     library_names: List[str] = []
-    no_machine_readable_libdoc: bool = False
-    extra_pythonpath: List[DirectoryPath] = []
+    build_machine_readable_libdoc: bool = True
+    extra_modules_searchpaths: List[DirectoryPath] = []
     include_robotframework_resources: bool = True
     external_resources: List[str] = []
     index_title: str = "Robot Framework Documentation Index"
@@ -71,8 +71,10 @@ def parse_configfile(config_file: Optional[Path]) -> Config:
 
     Args:
         config_file (pathlib.Path) : Path to the config file.
+
     Returns:
         (Config) : Config object.
+
     Raises:
         RuntimeError: If an error is encountered while parsing the config file.
     """

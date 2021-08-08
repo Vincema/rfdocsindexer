@@ -32,6 +32,7 @@ def cli(config_file: Optional[Path], output_dir: Path) -> None:
         config = parse_configfile(config_file)
     except RuntimeError as err:
         raise click.ClickException(f"When parsing config file: {err}")
+
     try:
         with redirect_stdout(io.StringIO()) as output:
             index_documentation(config, output_dir)

@@ -6,12 +6,12 @@ authors = ["Vincent Maire <maire.vincent31@gmail.com>"]
 readme = "README.md"
 
 [tool.poetry.scripts]
-rfdocsindexer = "rfdocsindexer.cli:cli"
+indexrfdocs = "rfdocsindexer.cli:cli"
 
 [tool.poetry.dependencies]
-python = "^3.9"
+python = "^3.6.2"
 Jinja2 = "^3.0.1"
-robotframework = "^4.1"
+robotframework = "^4"
 click = "^8.0.1"
 pydantic = "^1.8.2"
 toml = "^0.10.2"
@@ -26,7 +26,6 @@ types-toml = "^0.1.4"
 tox = "^3.24.1"
 tox-poetry-installer = {extras = ["poetry"], version = "^0.8.1"}
 pytest = "^6.2.4"
-hypothesis = "^6.14.6"
 
 [build-system]
 requires = ["poetry-core"]
