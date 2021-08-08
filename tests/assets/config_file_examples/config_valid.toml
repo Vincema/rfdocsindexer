@@ -1,0 +1,6 @@
+[rfdocsindexer]
+library_paths = ["**/libraries_dir_recursive/lib*", "**/lol"]
+library_names = ["LibModule1", "LibModule2.LibModule2CustomName"]
+extra_pythonpath = ["tests/assets/libraries_dir_examples/libraries_dir_recursive/"]
+no_machine_readable_libdoc = false
+external_resources = ["RF Homepage | https://robotframework.org/"] 

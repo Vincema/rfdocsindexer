@@ -1,0 +1,44 @@
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>RF docs index</title>
+    <meta name="description" content="RF docs index">
+    <meta name="author" content="Vincent Maire maire.vincent31@gmail.com">
+
+    <link rel="icon" href="/favicon.ico">
+
+    <style>
+        body {
+            margin: 2em;
+            font-family: 'Open Sans', sans-serif;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>{{ title }}</h1>
+    {% if ext_resources %}
+    <h2>
+        External resources
+    </h2>
+    <ul>
+        {% for resource in ext_resources|sort(attribute='name') %}
+        <li><a href="{{ resource.origin }}">{{ resource.name }}</a></li>
+        {% endfor %}
+    </ul>
+    {% endif %} {% if html_libdocs %}
+    <h2>
+        Imported Libraries
+    </h2>
+    <ul>
+        {% for doc in html_libdocs|sort(attribute='name') %}
+        <li><a href="{{ doc.creation_path.relative_to(filepath)|string }}">{{ doc.name }}</a></li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+</body>
+
+</html>

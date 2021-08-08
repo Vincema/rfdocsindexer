@@ -1,0 +1,10 @@
+.coverage
+.hypothesis
+.mypy_cache
+.tox
+.vscode
+
+dist
+rfdocs
+
+**/__pycache__
