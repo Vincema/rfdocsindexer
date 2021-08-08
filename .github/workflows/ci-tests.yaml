@@ -1,0 +1,35 @@
+name: Tests And Lint
+
+on: [push]
+
+jobs:
+
+  tests:
+
+    strategy:
+      matrix:
+        python: [3.7, 3.9]
+        platform: [ubuntu-latest, windows-latest]
+
+    runs-on: ${{ matrix.platform }}
+
+    steps:
+      - name: Checkout project
+        uses: actions/checkout@v2
+
+      - name: Setup Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python }}
+
+      - name: Install poetry and setup environment with it
+        run: |
+          pip install pip --upgrade
+          pip install poetry
+
+          poetry install
+
+          poetry run pip install tox tox-gh-actions
+
+      - name: Run Tox
+        run: poetry run tox

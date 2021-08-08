@@ -1,0 +1,9 @@
+# Generate libdocs the test assets in "library_dir_recursive"
+
+[rfdocsindexer]
+library_paths = ["**/libraries_dir_recursive/lib*"]
+library_names = ["LibModule1", "LibModule2.LibModule2CustomName", "LibModule3"]
+extra_modules_searchpaths = ["tests/assets/libraries_dir_examples/libraries_dir_recursive/", "tests/assets/libraries_dir_examples/libraries_dir_recursive/subdir1/"]
+build_machine_readable_libdoc = true
+external_resources = ["RF homepage | https://robotframework.org/", "http://example.org"] 
+include_robotframework_resources = true

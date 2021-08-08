@@ -1,0 +1,4 @@
+[flake8]
+max-line-length = 88
+exclude = tests/assets/*
+ignore = E302, E701, E704, W503
