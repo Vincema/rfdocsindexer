@@ -42,10 +42,10 @@ def glob_expr_list_will_expand(tmp_path: Path) -> List[str]:
     (tmp_path / "file3.file").write_text("")
     (tmp_path / "directory").mkdir()
     return [
-        os.path.join(tmp_path.resolve().as_posix(), "file1.file"),
-        os.path.join(tmp_path.resolve().as_posix(), "file2.*"),
-        os.path.join(tmp_path.resolve().as_posix(), "*3.file"),
-        os.path.join(tmp_path.resolve().as_posix(), "*directory"),
+        os.path.join((tmp_path.resolve()), "file1.file"),
+        os.path.join((tmp_path.resolve()), "file2.*"),
+        os.path.join((tmp_path.resolve()), "*3.file"),
+        os.path.join((tmp_path.resolve()), "*directory"),
     ]
 
 
@@ -69,7 +69,7 @@ def test_expand_and_filter_filepaths_file_not_found_stdout_should_contain_warn(c
 def test_expand_and_filter_filepaths_file_found(glob_expr_list_will_expand: List[str]):
     valid_paths = _expand_and_filter_filepaths(glob_expr_list_will_expand)
 
-    valid_paths_str = list(map(lambda x: x.as_posix(), valid_paths))
+    valid_paths_str = list(map(lambda x: str(x), valid_paths))
     assert len(valid_paths_str) == 3, "3 files should be found"
     assert not any(
         "directory" in x for x in valid_paths_str
@@ -97,18 +97,18 @@ def test_get_libdoc_from_libname_or_path_from_pathlib_path_no_error():
 
 def test_get_libdoc_from_libname_or_path_from_str_path_no_error():
     libdoc = _get_libdoc_from_libname_or_path(
-        (LIBRARIES_DIR_EXAMPLES / "libraries_dir_recursive" / "lib1.resource")
-        .resolve()
-        .as_posix()
+        str(
+            (
+                LIBRARIES_DIR_EXAMPLES / "libraries_dir_recursive" / "lib1.resource"
+            ).resolve()
+        )
     )
 
     assert libdoc.name == "lib1"
 
 
 def test_get_libdoc_from_libname_or_path_from_name_no_error():
-    sys.path.append(
-        (LIBRARIES_DIR_EXAMPLES / "libraries_dir_recursive").resolve().as_posix()
-    )
+    sys.path.append(str((LIBRARIES_DIR_EXAMPLES / "libraries_dir_recursive").resolve()))
     libdoc = _get_libdoc_from_libname_or_path("LibModule1")
 
     assert libdoc.name == "LibModule1"
@@ -140,9 +140,7 @@ def test_create_rflibdata_object_from_libname_or_path_from_pathlib_path():
 
 
 def test_create_rflibdata_object_from_libname_or_path_from_name():
-    sys.path.append(
-        (LIBRARIES_DIR_EXAMPLES / "libraries_dir_recursive").resolve().as_posix()
-    )
+    sys.path.append(str((LIBRARIES_DIR_EXAMPLES / "libraries_dir_recursive").resolve()))
     libdata = _create_rflibdata_object_from_libname_or_path("LibModule1")
 
     assert libdata.name == "LibModule1"
@@ -150,9 +148,7 @@ def test_create_rflibdata_object_from_libname_or_path_from_name():
 
 
 def test_get_libs_from_paths():
-    libdir_strpath = (
-        (LIBRARIES_DIR_EXAMPLES / "libraries_dir_recursive").resolve().as_posix()
-    )
+    libdir_strpath = (LIBRARIES_DIR_EXAMPLES / "libraries_dir_recursive").resolve()
     glob_paths = [os.path.join(libdir_strpath, "lib*.resource")]
     libs = _get_libs_from_paths(glob_paths)
 

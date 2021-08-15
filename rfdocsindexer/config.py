@@ -35,11 +35,10 @@ class Config(BaseModel):
 
     library_paths: List[str] = []
     library_names: List[str] = []
-    build_machine_readable_libdoc: bool = True
+    build_machine_readable_libdoc: bool = False
     extra_modules_searchpaths: List[DirectoryPath] = []
     include_robotframework_resources: bool = True
     external_resources: List[str] = []
-    index_title: str = "Robot Framework Documentation Index"
 
     class Config:
         extra = "forbid"

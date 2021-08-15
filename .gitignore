@@ -3,7 +3,10 @@
 .tox
 .vscode
 
+poetry.lock
+
 dist
 rfdocs
+atests_results
 
 **/__pycache__

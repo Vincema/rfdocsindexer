@@ -9,7 +9,7 @@ readme = "README.md"
 indexrfdocs = "rfdocsindexer.cli:cli"
 
 [tool.poetry.dependencies]
-python = "^3.6.2"
+python = "^3.7"
 Jinja2 = "^3.0.1"
 robotframework = "^4"
 click = "^8.0.1"
@@ -26,6 +26,8 @@ types-toml = "^0.1.4"
 tox = "^3.24.1"
 tox-poetry-installer = {extras = ["poetry"], version = "^0.8.1"}
 pytest = "^6.2.4"
+robotframework-tidy = "^1.4.0"
+
 
 [build-system]
 requires = ["poetry-core"]

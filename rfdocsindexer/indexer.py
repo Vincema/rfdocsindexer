@@ -64,7 +64,7 @@ def _get_libdoc_from_libname_or_path(
         RuntimeError: If an error occurs during process.
     """
     if isinstance(library_name_or_path, Path):
-        library_name_or_path = library_name_or_path.as_posix()
+        library_name_or_path = str(library_name_or_path)
     try:
         return DocumentationBuilder(library_name_or_path).build(library_name_or_path)
     except DataError as err:

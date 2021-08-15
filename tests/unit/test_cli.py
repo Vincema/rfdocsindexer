@@ -1,8 +1,10 @@
+import shutil
 from pathlib import Path
 from stat import S_IREAD
-import shutil
-from click.testing import CliRunner
+
 import pytest
+from click.testing import CliRunner
+
 from rfdocsindexer.cli import cli
 from tests.unit.conftest import CONFIG_FILE_EXAMPLES
 from tests.unit.testdata import output_libdocs_html_name
@@ -18,7 +20,7 @@ def test_cli_config_error():
     config_file = CONFIG_FILE_EXAMPLES / "config_bad_key.toml"
 
     runner = CliRunner()
-    result = runner.invoke(cli, ["-c", config_file.as_posix()])
+    result = runner.invoke(cli, ["-c", str(config_file)])
 
     assert (
         "Error: When parsing config file:" in result.output
