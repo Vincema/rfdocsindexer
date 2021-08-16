@@ -4,6 +4,9 @@ Documentation       Keyword to manage configuration from RobotFramework
 Library             Collections
 Library             OperatingSystem
 
+*** Variables ***
+${CREATE_CONFIGFILE__FILENAME}=     conf.toml
+
 *** Keywords ***
 Convert Dict To TOML Str
     [Documentation]    Take a dictionary and convert it to a TOML string.

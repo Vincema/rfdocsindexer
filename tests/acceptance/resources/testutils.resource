@@ -3,6 +3,9 @@ Documentation       Keywords to perform misc tests related operation.
 
 Library             OperatingSystem
 
+*** Variables ***
+@{CREATE_DIR_NOT_EMPTY__FILES}=     file1.txt    file2.json    subdir1    subdir2    subdir1${/}file3.txt
+
 *** Keywords ***
 Clear Test Dir
     [Documentation]    Clear the test directory recursively.
@@ -17,6 +20,14 @@ Create Dir Not Empty
     ${dirpath}=    Join Path    ${TEST_DIR}    ${dirname}
 
     Create Directory    ${dirpath}
-    Create File    ${dirpath}${/}file1.txt
-    Create Directory    ${dirpath}${/}subdir1
-    Create File    ${dirpath}${/}subdir1${/}file2.txt
+
+    FOR    ${file}    IN    @{CREATE_DIR_NOT_EMPTY__FILES}
+
+        ${path}    ${ext}=    Split Extension    ${file}
+        IF    "${ext}"
+            Create File    ${dirpath}${/}${file}
+        ELSE
+            Create Directory    ${dirpath}${/}${file}
+        END
+
+    END

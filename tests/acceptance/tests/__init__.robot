@@ -1,8 +1,8 @@
 *** Settings ***
-Library         OperatingSystem
+Resource        testutils.resource
 
 Suite Setup     Setup Test Environment
 
 *** Keywords ***
 Setup Test Environment
-    Create Directory    ${TEST_DIR}
+    Clear Test Dir
