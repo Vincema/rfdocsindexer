@@ -31,3 +31,21 @@ Create Dir Not Empty
         END
 
     END
+
+Create Fake Outputdir
+    [Documentation]    Create a fake outputdir.
+    [Arguments]    ${dirname}
+
+    Create Dir Not Empty    ${dirname}
+    Create Dir Not Empty    ${dirname}${/}${HTML_LIBDOCS_DIRNAME}
+    Create Dir Not Empty    ${dirname}${/}${XML_LIBDOCS_DIRNAME}
+    Create Dir Not Empty    ${dirname}${/}${JSON_LIBDOCS_DIRNAME}
+    Create Dir Not Empty    ${dirname}${/}${LIBSPECS_DIRNAME}
+
+Strings Should Be Almost Equals
+    [Documentation]    Uses fuzzywuzzy to compare two strings with the simple distance method.
+    ...    Raises an error if the similarity ratio is below the given treshold (0-100), default ratio is 90.
+    [Arguments]    ${string1}    ${string2}    @{}    ${treshold}=${90}
+    ${ns}=    Create Dictionary    s1=${string1}    s2=${string2}
+    ${ratio}=    Evaluate    fuzzywuzzy.fuzz.ratio(s1, s2)    modules=fuzzywuzzy.fuzz    namespace=${ns}
+    Should Be True    ${ratio} >= ${treshold}    msg=The two strings are too different (ratio is ${ratio} and below threshold ${treshold})

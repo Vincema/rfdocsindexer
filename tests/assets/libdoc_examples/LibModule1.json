@@ -1,0 +1,57 @@
+{
+  "name": "LibModule1",
+  "doc": "LibModule1 library",
+  "version": "",
+  "generated": "2021-08-18 04:53:35",
+  "type": "LIBRARY",
+  "scope": "TEST",
+  "docFormat": "ROBOT",
+  "source": "/home/vc/Workspace/rfdocsindexer/tests/assets/libraries_dir_examples/libraries_dir_recursive/LibModule1/__init__.py",
+  "lineno": 9,
+  "tags": [],
+  "inits": [],
+  "keywords": [
+    {
+      "name": "Keyword Which Embeds ${arg1} And ${arg2}",
+      "args": [],
+      "doc": "",
+      "shortdoc": "",
+      "tags": [],
+      "source": "/home/vc/Workspace/rfdocsindexer/tests/assets/libraries_dir_examples/libraries_dir_recursive/LibModule1/__init__.py",
+      "lineno": 24
+    },
+    {
+      "name": "Keyword1",
+      "args": [],
+      "doc": "",
+      "shortdoc": "",
+      "tags": [],
+      "source": "/home/vc/Workspace/rfdocsindexer/tests/assets/libraries_dir_examples/libraries_dir_recursive/LibModule1/__init__.py",
+      "lineno": 16
+    },
+    {
+      "name": "Keyword2",
+      "args": [
+        {
+          "name": "arg1",
+          "types": [
+            "str"
+          ],
+          "defaultValue": null,
+          "kind": "POSITIONAL_OR_NAMED",
+          "required": true,
+          "repr": "arg1: str"
+        }
+      ],
+      "doc": "",
+      "shortdoc": "",
+      "tags": [],
+      "source": "/home/vc/Workspace/rfdocsindexer/tests/assets/libraries_dir_examples/libraries_dir_recursive/LibModule1/__init__.py",
+      "lineno": 20
+    }
+  ],
+  "dataTypes": {
+    "enums": [],
+    "typedDicts": []
+  }
+}

@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<keywordspec name="Dialogs" type="LIBRARY" format="HTML" scope="GLOBAL" generated="2021-08-18T02:53:35Z" specversion="3" source="../../../../.cache/pypoetry/virtualenvs/rfdocsindexer--g8aZv4K-py3.9/lib/python3.9/site-packages/robot/libraries/Dialogs.py" lineno="1">
+<version>4.1</version>
+<doc>&lt;p&gt;A test library providing dialogs for interacting with users.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;Dialogs&lt;/code&gt; is Robot Framework's standard library that provides means for pausing the test execution and getting input from users. The dialogs are slightly different depending on whether tests are run on Python, IronPython or Jython but they provide the same functionality.&lt;/p&gt;
+&lt;p&gt;Long lines in the provided messages are wrapped automatically. If you want to wrap lines manually, you can add newlines using the &lt;code&gt;\n&lt;/code&gt; character sequence.&lt;/p&gt;
+&lt;p&gt;The library has a known limitation that it cannot be used with timeouts on Python.&lt;/p&gt;</doc>
+<tags>
+</tags>
+<inits>
+</inits>
+<keywords>
+<kw name="Execute Manual Step" lineno="55">
+<arguments repr="message, default_error=">
+<arg kind="POSITIONAL_OR_NAMED" required="true" repr="message">
+<name>message</name>
+</arg>
+<arg kind="POSITIONAL_OR_NAMED" required="false" repr="default_error=">
+<name>default_error</name>
+<default/>
+</arg>
+</arguments>
+<doc>&lt;p&gt;Pauses test execution until user sets the keyword status.&lt;/p&gt;
+&lt;p&gt;User can press either &lt;code&gt;PASS&lt;/code&gt; or &lt;code&gt;FAIL&lt;/code&gt; button. In the latter case execution fails and an additional dialog is opened for defining the error message.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;message&lt;/code&gt; is the instruction shown in the initial dialog and &lt;code&gt;default_error&lt;/code&gt; is the default value shown in the possible error message dialog.&lt;/p&gt;</doc>
+<shortdoc>Pauses test execution until user sets the keyword status.</shortdoc>
+</kw>
+<kw name="Get Selection From User" lineno="93">
+<arguments repr="message, *values">
+<arg kind="POSITIONAL_OR_NAMED" required="true" repr="message">
+<name>message</name>
+</arg>
+<arg kind="VAR_POSITIONAL" required="false" repr="*values">
+<name>values</name>
+</arg>
+</arguments>
+<doc>&lt;p&gt;Pauses test execution and asks user to select a value.&lt;/p&gt;
+&lt;p&gt;The selected value is returned. Pressing &lt;code&gt;Cancel&lt;/code&gt; fails the keyword.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;message&lt;/code&gt; is the instruction shown in the dialog and &lt;code&gt;values&lt;/code&gt; are the options given to the user.&lt;/p&gt;
+&lt;p&gt;Example:&lt;/p&gt;
+&lt;table border="1"&gt;
+&lt;tr&gt;
+&lt;td&gt;${user} =&lt;/td&gt;
+&lt;td&gt;Get Selection From User&lt;/td&gt;
+&lt;td&gt;Select user&lt;/td&gt;
+&lt;td&gt;user1&lt;/td&gt;
+&lt;td&gt;user2&lt;/td&gt;
+&lt;td&gt;admin&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;</doc>
+<shortdoc>Pauses test execution and asks user to select a value.</shortdoc>
+</kw>
+<kw name="Get Selections From User" lineno="107">
+<arguments repr="message, *values">
+<arg kind="POSITIONAL_OR_NAMED" required="true" repr="message">
+<name>message</name>
+</arg>
+<arg kind="VAR_POSITIONAL" required="false" repr="*values">
+<name>values</name>
+</arg>
+</arguments>
+<doc>&lt;p&gt;Pauses test execution and asks user to select multiple values.&lt;/p&gt;
+&lt;p&gt;The selected values are returned as a list. Selecting no values is OK and in that case the returned list is empty. Pressing &lt;code&gt;Cancel&lt;/code&gt; fails the keyword.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;message&lt;/code&gt; is the instruction shown in the dialog and &lt;code&gt;values&lt;/code&gt; are the options given to the user.&lt;/p&gt;
+&lt;p&gt;Example:&lt;/p&gt;
+&lt;table border="1"&gt;
+&lt;tr&gt;
+&lt;td&gt;${users} =&lt;/td&gt;
+&lt;td&gt;Get Selections From User&lt;/td&gt;
+&lt;td&gt;Select users&lt;/td&gt;
+&lt;td&gt;user1&lt;/td&gt;
+&lt;td&gt;user2&lt;/td&gt;
+&lt;td&gt;admin&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+&lt;p&gt;New in Robot Framework 3.1.&lt;/p&gt;</doc>
+<shortdoc>Pauses test execution and asks user to select multiple values.</shortdoc>
+</kw>
+<kw name="Get Value From User" lineno="70">
+<arguments repr="message, default_value=, hidden=False">
+<arg kind="POSITIONAL_OR_NAMED" required="true" repr="message">
+<name>message</name>
+</arg>
+<arg kind="POSITIONAL_OR_NAMED" required="false" repr="default_value=">
+<name>default_value</name>
+<default/>
+</arg>
+<arg kind="POSITIONAL_OR_NAMED" required="false" repr="hidden=False">
+<name>hidden</name>
+<default>False</default>
+</arg>
+</arguments>
+<doc>&lt;p&gt;Pauses test execution and asks user to input a value.&lt;/p&gt;
+&lt;p&gt;Value typed by the user, or the possible default value, is returned. Returning an empty value is fine, but pressing &lt;code&gt;Cancel&lt;/code&gt; fails the keyword.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;message&lt;/code&gt; is the instruction shown in the dialog and &lt;code&gt;default_value&lt;/code&gt; is the possible default value shown in the input field.&lt;/p&gt;
+&lt;p&gt;If &lt;code&gt;hidden&lt;/code&gt; is given a true value, the value typed by the user is hidden. &lt;code&gt;hidden&lt;/code&gt; is considered true if it is a non-empty string not equal to &lt;code&gt;false&lt;/code&gt;, &lt;code&gt;none&lt;/code&gt; or &lt;code&gt;no&lt;/code&gt;, case-insensitively. If it is not a string, its truth value is got directly using same &lt;a href="http://docs.python.org/library/stdtypes.html#truth"&gt;rules as in Python&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Example:&lt;/p&gt;
+&lt;table border="1"&gt;
+&lt;tr&gt;
+&lt;td&gt;${username} =&lt;/td&gt;
+&lt;td&gt;Get Value From User&lt;/td&gt;
+&lt;td&gt;Input user name&lt;/td&gt;
+&lt;td&gt;default&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;${password} =&lt;/td&gt;
+&lt;td&gt;Get Value From User&lt;/td&gt;
+&lt;td&gt;Input password&lt;/td&gt;
+&lt;td&gt;hidden=yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;</doc>
+<shortdoc>Pauses test execution and asks user to input a value.</shortdoc>
+</kw>
+<kw name="Pause Execution" lineno="47">
+<arguments repr="message=Test execution paused. Press OK to continue.">
+<arg kind="POSITIONAL_OR_NAMED" required="false" repr="message=Test execution paused. Press OK to continue.">
+<name>message</name>
+<default>Test execution paused. Press OK to continue.</default>
+</arg>
+</arguments>
+<doc>&lt;p&gt;Pauses test execution until user clicks &lt;code&gt;Ok&lt;/code&gt; button.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;message&lt;/code&gt; is the message shown in the dialog.&lt;/p&gt;</doc>
+<shortdoc>Pauses test execution until user clicks ``Ok`` button.</shortdoc>
+</kw>
+</keywords>
+<datatypes>
+</datatypes>
+</keywordspec>

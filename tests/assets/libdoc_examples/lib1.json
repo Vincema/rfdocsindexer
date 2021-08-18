@@ -1,0 +1,64 @@
+{
+  "name": "lib1",
+  "doc": "An example resource file",
+  "version": "",
+  "generated": "2021-08-18 04:53:35",
+  "type": "RESOURCE",
+  "scope": "GLOBAL",
+  "docFormat": "ROBOT",
+  "source": "tests/assets/libraries_dir_examples/libraries_dir_recursive/lib1.resource",
+  "lineno": 1,
+  "tags": [],
+  "inits": [],
+  "keywords": [
+    {
+      "name": "Input Name",
+      "args": [
+        {
+          "name": "name",
+          "types": [],
+          "defaultValue": null,
+          "kind": "POSITIONAL_OR_NAMED",
+          "required": true,
+          "repr": "name"
+        }
+      ],
+      "doc": "",
+      "shortdoc": "",
+      "tags": [],
+      "source": "tests/assets/libraries_dir_examples/libraries_dir_recursive/lib1.resource",
+      "lineno": 18
+    },
+    {
+      "name": "Input Password",
+      "args": [
+        {
+          "name": "password",
+          "types": [],
+          "defaultValue": null,
+          "kind": "POSITIONAL_OR_NAMED",
+          "required": true,
+          "repr": "password"
+        }
+      ],
+      "doc": "",
+      "shortdoc": "",
+      "tags": [],
+      "source": "tests/assets/libraries_dir_examples/libraries_dir_recursive/lib1.resource",
+      "lineno": 22
+    },
+    {
+      "name": "Open Login Page",
+      "args": [],
+      "doc": "Opens browser to login page",
+      "shortdoc": "Opens browser to login page",
+      "tags": [],
+      "source": "tests/assets/libraries_dir_examples/libraries_dir_recursive/lib1.resource",
+      "lineno": 13
+    }
+  ],
+  "dataTypes": {
+    "enums": [],
+    "typedDicts": []
+  }
+}

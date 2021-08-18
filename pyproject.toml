@@ -24,9 +24,11 @@ mypy = "^0.910"
 flake8 = "^3.9.2"
 types-toml = "^0.1.4"
 tox = "^3.24.1"
-tox-poetry-installer = {extras = ["poetry"], version = "^0.8.1"}
+tox-poetry-installer = "^0.8.1"
 pytest = "^6.2.4"
 robotframework-tidy = "^1.4.0"
+fuzzywuzzy = "^0.18.0"
+python-Levenshtein = "^0.12.2"
 
 
 [build-system]

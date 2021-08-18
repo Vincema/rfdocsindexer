@@ -1,7 +1,7 @@
 import tempfile
-from pathlib import Path
+import os
 
-_tmp_dir = Path(tempfile.gettempdir())
+_tmp_dir = tempfile.gettempdir()
 
 # Default cli settings
 DEFCLI_OUTPUT_DIRNAME = "rfdocs"
@@ -19,9 +19,11 @@ DEFCONF = {
 }
 
 # Paths
-TEST_DIR = str(_tmp_dir / "atest-rfdocsindexer")
-ASSETS_PATH = Path("tests", "assets").absolute()
-LIBRARIES_DIR_EXAMPLES_PATH = ASSETS_PATH / "libraries_dir_examples"
+TEST_DIR = os.path.abspath(os.path.join(_tmp_dir, "atest-rfdocsindexer"))
+ASSETS_PATH = os.path.abspath(os.path.join("tests", "assets"))
+CONFIG_FILE_EXAMPLES_PATH = os.path.join(ASSETS_PATH, "config_file_examples")
+LIBRARIES_DIR_EXAMPLES_PATH = os.path.join(ASSETS_PATH, "libraries_dir_examples")
+LIBDOC_EXAMPLES_PATH = os.path.join(ASSETS_PATH, "libdoc_examples")
 
 # Values
 INDEX_FILENAME = "index.html"
@@ -52,7 +54,9 @@ CONFIG_GEN_MACHINE_LIBDOCS = {
 CONFIG_LIBDOCS_FOR_LIBRARY_PATHS_AND_NAMES = {
     SECTION_NAME: {
         "library_paths": [
-            str(LIBRARIES_DIR_EXAMPLES_PATH / "libraries_dir_recursive" / "lib?.*")
+            os.path.join(
+                LIBRARIES_DIR_EXAMPLES_PATH, "libraries_dir_recursive", "lib?.*"
+            )
         ],
         "library_names": [
             "LibModule1",
@@ -60,10 +64,50 @@ CONFIG_LIBDOCS_FOR_LIBRARY_PATHS_AND_NAMES = {
             "LibModule3",
         ],
         "extra_modules_searchpaths": [
-            str(LIBRARIES_DIR_EXAMPLES_PATH / "libraries_dir_recursive" / "subdir1"),
-            str(LIBRARIES_DIR_EXAMPLES_PATH / "libraries_dir_recursive"),
+            os.path.join(
+                LIBRARIES_DIR_EXAMPLES_PATH, "libraries_dir_recursive", "subdir1"
+            ),
+            os.path.join(LIBRARIES_DIR_EXAMPLES_PATH, "libraries_dir_recursive"),
         ],
         "build_machine_readable_libdoc": True,
         "include_robotframework_resources": False,
+    }
+}
+CONFIG_LIBDOCS_2_LIBS_AND_RF_LIBS = {
+    SECTION_NAME: {
+        "library_paths": [
+            os.path.join(
+                LIBRARIES_DIR_EXAMPLES_PATH, "libraries_dir_recursive", "lib1.resource"
+            )
+        ],
+        "library_names": [
+            "LibModule1",
+        ],
+        "extra_modules_searchpaths": [
+            os.path.join(LIBRARIES_DIR_EXAMPLES_PATH, "libraries_dir_recursive"),
+        ],
+        "build_machine_readable_libdoc": True,
+        "include_robotframework_resources": True,
+    }
+}
+
+CONFIG_LIBDOCS_NO_LIBRARY = {
+    SECTION_NAME: {
+        "build_machine_readable_libdoc": True,
+        "include_robotframework_resources": False,
+    }
+}
+
+CONFIG_LIBDOCS_NO_EXTERNALS = {
+    SECTION_NAME: {
+        "include_robotframework_resources": False,
+        "external_resources": [],
+    }
+}
+
+CONFIG_LIBDOCS_INCLUDE_2_EXTERNALS = {
+    SECTION_NAME: {
+        "include_robotframework_resources": False,
+        "external_resources": ["http://test.com", "http://robotframework.org"],
     }
 }
