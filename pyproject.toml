@@ -29,6 +29,7 @@ pytest = "^6.2.4"
 robotframework-tidy = "^1.4.0"
 fuzzywuzzy = "^0.18.0"
 python-Levenshtein = "^0.12.2"
+beautifulsoup4 = "^4.9.3"
 
 
 [build-system]

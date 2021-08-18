@@ -1,15 +1,7 @@
 [rfdocsindexer]
-library_paths = ["**/libraries_dir_recursive/lib*", "**/lol"]
-library_names = ["LibModule1", "LibModule2.LibModule2CustomName"]
-extra_modules_searchpaths = ["tests/assets/libraries_dir_examples/libraries_dir_recursive/"]
+library_paths = ["**/libraries_dir_recursive/lib*"]
+library_names = ["LibModule1", "LibModule2.LibModule2CustomName", "LibModule3"]
+extra_modules_searchpaths = ["tests/assets/libraries_dir_examples/libraries_dir_recursive/", "tests/assets/libraries_dir_examples/libraries_dir_recursive/subdir1/"]
 build_machine_readable_libdoc = true
 external_resources = ["RF Homepage | https://robotframework.org/"] 
 include_robotframework_resources = true
-
-[rfdocsindexer-tmp]
-library_paths = ["**/libraries_dir_recursive/lib*", "**/lol", "rfdocs/**/*.json"]
-library_names = ["LibModule1", "LibModule2.LibModule2CustomName"]
-extra_modules_searchpaths = ["tests/assets/libraries_dir_examples/libraries_dir_recursive/"]
-build_machine_readable_libdoc = true
-external_resources = ["RF Homepage | https://robotframework.org/"] 
-include_robotframework_resources = false

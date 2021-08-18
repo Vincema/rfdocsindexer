@@ -22,6 +22,7 @@ DEFCONF = {
 TEST_DIR = os.path.abspath(os.path.join(_tmp_dir, "atest-rfdocsindexer"))
 ASSETS_PATH = os.path.abspath(os.path.join("tests", "assets"))
 CONFIG_FILE_EXAMPLES_PATH = os.path.join(ASSETS_PATH, "config_file_examples")
+INDEX_FILE_EXAMPLES_PATH = os.path.join(ASSETS_PATH, "index_file_examples")
 LIBRARIES_DIR_EXAMPLES_PATH = os.path.join(ASSETS_PATH, "libraries_dir_examples")
 LIBDOC_EXAMPLES_PATH = os.path.join(ASSETS_PATH, "libdoc_examples")
 
@@ -109,5 +110,29 @@ CONFIG_LIBDOCS_INCLUDE_2_EXTERNALS = {
     SECTION_NAME: {
         "include_robotframework_resources": False,
         "external_resources": ["http://test.com", "http://robotframework.org"],
+    }
+}
+
+CONFIG_INDEX_INCLUDE_ALL_LIBS_FROM_RECURSIVE_DIR = {
+    SECTION_NAME: {
+        "library_paths": [
+            os.path.join(
+                LIBRARIES_DIR_EXAMPLES_PATH, "libraries_dir_recursive", "lib?.*"
+            )
+        ],
+        "library_names": [
+            "LibModule1",
+            "LibModule2.LibModule2CustomName",
+            "LibModule3",
+        ],
+        "extra_modules_searchpaths": [
+            os.path.join(
+                LIBRARIES_DIR_EXAMPLES_PATH, "libraries_dir_recursive", "subdir1"
+            ),
+            os.path.join(LIBRARIES_DIR_EXAMPLES_PATH, "libraries_dir_recursive"),
+        ],
+        "build_machine_readable_libdoc": True,
+        "include_robotframework_resources": True,
+        "external_resources": ["RF Homepage | https://robotframework.org/"],
     }
 }

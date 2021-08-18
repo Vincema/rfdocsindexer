@@ -236,7 +236,7 @@ def test_gen_index_file(tmp_path: Path):
         )
     _gen_index_file([indexedlib1, indexedlib2], [external1, external2], tmp_path)
 
-    expected_index_path = INDEX_FILE_EXAMPLES / "index1.html"
+    expected_index_path = INDEX_FILE_EXAMPLES / "index_unit_test.html"
     gen_index_path = tmp_path / "index.html"
     assert expected_index_path.is_file(), "index.html should be created"
     assert filecmp.cmp(
