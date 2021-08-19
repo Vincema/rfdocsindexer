@@ -36,7 +36,7 @@
     </div>
     <br> {%- endif %} {%- if indexed_libs %}
     <h2>
-        Imported Libraries
+        Imported libraries
     </h2>
     <div class="accordion" id="accordion-libraries">
         {%- for lib in indexed_libs|sort %}
@@ -50,8 +50,8 @@
             <div id="collapse-{{ lib.name | quote | rmdot }}" class="accordion-collapse collapse" aria-labelledby="heading-{{ lib.name | quote | rmdot }}">
                 <div class="accordion-body">
                     <div class="list-group">
-                        <a href="{{ lib.html_libdoc_path.relative_to(dirpath)|string }}" target="_blank" class="list-group-item list-group-item-action kw-item" style="font-weight: bold;">Library documentation</a> {%- for keyword in lib.libdata.rflibrary.keywords|sort
-                        %}
+                        <a href="{{ lib.html_libdoc_path.relative_to(dirpath)|string }}" target="_blank" class="list-group-item list-group-item-action kw-item" style="font-weight: bold; background-color: ghostwhite">Library documentation</a> {%- for keyword
+                        in lib.libdata.rflibrary.keywords|sort %}
                         <a href="{{ lib.html_libdoc_path.relative_to(dirpath)|string }}#{{ keyword.name | quote }}" target="_blank" class="list-group-item list-group-item-action kw-item">{{ keyword.name }}
                             <p style="font-size: small; margin: 0;">{{ keyword.args | map(attribute='repr') | join(' | ') }}</p></a> {%- endfor %}
                     </div>

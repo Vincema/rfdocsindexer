@@ -41,14 +41,14 @@ Command Should Have Returned Without Error
     [Arguments]    ${result}
 
     Should Be Equal As Integers    0    ${result.rc}
-    ...    msg=Command result should be 0, got ${result.rc} with stdout "${result.stdout}" and stderr "${result.stderr}"
+    ...    msg=Command RC should be 0, got ${result.rc} with stdout "${result.stdout}" and stderr "${result.stderr}"
 
 Command Should Have Returned With An Error
     [Documentation]    Check if the rc of the command is != 0.
     [Arguments]    ${result}
 
     Should Not Be Equal As Integers    0    ${result.rc}
-    ...    msg=Command result should not be 0, got ${result.rc} with stdout "${result.stdout}" and stderr "${result.stderr}"
+    ...    msg=Command RC should not be 0, got ${result.rc} with stdout "${result.stdout}" and stderr "${result.stderr}"
 
 Stdout Should Match Regex
     [Documentation]    Check that the stdout matches the given regex.

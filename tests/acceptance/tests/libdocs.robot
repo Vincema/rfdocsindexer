@@ -95,7 +95,7 @@ Command With No Lib Specified Should Not Return An Error
 
 Bad Config File Should Return An Error
     [Documentation]    Run the command with a bad config file and expect an error code and error message.
-    [Tags]    error_handling
+    [Tags]    error_handling    cliconfig_configfile
     [Setup]    Copy File    ${CONFIG_FILE_EXAMPLES_PATH}${/}config_bad_key.toml    ${TEST_DIR}${/}config_bad_key.toml
 
     ${result}=    Run Command    configfile=config_bad_key.toml

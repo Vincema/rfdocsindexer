@@ -32,6 +32,10 @@ HTML_LIBDOCS_DIRNAME = "libdocs_html"
 XML_LIBDOCS_DIRNAME = "libdocs_xml"
 JSON_LIBDOCS_DIRNAME = "libdocs_json"
 LIBSPECS_DIRNAME = "libspecs"
+RF_DEFAULT_EXTERNAL_RESOURCES = {
+    "User guide": "https://robotframework.org/robotframework\
+/latest/RobotFrameworkUserGuide.html"
+}
 RF_DEFAULT_LIBRARY_NAMES = [
     "BuiltIn",
     "Collections",
@@ -44,6 +48,8 @@ RF_DEFAULT_LIBRARY_NAMES = [
     "Telnet",
     "XML",
 ]
+INDEXFILE_EXTRES_TITLE = "External resources"
+INDEXFILE_LIBLIST_TITLE = "Imported libraries"
 
 # Configs
 SECTION_NAME = "rfdocsindexer"
@@ -133,6 +139,9 @@ CONFIG_INDEX_INCLUDE_ALL_LIBS_FROM_RECURSIVE_DIR = {
         ],
         "build_machine_readable_libdoc": True,
         "include_robotframework_resources": True,
-        "external_resources": ["RF Homepage | https://robotframework.org/"],
+        "external_resources": [
+            "RF homepage | https://robotframework.org/",
+            "http://example.org",
+        ],
     }
 }
