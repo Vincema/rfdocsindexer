@@ -1,4 +1,3 @@
-import filecmp
 import os
 import sys
 from pathlib import Path
@@ -20,7 +19,7 @@ from rfdocsindexer.indexer import (
     _prepare_output_directories,
     index_documentation,
 )
-from tests.unit.conftest import INDEX_FILE_EXAMPLES, LIBRARIES_DIR_EXAMPLES
+from tests.unit.conftest import LIBRARIES_DIR_EXAMPLES
 from tests.unit.testdata import (
     external1,
     external2,

@@ -115,6 +115,6 @@ Libdoc Should Be Valid
     File Should Exist    ${LIBDOC_EXAMPLES_PATH}${/}${libdoc_name}    msg=Unknown libdoc "${libdoc_name}"
 
     ${expected_libdoc_content}=    Get File    ${LIBDOC_EXAMPLES_PATH}${/}${libdoc_name}
-    ${got_libdoc_content}=    Get File    ${libdoc_filepath}
+    ${read_libdoc_content}=    Get File    ${libdoc_filepath}
 
-    Strings Should Be Almost Equals    ${expected_libdoc_content}    ${got_libdoc_content}    treshold=${95}
+    Strings Should Be Almost Equal    ${expected_libdoc_content}    ${read_libdoc_content}    treshold=${95}

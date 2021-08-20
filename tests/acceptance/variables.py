@@ -1,5 +1,5 @@
-import tempfile
 import os
+import tempfile
 
 _tmp_dir = tempfile.gettempdir()
 

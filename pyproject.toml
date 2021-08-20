@@ -27,8 +27,6 @@ tox = "^3.24.1"
 tox-poetry-installer = {extras = ["poetry"], version = "^0.8.1"}
 pytest = "^6.2.4"
 robotframework-tidy = "^1.4.0"
-fuzzywuzzy = "^0.18.0"
-python-Levenshtein = "^0.12.2"
 beautifulsoup4 = "^4.9.3"
 invoke = "^1.6.0"
 
