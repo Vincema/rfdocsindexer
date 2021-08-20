@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<keywordspec name="String" type="LIBRARY" format="HTML" scope="GLOBAL" generated="2021-08-18T02:53:35Z" specversion="3" source="../../../../.cache/pypoetry/virtualenvs/rfdocsindexer--g8aZv4K-py3.9/lib/python3.9/site-packages/robot/libraries/String.py" lineno="32">
+<keywordspec name="String" type="LIBRARY" format="HTML" scope="GLOBAL" generated="2021-08-20T15:17:14Z" specversion="3" source="../../../../.cache/pypoetry/virtualenvs/rfdocsindexer--g8aZv4K-py3.9/lib/python3.9/site-packages/robot/libraries/String.py" lineno="32">
 <version>4.1</version>
 <doc>&lt;p&gt;A test library for string manipulation and verification.&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;String&lt;/code&gt; is Robot Framework's standard library for manipulating strings (e.g. &lt;a href="#Replace%20String%20Using%20Regexp" class="name"&gt;Replace String Using Regexp&lt;/a&gt;, &lt;a href="#Split%20To%20Lines" class="name"&gt;Split To Lines&lt;/a&gt;) and verifying their contents (e.g. &lt;a href="#Should%20Be%20String" class="name"&gt;Should Be String&lt;/a&gt;).&lt;/p&gt;

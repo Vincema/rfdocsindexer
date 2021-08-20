@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<keywordspec name="LibModule1" type="LIBRARY" format="ROBOT" scope="TEST" generated="2021-08-18T02:53:35Z" specversion="3" source="../../tests/assets/libraries_dir_examples/libraries_dir_recursive/LibModule1/__init__.py" lineno="9">
+<keywordspec name="LibModule1" type="LIBRARY" format="ROBOT" scope="TEST" generated="2021-08-20T15:17:13Z" specversion="3" source="../../tests/assets/libraries_dir_examples/libraries_dir_recursive/LibModule1/__init__.py" lineno="9">
 <version/>
 <doc>LibModule1 library</doc>
 <tags>

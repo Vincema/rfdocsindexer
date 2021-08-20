@@ -1,12 +1,12 @@
 {
-  "name": "lib1",
+  "name": "lib2",
   "doc": "An example resource file",
   "version": "",
   "generated": "2021-08-20 17:17:13",
   "type": "RESOURCE",
   "scope": "GLOBAL",
   "docFormat": "ROBOT",
-  "source": "tests/assets/libraries_dir_examples/libraries_dir_recursive/lib1.resource",
+  "source": "tests/assets/libraries_dir_examples/libraries_dir_recursive/lib2.resource",
   "lineno": 1,
   "tags": [],
   "inits": [],
@@ -26,7 +26,7 @@
       "doc": "",
       "shortdoc": "",
       "tags": [],
-      "source": "tests/assets/libraries_dir_examples/libraries_dir_recursive/lib1.resource",
+      "source": "tests/assets/libraries_dir_examples/libraries_dir_recursive/lib2.resource",
       "lineno": 18
     },
     {
@@ -44,7 +44,7 @@
       "doc": "",
       "shortdoc": "",
       "tags": [],
-      "source": "tests/assets/libraries_dir_examples/libraries_dir_recursive/lib1.resource",
+      "source": "tests/assets/libraries_dir_examples/libraries_dir_recursive/lib2.resource",
       "lineno": 22
     },
     {
@@ -53,7 +53,7 @@
       "doc": "Opens browser to login page",
       "shortdoc": "Opens browser to login page",
       "tags": [],
-      "source": "tests/assets/libraries_dir_examples/libraries_dir_recursive/lib1.resource",
+      "source": "tests/assets/libraries_dir_examples/libraries_dir_recursive/lib2.resource",
       "lineno": 13
     }
   ],

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<keywordspec name="Screenshot" type="LIBRARY" format="HTML" scope="SUITE" generated="2021-08-18T02:53:35Z" specversion="3" source="../../../../.cache/pypoetry/virtualenvs/rfdocsindexer--g8aZv4K-py3.9/lib/python3.9/site-packages/robot/libraries/Screenshot.py" lineno="51">
+<keywordspec name="Screenshot" type="LIBRARY" format="HTML" scope="SUITE" generated="2021-08-20T15:17:13Z" specversion="3" source="../../../../.cache/pypoetry/virtualenvs/rfdocsindexer--g8aZv4K-py3.9/lib/python3.9/site-packages/robot/libraries/Screenshot.py" lineno="51">
 <version>4.1</version>
 <doc>&lt;p&gt;Test library for taking screenshots on the machine where tests are run.&lt;/p&gt;
 &lt;p&gt;Notice that successfully taking screenshots requires tests to be run with a physical or virtual display.&lt;/p&gt;

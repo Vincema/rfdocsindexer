@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<keywordspec name="Dialogs" type="LIBRARY" format="HTML" scope="GLOBAL" generated="2021-08-18T02:53:35Z" specversion="3" source="../../../../.cache/pypoetry/virtualenvs/rfdocsindexer--g8aZv4K-py3.9/lib/python3.9/site-packages/robot/libraries/Dialogs.py" lineno="1">
+<keywordspec name="Dialogs" type="LIBRARY" format="HTML" scope="GLOBAL" generated="2021-08-20T15:17:13Z" specversion="3" source="../../../../.cache/pypoetry/virtualenvs/rfdocsindexer--g8aZv4K-py3.9/lib/python3.9/site-packages/robot/libraries/Dialogs.py" lineno="1">
 <version>4.1</version>
 <doc>&lt;p&gt;A test library providing dialogs for interacting with users.&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;Dialogs&lt;/code&gt; is Robot Framework's standard library that provides means for pausing the test execution and getting input from users. The dialogs are slightly different depending on whether tests are run on Python, IronPython or Jython but they provide the same functionality.&lt;/p&gt;

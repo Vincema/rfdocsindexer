@@ -1,3 +1,5 @@
+# Generate libdocs the test assets in "library_dir_recursive"
+
 [rfdocsindexer]
 library_paths = ["**/libraries_dir_recursive/lib*"]
 library_names = ["LibModule1", "LibModule2.LibModule2CustomName", "LibModule3"]

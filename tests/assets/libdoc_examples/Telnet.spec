@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<keywordspec name="Telnet" type="LIBRARY" format="HTML" scope="SUITE" generated="2021-08-18T02:53:35Z" specversion="3" source="../../../../.cache/pypoetry/virtualenvs/rfdocsindexer--g8aZv4K-py3.9/lib/python3.9/site-packages/robot/libraries/Telnet.py" lineno="36">
+<keywordspec name="Telnet" type="LIBRARY" format="HTML" scope="SUITE" generated="2021-08-20T15:17:14Z" specversion="3" source="../../../../.cache/pypoetry/virtualenvs/rfdocsindexer--g8aZv4K-py3.9/lib/python3.9/site-packages/robot/libraries/Telnet.py" lineno="36">
 <version>4.1</version>
 <doc>&lt;p&gt;A test library providing communication over Telnet connections.&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;Telnet&lt;/code&gt; is Robot Framework's standard library that makes it possible to connect to Telnet servers and execute commands on the opened connections.&lt;/p&gt;

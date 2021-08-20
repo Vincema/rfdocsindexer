@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<keywordspec name="DateTime" type="LIBRARY" format="HTML" scope="GLOBAL" generated="2021-08-18T02:53:35Z" specversion="3" source="../../../../.cache/pypoetry/virtualenvs/rfdocsindexer--g8aZv4K-py3.9/lib/python3.9/site-packages/robot/libraries/DateTime.py" lineno="1">
+<keywordspec name="DateTime" type="LIBRARY" format="HTML" scope="GLOBAL" generated="2021-08-20T15:17:13Z" specversion="3" source="../../../../.cache/pypoetry/virtualenvs/rfdocsindexer--g8aZv4K-py3.9/lib/python3.9/site-packages/robot/libraries/DateTime.py" lineno="1">
 <version>4.1</version>
 <doc>&lt;p&gt;A test library for handling date and time values.&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;DateTime&lt;/code&gt; is a Robot Framework standard library that supports creating and converting date and time values (e.g. &lt;a href="#Get%20Current%20Date" class="name"&gt;Get Current Date&lt;/a&gt;, &lt;a href="#Convert%20Time" class="name"&gt;Convert Time&lt;/a&gt;), as well as doing simple calculations with them (e.g. &lt;a href="#Subtract%20Time%20From%20Date" class="name"&gt;Subtract Time From Date&lt;/a&gt;, &lt;a href="#Add%20Time%20To%20Time" class="name"&gt;Add Time To Time&lt;/a&gt;). It supports dates and times in various formats, and can also be used by other libraries programmatically.&lt;/p&gt;

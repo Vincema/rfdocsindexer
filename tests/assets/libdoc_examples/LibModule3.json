@@ -1,0 +1,48 @@
+{
+  "name": "LibModule3",
+  "doc": "LibModule3 library",
+  "version": "",
+  "generated": "2021-08-20 17:17:13",
+  "type": "LIBRARY",
+  "scope": "TEST",
+  "docFormat": "ROBOT",
+  "source": "/home/vc/Workspace/rfdocsindexer/tests/assets/libraries_dir_examples/libraries_dir_recursive/subdir1/LibModule3/__init__.py",
+  "lineno": 7,
+  "tags": [],
+  "inits": [],
+  "keywords": [
+    {
+      "name": "Keyword1",
+      "args": [],
+      "doc": "",
+      "shortdoc": "",
+      "tags": [],
+      "source": "/home/vc/Workspace/rfdocsindexer/tests/assets/libraries_dir_examples/libraries_dir_recursive/subdir1/LibModule3/__init__.py",
+      "lineno": 14
+    },
+    {
+      "name": "Keyword2",
+      "args": [
+        {
+          "name": "arg1",
+          "types": [
+            "str"
+          ],
+          "defaultValue": null,
+          "kind": "POSITIONAL_OR_NAMED",
+          "required": true,
+          "repr": "arg1: str"
+        }
+      ],
+      "doc": "",
+      "shortdoc": "",
+      "tags": [],
+      "source": "/home/vc/Workspace/rfdocsindexer/tests/assets/libraries_dir_examples/libraries_dir_recursive/subdir1/LibModule3/__init__.py",
+      "lineno": 18
+    }
+  ],
+  "dataTypes": {
+    "enums": [],
+    "typedDicts": []
+  }
+}

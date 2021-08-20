@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<keywordspec name="XML" type="LIBRARY" format="HTML" scope="GLOBAL" generated="2021-08-18T02:53:35Z" specversion="3" source="../../../../.cache/pypoetry/virtualenvs/rfdocsindexer--g8aZv4K-py3.9/lib/python3.9/site-packages/robot/libraries/XML.py" lineno="37">
+<keywordspec name="XML" type="LIBRARY" format="HTML" scope="GLOBAL" generated="2021-08-20T15:17:14Z" specversion="3" source="../../../../.cache/pypoetry/virtualenvs/rfdocsindexer--g8aZv4K-py3.9/lib/python3.9/site-packages/robot/libraries/XML.py" lineno="37">
 <version>4.1</version>
 <doc>&lt;p&gt;Robot Framework test library for verifying and modifying XML documents.&lt;/p&gt;
 &lt;p&gt;As the name implies, &lt;i&gt;XML&lt;/i&gt; is a test library for verifying contents of XML files. In practice it is a pretty thin wrapper on top of Python's &lt;a href="http://docs.python.org/library/xml.etree.elementtree.html"&gt;ElementTree XML API&lt;/a&gt;.&lt;/p&gt;
