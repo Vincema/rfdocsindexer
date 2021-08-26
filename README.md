@@ -31,7 +31,7 @@ build_machine_readable_libdoc = true
 include_robotframework_resources = true
 ```
 
-The configuration file must contain the section `[rfdocindexer]` and any or non of the following options:
+The configuration file must contain the section `[rfdocindexer]` and any or none of the following options:
 
 * `library_paths`: a list of paths (glob format accepted) to RF resource files (can be `*.resource`, `*.robot`, `*.spec`...)
 * `library_names`: a list of RF library modules
