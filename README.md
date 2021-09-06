@@ -8,6 +8,8 @@ The tool then uses the RobotFramework [Libdoc](https://robotframework.org/robotf
 
 An HTML index is also generated to centralize the generated documentations.
 
+![RFDocsIndexer Diagram](docs/diagrams/rfdocsindexer_diagram.svg)
+
 ## Installing the tool
 
 Install from Pypi:
@@ -55,7 +57,3 @@ indexrfdocs -c path/to/configfile.toml
 # To specify the output directory (content will not be erased if already existing), default is "rfdocs"
 indexrfdocs -o path/to/outdir
 ```
-
-## Generated index file example
-
-![Index file example](indexfile.gif)
