@@ -50,14 +50,8 @@ def test_cli_no_args_should_print_success():
 
     output_dirname = "rfdocs"
     assert (
-<<<<<<< HEAD
-        f'👍 Successfully generated docs and index in "{output_dirname}"'
-        in result.output
-    ), "Incorrect error message"
-=======
         f'Successfully generated docs and index in "{output_dirname}"' in result.output
     ), "Error message incorrect"
->>>>>>> 91a906d... Remove emojis for better support
     assert result.exit_code == 0
 
 
