@@ -8,7 +8,7 @@ The tool then uses the RobotFramework [Libdoc](https://robotframework.org/robotf
 
 An HTML index is also generated to centralize the generated documentations.
 
-![RFDocsIndexer Diagram](https://github.com/Vincema/rfdocsindexer/blob/main/docs/diagrams/rfdocsindexer_diagram.svg)
+![RFDocsIndexer Diagram](https://github.com/Vincema/rfdocsindexer/raw/main/docs/diagrams/rfdocsindexer_diagram.svg)
 
 ## Installing the tool
 
