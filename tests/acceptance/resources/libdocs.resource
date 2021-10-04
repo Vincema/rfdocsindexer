@@ -30,11 +30,9 @@ Output Dir Should Contain Index And Libdocs Dirs
     IF    ${contains_machine_libdocs}
 
         Append to List    ${expected_dirnames}    @{machine_libdocs_dirnames}
-
     ELSE
 
         Append to List    ${unexpected_dirnames}    @{machine_libdocs_dirnames}
-
     END
 
     FOR    ${dirname}    IN    @{expected_dirnames}
@@ -103,7 +101,6 @@ Libdocs Should Be Generated
         ...    @{library_names}
         ...    subdir_path=${spec_subdir_path}
         ...    suffix=spec
-
     END
 
 Libdoc Should Be Valid
