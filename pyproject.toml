@@ -39,7 +39,7 @@ toml = "^0.10.2"
 
 [tool.poetry.dev-dependencies]
 beautifulsoup4 = "^4.9.3"
-black = "^21.7b0"
+black = "^22.1"
 coverage = "^6.0"
 flake8 = "^4.0.0"
 invoke = "^1.6.0"
