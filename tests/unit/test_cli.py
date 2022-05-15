@@ -61,7 +61,6 @@ def test_cli_no_args_should_generate_default_docs():
         "BuiltIn.html",
         "Collections.html",
         "DateTime.html",
-        "Dialogs.html",
         "OperatingSystem.html",
         "Process.html",
         "Screenshot.html",
