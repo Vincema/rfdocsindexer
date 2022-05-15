@@ -366,7 +366,6 @@ def test_index_documentation_default_config(tmp_path: Path):
         "BuiltIn.html",
         "Collections.html",
         "DateTime.html",
-        "Dialogs.html",
         "OperatingSystem.html",
         "Process.html",
         "Screenshot.html",

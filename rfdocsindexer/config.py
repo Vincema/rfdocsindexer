@@ -15,7 +15,6 @@ ROBOTFRAMEWORK_LIBRARY_NAMES = [
     "BuiltIn",
     "Collections",
     "DateTime",
-    "Dialogs",
     "OperatingSystem",
     "Process",
     "Screenshot",
