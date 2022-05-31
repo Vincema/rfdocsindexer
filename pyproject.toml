@@ -46,7 +46,7 @@ invoke = "^1.6.0"
 isort = "^5.9.3"
 mypy = "^0.960"
 pytest = "^7.0.1"
-robotframework-tidy = "^1.4.0"
+robotframework-tidy = "^2.0"
 tox = "^3.24.0"
 tox-poetry-installer = {extras = ["poetry"], version = "^0.8.1"}
 types-toml = "^0.10.0"
