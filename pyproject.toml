@@ -34,7 +34,7 @@ python = "^3.7"
 click = "^8.0.1"
 Jinja2 = "^3.0.1"
 pydantic = "^1.8.2"
-robotframework = "^4"
+robotframework = ">=4,<6"
 toml = "^0.10.2"
 
 [tool.poetry.dev-dependencies]
