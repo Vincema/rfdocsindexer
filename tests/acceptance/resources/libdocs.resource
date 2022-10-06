@@ -117,4 +117,3 @@ Libdoc Should Be Valid
     ${read_libdoc_content}=    Get File    ${libdoc_filepath}
 
     Strings Should Be Almost Equal    ${expected_libdoc_content}    ${read_libdoc_content}    treshold=${90}
-
