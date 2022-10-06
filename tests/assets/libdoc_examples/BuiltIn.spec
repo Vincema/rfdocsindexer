@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<keywordspec name="BuiltIn" type="LIBRARY" format="HTML" scope="GLOBAL" generated="2021-08-20T15:17:13Z" specversion="3" source="../../../../.cache/pypoetry/virtualenvs/rfdocsindexer--g8aZv4K-py3.9/lib/python3.9/site-packages/robot/libraries/BuiltIn.py" lineno="3560">
-<version>4.1</version>
+<keywordspec name="BuiltIn" type="LIBRARY" format="HTML" scope="GLOBAL" generated="2022-10-06T17:00:29Z" specversion="4" source="/home/kali/Code/rfdocsindexer/.tox/py39/lib/python3.9/site-packages/robot/libraries/BuiltIn.py" lineno="3634">
+<version>5.0.1</version>
 <doc>&lt;p&gt;An always available standard library with often needed keywords.&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;BuiltIn&lt;/code&gt; is Robot Framework's standard library that provides a set of generic keywords needed often. It is imported automatically and thus always available. The provided keywords can be used, for example, for verifications (e.g. &lt;a href="#Should%20Be%20Equal" class="name"&gt;Should Be Equal&lt;/a&gt;, &lt;a href="#Should%20Contain" class="name"&gt;Should Contain&lt;/a&gt;), conversions (e.g. &lt;a href="#Convert%20To%20Integer" class="name"&gt;Convert To Integer&lt;/a&gt;) and for various other purposes (e.g. &lt;a href="#Log" class="name"&gt;Log&lt;/a&gt;, &lt;a href="#Sleep" class="name"&gt;Sleep&lt;/a&gt;, &lt;a href="#Run%20Keyword%20If" class="name"&gt;Run Keyword If&lt;/a&gt;, &lt;a href="#Set%20Global%20Variable" class="name"&gt;Set Global Variable&lt;/a&gt;).&lt;/p&gt;
 &lt;h3 id="Table of contents"&gt;Table of contents&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href="#HTML%20error%20messages" class="name"&gt;HTML error messages&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#Using%20variables%20with%20keywords%20creating%20or%20accessing%20variables" class="name"&gt;Using variables with keywords creating or accessing variables&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="#Evaluating%20expressions" class="name"&gt;Evaluating expressions&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="#Boolean%20arguments" class="name"&gt;Boolean arguments&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="#Pattern%20matching" class="name"&gt;Pattern matching&lt;/a&gt;&lt;/li&gt;
@@ -15,171 +16,70 @@
 &lt;/ul&gt;
 &lt;h2 id="HTML error messages"&gt;HTML error messages&lt;/h2&gt;
 &lt;p&gt;Many of the keywords accept an optional error message to use if the keyword fails, and it is possible to use HTML in these messages by prefixing them with &lt;code&gt;*HTML*&lt;/code&gt;. See &lt;a href="#Fail" class="name"&gt;Fail&lt;/a&gt; keyword for a usage example. Notice that using HTML in messages is not limited to BuiltIn library but works with any error message.&lt;/p&gt;
+&lt;h2 id="Using variables with keywords creating or accessing variables"&gt;Using variables with keywords creating or accessing variables&lt;/h2&gt;
+&lt;p&gt;This library has special keywords &lt;a href="#Set%20Global%20Variable" class="name"&gt;Set Global Variable&lt;/a&gt;, &lt;a href="#Set%20Suite%20Variable" class="name"&gt;Set Suite Variable&lt;/a&gt;, &lt;a href="#Set%20Test%20Variable" class="name"&gt;Set Test Variable&lt;/a&gt; and &lt;a href="#Set%20Local%20Variable" class="name"&gt;Set Local Variable&lt;/a&gt; for creating variables in different scopes. These keywords take the variable name and its value as arguments. The name can be given using the normal &lt;code&gt;${variable}&lt;/code&gt; syntax or in escaped format either like &lt;code&gt;$variable&lt;/code&gt; or &lt;code&gt;\${variable}&lt;/code&gt;. For example, these are typically equivalent and create new suite level variable &lt;code&gt;${name}&lt;/code&gt; with value &lt;code&gt;value&lt;/code&gt;:&lt;/p&gt;
+&lt;pre&gt;
+Set Suite Variable    ${name}     value
+Set Suite Variable    $name       value
+Set Suite Variable    \${name}    value
+&lt;/pre&gt;
+&lt;p&gt;A problem with using the normal &lt;code&gt;${variable}&lt;/code&gt; syntax is that these keywords cannot easily know is the idea to create a variable with exactly that name or does that variable actually contain the name of the variable to create. If the variable does not initially exist, it will always be created. If it exists and its value is a variable name either in the normal or in the escaped syntax, variable with &lt;i&gt;that&lt;/i&gt; name is created instead. For example, if &lt;code&gt;${name}&lt;/code&gt; variable would exist and contain value &lt;code&gt;$example&lt;/code&gt;, these examples would create different variables:&lt;/p&gt;
+&lt;pre&gt;
+Set Suite Variable    ${name}     value    # Creates ${example}.
+Set Suite Variable    $name       value    # Creates ${name}.
+Set Suite Variable    \${name}    value    # Creates ${name}.
+&lt;/pre&gt;
+&lt;p&gt;Because the behavior when using the normal &lt;code&gt;${variable}&lt;/code&gt; syntax depends on the possible existing value of the variable, it is &lt;b&gt;highly recommended to use the escaped &lt;code&gt;$variable&lt;/code&gt; or &lt;code&gt;\${variable}&lt;/code&gt; format instead&lt;/b&gt;.&lt;/p&gt;
+&lt;p&gt;This same problem occurs also with special keywords for accessing variables &lt;a href="#Get%20Variable%20Value" class="name"&gt;Get Variable Value&lt;/a&gt;, &lt;a href="#Variable%20Should%20Exist" class="name"&gt;Variable Should Exist&lt;/a&gt; and &lt;a href="#Variable%20Should%20Not%20Exist" class="name"&gt;Variable Should Not Exist&lt;/a&gt;.&lt;/p&gt;
 &lt;h2 id="Evaluating expressions"&gt;Evaluating expressions&lt;/h2&gt;
 &lt;p&gt;Many keywords, such as &lt;a href="#Evaluate" class="name"&gt;Evaluate&lt;/a&gt;, &lt;a href="#Run%20Keyword%20If" class="name"&gt;Run Keyword If&lt;/a&gt; and &lt;a href="#Should%20Be%20True" class="name"&gt;Should Be True&lt;/a&gt;, accept an expression that is evaluated in Python.&lt;/p&gt;
 &lt;h3 id="Evaluation namespace"&gt;Evaluation namespace&lt;/h3&gt;
 &lt;p&gt;Expressions are evaluated using Python's &lt;a href="http://docs.python.org/library/functions.html#eval"&gt;eval&lt;/a&gt; function so that all Python built-ins like &lt;code&gt;len()&lt;/code&gt; and &lt;code&gt;int()&lt;/code&gt; are available. In addition to that, all unrecognized variables are considered to be modules that are automatically imported. It is possible to use all available Python modules, including the standard modules and the installed third party modules.&lt;/p&gt;
 &lt;p&gt;Examples:&lt;/p&gt;
-&lt;table border="1"&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;a href="#Should%20Be%20True" class="name"&gt;Should Be True&lt;/a&gt;&lt;/td&gt;
-&lt;td&gt;len('${result}') &amp;gt; 3&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;a href="#Run%20Keyword%20If" class="name"&gt;Run Keyword If&lt;/a&gt;&lt;/td&gt;
-&lt;td&gt;os.sep == '/'&lt;/td&gt;
-&lt;td&gt;Non-Windows Keyword&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;${robot version} =&lt;/td&gt;
-&lt;td&gt;&lt;a href="#Evaluate" class="name"&gt;Evaluate&lt;/a&gt;&lt;/td&gt;
-&lt;td&gt;robot.__version__&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/table&gt;
+&lt;pre&gt;
+&lt;a href="#Should%20Be%20True" class="name"&gt;Should Be True&lt;/a&gt;    len('${result}') &amp;gt; 3
+&lt;a href="#Run%20Keyword%20If" class="name"&gt;Run Keyword If&lt;/a&gt;    os.sep == '/'    Non-Windows Keyword
+${version} =    &lt;a href="#Evaluate" class="name"&gt;Evaluate&lt;/a&gt;    robot.__version__
+&lt;/pre&gt;
 &lt;p&gt;&lt;a href="#Evaluate" class="name"&gt;Evaluate&lt;/a&gt; also allows configuring the execution namespace with a custom namespace and with custom modules to be imported. The latter functionality is useful in special cases where the automatic module import does not work such as when using nested modules like &lt;code&gt;rootmod.submod&lt;/code&gt; or list comprehensions. See the documentation of the &lt;a href="#Evaluate" class="name"&gt;Evaluate&lt;/a&gt; keyword for mode details.&lt;/p&gt;
-&lt;p&gt;&lt;b&gt;NOTE:&lt;/b&gt; Automatic module import is a new feature in Robot Framework 3.2. Earlier modules needed to be explicitly taken into use when using the &lt;a href="#Evaluate" class="name"&gt;Evaluate&lt;/a&gt; keyword and other keywords only had access to &lt;code&gt;sys&lt;/code&gt; and &lt;code&gt;os&lt;/code&gt; modules.&lt;/p&gt;
-&lt;h3 id="Using variables"&gt;Using variables&lt;/h3&gt;
+&lt;h3 id="Variables in expressions"&gt;Variables in expressions&lt;/h3&gt;
 &lt;p&gt;When a variable is used in the expressing using the normal &lt;code&gt;${variable}&lt;/code&gt; syntax, its value is replaced before the expression is evaluated. This means that the value used in the expression will be the string representation of the variable value, not the variable value itself. This is not a problem with numbers and other objects that have a string representation that can be evaluated directly, but with other objects the behavior depends on the string representation. Most importantly, strings must always be quoted, and if they can contain newlines, they must be triple quoted.&lt;/p&gt;
 &lt;p&gt;Examples:&lt;/p&gt;
-&lt;table border="1"&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;a href="#Should%20Be%20True" class="name"&gt;Should Be True&lt;/a&gt;&lt;/td&gt;
-&lt;td&gt;${rc} &amp;lt; 10&lt;/td&gt;
-&lt;td&gt;Return code greater than 10&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;a href="#Run%20Keyword%20If" class="name"&gt;Run Keyword If&lt;/a&gt;&lt;/td&gt;
-&lt;td&gt;'${status}' == 'PASS'&lt;/td&gt;
-&lt;td&gt;Log&lt;/td&gt;
-&lt;td&gt;Passed&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;a href="#Run%20Keyword%20If" class="name"&gt;Run Keyword If&lt;/a&gt;&lt;/td&gt;
-&lt;td&gt;'FAIL' in '''${output}'''&lt;/td&gt;
-&lt;td&gt;Log&lt;/td&gt;
-&lt;td&gt;Output contains FAIL&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/table&gt;
+&lt;pre&gt;
+&lt;a href="#Should%20Be%20True" class="name"&gt;Should Be True&lt;/a&gt;    ${rc} &amp;lt; 10                   Return code greater than 10
+&lt;a href="#Run%20Keyword%20If" class="name"&gt;Run Keyword If&lt;/a&gt;    '${status}' == 'PASS'        Log    Passed
+&lt;a href="#Run%20Keyword%20If" class="name"&gt;Run Keyword If&lt;/a&gt;    'FAIL' in '''${output}'''    Log    Output contains FAIL
+&lt;/pre&gt;
 &lt;p&gt;Actual variables values are also available in the evaluation namespace. They can be accessed using special variable syntax without the curly braces like &lt;code&gt;$variable&lt;/code&gt;. These variables should never be quoted.&lt;/p&gt;
 &lt;p&gt;Examples:&lt;/p&gt;
-&lt;table border="1"&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;a href="#Should%20Be%20True" class="name"&gt;Should Be True&lt;/a&gt;&lt;/td&gt;
-&lt;td&gt;$rc &amp;lt; 10&lt;/td&gt;
-&lt;td&gt;Return code greater than 10&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;a href="#Run%20Keyword%20If" class="name"&gt;Run Keyword If&lt;/a&gt;&lt;/td&gt;
-&lt;td&gt;$status == 'PASS'&lt;/td&gt;
-&lt;td&gt;&lt;a href="#Log" class="name"&gt;Log&lt;/a&gt;&lt;/td&gt;
-&lt;td&gt;Passed&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;a href="#Run%20Keyword%20If" class="name"&gt;Run Keyword If&lt;/a&gt;&lt;/td&gt;
-&lt;td&gt;'FAIL' in $output&lt;/td&gt;
-&lt;td&gt;&lt;a href="#Log" class="name"&gt;Log&lt;/a&gt;&lt;/td&gt;
-&lt;td&gt;Output contains FAIL&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;a href="#Should%20Be%20True" class="name"&gt;Should Be True&lt;/a&gt;&lt;/td&gt;
-&lt;td&gt;len($result) &amp;gt; 1 and $result[1] == 'OK'&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;a href="#Should%20Be%20True" class="name"&gt;Should Be True&lt;/a&gt;&lt;/td&gt;
-&lt;td&gt;$result is not None&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/table&gt;
+&lt;pre&gt;
+&lt;a href="#Should%20Be%20True" class="name"&gt;Should Be True&lt;/a&gt;    $rc &amp;lt; 10             Return code greater than 10
+&lt;a href="#Run%20Keyword%20If" class="name"&gt;Run Keyword If&lt;/a&gt;    $status == 'PASS'    &lt;a href="#Log" class="name"&gt;Log&lt;/a&gt;    Passed
+&lt;a href="#Run%20Keyword%20If" class="name"&gt;Run Keyword If&lt;/a&gt;    'FAIL' in $output    &lt;a href="#Log" class="name"&gt;Log&lt;/a&gt;    Output contains FAIL
+&lt;a href="#Should%20Be%20True" class="name"&gt;Should Be True&lt;/a&gt;    len($result) &amp;gt; 1 and $result[1] == 'OK'
+&lt;a href="#Should%20Be%20True" class="name"&gt;Should Be True&lt;/a&gt;    $result is not None
+&lt;/pre&gt;
 &lt;p&gt;Using the &lt;code&gt;$variable&lt;/code&gt; syntax slows down expression evaluation a little. This should not typically matter, but should be taken into account if complex expressions are evaluated often and there are strict time constrains.&lt;/p&gt;
-&lt;p&gt;Notice that instead of creating complicated expressions, it is often better to move the logic into a test library. That eases maintenance and can also enhance execution speed.&lt;/p&gt;
+&lt;p&gt;Notice that instead of creating complicated expressions, it is often better to move the logic into a library. That eases maintenance and can also enhance execution speed.&lt;/p&gt;
 &lt;h2 id="Boolean arguments"&gt;Boolean arguments&lt;/h2&gt;
 &lt;p&gt;Some keywords accept arguments that are handled as Boolean values true or false. If such an argument is given as a string, it is considered false if it is an empty string or equal to &lt;code&gt;FALSE&lt;/code&gt;, &lt;code&gt;NONE&lt;/code&gt;, &lt;code&gt;NO&lt;/code&gt;, &lt;code&gt;OFF&lt;/code&gt; or &lt;code&gt;0&lt;/code&gt;, case-insensitively. Keywords verifying something that allow dropping actual and expected values from the possible error message also consider string &lt;code&gt;no values&lt;/code&gt; to be false. Other strings are considered true unless the keyword documentation explicitly states otherwise, and other argument types are tested using the same &lt;a href="http://docs.python.org/library/stdtypes.html#truth"&gt;rules as in Python&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;True examples:&lt;/p&gt;
-&lt;table border="1"&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;a href="#Should%20Be%20Equal" class="name"&gt;Should Be Equal&lt;/a&gt;&lt;/td&gt;
-&lt;td&gt;${x}&lt;/td&gt;
-&lt;td&gt;${y}&lt;/td&gt;
-&lt;td&gt;Custom error&lt;/td&gt;
-&lt;td&gt;values=True&lt;/td&gt;
-&lt;td&gt;# Strings are generally true.&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;a href="#Should%20Be%20Equal" class="name"&gt;Should Be Equal&lt;/a&gt;&lt;/td&gt;
-&lt;td&gt;${x}&lt;/td&gt;
-&lt;td&gt;${y}&lt;/td&gt;
-&lt;td&gt;Custom error&lt;/td&gt;
-&lt;td&gt;values=yes&lt;/td&gt;
-&lt;td&gt;# Same as the above.&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;a href="#Should%20Be%20Equal" class="name"&gt;Should Be Equal&lt;/a&gt;&lt;/td&gt;
-&lt;td&gt;${x}&lt;/td&gt;
-&lt;td&gt;${y}&lt;/td&gt;
-&lt;td&gt;Custom error&lt;/td&gt;
-&lt;td&gt;values=${TRUE}&lt;/td&gt;
-&lt;td&gt;# Python &lt;code&gt;True&lt;/code&gt; is true.&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;a href="#Should%20Be%20Equal" class="name"&gt;Should Be Equal&lt;/a&gt;&lt;/td&gt;
-&lt;td&gt;${x}&lt;/td&gt;
-&lt;td&gt;${y}&lt;/td&gt;
-&lt;td&gt;Custom error&lt;/td&gt;
-&lt;td&gt;values=${42}&lt;/td&gt;
-&lt;td&gt;# Numbers other than 0 are true.&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/table&gt;
+&lt;pre&gt;
+&lt;a href="#Should%20Be%20Equal" class="name"&gt;Should Be Equal&lt;/a&gt;    ${x}    ${y}    Custom error    values=True         # Strings are generally true.
+&lt;a href="#Should%20Be%20Equal" class="name"&gt;Should Be Equal&lt;/a&gt;    ${x}    ${y}    Custom error    values=yes          # Same as the above.
+&lt;a href="#Should%20Be%20Equal" class="name"&gt;Should Be Equal&lt;/a&gt;    ${x}    ${y}    Custom error    values=${TRUE}      # Python &lt;code&gt;True&lt;/code&gt; is true.
+&lt;a href="#Should%20Be%20Equal" class="name"&gt;Should Be Equal&lt;/a&gt;    ${x}    ${y}    Custom error    values=${42}        # Numbers other than 0 are true.
+&lt;/pre&gt;
 &lt;p&gt;False examples:&lt;/p&gt;
-&lt;table border="1"&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;a href="#Should%20Be%20Equal" class="name"&gt;Should Be Equal&lt;/a&gt;&lt;/td&gt;
-&lt;td&gt;${x}&lt;/td&gt;
-&lt;td&gt;${y}&lt;/td&gt;
-&lt;td&gt;Custom error&lt;/td&gt;
-&lt;td&gt;values=False&lt;/td&gt;
-&lt;td&gt;# String &lt;code&gt;false&lt;/code&gt; is false.&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;a href="#Should%20Be%20Equal" class="name"&gt;Should Be Equal&lt;/a&gt;&lt;/td&gt;
-&lt;td&gt;${x}&lt;/td&gt;
-&lt;td&gt;${y}&lt;/td&gt;
-&lt;td&gt;Custom error&lt;/td&gt;
-&lt;td&gt;values=no&lt;/td&gt;
-&lt;td&gt;# Also string &lt;code&gt;no&lt;/code&gt; is false.&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;a href="#Should%20Be%20Equal" class="name"&gt;Should Be Equal&lt;/a&gt;&lt;/td&gt;
-&lt;td&gt;${x}&lt;/td&gt;
-&lt;td&gt;${y}&lt;/td&gt;
-&lt;td&gt;Custom error&lt;/td&gt;
-&lt;td&gt;values=${EMPTY}&lt;/td&gt;
-&lt;td&gt;# Empty string is false.&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;a href="#Should%20Be%20Equal" class="name"&gt;Should Be Equal&lt;/a&gt;&lt;/td&gt;
-&lt;td&gt;${x}&lt;/td&gt;
-&lt;td&gt;${y}&lt;/td&gt;
-&lt;td&gt;Custom error&lt;/td&gt;
-&lt;td&gt;values=${FALSE}&lt;/td&gt;
-&lt;td&gt;# Python &lt;code&gt;False&lt;/code&gt; is false.&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;a href="#Should%20Be%20Equal" class="name"&gt;Should Be Equal&lt;/a&gt;&lt;/td&gt;
-&lt;td&gt;${x}&lt;/td&gt;
-&lt;td&gt;${y}&lt;/td&gt;
-&lt;td&gt;Custom error&lt;/td&gt;
-&lt;td&gt;values=no values&lt;/td&gt;
-&lt;td&gt;# &lt;code&gt;no values&lt;/code&gt; works with &lt;code&gt;values&lt;/code&gt; argument&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/table&gt;
+&lt;pre&gt;
+&lt;a href="#Should%20Be%20Equal" class="name"&gt;Should Be Equal&lt;/a&gt;    ${x}    ${y}    Custom error    values=False        # String &lt;code&gt;false&lt;/code&gt; is false.
+&lt;a href="#Should%20Be%20Equal" class="name"&gt;Should Be Equal&lt;/a&gt;    ${x}    ${y}    Custom error    values=no           # Also string &lt;code&gt;no&lt;/code&gt; is false.
+&lt;a href="#Should%20Be%20Equal" class="name"&gt;Should Be Equal&lt;/a&gt;    ${x}    ${y}    Custom error    values=${EMPTY}     # Empty string is false.
+&lt;a href="#Should%20Be%20Equal" class="name"&gt;Should Be Equal&lt;/a&gt;    ${x}    ${y}    Custom error    values=${FALSE}     # Python &lt;code&gt;False&lt;/code&gt; is false.
+&lt;a href="#Should%20Be%20Equal" class="name"&gt;Should Be Equal&lt;/a&gt;    ${x}    ${y}    Custom error    values=no values    # &lt;code&gt;no values&lt;/code&gt; works with &lt;code&gt;values&lt;/code&gt; argument
+&lt;/pre&gt;
 &lt;h2 id="Pattern matching"&gt;Pattern matching&lt;/h2&gt;
-&lt;p&gt;Many keywords accepts arguments as either glob or regular expression patterns.&lt;/p&gt;
+&lt;p&gt;Many keywords accept arguments as either glob or regular expression patterns.&lt;/p&gt;
 &lt;h3 id="Glob patterns"&gt;Glob patterns&lt;/h3&gt;
 &lt;p&gt;Some keywords, for example &lt;a href="#Should%20Match" class="name"&gt;Should Match&lt;/a&gt;, support so called &lt;a href="http://en.wikipedia.org/wiki/Glob_(programming)"&gt;glob patterns&lt;/a&gt; where:&lt;/p&gt;
 &lt;table border="1"&gt;
@@ -215,35 +115,11 @@
 &lt;h2 id="Multiline string comparison"&gt;Multiline string comparison&lt;/h2&gt;
 &lt;p&gt;&lt;a href="#Should%20Be%20Equal" class="name"&gt;Should Be Equal&lt;/a&gt; and &lt;a href="#Should%20Be%20Equal%20As%20Strings" class="name"&gt;Should Be Equal As Strings&lt;/a&gt; report the failures using &lt;a href="http://en.wikipedia.org/wiki/Diff_utility#Unified_format"&gt;unified diff format&lt;/a&gt; if both strings have more than two lines.&lt;/p&gt;
 &lt;p&gt;Example:&lt;/p&gt;
-&lt;table border="1"&gt;
-&lt;tr&gt;
-&lt;td&gt;${first} =&lt;/td&gt;
-&lt;td&gt;&lt;a href="#Catenate" class="name"&gt;Catenate&lt;/a&gt;&lt;/td&gt;
-&lt;td&gt;SEPARATOR=\n&lt;/td&gt;
-&lt;td&gt;Not in second&lt;/td&gt;
-&lt;td&gt;Same&lt;/td&gt;
-&lt;td&gt;Differs&lt;/td&gt;
-&lt;td&gt;Same&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;${second} =&lt;/td&gt;
-&lt;td&gt;&lt;a href="#Catenate" class="name"&gt;Catenate&lt;/a&gt;&lt;/td&gt;
-&lt;td&gt;SEPARATOR=\n&lt;/td&gt;
-&lt;td&gt;Same&lt;/td&gt;
-&lt;td&gt;Differs2&lt;/td&gt;
-&lt;td&gt;Same&lt;/td&gt;
-&lt;td&gt;Not in first&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;a href="#Should%20Be%20Equal" class="name"&gt;Should Be Equal&lt;/a&gt;&lt;/td&gt;
-&lt;td&gt;${first}&lt;/td&gt;
-&lt;td&gt;${second}&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/table&gt;
+&lt;pre&gt;
+${first} =     &lt;a href="#Catenate" class="name"&gt;Catenate&lt;/a&gt;    SEPARATOR=\n    Not in second    Same    Differs    Same
+${second} =    &lt;a href="#Catenate" class="name"&gt;Catenate&lt;/a&gt;    SEPARATOR=\n    Same    Differs2    Same    Not in first
+&lt;a href="#Should%20Be%20Equal" class="name"&gt;Should Be Equal&lt;/a&gt;    ${first}    ${second}
+&lt;/pre&gt;
 &lt;p&gt;Results in the following error message:&lt;/p&gt;
 &lt;pre&gt;
 Multiline strings are different:
@@ -258,9 +134,9 @@ Multiline strings are different:
 +Not in first
 &lt;/pre&gt;
 &lt;h2 id="String representations"&gt;String representations&lt;/h2&gt;
-&lt;p&gt;Several keywords log values explicitly (e.g. &lt;a href="#Log" class="name"&gt;Log&lt;/a&gt;) or implicitly (e.g. &lt;a href="#Should%20Be%20Equal" class="name"&gt;Should Be Equal&lt;/a&gt; when there are failures). By default keywords log values using "human readable" string representation, which means that strings like &lt;code&gt;Hello&lt;/code&gt; and numbers like &lt;code&gt;42&lt;/code&gt; are logged as-is. Most of the time this is the desired behavior, but there are some problems as well:&lt;/p&gt;
+&lt;p&gt;Several keywords log values explicitly (e.g. &lt;a href="#Log" class="name"&gt;Log&lt;/a&gt;) or implicitly (e.g. &lt;a href="#Should%20Be%20Equal" class="name"&gt;Should Be Equal&lt;/a&gt; when there are failures). By default, keywords log values using human-readable string representation, which means that strings like &lt;code&gt;Hello&lt;/code&gt; and numbers like &lt;code&gt;42&lt;/code&gt; are logged as-is. Most of the time this is the desired behavior, but there are some problems as well:&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;It is not possible to see difference between different objects that have same string representation like string &lt;code&gt;42&lt;/code&gt; and integer &lt;code&gt;42&lt;/code&gt;. &lt;a href="#Should%20Be%20Equal" class="name"&gt;Should Be Equal&lt;/a&gt; and some other keywords add the type information to the error message in these cases, though.&lt;/li&gt;
+&lt;li&gt;It is not possible to see difference between different objects that have the same string representation like string &lt;code&gt;42&lt;/code&gt; and integer &lt;code&gt;42&lt;/code&gt;. &lt;a href="#Should%20Be%20Equal" class="name"&gt;Should Be Equal&lt;/a&gt; and some other keywords add the type information to the error message in these cases, though.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;ul&gt;
 &lt;li&gt;Non-printable characters such as the null byte are not visible.&lt;/li&gt;
@@ -275,26 +151,21 @@ Multiline strings are different:
 &lt;li&gt;There are several Unicode characters that are different but look the same. One example is the Latin &lt;code&gt;a&lt;/code&gt; (&lt;code&gt;\u0061&lt;/code&gt;) and the Cyrillic &lt;code&gt;а&lt;/code&gt; (&lt;code&gt;\u0430&lt;/code&gt;). Error messages like &lt;code&gt;a != а&lt;/code&gt; are not very helpful.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;ul&gt;
-&lt;li&gt;Some Unicode characters can be represented using &lt;a href="https://en.wikipedia.org/wiki/Unicode_equivalence"&gt;different forms&lt;/a&gt;. For example, &lt;code&gt;ä&lt;/code&gt; can be represented either as a single code point &lt;code&gt;\u00e4&lt;/code&gt; or using two code points &lt;code&gt;\u0061&lt;/code&gt; and &lt;code&gt;\u0308&lt;/code&gt; combined together. Such forms are considered canonically equivalent, but strings containing them are not considered equal when compared in Python. Error messages like &lt;code&gt;ä != ä&lt;/code&gt; are not that helpful either.&lt;/li&gt;
+&lt;li&gt;Some Unicode characters can be represented using &lt;a href="https://en.wikipedia.org/wiki/Unicode_equivalence"&gt;different forms&lt;/a&gt;. For example, &lt;code&gt;ä&lt;/code&gt; can be represented either as a single code point &lt;code&gt;\u00e4&lt;/code&gt; or using two combined code points &lt;code&gt;\u0061&lt;/code&gt; and &lt;code&gt;\u0308&lt;/code&gt;. Such forms are considered canonically equivalent, but strings containing them are not considered equal when compared in Python. Error messages like &lt;code&gt;ä != ä&lt;/code&gt; are not that helpful either.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;ul&gt;
 &lt;li&gt;Containers such as lists and dictionaries are formatted into a single line making it hard to see individual items they contain.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;To overcome the above problems, some keywords such as &lt;a href="#Log" class="name"&gt;Log&lt;/a&gt; and &lt;a href="#Should%20Be%20Equal" class="name"&gt;Should Be Equal&lt;/a&gt; have an optional &lt;code&gt;formatter&lt;/code&gt; argument that can be used to configure the string representation. The supported values are &lt;code&gt;str&lt;/code&gt; (default), &lt;code&gt;repr&lt;/code&gt;, and &lt;code&gt;ascii&lt;/code&gt; that work similarly as &lt;a href="https://docs.python.org/library/functions.html"&gt;Python built-in functions&lt;/a&gt; with same names. More detailed semantics are explained below.&lt;/p&gt;
 &lt;h3 id="str"&gt;str&lt;/h3&gt;
-&lt;p&gt;Use the "human readable" string representation. Equivalent to using &lt;code&gt;str()&lt;/code&gt; in Python 3 and &lt;code&gt;unicode()&lt;/code&gt; in Python 2. This is the default.&lt;/p&gt;
+&lt;p&gt;Use the human-readable string representation. Equivalent to using &lt;code&gt;str()&lt;/code&gt; in Python. This is the default.&lt;/p&gt;
 &lt;h3 id="repr"&gt;repr&lt;/h3&gt;
-&lt;p&gt;Use the "machine readable" string representation. Similar to using &lt;code&gt;repr()&lt;/code&gt; in Python, which means that strings like &lt;code&gt;Hello&lt;/code&gt; are logged like &lt;code&gt;'Hello'&lt;/code&gt;, newlines and non-printable characters are escaped like &lt;code&gt;\n&lt;/code&gt; and &lt;code&gt;\x00&lt;/code&gt;, and so on. Non-ASCII characters are shown as-is like &lt;code&gt;ä&lt;/code&gt; in Python 3 and in escaped format like &lt;code&gt;\xe4&lt;/code&gt; in Python 2. Use &lt;code&gt;ascii&lt;/code&gt; to always get the escaped format.&lt;/p&gt;
-&lt;p&gt;There are also some enhancements compared to the standard &lt;code&gt;repr()&lt;/code&gt;:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Bigger lists, dictionaries and other containers are pretty-printed so that there is one item per row.&lt;/li&gt;
-&lt;li&gt;On Python 2 the &lt;code&gt;u&lt;/code&gt; prefix is omitted with Unicode strings and the &lt;code&gt;b&lt;/code&gt; prefix is added to byte strings.&lt;/li&gt;
-&lt;/ul&gt;
+&lt;p&gt;Use the machine-readable string representation. Similar to using &lt;code&gt;repr()&lt;/code&gt; in Python, which means that strings like &lt;code&gt;Hello&lt;/code&gt; are logged like &lt;code&gt;'Hello'&lt;/code&gt;, newlines and non-printable characters are escaped like &lt;code&gt;\n&lt;/code&gt; and &lt;code&gt;\x00&lt;/code&gt;, and so on. Non-ASCII characters are shown as-is like &lt;code&gt;ä&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;In this mode bigger lists, dictionaries and other containers are pretty-printed so that there is one item per row.&lt;/p&gt;
 &lt;h3 id="ascii"&gt;ascii&lt;/h3&gt;
-&lt;p&gt;Same as using &lt;code&gt;ascii()&lt;/code&gt; in Python 3 or &lt;code&gt;repr()&lt;/code&gt; in Python 2 where &lt;code&gt;ascii()&lt;/code&gt; does not exist. Similar to using &lt;code&gt;repr&lt;/code&gt; explained above but with the following differences:&lt;/p&gt;
+&lt;p&gt;Same as using &lt;code&gt;ascii()&lt;/code&gt; in Python. Similar to using &lt;code&gt;repr&lt;/code&gt; explained above but with the following differences:&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;On Python 3 non-ASCII characters are escaped like &lt;code&gt;\xe4&lt;/code&gt; instead of showing them as-is like &lt;code&gt;ä&lt;/code&gt;. This makes it easier to see differences between Unicode characters that look the same but are not equal. This is how &lt;code&gt;repr()&lt;/code&gt; works in Python 2.&lt;/li&gt;
-&lt;li&gt;On Python 2 just uses the standard &lt;code&gt;repr()&lt;/code&gt; meaning that Unicode strings get the &lt;code&gt;u&lt;/code&gt; prefix and no &lt;code&gt;b&lt;/code&gt; prefix is added to byte strings.&lt;/li&gt;
+&lt;li&gt;Non-ASCII characters are escaped like &lt;code&gt;\xe4&lt;/code&gt; instead of showing them as-is like &lt;code&gt;ä&lt;/code&gt;. This makes it easier to see differences between Unicode characters that look the same but are not equal.&lt;/li&gt;
 &lt;li&gt;Containers are not pretty-printed.&lt;/li&gt;
 &lt;/ul&gt;</doc>
 <tags>
@@ -302,7 +173,7 @@ Multiline strings are different:
 <inits>
 </inits>
 <keywords>
-<kw name="Call Method" lineno="3308">
+<kw name="Call Method" lineno="3382">
 <arguments repr="object, method_name, *args, **kwargs">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="object">
 <name>object</name>
@@ -374,7 +245,7 @@ Multiline strings are different:
 &lt;/table&gt;</doc>
 <shortdoc>Calls the named method of the given object with the provided arguments.</shortdoc>
 </kw>
-<kw name="Catenate" lineno="2833">
+<kw name="Catenate" lineno="2892">
 <arguments repr="*items">
 <arg kind="VAR_POSITIONAL" required="false" repr="*items">
 <name>items</name>
@@ -414,7 +285,7 @@ ${str3} = 'Helloworld'
 &lt;/pre&gt;</doc>
 <shortdoc>Catenates the given items together and returns the resulted string.</shortdoc>
 </kw>
-<kw name="Comment" lineno="2982">
+<kw name="Comment" lineno="3057">
 <arguments repr="*messages">
 <arg kind="VAR_POSITIONAL" required="false" repr="*messages">
 <name>messages</name>
@@ -424,11 +295,18 @@ ${str3} = 'Helloworld'
 &lt;p&gt;This keyword does nothing with the arguments it receives, but as they are visible in the log, this keyword can be used to display simple messages. Given arguments are ignored so thoroughly that they can even contain non-existing variables. If you are interested about variable values, you can use the &lt;a href="#Log" class="name"&gt;Log&lt;/a&gt; or &lt;a href="#Log%20Many" class="name"&gt;Log Many&lt;/a&gt; keywords.&lt;/p&gt;</doc>
 <shortdoc>Displays the given messages in the log file as keyword arguments.</shortdoc>
 </kw>
-<kw name="Continue For Loop" lineno="2529">
+<kw name="Continue For Loop" lineno="2497">
 <arguments repr="">
 </arguments>
-<doc>&lt;p&gt;Skips the current for loop iteration and continues from the next.&lt;/p&gt;
-&lt;p&gt;Skips the remaining keywords in the current for loop iteration and continues from the next one. Can be used directly in a for loop or in a keyword that the loop uses.&lt;/p&gt;
+<doc>&lt;p&gt;Skips the current FOR loop iteration and continues from the next.&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;b&gt;NOTE:&lt;/b&gt; Robot Framework 5.0 added support for native &lt;code&gt;CONTINUE&lt;/code&gt; statement that is recommended over this keyword. In the examples below, &lt;code&gt;Continue For Loop&lt;/code&gt; can simply be replaced with &lt;code&gt;CONTINUE&lt;/code&gt;. In addition to that, native &lt;code&gt;IF&lt;/code&gt; syntax (new in RF 4.0) or inline &lt;code&gt;IF&lt;/code&gt; syntax (new in RF 5.0) can be used instead of &lt;code&gt;Run Keyword If&lt;/code&gt;. For example, the first example below could be written like this instead:&lt;/p&gt;
+&lt;pre&gt;
+IF    '${var}' == 'CONTINUE'    CONTINUE
+&lt;/pre&gt;
+&lt;p&gt;This keyword will eventually be deprecated and removed.&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;Skips the remaining keywords in the current FOR loop iteration and continues from the next one. Starting from Robot Framework 5.0, this keyword can only be used inside a loop, not in a keyword used in a loop.&lt;/p&gt;
 &lt;p&gt;Example:&lt;/p&gt;
 &lt;table border="1"&gt;
 &lt;tr&gt;
@@ -456,17 +334,24 @@ ${str3} = 'Helloworld'
 &lt;td&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/table&gt;
-&lt;p&gt;See &lt;a href="#Continue%20For%20Loop%20If" class="name"&gt;Continue For Loop If&lt;/a&gt; to conditionally continue a for loop without using &lt;a href="#Run%20Keyword%20If" class="name"&gt;Run Keyword If&lt;/a&gt; or other wrapper keywords.&lt;/p&gt;</doc>
-<shortdoc>Skips the current for loop iteration and continues from the next.</shortdoc>
+&lt;p&gt;See &lt;a href="#Continue%20For%20Loop%20If" class="name"&gt;Continue For Loop If&lt;/a&gt; to conditionally continue a FOR loop without using &lt;a href="#Run%20Keyword%20If" class="name"&gt;Run Keyword If&lt;/a&gt; or other wrapper keywords.&lt;/p&gt;</doc>
+<shortdoc>Skips the current FOR loop iteration and continues from the next.</shortdoc>
 </kw>
-<kw name="Continue For Loop If" lineno="2548">
+<kw name="Continue For Loop If" lineno="2533">
 <arguments repr="condition">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="condition">
 <name>condition</name>
 </arg>
 </arguments>
-<doc>&lt;p&gt;Skips the current for loop iteration if the &lt;code&gt;condition&lt;/code&gt; is true.&lt;/p&gt;
-&lt;p&gt;A wrapper for &lt;a href="#Continue%20For%20Loop" class="name"&gt;Continue For Loop&lt;/a&gt; to continue a for loop based on the given condition. The condition is evaluated using the same semantics as with &lt;a href="#Should%20Be%20True" class="name"&gt;Should Be True&lt;/a&gt; keyword.&lt;/p&gt;
+<doc>&lt;p&gt;Skips the current FOR loop iteration if the &lt;code&gt;condition&lt;/code&gt; is true.&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;b&gt;NOTE:&lt;/b&gt; Robot Framework 5.0 added support for native &lt;code&gt;CONTINUE&lt;/code&gt; statement and for inline &lt;code&gt;IF&lt;/code&gt;, and that combination should be used instead of this keyword. For example, &lt;code&gt;Continue For Loop If&lt;/code&gt; usage in the example below could be replaced with&lt;/p&gt;
+&lt;pre&gt;
+IF    '${var}' == 'CONTINUE'    CONTINUE
+&lt;/pre&gt;
+&lt;p&gt;This keyword will eventually be deprecated and removed.&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;A wrapper for &lt;a href="#Continue%20For%20Loop" class="name"&gt;Continue For Loop&lt;/a&gt; to continue a FOR loop based on the given condition. The condition is evaluated using the same semantics as with &lt;a href="#Should%20Be%20True" class="name"&gt;Should Be True&lt;/a&gt; keyword.&lt;/p&gt;
 &lt;p&gt;Example:&lt;/p&gt;
 &lt;table border="1"&gt;
 &lt;tr&gt;
@@ -494,9 +379,9 @@ ${str3} = 'Helloworld'
 &lt;td&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/table&gt;</doc>
-<shortdoc>Skips the current for loop iteration if the ``condition`` is true.</shortdoc>
+<shortdoc>Skips the current FOR loop iteration if the ``condition`` is true.</shortdoc>
 </kw>
-<kw name="Convert To Binary" lineno="169">
+<kw name="Convert To Binary" lineno="149">
 <arguments repr="item, base=None, prefix=None, length=None">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="item">
 <name>item</name>
@@ -547,7 +432,7 @@ ${str3} = 'Helloworld'
 &lt;p&gt;See also &lt;a href="#Convert%20To%20Integer" class="name"&gt;Convert To Integer&lt;/a&gt;, &lt;a href="#Convert%20To%20Octal" class="name"&gt;Convert To Octal&lt;/a&gt; and &lt;a href="#Convert%20To%20Hex" class="name"&gt;Convert To Hex&lt;/a&gt;.&lt;/p&gt;</doc>
 <shortdoc>Converts the given item to a binary string.</shortdoc>
 </kw>
-<kw name="Convert To Boolean" lineno="322">
+<kw name="Convert To Boolean" lineno="296">
 <arguments repr="item">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="item">
 <name>item</name>
@@ -557,7 +442,7 @@ ${str3} = 'Helloworld'
 &lt;p&gt;Handles strings &lt;code&gt;True&lt;/code&gt; and &lt;code&gt;False&lt;/code&gt; (case-insensitive) as expected, otherwise returns item's &lt;a href="http://docs.python.org/library/stdtypes.html#truth"&gt;truth value&lt;/a&gt; using Python's &lt;code&gt;bool()&lt;/code&gt; method.&lt;/p&gt;</doc>
 <shortdoc>Converts the given item to Boolean true or false.</shortdoc>
 </kw>
-<kw name="Convert To Bytes" lineno="338">
+<kw name="Convert To Bytes" lineno="312">
 <arguments repr="input, input_type=text">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="input">
 <name>input</name>
@@ -594,6 +479,13 @@ ${str3} = 'Helloworld'
 &lt;tr&gt;
 &lt;td&gt;${bytes} =&lt;/td&gt;
 &lt;td&gt;Convert To Bytes&lt;/td&gt;
+&lt;td&gt;hyv\xe4&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;# hyv\xe4&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;${bytes} =&lt;/td&gt;
+&lt;td&gt;Convert To Bytes&lt;/td&gt;
 &lt;td&gt;\xff\x07&lt;/td&gt;
 &lt;td&gt;&lt;/td&gt;
 &lt;td&gt;# \xff\x07&lt;/td&gt;
@@ -622,9 +514,9 @@ ${str3} = 'Helloworld'
 &lt;tr&gt;
 &lt;td&gt;${bytes} =&lt;/td&gt;
 &lt;td&gt;Convert To Bytes&lt;/td&gt;
-&lt;td&gt;5246212121&lt;/td&gt;
+&lt;td&gt;52462121&lt;/td&gt;
 &lt;td&gt;hex&lt;/td&gt;
-&lt;td&gt;# RF!!!&lt;/td&gt;
+&lt;td&gt;# RF!!&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;${bytes} =&lt;/td&gt;
@@ -658,7 +550,7 @@ ${str3} = 'Helloworld'
 &lt;p&gt;Use &lt;span class="name"&gt;Encode String To Bytes&lt;/span&gt; in &lt;code&gt;String&lt;/code&gt; library if you need to convert text to bytes using a certain encoding.&lt;/p&gt;</doc>
 <shortdoc>Converts the given ``input`` to bytes according to the ``input_type``.</shortdoc>
 </kw>
-<kw name="Convert To Hex" lineno="213">
+<kw name="Convert To Hex" lineno="193">
 <arguments repr="item, base=None, prefix=None, length=None, lowercase=False">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="item">
 <name>item</name>
@@ -714,7 +606,7 @@ ${str3} = 'Helloworld'
 &lt;p&gt;See also &lt;a href="#Convert%20To%20Integer" class="name"&gt;Convert To Integer&lt;/a&gt;, &lt;a href="#Convert%20To%20Binary" class="name"&gt;Convert To Binary&lt;/a&gt; and &lt;a href="#Convert%20To%20Octal" class="name"&gt;Convert To Octal&lt;/a&gt;.&lt;/p&gt;</doc>
 <shortdoc>Converts the given item to a hexadecimal string.</shortdoc>
 </kw>
-<kw name="Convert To Integer" lineno="106">
+<kw name="Convert To Integer" lineno="96">
 <arguments repr="item, base=None">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="item">
 <name>item</name>
@@ -781,7 +673,7 @@ ${str3} = 'Helloworld'
 &lt;p&gt;See also &lt;a href="#Convert%20To%20Number" class="name"&gt;Convert To Number&lt;/a&gt;, &lt;a href="#Convert%20To%20Binary" class="name"&gt;Convert To Binary&lt;/a&gt;, &lt;a href="#Convert%20To%20Octal" class="name"&gt;Convert To Octal&lt;/a&gt;, &lt;a href="#Convert%20To%20Hex" class="name"&gt;Convert To Hex&lt;/a&gt;, and &lt;a href="#Convert%20To%20Bytes" class="name"&gt;Convert To Bytes&lt;/a&gt;.&lt;/p&gt;</doc>
 <shortdoc>Converts the given item to an integer number.</shortdoc>
 </kw>
-<kw name="Convert To Number" lineno="252">
+<kw name="Convert To Number" lineno="232">
 <arguments repr="item, precision=None">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="item">
 <name>item</name>
@@ -833,7 +725,7 @@ ${str3} = 'Helloworld'
 &lt;p&gt;If you need an integer number, use &lt;a href="#Convert%20To%20Integer" class="name"&gt;Convert To Integer&lt;/a&gt; instead.&lt;/p&gt;</doc>
 <shortdoc>Converts the given item to a floating point number.</shortdoc>
 </kw>
-<kw name="Convert To Octal" lineno="191">
+<kw name="Convert To Octal" lineno="171">
 <arguments repr="item, base=None, prefix=None, length=None">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="item">
 <name>item</name>
@@ -884,7 +776,7 @@ ${str3} = 'Helloworld'
 &lt;p&gt;See also &lt;a href="#Convert%20To%20Integer" class="name"&gt;Convert To Integer&lt;/a&gt;, &lt;a href="#Convert%20To%20Binary" class="name"&gt;Convert To Binary&lt;/a&gt; and &lt;a href="#Convert%20To%20Hex" class="name"&gt;Convert To Hex&lt;/a&gt;.&lt;/p&gt;</doc>
 <shortdoc>Converts the given item to an octal string.</shortdoc>
 </kw>
-<kw name="Convert To String" lineno="305">
+<kw name="Convert To String" lineno="282">
 <arguments repr="item">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="item">
 <name>item</name>
@@ -895,7 +787,7 @@ ${str3} = 'Helloworld'
 &lt;p&gt;Use &lt;span class="name"&gt;Encode String To Bytes&lt;/span&gt; and &lt;span class="name"&gt;Decode Bytes To String&lt;/span&gt; keywords in &lt;code&gt;String&lt;/code&gt; library if you need to convert between Unicode and byte strings using different encodings. Use &lt;a href="#Convert%20To%20Bytes" class="name"&gt;Convert To Bytes&lt;/a&gt; if you just want to create byte strings.&lt;/p&gt;</doc>
 <shortdoc>Converts the given item to a Unicode string.</shortdoc>
 </kw>
-<kw name="Create Dictionary" lineno="446">
+<kw name="Create Dictionary" lineno="418">
 <arguments repr="*items">
 <arg kind="VAR_POSITIONAL" required="false" repr="*items">
 <name>items</name>
@@ -973,7 +865,7 @@ ${str3} = 'Helloworld'
 &lt;/table&gt;</doc>
 <shortdoc>Creates and returns a dictionary based on the given ``items``.</shortdoc>
 </kw>
-<kw name="Create List" lineno="432">
+<kw name="Create List" lineno="404">
 <arguments repr="*items">
 <arg kind="VAR_POSITIONAL" required="false" repr="*items">
 <name>items</name>
@@ -1007,7 +899,7 @@ ${str3} = 'Helloworld'
 &lt;/table&gt;</doc>
 <shortdoc>Returns a list containing given items.</shortdoc>
 </kw>
-<kw name="Evaluate" lineno="3252">
+<kw name="Evaluate" lineno="3326">
 <arguments repr="expression, modules=None, namespace=None">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="expression">
 <name>expression</name>
@@ -1092,8 +984,15 @@ ${result} = 42
 <kw name="Exit For Loop" lineno="2564">
 <arguments repr="">
 </arguments>
-<doc>&lt;p&gt;Stops executing the enclosing for loop.&lt;/p&gt;
-&lt;p&gt;Exits the enclosing for loop and continues execution after it. Can be used directly in a for loop or in a keyword that the loop uses.&lt;/p&gt;
+<doc>&lt;p&gt;Stops executing the enclosing FOR loop.&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;b&gt;NOTE:&lt;/b&gt; Robot Framework 5.0 added support for native &lt;code&gt;BREAK&lt;/code&gt; statement that is recommended over this keyword. In the examples below, &lt;code&gt;Exit For Loop&lt;/code&gt; can simply be replaced with &lt;code&gt;BREAK&lt;/code&gt;. In addition to that, native &lt;code&gt;IF&lt;/code&gt; syntax (new in RF 4.0) or inline &lt;code&gt;IF&lt;/code&gt; syntax (new in RF 5.0) can be used instead of &lt;code&gt;Run Keyword If&lt;/code&gt;. For example, the first example below could be written like this instead:&lt;/p&gt;
+&lt;pre&gt;
+IF    '${var}' == 'EXIT'    BREAK
+&lt;/pre&gt;
+&lt;p&gt;This keyword will eventually be deprecated and removed.&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;Exits the enclosing FOR loop and continues execution after it. Starting from Robot Framework 5.0, this keyword can only be used inside a loop, not in a keyword used in a loop.&lt;/p&gt;
 &lt;p&gt;Example:&lt;/p&gt;
 &lt;table border="1"&gt;
 &lt;tr&gt;
@@ -1121,17 +1020,24 @@ ${result} = 42
 &lt;td&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/table&gt;
-&lt;p&gt;See &lt;a href="#Exit%20For%20Loop%20If" class="name"&gt;Exit For Loop If&lt;/a&gt; to conditionally exit a for loop without using &lt;a href="#Run%20Keyword%20If" class="name"&gt;Run Keyword If&lt;/a&gt; or other wrapper keywords.&lt;/p&gt;</doc>
-<shortdoc>Stops executing the enclosing for loop.</shortdoc>
+&lt;p&gt;See &lt;a href="#Exit%20For%20Loop%20If" class="name"&gt;Exit For Loop If&lt;/a&gt; to conditionally exit a FOR loop without using &lt;a href="#Run%20Keyword%20If" class="name"&gt;Run Keyword If&lt;/a&gt; or other wrapper keywords.&lt;/p&gt;</doc>
+<shortdoc>Stops executing the enclosing FOR loop.</shortdoc>
 </kw>
-<kw name="Exit For Loop If" lineno="2582">
+<kw name="Exit For Loop If" lineno="2600">
 <arguments repr="condition">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="condition">
 <name>condition</name>
 </arg>
 </arguments>
-<doc>&lt;p&gt;Stops executing the enclosing for loop if the &lt;code&gt;condition&lt;/code&gt; is true.&lt;/p&gt;
-&lt;p&gt;A wrapper for &lt;a href="#Exit%20For%20Loop" class="name"&gt;Exit For Loop&lt;/a&gt; to exit a for loop based on the given condition. The condition is evaluated using the same semantics as with &lt;a href="#Should%20Be%20True" class="name"&gt;Should Be True&lt;/a&gt; keyword.&lt;/p&gt;
+<doc>&lt;p&gt;Stops executing the enclosing FOR loop if the &lt;code&gt;condition&lt;/code&gt; is true.&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;b&gt;NOTE:&lt;/b&gt; Robot Framework 5.0 added support for native &lt;code&gt;BREAK&lt;/code&gt; statement and for inline &lt;code&gt;IF&lt;/code&gt;, and that combination should be used instead of this keyword. For example, &lt;code&gt;Exit For Loop If&lt;/code&gt; usage in the example below could be replaced with&lt;/p&gt;
+&lt;pre&gt;
+IF    '${var}' == 'EXIT'    BREAK
+&lt;/pre&gt;
+&lt;p&gt;This keyword will eventually be deprecated and removed.&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;A wrapper for &lt;a href="#Exit%20For%20Loop" class="name"&gt;Exit For Loop&lt;/a&gt; to exit a FOR loop based on the given condition. The condition is evaluated using the same semantics as with &lt;a href="#Should%20Be%20True" class="name"&gt;Should Be True&lt;/a&gt; keyword.&lt;/p&gt;
 &lt;p&gt;Example:&lt;/p&gt;
 &lt;table border="1"&gt;
 &lt;tr&gt;
@@ -1159,9 +1065,9 @@ ${result} = 42
 &lt;td&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/table&gt;</doc>
-<shortdoc>Stops executing the enclosing for loop if the ``condition`` is true.</shortdoc>
+<shortdoc>Stops executing the enclosing FOR loop if the ``condition`` is true.</shortdoc>
 </kw>
-<kw name="Fail" lineno="510">
+<kw name="Fail" lineno="482">
 <arguments repr="msg=None, *tags">
 <arg kind="POSITIONAL_OR_NAMED" required="false" repr="msg=None">
 <name>msg</name>
@@ -1215,7 +1121,7 @@ ${result} = 42
 &lt;p&gt;See &lt;a href="#Fatal%20Error" class="name"&gt;Fatal Error&lt;/a&gt; if you need to stop the whole test execution.&lt;/p&gt;</doc>
 <shortdoc>Fails the test with the given message and optionally alters its tags.</shortdoc>
 </kw>
-<kw name="Fatal Error" lineno="536">
+<kw name="Fatal Error" lineno="508">
 <arguments repr="msg=None">
 <arg kind="POSITIONAL_OR_NAMED" required="false" repr="msg=None">
 <name>msg</name>
@@ -1227,7 +1133,7 @@ ${result} = 42
 &lt;p&gt;See &lt;a href="#Fail" class="name"&gt;Fail&lt;/a&gt; if you only want to stop one test case unconditionally.&lt;/p&gt;</doc>
 <shortdoc>Stops the whole test execution.</shortdoc>
 </kw>
-<kw name="Get Count" lineno="1286">
+<kw name="Get Count" lineno="1249">
 <arguments repr="container, item">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="container">
 <name>container</name>
@@ -1255,7 +1161,7 @@ ${result} = 42
 &lt;/table&gt;</doc>
 <shortdoc>Returns and logs how many times ``item`` is found from ``container``.</shortdoc>
 </kw>
-<kw name="Get Length" lineno="1399">
+<kw name="Get Length" lineno="1362">
 <arguments repr="item">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="item">
 <name>item</name>
@@ -1299,7 +1205,7 @@ ${result} = 42
 &lt;p&gt;See also &lt;a href="#Length%20Should%20Be" class="name"&gt;Length Should Be&lt;/a&gt;, &lt;a href="#Should%20Be%20Empty" class="name"&gt;Should Be Empty&lt;/a&gt; and &lt;a href="#Should%20Not%20Be%20Empty" class="name"&gt;Should Not Be Empty&lt;/a&gt;.&lt;/p&gt;</doc>
 <shortdoc>Returns and logs the length of the given item as an integer.</shortdoc>
 </kw>
-<kw name="Get Library Instance" lineno="3525">
+<kw name="Get Library Instance" lineno="3599">
 <arguments repr="name=None, all=False">
 <arg kind="POSITIONAL_OR_NAMED" required="false" repr="name=None">
 <name>name</name>
@@ -1310,8 +1216,8 @@ ${result} = 42
 <default>False</default>
 </arg>
 </arguments>
-<doc>&lt;p&gt;Returns the currently active instance of the specified test library.&lt;/p&gt;
-&lt;p&gt;This keyword makes it easy for test libraries to interact with other test libraries that have state. This is illustrated by the Python example below:&lt;/p&gt;
+<doc>&lt;p&gt;Returns the currently active instance of the specified library.&lt;/p&gt;
+&lt;p&gt;This keyword makes it easy for libraries to interact with other libraries that have state. This is illustrated by the Python example below:&lt;/p&gt;
 &lt;pre&gt;
 from robot.libraries.BuiltIn import BuiltIn
 
@@ -1332,9 +1238,9 @@ def title_should_start_with(expected):
 &lt;td&gt;all=True&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/table&gt;</doc>
-<shortdoc>Returns the currently active instance of the specified test library.</shortdoc>
+<shortdoc>Returns the currently active instance of the specified library.</shortdoc>
 </kw>
-<kw name="Get Time" lineno="3169">
+<kw name="Get Time" lineno="3243">
 <arguments repr="format=timestamp, time_=NOW">
 <arg kind="POSITIONAL_OR_NAMED" required="false" repr="format=timestamp">
 <name>format</name>
@@ -1468,7 +1374,7 @@ ${hour} = '11'
 &lt;/pre&gt;</doc>
 <shortdoc>Returns the given time in the requested format.</shortdoc>
 </kw>
-<kw name="Get Variable Value" lineno="1521">
+<kw name="Get Variable Value" lineno="1484">
 <arguments repr="name, default=None">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="name">
 <name>name</name>
@@ -1479,38 +1385,22 @@ ${hour} = '11'
 </arg>
 </arguments>
 <doc>&lt;p&gt;Returns variable value or &lt;code&gt;default&lt;/code&gt; if the variable does not exist.&lt;/p&gt;
-&lt;p&gt;The name of the variable can be given either as a normal variable name (e.g. &lt;code&gt;${NAME}&lt;/code&gt;) or in escaped format (e.g. &lt;code&gt;\${NAME}&lt;/code&gt;). Notice that the former has some limitations explained in &lt;a href="#Set%20Suite%20Variable" class="name"&gt;Set Suite Variable&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;The name of the variable can be given either as a normal variable name like &lt;code&gt;${name}&lt;/code&gt; or in escaped format like &lt;code&gt;$name&lt;/code&gt; or &lt;code&gt;\${name}&lt;/code&gt;. For the reasons explained in the &lt;a href="#Using%20variables%20with%20keywords%20creating%20or%20accessing%20variables" class="name"&gt;Using variables with keywords creating or accessing variables&lt;/a&gt; section, using the escaped format is recommended.&lt;/p&gt;
 &lt;p&gt;Examples:&lt;/p&gt;
-&lt;table border="1"&gt;
-&lt;tr&gt;
-&lt;td&gt;${x} =&lt;/td&gt;
-&lt;td&gt;Get Variable Value&lt;/td&gt;
-&lt;td&gt;${a}&lt;/td&gt;
-&lt;td&gt;default&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;${y} =&lt;/td&gt;
-&lt;td&gt;Get Variable Value&lt;/td&gt;
-&lt;td&gt;${a}&lt;/td&gt;
-&lt;td&gt;${b}&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;${z} =&lt;/td&gt;
-&lt;td&gt;Get Variable Value&lt;/td&gt;
-&lt;td&gt;${z}&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/table&gt;
-&lt;p&gt;=&amp;gt;&lt;/p&gt;
 &lt;pre&gt;
-${x} gets value of ${a} if ${a} exists and string 'default' otherwise
-${y} gets value of ${a} if ${a} exists and value of ${b} otherwise
-${z} is set to Python None if it does not exist previously
+${x} =    &lt;a href="#Get%20Variable%20Value" class="name"&gt;Get Variable Value&lt;/a&gt;    $a    default
+${y} =    &lt;a href="#Get%20Variable%20Value" class="name"&gt;Get Variable Value&lt;/a&gt;    $a    ${b}
+${z} =    &lt;a href="#Get%20Variable%20Value" class="name"&gt;Get Variable Value&lt;/a&gt;    $z
 &lt;/pre&gt;
-&lt;p&gt;See &lt;a href="#Set%20Variable%20If" class="name"&gt;Set Variable If&lt;/a&gt; for another keyword to set variables dynamically.&lt;/p&gt;</doc>
+&lt;p&gt;=&amp;gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;${x}&lt;/code&gt; gets value of &lt;code&gt;${a}&lt;/code&gt; if &lt;code&gt;${a}&lt;/code&gt; exists and string &lt;code&gt;default&lt;/code&gt; otherwise&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;${y}&lt;/code&gt; gets value of &lt;code&gt;${a}&lt;/code&gt; if &lt;code&gt;${a}&lt;/code&gt; exists and value of &lt;code&gt;${b}&lt;/code&gt; otherwise&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;${z}&lt;/code&gt; is set to Python &lt;code&gt;None&lt;/code&gt; if it does not exist previously&lt;/li&gt;
+&lt;/ul&gt;</doc>
 <shortdoc>Returns variable value or ``default`` if the variable does not exist.</shortdoc>
 </kw>
-<kw name="Get Variables" lineno="1491">
+<kw name="Get Variables" lineno="1454">
 <arguments repr="no_decoration=False">
 <arg kind="POSITIONAL_OR_NAMED" required="false" repr="no_decoration=False">
 <name>no_decoration</name>
@@ -1573,7 +1463,7 @@ ${z} is set to Python None if it does not exist previously
 &lt;/table&gt;</doc>
 <shortdoc>Returns a dictionary containing all variables in the current scope.</shortdoc>
 </kw>
-<kw name="Import Library" lineno="3026">
+<kw name="Import Library" lineno="3101">
 <arguments repr="name, *args">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="name">
 <name>name</name>
@@ -1583,8 +1473,8 @@ ${z} is set to Python None if it does not exist previously
 </arg>
 </arguments>
 <doc>&lt;p&gt;Imports a library with the given name and optional arguments.&lt;/p&gt;
-&lt;p&gt;This functionality allows dynamic importing of libraries while tests are running. That may be necessary, if the library itself is dynamic and not yet available when test data is processed. In a normal case, libraries should be imported using the Library setting in the Setting table.&lt;/p&gt;
-&lt;p&gt;This keyword supports importing libraries both using library names and physical paths. When paths are used, they must be given in absolute format or found from &lt;a href="http://robotframework.org/robotframework/latest/RobotFrameworkUserGuide.html#pythonpath-jythonpath-and-ironpythonpath"&gt;search path&lt;/a&gt;. Forward slashes can be used as path separators in all operating systems.&lt;/p&gt;
+&lt;p&gt;This functionality allows dynamic importing of libraries while tests are running. That may be necessary, if the library itself is dynamic and not yet available when test data is processed. In a normal case, libraries should be imported using the Library setting in the Setting section.&lt;/p&gt;
+&lt;p&gt;This keyword supports importing libraries both using library names and physical paths. When paths are used, they must be given in absolute format or found from &lt;a href="http://robotframework.org/robotframework/latest/RobotFrameworkUserGuide.html#module-search-path"&gt;search path&lt;/a&gt;. Forward slashes can be used as path separators in all operating systems.&lt;/p&gt;
 &lt;p&gt;It is possible to pass arguments to the imported library and also named argument syntax works if the library supports it. &lt;code&gt;WITH NAME&lt;/code&gt; syntax can be used to give a custom name to the imported library.&lt;/p&gt;
 &lt;p&gt;Examples:&lt;/p&gt;
 &lt;table border="1"&gt;
@@ -1594,25 +1484,20 @@ ${z} is set to Python None if it does not exist previously
 &lt;td&gt;&lt;/td&gt;
 &lt;td&gt;&lt;/td&gt;
 &lt;td&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Import Library&lt;/td&gt;
-&lt;td&gt;${CURDIR}/../Library.py&lt;/td&gt;
-&lt;td&gt;arg1&lt;/td&gt;
-&lt;td&gt;named=arg2&lt;/td&gt;
 &lt;td&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;Import Library&lt;/td&gt;
-&lt;td&gt;${LIBRARIES}/Lib.java&lt;/td&gt;
-&lt;td&gt;arg&lt;/td&gt;
+&lt;td&gt;${CURDIR}/Lib.py&lt;/td&gt;
+&lt;td&gt;arg1&lt;/td&gt;
+&lt;td&gt;named=arg2&lt;/td&gt;
 &lt;td&gt;WITH NAME&lt;/td&gt;
-&lt;td&gt;JavaLib&lt;/td&gt;
+&lt;td&gt;Custom&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/table&gt;</doc>
 <shortdoc>Imports a library with the given name and optional arguments.</shortdoc>
 </kw>
-<kw name="Import Resource" lineno="3088">
+<kw name="Import Resource" lineno="3162">
 <arguments repr="path">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="path">
 <name>path</name>
@@ -1620,7 +1505,7 @@ ${z} is set to Python None if it does not exist previously
 </arguments>
 <doc>&lt;p&gt;Imports a resource file with the given path.&lt;/p&gt;
 &lt;p&gt;Resources imported with this keyword are set into the test suite scope similarly when importing them in the Setting table using the Resource setting.&lt;/p&gt;
-&lt;p&gt;The given path must be absolute or found from &lt;a href="http://robotframework.org/robotframework/latest/RobotFrameworkUserGuide.html#pythonpath-jythonpath-and-ironpythonpath"&gt;search path&lt;/a&gt;. Forward slashes can be used as path separator regardless the operating system.&lt;/p&gt;
+&lt;p&gt;The given path must be absolute or found from &lt;a href="http://robotframework.org/robotframework/latest/RobotFrameworkUserGuide.html#module-search-path"&gt;search path&lt;/a&gt;. Forward slashes can be used as path separator regardless the operating system.&lt;/p&gt;
 &lt;p&gt;Examples:&lt;/p&gt;
 &lt;table border="1"&gt;
 &lt;tr&gt;
@@ -1638,7 +1523,7 @@ ${z} is set to Python None if it does not exist previously
 &lt;/table&gt;</doc>
 <shortdoc>Imports a resource file with the given path.</shortdoc>
 </kw>
-<kw name="Import Variables" lineno="3063">
+<kw name="Import Variables" lineno="3137">
 <arguments repr="path, *args">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="path">
 <name>path</name>
@@ -1649,7 +1534,7 @@ ${z} is set to Python None if it does not exist previously
 </arguments>
 <doc>&lt;p&gt;Imports a variable file with the given path and optional arguments.&lt;/p&gt;
 &lt;p&gt;Variables imported with this keyword are set into the test suite scope similarly when importing them in the Setting table using the Variables setting. These variables override possible existing variables with the same names. This functionality can thus be used to import new variables, for example, for each test in a test suite.&lt;/p&gt;
-&lt;p&gt;The given path must be absolute or found from &lt;a href="http://robotframework.org/robotframework/latest/RobotFrameworkUserGuide.html#pythonpath-jythonpath-and-ironpythonpath"&gt;search path&lt;/a&gt;. Forward slashes can be used as path separator regardless the operating system.&lt;/p&gt;
+&lt;p&gt;The given path must be absolute or found from &lt;a href="http://robotframework.org/robotframework/latest/RobotFrameworkUserGuide.html##module-search-path"&gt;search path&lt;/a&gt;. Forward slashes can be used as path separator regardless the operating system.&lt;/p&gt;
 &lt;p&gt;Examples:&lt;/p&gt;
 &lt;table border="1"&gt;
 &lt;tr&gt;
@@ -1673,7 +1558,7 @@ ${z} is set to Python None if it does not exist previously
 &lt;/table&gt;</doc>
 <shortdoc>Imports a variable file with the given path and optional arguments.</shortdoc>
 </kw>
-<kw name="Keyword Should Exist" lineno="3151">
+<kw name="Keyword Should Exist" lineno="3225">
 <arguments repr="name, msg=None">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="name">
 <name>name</name>
@@ -1689,7 +1574,7 @@ ${z} is set to Python None if it does not exist previously
 &lt;p&gt;See also &lt;a href="#Variable%20Should%20Exist" class="name"&gt;Variable Should Exist&lt;/a&gt;.&lt;/p&gt;</doc>
 <shortdoc>Fails unless the given keyword exists in the current scope.</shortdoc>
 </kw>
-<kw name="Length Should Be" lineno="1447">
+<kw name="Length Should Be" lineno="1410">
 <arguments repr="item, length, msg=None">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="item">
 <name>item</name>
@@ -1706,8 +1591,8 @@ ${z} is set to Python None if it does not exist previously
 &lt;p&gt;The length of the item is got using the &lt;a href="#Get%20Length" class="name"&gt;Get Length&lt;/a&gt; keyword. The default error message can be overridden with the &lt;code&gt;msg&lt;/code&gt; argument.&lt;/p&gt;</doc>
 <shortdoc>Verifies that the length of the given item is correct.</shortdoc>
 </kw>
-<kw name="Log" lineno="2859">
-<arguments repr="message, level=INFO, html=False, console=False, repr=False, formatter=str">
+<kw name="Log" lineno="2918">
+<arguments repr="message, level=INFO, html=False, console=False, repr=DEPRECATED, formatter=str">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="message">
 <name>message</name>
 </arg>
@@ -1723,9 +1608,9 @@ ${z} is set to Python None if it does not exist previously
 <name>console</name>
 <default>False</default>
 </arg>
-<arg kind="POSITIONAL_OR_NAMED" required="false" repr="repr=False">
+<arg kind="POSITIONAL_OR_NAMED" required="false" repr="repr=DEPRECATED">
 <name>repr</name>
-<default>False</default>
+<default>DEPRECATED</default>
 </arg>
 <arg kind="POSITIONAL_OR_NAMED" required="false" repr="formatter=str">
 <name>formatter</name>
@@ -1737,8 +1622,8 @@ ${z} is set to Python None if it does not exist previously
 &lt;p&gt;Messages logged with the WARN or ERROR levels will be automatically visible also in the console and in the Test Execution Errors section in the log file.&lt;/p&gt;
 &lt;p&gt;If the &lt;code&gt;html&lt;/code&gt; argument is given a true value (see &lt;a href="#Boolean%20arguments" class="name"&gt;Boolean arguments&lt;/a&gt;), the message will be considered HTML and special characters such as &lt;code&gt;&amp;lt;&lt;/code&gt; are not escaped. For example, logging &lt;code&gt;&amp;lt;img src="image.png"&amp;gt;&lt;/code&gt; creates an image when &lt;code&gt;html&lt;/code&gt; is true, but otherwise the message is that exact string. An alternative to using the &lt;code&gt;html&lt;/code&gt; argument is using the HTML pseudo log level. It logs the message as HTML using the INFO level.&lt;/p&gt;
 &lt;p&gt;If the &lt;code&gt;console&lt;/code&gt; argument is true, the message will be written to the console where test execution was started from in addition to the log file. This keyword always uses the standard output stream and adds a newline after the written message. Use &lt;a href="#Log%20To%20Console" class="name"&gt;Log To Console&lt;/a&gt; instead if either of these is undesirable,&lt;/p&gt;
-&lt;p&gt;The &lt;code&gt;formatter&lt;/code&gt; argument controls how to format the string representation of the message. Possible values are &lt;code&gt;str&lt;/code&gt; (default), &lt;code&gt;repr&lt;/code&gt; and &lt;code&gt;ascii&lt;/code&gt;, and they work similarly to Python built-in functions with same names. When using &lt;code&gt;repr&lt;/code&gt;, bigger lists, dictionaries and other containers are also pretty-printed so that there is one item per row. For more details see &lt;a href="#String%20representations" class="name"&gt;String representations&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;The old way to control string representation was using the &lt;code&gt;repr&lt;/code&gt; argument, and &lt;code&gt;repr=True&lt;/code&gt; is still equivalent to using &lt;code&gt;formatter=repr&lt;/code&gt;. The &lt;code&gt;repr&lt;/code&gt; argument will be deprecated in the future, though, and using &lt;code&gt;formatter&lt;/code&gt; is thus recommended.&lt;/p&gt;
+&lt;p&gt;The &lt;code&gt;formatter&lt;/code&gt; argument controls how to format the string representation of the message. Possible values are &lt;code&gt;str&lt;/code&gt; (default), &lt;code&gt;repr&lt;/code&gt;, &lt;code&gt;ascii&lt;/code&gt;, &lt;code&gt;len&lt;/code&gt;, and &lt;code&gt;type&lt;/code&gt;. They work similarly to Python built-in functions with same names. When using &lt;code&gt;repr&lt;/code&gt;, bigger lists, dictionaries and other containers are also pretty-printed so that there is one item per row. For more details see &lt;a href="#String%20representations" class="name"&gt;String representations&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;The old way to control string representation was using the &lt;code&gt;repr&lt;/code&gt; argument. This argument has been deprecated and &lt;code&gt;formatter=repr&lt;/code&gt; should be used instead.&lt;/p&gt;
 &lt;p&gt;Examples:&lt;/p&gt;
 &lt;table border="1"&gt;
 &lt;tr&gt;
@@ -1791,10 +1676,11 @@ ${z} is set to Python None if it does not exist previously
 &lt;td&gt;# Log &lt;code&gt;'Null is \x00'&lt;/code&gt;.&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/table&gt;
-&lt;p&gt;See &lt;a href="#Log%20Many" class="name"&gt;Log Many&lt;/a&gt; if you want to log multiple messages in one go, and &lt;a href="#Log%20To%20Console" class="name"&gt;Log To Console&lt;/a&gt; if you only want to write to the console.&lt;/p&gt;</doc>
+&lt;p&gt;See &lt;a href="#Log%20Many" class="name"&gt;Log Many&lt;/a&gt; if you want to log multiple messages in one go, and &lt;a href="#Log%20To%20Console" class="name"&gt;Log To Console&lt;/a&gt; if you only want to write to the console.&lt;/p&gt;
+&lt;p&gt;Formatter options &lt;code&gt;type&lt;/code&gt; and &lt;code&gt;log&lt;/code&gt; are new in Robot Framework 5.0.&lt;/p&gt;</doc>
 <shortdoc>Logs the given message with the given level.</shortdoc>
 </kw>
-<kw name="Log Many" lineno="2931">
+<kw name="Log Many" lineno="2995">
 <arguments repr="*messages">
 <arg kind="VAR_POSITIONAL" required="false" repr="*messages">
 <name>messages</name>
@@ -1818,8 +1704,8 @@ ${z} is set to Python None if it does not exist previously
 &lt;p&gt;See &lt;a href="#Log" class="name"&gt;Log&lt;/a&gt; and &lt;a href="#Log%20To%20Console" class="name"&gt;Log To Console&lt;/a&gt; keywords if you want to use alternative log levels, use HTML, or log to the console.&lt;/p&gt;</doc>
 <shortdoc>Logs the given messages as separate entries using the INFO level.</shortdoc>
 </kw>
-<kw name="Log To Console" lineno="2959">
-<arguments repr="message, stream=STDOUT, no_newline=False">
+<kw name="Log To Console" lineno="3023">
+<arguments repr="message, stream=STDOUT, no_newline=False, format=">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="message">
 <name>message</name>
 </arg>
@@ -1831,10 +1717,15 @@ ${z} is set to Python None if it does not exist previously
 <name>no_newline</name>
 <default>False</default>
 </arg>
+<arg kind="POSITIONAL_OR_NAMED" required="false" repr="format=">
+<name>format</name>
+<default/>
+</arg>
 </arguments>
 <doc>&lt;p&gt;Logs the given message to the console.&lt;/p&gt;
-&lt;p&gt;By default uses the standard output stream. Using the standard error stream is possibly by giving the &lt;code&gt;stream&lt;/code&gt; argument value &lt;code&gt;STDERR&lt;/code&gt; (case-insensitive).&lt;/p&gt;
+&lt;p&gt;By default uses the standard output stream. Using the standard error stream is possible by giving the &lt;code&gt;stream&lt;/code&gt; argument value &lt;code&gt;STDERR&lt;/code&gt; (case-insensitive).&lt;/p&gt;
 &lt;p&gt;By default appends a newline to the logged message. This can be disabled by giving the &lt;code&gt;no_newline&lt;/code&gt; argument a true value (see &lt;a href="#Boolean%20arguments" class="name"&gt;Boolean arguments&lt;/a&gt;).&lt;/p&gt;
+&lt;p&gt;By default adds no alignment formatting. The &lt;code&gt;format&lt;/code&gt; argument allows, for example, alignment and customized padding of the log message. Please see the &lt;a href="https://docs.python.org/3/library/string.html#formatspec"&gt;format specification&lt;/a&gt; for detailed alignment possibilities. This argument is new in Robot Framework 5.0.&lt;/p&gt;
 &lt;p&gt;Examples:&lt;/p&gt;
 &lt;table border="1"&gt;
 &lt;tr&gt;
@@ -1857,11 +1748,21 @@ ${z} is set to Python None if it does not exist previously
 &lt;td&gt;continued without newline.&lt;/td&gt;
 &lt;td&gt;&lt;/td&gt;
 &lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Log To Console&lt;/td&gt;
+&lt;td&gt;center message with * pad&lt;/td&gt;
+&lt;td&gt;format=*^60&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Log To Console&lt;/td&gt;
+&lt;td&gt;30 spaces before msg starts&lt;/td&gt;
+&lt;td&gt;format=&amp;gt;30&lt;/td&gt;
+&lt;/tr&gt;
 &lt;/table&gt;
 &lt;p&gt;This keyword does not log the message to the normal log file. Use &lt;a href="#Log" class="name"&gt;Log&lt;/a&gt; keyword, possibly with argument &lt;code&gt;console&lt;/code&gt;, if that is desired.&lt;/p&gt;</doc>
 <shortdoc>Logs the given message to the console.</shortdoc>
 </kw>
-<kw name="Log Variables" lineno="1545">
+<kw name="Log Variables" lineno="1507">
 <arguments repr="level=INFO">
 <arg kind="POSITIONAL_OR_NAMED" required="false" repr="level=INFO">
 <name>level</name>
@@ -1871,13 +1772,13 @@ ${z} is set to Python None if it does not exist previously
 <doc>&lt;p&gt;Logs all variables in the current scope with given log level.&lt;/p&gt;</doc>
 <shortdoc>Logs all variables in the current scope with given log level.</shortdoc>
 </kw>
-<kw name="No Operation" lineno="2795">
+<kw name="No Operation" lineno="2854">
 <arguments repr="">
 </arguments>
 <doc>&lt;p&gt;Does absolutely nothing.&lt;/p&gt;</doc>
 <shortdoc>Does absolutely nothing.</shortdoc>
 </kw>
-<kw name="Pass Execution" lineno="2721">
+<kw name="Pass Execution" lineno="2780">
 <arguments repr="message, *tags">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="message">
 <name>message</name>
@@ -1928,7 +1829,7 @@ ${z} is set to Python None if it does not exist previously
 &lt;p&gt;Passing execution in the middle of a test, setup or teardown should be used with care. In the worst case it leads to tests that skip all the parts that could actually uncover problems in the tested application. In cases where execution cannot continue do to external factors, it is often safer to fail the test case and make it non-critical.&lt;/p&gt;</doc>
 <shortdoc>Skips rest of the current test, setup, or teardown with PASS status.</shortdoc>
 </kw>
-<kw name="Pass Execution If" lineno="2773">
+<kw name="Pass Execution If" lineno="2832">
 <arguments repr="condition, message, *tags">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="condition">
 <name>condition</name>
@@ -1971,7 +1872,7 @@ ${z} is set to Python None if it does not exist previously
 &lt;/table&gt;</doc>
 <shortdoc>Conditionally skips rest of the current test, setup, or teardown with PASS status.</shortdoc>
 </kw>
-<kw name="Regexp Escape" lineno="3339">
+<kw name="Regexp Escape" lineno="3413">
 <arguments repr="*patterns">
 <arg kind="VAR_POSITIONAL" required="false" repr="*patterns">
 <name>patterns</name>
@@ -1995,7 +1896,7 @@ ${z} is set to Python None if it does not exist previously
 &lt;/table&gt;</doc>
 <shortdoc>Returns each argument string escaped for use as a regular expression.</shortdoc>
 </kw>
-<kw name="Reload Library" lineno="3011">
+<kw name="Reload Library" lineno="3086">
 <arguments repr="name_or_instance">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="name_or_instance">
 <name>name_or_instance</name>
@@ -2006,7 +1907,7 @@ ${z} is set to Python None if it does not exist previously
 &lt;p&gt;The library can be specified by its name or as the active instance of the library. The latter is especially useful if the library itself calls this keyword as a method.&lt;/p&gt;</doc>
 <shortdoc>Rechecks what keywords the specified library provides.</shortdoc>
 </kw>
-<kw name="Remove Tags" lineno="3497">
+<kw name="Remove Tags" lineno="3571">
 <arguments repr="*tags">
 <arg kind="VAR_POSITIONAL" required="false" repr="*tags">
 <name>tags</name>
@@ -2028,7 +1929,7 @@ ${z} is set to Python None if it does not exist previously
 &lt;p&gt;See &lt;a href="#Set%20Tags" class="name"&gt;Set Tags&lt;/a&gt; if you want to add certain tags and &lt;a href="#Fail" class="name"&gt;Fail&lt;/a&gt; if you want to fail the test case after setting and/or removing tags.&lt;/p&gt;</doc>
 <shortdoc>Removes given ``tags`` from the current test or all tests in a suite.</shortdoc>
 </kw>
-<kw name="Repeat Keyword" lineno="2195">
+<kw name="Repeat Keyword" lineno="2174">
 <arguments repr="repeat, name, *args">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="repeat">
 <name>repeat</name>
@@ -2071,7 +1972,7 @@ ${z} is set to Python None if it does not exist previously
 &lt;/table&gt;</doc>
 <shortdoc>Executes the specified keyword multiple times.</shortdoc>
 </kw>
-<kw name="Replace Variables" lineno="1606">
+<kw name="Replace Variables" lineno="1570">
 <arguments repr="text">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="text">
 <name>text</name>
@@ -2100,28 +2001,26 @@ ${z} is set to Python None if it does not exist previously
 &lt;/table&gt;</doc>
 <shortdoc>Replaces variables in the given text with their current values.</shortdoc>
 </kw>
-<kw name="Return From Keyword" lineno="2599">
+<kw name="Return From Keyword" lineno="2632">
 <arguments repr="*return_values">
 <arg kind="VAR_POSITIONAL" required="false" repr="*return_values">
 <name>return_values</name>
 </arg>
 </arguments>
 <doc>&lt;p&gt;Returns from the enclosing user keyword.&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;b&gt;NOTE:&lt;/b&gt; Robot Framework 5.0 added support for native &lt;code&gt;RETURN&lt;/code&gt; statement that is recommended over this keyword. In the examples below, &lt;code&gt;Return From Keyword&lt;/code&gt; can simply be replaced with &lt;code&gt;RETURN&lt;/code&gt;. In addition to that, native &lt;code&gt;IF&lt;/code&gt; syntax (new in RF 4.0) or inline &lt;code&gt;IF&lt;/code&gt; syntax (new in RF 5.0) can be used instead of &lt;code&gt;Run Keyword If&lt;/code&gt;. For example, the first example below could be written like this instead:&lt;/p&gt;
+&lt;pre&gt;
+IF    ${rc} &amp;lt; 0    RETURN
+&lt;/pre&gt;
+&lt;p&gt;This keyword will eventually be deprecated and removed.&lt;/p&gt;
+&lt;hr&gt;
 &lt;p&gt;This keyword can be used to return from a user keyword with PASS status without executing it fully. It is also possible to return values similarly as with the &lt;code&gt;[Return]&lt;/code&gt; setting. For more detailed information about working with the return values, see the User Guide.&lt;/p&gt;
-&lt;p&gt;This keyword is typically wrapped to some other keyword, such as &lt;a href="#Run%20Keyword%20If" class="name"&gt;Run Keyword If&lt;/a&gt; or &lt;a href="#Run%20Keyword%20If%20Test%20Passed" class="name"&gt;Run Keyword If Test Passed&lt;/a&gt;, to return based on a condition:&lt;/p&gt;
-&lt;table border="1"&gt;
-&lt;tr&gt;
-&lt;td&gt;Run Keyword If&lt;/td&gt;
-&lt;td&gt;${rc} &amp;lt; 0&lt;/td&gt;
-&lt;td&gt;Return From Keyword&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Run Keyword If Test Passed&lt;/td&gt;
-&lt;td&gt;Return From Keyword&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/table&gt;
-&lt;p&gt;It is possible to use this keyword to return from a keyword also inside a for loop. That, as well as returning values, is demonstrated by the &lt;span class="name"&gt;Find Index&lt;/span&gt; keyword in the following somewhat advanced example. Notice that it is often a good idea to move this kind of complicated logic into a test library.&lt;/p&gt;
+&lt;p&gt;This keyword is typically wrapped to some other keyword, such as &lt;a href="#Run%20Keyword%20If" class="name"&gt;Run Keyword If&lt;/a&gt;, to return based on a condition:&lt;/p&gt;
+&lt;pre&gt;
+Run Keyword If    ${rc} &amp;lt; 0    Return From Keyword
+&lt;/pre&gt;
+&lt;p&gt;It is possible to use this keyword to return from a keyword also inside a for loop. That, as well as returning values, is demonstrated by the &lt;span class="name"&gt;Find Index&lt;/span&gt; keyword in the following somewhat advanced example. Notice that it is often a good idea to move this kind of complicated logic into a library.&lt;/p&gt;
 &lt;pre&gt;
 &lt;b&gt;***&lt;/b&gt; Variables &lt;b&gt;***&lt;/b&gt;
 @{LIST} =    foo    baz
@@ -2141,12 +2040,12 @@ Find Index
        Run Keyword If    '${item}' == '${element}'    Return From Keyword    ${index}
        ${index} =    Set Variable    ${index + 1}
    END
-   Return From Keyword    ${-1}    # Also [Return] would work here.
+   Return From Keyword    ${-1}
 &lt;/pre&gt;
 &lt;p&gt;The most common use case, returning based on an expression, can be accomplished directly with &lt;a href="#Return%20From%20Keyword%20If" class="name"&gt;Return From Keyword If&lt;/a&gt;. See also &lt;a href="#Run%20Keyword%20And%20Return" class="name"&gt;Run Keyword And Return&lt;/a&gt; and &lt;a href="#Run%20Keyword%20And%20Return%20If" class="name"&gt;Run Keyword And Return If&lt;/a&gt;.&lt;/p&gt;</doc>
 <shortdoc>Returns from the enclosing user keyword.</shortdoc>
 </kw>
-<kw name="Return From Keyword If" lineno="2651">
+<kw name="Return From Keyword If" lineno="2697">
 <arguments repr="condition, *return_values">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="condition">
 <name>condition</name>
@@ -2156,6 +2055,13 @@ Find Index
 </arg>
 </arguments>
 <doc>&lt;p&gt;Returns from the enclosing user keyword if &lt;code&gt;condition&lt;/code&gt; is true.&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;b&gt;NOTE:&lt;/b&gt; Robot Framework 5.0 added support for native &lt;code&gt;RETURN&lt;/code&gt; statement and for inline &lt;code&gt;IF&lt;/code&gt;, and that combination should be used instead of this keyword. For example, &lt;code&gt;Return From Keyword&lt;/code&gt; usage in the example below could be replaced with&lt;/p&gt;
+&lt;pre&gt;
+IF    '${item}' == '${element}'    RETURN    ${index}
+&lt;/pre&gt;
+&lt;p&gt;This keyword will eventually be deprecated and removed.&lt;/p&gt;
+&lt;hr&gt;
 &lt;p&gt;A wrapper for &lt;a href="#Return%20From%20Keyword" class="name"&gt;Return From Keyword&lt;/a&gt; to return based on the given condition. The condition is evaluated using the same semantics as with &lt;a href="#Should%20Be%20True" class="name"&gt;Should Be True&lt;/a&gt; keyword.&lt;/p&gt;
 &lt;p&gt;Given the same example as in &lt;a href="#Return%20From%20Keyword" class="name"&gt;Return From Keyword&lt;/a&gt;, we can rewrite the &lt;span class="name"&gt;Find Index&lt;/span&gt; keyword as follows:&lt;/p&gt;
 &lt;pre&gt;
@@ -2167,12 +2073,12 @@ Find Index
        Return From Keyword If    '${item}' == '${element}'    ${index}
        ${index} =    Set Variable    ${index + 1}
    END
-   Return From Keyword    ${-1}    # Also [Return] would work here.
+   Return From Keyword    ${-1}
 &lt;/pre&gt;
 &lt;p&gt;See also &lt;a href="#Run%20Keyword%20And%20Return" class="name"&gt;Run Keyword And Return&lt;/a&gt; and &lt;a href="#Run%20Keyword%20And%20Return%20If" class="name"&gt;Run Keyword And Return If&lt;/a&gt;.&lt;/p&gt;</doc>
 <shortdoc>Returns from the enclosing user keyword if ``condition`` is true.</shortdoc>
 </kw>
-<kw name="Run Keyword" lineno="1857">
+<kw name="Run Keyword" lineno="1835">
 <arguments repr="name, *args">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="name">
 <name>name</name>
@@ -2185,7 +2091,7 @@ Find Index
 &lt;p&gt;Because the name of the keyword to execute is given as an argument, it can be a variable and thus set dynamically, e.g. from a return value of another keyword or from the command line.&lt;/p&gt;</doc>
 <shortdoc>Executes the given keyword with the given arguments.</shortdoc>
 </kw>
-<kw name="Run Keyword And Continue On Failure" lineno="2109">
+<kw name="Run Keyword And Continue On Failure" lineno="2078">
 <arguments repr="name, *args">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="name">
 <name>name</name>
@@ -2212,7 +2118,7 @@ Find Index
 &lt;p&gt;The execution is not continued if the failure is caused by invalid syntax, timeout, or fatal exception.&lt;/p&gt;</doc>
 <shortdoc>Runs the keyword and continues execution even if a failure occurs.</shortdoc>
 </kw>
-<kw name="Run Keyword And Expect Error" lineno="2129">
+<kw name="Run Keyword And Expect Error" lineno="2098">
 <arguments repr="expected_error, name, *args">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="expected_error">
 <name>expected_error</name>
@@ -2302,10 +2208,12 @@ Find Index
 &lt;td&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/table&gt;
-&lt;p&gt;Errors caused by invalid syntax, timeouts, or fatal exceptions are not caught by this keyword.&lt;/p&gt;</doc>
+&lt;p&gt;Errors caused by invalid syntax, timeouts, or fatal exceptions are not caught by this keyword.&lt;/p&gt;
+&lt;p&gt;&lt;b&gt;NOTE:&lt;/b&gt; Regular expression matching used to require only the beginning of the error to match the given pattern. That was changed in Robot Framework 5.0 and nowadays the pattern must match the error fully. To match only the beginning, add &lt;code&gt;.*&lt;/code&gt; at the end of the pattern like &lt;code&gt;REGEXP: Start.*&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;b&gt;NOTE:&lt;/b&gt; Robot Framework 5.0 introduced native TRY/EXCEPT functionality that is generally recommended for error handling. It supports same pattern matching syntax as this keyword.&lt;/p&gt;</doc>
 <shortdoc>Runs the keyword and checks that the expected error occurred.</shortdoc>
 </kw>
-<kw name="Run Keyword And Ignore Error" lineno="2046">
+<kw name="Run Keyword And Ignore Error" lineno="2012">
 <arguments repr="name, *args">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="name">
 <name>name</name>
@@ -2317,10 +2225,11 @@ Find Index
 <doc>&lt;p&gt;Runs the given keyword with the given arguments and ignores possible error.&lt;/p&gt;
 &lt;p&gt;This keyword returns two values, so that the first is either string &lt;code&gt;PASS&lt;/code&gt; or &lt;code&gt;FAIL&lt;/code&gt;, depending on the status of the executed keyword. The second value is either the return value of the keyword or the received error message. See &lt;a href="#Run%20Keyword%20And%20Return%20Status" class="name"&gt;Run Keyword And Return Status&lt;/a&gt; If you are only interested in the execution status.&lt;/p&gt;
 &lt;p&gt;The keyword name and arguments work as in &lt;a href="#Run%20Keyword" class="name"&gt;Run Keyword&lt;/a&gt;. See &lt;a href="#Run%20Keyword%20If" class="name"&gt;Run Keyword If&lt;/a&gt; for a usage example.&lt;/p&gt;
-&lt;p&gt;Errors caused by invalid syntax, timeouts, or fatal exceptions are not caught by this keyword. Otherwise this keyword itself never fails.&lt;/p&gt;</doc>
+&lt;p&gt;Errors caused by invalid syntax, timeouts, or fatal exceptions are not caught by this keyword. Otherwise this keyword itself never fails.&lt;/p&gt;
+&lt;p&gt;&lt;b&gt;NOTE:&lt;/b&gt; Robot Framework 5.0 introduced native TRY/EXCEPT functionality that is generally recommended for error handling.&lt;/p&gt;</doc>
 <shortdoc>Runs the given keyword with the given arguments and ignores possible error.</shortdoc>
 </kw>
-<kw name="Run Keyword And Return" lineno="2677">
+<kw name="Run Keyword And Return" lineno="2736">
 <arguments repr="name, *args">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="name">
 <name>name</name>
@@ -2361,7 +2270,7 @@ Find Index
 &lt;p&gt;Use &lt;a href="#Run%20Keyword%20And%20Return%20If" class="name"&gt;Run Keyword And Return If&lt;/a&gt; if you want to run keyword and return based on a condition.&lt;/p&gt;</doc>
 <shortdoc>Runs the specified keyword and returns from the enclosing user keyword.</shortdoc>
 </kw>
-<kw name="Run Keyword And Return If" lineno="2703">
+<kw name="Run Keyword And Return If" lineno="2762">
 <arguments repr="condition, name, *args">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="condition">
 <name>condition</name>
@@ -2405,7 +2314,7 @@ Find Index
 &lt;p&gt;Use &lt;a href="#Return%20From%20Keyword%20If" class="name"&gt;Return From Keyword If&lt;/a&gt; if you want to return a certain value based on a condition.&lt;/p&gt;</doc>
 <shortdoc>Runs the specified keyword and returns from the enclosing user keyword.</shortdoc>
 </kw>
-<kw name="Run Keyword And Return Status" lineno="2088">
+<kw name="Run Keyword And Return Status" lineno="2057">
 <arguments repr="name, *args">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="name">
 <name>name</name>
@@ -2435,7 +2344,7 @@ Find Index
 &lt;p&gt;Errors caused by invalid syntax, timeouts, or fatal exceptions are not caught by this keyword. Otherwise this keyword itself never fails.&lt;/p&gt;</doc>
 <shortdoc>Runs the given keyword with given arguments and returns the status as a Boolean value.</shortdoc>
 </kw>
-<kw name="Run Keyword And Warn On Failure" lineno="2069">
+<kw name="Run Keyword And Warn On Failure" lineno="2038">
 <arguments repr="name, *args">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="name">
 <name>name</name>
@@ -2450,7 +2359,7 @@ Find Index
 &lt;p&gt;New in Robot Framework 4.0.&lt;/p&gt;</doc>
 <shortdoc>Runs the specified keyword logs a warning if the keyword fails.</shortdoc>
 </kw>
-<kw name="Run Keyword If" lineno="1940">
+<kw name="Run Keyword If" lineno="1918">
 <arguments repr="condition, name, *args">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="condition">
 <name>condition</name>
@@ -2464,65 +2373,51 @@ Find Index
 </arguments>
 <doc>&lt;p&gt;Runs the given keyword with the given arguments, if &lt;code&gt;condition&lt;/code&gt; is true.&lt;/p&gt;
 &lt;p&gt;&lt;b&gt;NOTE:&lt;/b&gt; Robot Framework 4.0 introduced built-in IF/ELSE support and using that is generally recommended over using this keyword.&lt;/p&gt;
-&lt;p&gt;The given &lt;code&gt;condition&lt;/code&gt; is evaluated in Python as explained in &lt;a href="#Evaluating%20expressions" class="name"&gt;Evaluating expressions&lt;/a&gt;, and &lt;code&gt;name&lt;/code&gt; and &lt;code&gt;*args&lt;/code&gt; have same semantics as with &lt;a href="#Run%20Keyword" class="name"&gt;Run Keyword&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;The given &lt;code&gt;condition&lt;/code&gt; is evaluated in Python as explained in the &lt;a href="#Evaluating%20expressions" class="name"&gt;Evaluating expressions&lt;/a&gt; section, and &lt;code&gt;name&lt;/code&gt; and &lt;code&gt;*args&lt;/code&gt; have same semantics as with &lt;a href="#Run%20Keyword" class="name"&gt;Run Keyword&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Example, a simple if/else construct:&lt;/p&gt;
 &lt;table border="1"&gt;
 &lt;tr&gt;
-&lt;td&gt;${status}&lt;/td&gt;
-&lt;td&gt;${value} =&lt;/td&gt;
-&lt;td&gt;&lt;a href="#Run%20Keyword%20And%20Ignore%20Error" class="name"&gt;Run Keyword And Ignore Error&lt;/a&gt;&lt;/td&gt;
-&lt;td&gt;&lt;span class="name"&gt;My Keyword&lt;/span&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
 &lt;td&gt;&lt;a href="#Run%20Keyword%20If" class="name"&gt;Run Keyword If&lt;/a&gt;&lt;/td&gt;
-&lt;td&gt;'${status}' == 'PASS'&lt;/td&gt;
-&lt;td&gt;&lt;span class="name"&gt;Some Action&lt;/span&gt;&lt;/td&gt;
+&lt;td&gt;'${status}' == 'OK'&lt;/td&gt;
+&lt;td&gt;Some Action&lt;/td&gt;
 &lt;td&gt;arg&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td&gt;&lt;a href="#Run%20Keyword%20Unless" class="name"&gt;Run Keyword Unless&lt;/a&gt;&lt;/td&gt;
-&lt;td&gt;'${status}' == 'PASS'&lt;/td&gt;
-&lt;td&gt;&lt;span class="name"&gt;Another Action&lt;/span&gt;&lt;/td&gt;
+&lt;td&gt;&lt;a href="#Run%20Keyword%20If" class="name"&gt;Run Keyword If&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;'${status}' != 'OK'&lt;/td&gt;
+&lt;td&gt;Another Action&lt;/td&gt;
 &lt;td&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/table&gt;
-&lt;p&gt;In this example, only either &lt;span class="name"&gt;Some Action&lt;/span&gt; or &lt;span class="name"&gt;Another Action&lt;/span&gt; is executed, based on the status of &lt;span class="name"&gt;My Keyword&lt;/span&gt;. Instead of &lt;a href="#Run%20Keyword%20And%20Ignore%20Error" class="name"&gt;Run Keyword And Ignore Error&lt;/a&gt; you can also use &lt;a href="#Run%20Keyword%20And%20Return%20Status" class="name"&gt;Run Keyword And Return Status&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;Variables used like &lt;code&gt;${variable}&lt;/code&gt;, as in the examples above, are replaced in the expression before evaluation. Variables are also available in the evaluation namespace and can be accessed using special syntax &lt;code&gt;$variable&lt;/code&gt; as explained in the &lt;a href="#Evaluating%20expressions" class="name"&gt;Evaluating expressions&lt;/a&gt; section.&lt;/p&gt;
+&lt;p&gt;In this example, only either &lt;code&gt;Some Action&lt;/code&gt; or &lt;code&gt;Another Action&lt;/code&gt; is executed, based on the value of the &lt;code&gt;${status}&lt;/code&gt; variable.&lt;/p&gt;
+&lt;p&gt;Variables used like &lt;code&gt;${variable}&lt;/code&gt;, as in the examples above, are replaced in the expression before evaluation. Variables are also available in the evaluation namespace and can be accessed using special &lt;code&gt;$variable&lt;/code&gt; syntax as explained in the &lt;a href="#Evaluating%20expressions" class="name"&gt;Evaluating expressions&lt;/a&gt; section.&lt;/p&gt;
 &lt;p&gt;Example:&lt;/p&gt;
 &lt;table border="1"&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;a href="#Run%20Keyword%20If" class="name"&gt;Run Keyword If&lt;/a&gt;&lt;/td&gt;
 &lt;td&gt;$result is None or $result == 'FAIL'&lt;/td&gt;
-&lt;td&gt;&lt;span class="name"&gt;Keyword&lt;/span&gt;&lt;/td&gt;
+&lt;td&gt;Keyword&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/table&gt;
 &lt;p&gt;This keyword supports also optional ELSE and ELSE IF branches. Both of them are defined in &lt;code&gt;*args&lt;/code&gt; and must use exactly format &lt;code&gt;ELSE&lt;/code&gt; or &lt;code&gt;ELSE IF&lt;/code&gt;, respectively. ELSE branches must contain first the name of the keyword to execute and then its possible arguments. ELSE IF branches must first contain a condition, like the first argument to this keyword, and then the keyword to execute and its possible arguments. It is possible to have ELSE branch after ELSE IF and to have multiple ELSE IF branches. Nested &lt;a href="#Run%20Keyword%20If" class="name"&gt;Run Keyword If&lt;/a&gt; usage is not supported when using ELSE and/or ELSE IF branches.&lt;/p&gt;
 &lt;p&gt;Given previous example, if/else construct can also be created like this:&lt;/p&gt;
 &lt;table border="1"&gt;
 &lt;tr&gt;
-&lt;td&gt;${status}&lt;/td&gt;
-&lt;td&gt;${value} =&lt;/td&gt;
-&lt;td&gt;&lt;a href="#Run%20Keyword%20And%20Ignore%20Error" class="name"&gt;Run Keyword And Ignore Error&lt;/a&gt;&lt;/td&gt;
-&lt;td&gt;&lt;span class="name"&gt;My Keyword&lt;/span&gt;&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
 &lt;td&gt;&lt;a href="#Run%20Keyword%20If" class="name"&gt;Run Keyword If&lt;/a&gt;&lt;/td&gt;
 &lt;td&gt;'${status}' == 'PASS'&lt;/td&gt;
-&lt;td&gt;&lt;span class="name"&gt;Some Action&lt;/span&gt;&lt;/td&gt;
+&lt;td&gt;Some Action&lt;/td&gt;
 &lt;td&gt;arg&lt;/td&gt;
 &lt;td&gt;ELSE&lt;/td&gt;
-&lt;td&gt;&lt;span class="name"&gt;Another Action&lt;/span&gt;&lt;/td&gt;
+&lt;td&gt;Another Action&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/table&gt;
-&lt;p&gt;The return value of this keyword is the return value of the actually executed keyword or Python &lt;code&gt;None&lt;/code&gt; if no keyword was executed (i.e. if &lt;code&gt;condition&lt;/code&gt; was false). Hence, it is recommended to use ELSE and/or ELSE IF branches to conditionally assign return values from keyword to variables (see &lt;a href="#Set%20Variable%20If" class="name"&gt;Set Variable If&lt;/a&gt; if you need to set fixed values conditionally). This is illustrated by the example below:&lt;/p&gt;
+&lt;p&gt;The return value of this keyword is the return value of the actually executed keyword or Python &lt;code&gt;None&lt;/code&gt; if no keyword was executed (i.e. if &lt;code&gt;condition&lt;/code&gt; was false). Hence, it is recommended to use ELSE and/or ELSE IF branches to conditionally assign return values from keyword to variables (see &lt;a href="#Set%20Variable%20If" class="name"&gt;Set Variable If&lt;/a&gt; you need to set fixed values conditionally). This is illustrated by the example below:&lt;/p&gt;
 &lt;table border="1"&gt;
 &lt;tr&gt;
 &lt;td&gt;${var1} =&lt;/td&gt;
 &lt;td&gt;&lt;a href="#Run%20Keyword%20If" class="name"&gt;Run Keyword If&lt;/a&gt;&lt;/td&gt;
 &lt;td&gt;${rc} == 0&lt;/td&gt;
-&lt;td&gt;&lt;span class="name"&gt;Some keyword returning a value&lt;/span&gt;&lt;/td&gt;
+&lt;td&gt;Some keyword returning a value&lt;/td&gt;
 &lt;td&gt;&lt;/td&gt;
 &lt;td&gt;&lt;/td&gt;
 &lt;/tr&gt;
@@ -2530,7 +2425,7 @@ Find Index
 &lt;td&gt;...&lt;/td&gt;
 &lt;td&gt;ELSE IF&lt;/td&gt;
 &lt;td&gt;0 &amp;lt; ${rc} &amp;lt; 42&lt;/td&gt;
-&lt;td&gt;&lt;span class="name"&gt;Another keyword&lt;/span&gt;&lt;/td&gt;
+&lt;td&gt;Another keyword&lt;/td&gt;
 &lt;td&gt;&lt;/td&gt;
 &lt;td&gt;&lt;/td&gt;
 &lt;/tr&gt;
@@ -2538,14 +2433,14 @@ Find Index
 &lt;td&gt;...&lt;/td&gt;
 &lt;td&gt;ELSE IF&lt;/td&gt;
 &lt;td&gt;${rc} &amp;lt; 0&lt;/td&gt;
-&lt;td&gt;&lt;span class="name"&gt;Another keyword with args&lt;/span&gt;&lt;/td&gt;
+&lt;td&gt;Another keyword with args&lt;/td&gt;
 &lt;td&gt;${rc}&lt;/td&gt;
 &lt;td&gt;arg2&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;...&lt;/td&gt;
 &lt;td&gt;ELSE&lt;/td&gt;
-&lt;td&gt;&lt;span class="name"&gt;Final keyword to handle abnormal cases&lt;/span&gt;&lt;/td&gt;
+&lt;td&gt;Final keyword to handle abnormal cases&lt;/td&gt;
 &lt;td&gt;${rc}&lt;/td&gt;
 &lt;td&gt;&lt;/td&gt;
 &lt;td&gt;&lt;/td&gt;
@@ -2554,49 +2449,16 @@ Find Index
 &lt;td&gt;${var2} =&lt;/td&gt;
 &lt;td&gt;&lt;a href="#Run%20Keyword%20If" class="name"&gt;Run Keyword If&lt;/a&gt;&lt;/td&gt;
 &lt;td&gt;${condition}&lt;/td&gt;
-&lt;td&gt;&lt;span class="name"&gt;Some keyword&lt;/span&gt;&lt;/td&gt;
+&lt;td&gt;Some keyword&lt;/td&gt;
 &lt;td&gt;&lt;/td&gt;
 &lt;td&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/table&gt;
 &lt;p&gt;In this example, ${var2} will be set to &lt;code&gt;None&lt;/code&gt; if ${condition} is false.&lt;/p&gt;
-&lt;p&gt;Notice that &lt;code&gt;ELSE&lt;/code&gt; and &lt;code&gt;ELSE IF&lt;/code&gt; control words must be used explicitly and thus cannot come from variables. If you need to use literal &lt;code&gt;ELSE&lt;/code&gt; and &lt;code&gt;ELSE IF&lt;/code&gt; strings as arguments, you can escape them with a backslash like &lt;code&gt;\ELSE&lt;/code&gt; and &lt;code&gt;\ELSE IF&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;Python's &lt;a href="http://docs.python.org/library/os.html"&gt;os&lt;/a&gt; and &lt;a href="http://docs.python.org/library/sys.html"&gt;sys&lt;/a&gt; modules are automatically imported when evaluating the &lt;code&gt;condition&lt;/code&gt;. Attributes they contain can thus be used in the condition:&lt;/p&gt;
-&lt;table border="1"&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;a href="#Run%20Keyword%20If" class="name"&gt;Run Keyword If&lt;/a&gt;&lt;/td&gt;
-&lt;td&gt;os.sep == '/'&lt;/td&gt;
-&lt;td&gt;&lt;span class="name"&gt;Unix Keyword&lt;/span&gt;&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;...&lt;/td&gt;
-&lt;td&gt;ELSE IF&lt;/td&gt;
-&lt;td&gt;sys.platform.startswith('java')&lt;/td&gt;
-&lt;td&gt;&lt;span class="name"&gt;Jython Keyword&lt;/span&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;...&lt;/td&gt;
-&lt;td&gt;ELSE&lt;/td&gt;
-&lt;td&gt;&lt;span class="name"&gt;Windows Keyword&lt;/span&gt;&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/table&gt;</doc>
+&lt;p&gt;Notice that &lt;code&gt;ELSE&lt;/code&gt; and &lt;code&gt;ELSE IF&lt;/code&gt; control words must be used explicitly and thus cannot come from variables. If you need to use literal &lt;code&gt;ELSE&lt;/code&gt; and &lt;code&gt;ELSE IF&lt;/code&gt; strings as arguments, you can escape them with a backslash like &lt;code&gt;\ELSE&lt;/code&gt; and &lt;code&gt;\ELSE IF&lt;/code&gt;.&lt;/p&gt;</doc>
 <shortdoc>Runs the given keyword with the given arguments, if ``condition`` is true.</shortdoc>
 </kw>
-<kw name="Run Keyword If All Critical Tests Passed" lineno="2463">
-<arguments repr="name, *args">
-<arg kind="POSITIONAL_OR_NAMED" required="true" repr="name">
-<name>name</name>
-</arg>
-<arg kind="VAR_POSITIONAL" required="false" repr="*args">
-<name>args</name>
-</arg>
-</arguments>
-<doc>&lt;p&gt;&lt;b&gt;DEPRECATED.&lt;/b&gt; Use &lt;span class="name"&gt;BuiltIn.Run Keyword If All Tests Passed&lt;/span&gt; instead.&lt;/p&gt;</doc>
-<shortdoc>*DEPRECATED.* Use `BuiltIn.Run Keyword If All Tests Passed` instead.</shortdoc>
-</kw>
-<kw name="Run Keyword If All Tests Passed" lineno="2473">
+<kw name="Run Keyword If All Tests Passed" lineno="2441">
 <arguments repr="name, *args">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="name">
 <name>name</name>
@@ -2610,19 +2472,7 @@ Find Index
 &lt;p&gt;Otherwise, this keyword works exactly like &lt;a href="#Run%20Keyword" class="name"&gt;Run Keyword&lt;/a&gt;, see its documentation for more details.&lt;/p&gt;</doc>
 <shortdoc>Runs the given keyword with the given arguments, if all tests passed.</shortdoc>
 </kw>
-<kw name="Run Keyword If Any Critical Tests Failed" lineno="2468">
-<arguments repr="name, *args">
-<arg kind="POSITIONAL_OR_NAMED" required="true" repr="name">
-<name>name</name>
-</arg>
-<arg kind="VAR_POSITIONAL" required="false" repr="*args">
-<name>args</name>
-</arg>
-</arguments>
-<doc>&lt;p&gt;&lt;b&gt;DEPRECATED.&lt;/b&gt; Use &lt;span class="name"&gt;BuiltIn.Run Keyword If Any Tests Failed&lt;/span&gt; instead.&lt;/p&gt;</doc>
-<shortdoc>*DEPRECATED.* Use `BuiltIn.Run Keyword If Any Tests Failed` instead.</shortdoc>
-</kw>
-<kw name="Run Keyword If Any Tests Failed" lineno="2487">
+<kw name="Run Keyword If Any Tests Failed" lineno="2455">
 <arguments repr="name, *args">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="name">
 <name>name</name>
@@ -2636,7 +2486,7 @@ Find Index
 &lt;p&gt;Otherwise, this keyword works exactly like &lt;a href="#Run%20Keyword" class="name"&gt;Run Keyword&lt;/a&gt;, see its documentation for more details.&lt;/p&gt;</doc>
 <shortdoc>Runs the given keyword with the given arguments, if one or more tests failed.</shortdoc>
 </kw>
-<kw name="Run Keyword If Test Failed" lineno="2414">
+<kw name="Run Keyword If Test Failed" lineno="2393">
 <arguments repr="name, *args">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="name">
 <name>name</name>
@@ -2650,7 +2500,7 @@ Find Index
 &lt;p&gt;Otherwise, this keyword works exactly like &lt;a href="#Run%20Keyword" class="name"&gt;Run Keyword&lt;/a&gt;, see its documentation for more details.&lt;/p&gt;</doc>
 <shortdoc>Runs the given keyword with the given arguments, if the test failed.</shortdoc>
 </kw>
-<kw name="Run Keyword If Test Passed" lineno="2428">
+<kw name="Run Keyword If Test Passed" lineno="2407">
 <arguments repr="name, *args">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="name">
 <name>name</name>
@@ -2664,7 +2514,7 @@ Find Index
 &lt;p&gt;Otherwise, this keyword works exactly like &lt;a href="#Run%20Keyword" class="name"&gt;Run Keyword&lt;/a&gt;, see its documentation for more details.&lt;/p&gt;</doc>
 <shortdoc>Runs the given keyword with the given arguments, if the test passed.</shortdoc>
 </kw>
-<kw name="Run Keyword If Timeout Occurred" lineno="2442">
+<kw name="Run Keyword If Timeout Occurred" lineno="2421">
 <arguments repr="name, *args">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="name">
 <name>name</name>
@@ -2678,7 +2528,7 @@ Find Index
 &lt;p&gt;Otherwise, this keyword works exactly like &lt;a href="#Run%20Keyword" class="name"&gt;Run Keyword&lt;/a&gt;, see its documentation for more details.&lt;/p&gt;</doc>
 <shortdoc>Runs the given keyword if either a test or a keyword timeout has occurred.</shortdoc>
 </kw>
-<kw name="Run Keyword Unless" lineno="2035">
+<kw name="Run Keyword Unless" lineno="2000">
 <arguments repr="condition, name, *args">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="condition">
 <name>condition</name>
@@ -2690,11 +2540,12 @@ Find Index
 <name>args</name>
 </arg>
 </arguments>
-<doc>&lt;p&gt;Runs the given keyword with the given arguments if &lt;code&gt;condition&lt;/code&gt; is false.&lt;/p&gt;
-&lt;p&gt;See &lt;a href="#Run%20Keyword%20If" class="name"&gt;Run Keyword If&lt;/a&gt; for more information and an example. Notice that this keyword does not support &lt;code&gt;ELSE&lt;/code&gt; or &lt;code&gt;ELSE IF&lt;/code&gt; branches like &lt;a href="#Run%20Keyword%20If" class="name"&gt;Run Keyword If&lt;/a&gt; does, though.&lt;/p&gt;</doc>
-<shortdoc>Runs the given keyword with the given arguments if ``condition`` is false.</shortdoc>
+<doc>&lt;p&gt;&lt;b&gt;DEPRECATED since RF 5.0. Use Native IF/ELSE or &lt;a href="#Run%20Keyword%20If" class="name"&gt;Run Keyword If&lt;/a&gt; instead.&lt;/b&gt;&lt;/p&gt;
+&lt;p&gt;Runs the given keyword with the given arguments if &lt;code&gt;condition&lt;/code&gt; is false.&lt;/p&gt;
+&lt;p&gt;See &lt;a href="#Run%20Keyword%20If" class="name"&gt;Run Keyword If&lt;/a&gt; for more information and an example. Notice that this keyword does not support ELSE or ELSE IF branches like &lt;a href="#Run%20Keyword%20If" class="name"&gt;Run Keyword If&lt;/a&gt; does.&lt;/p&gt;</doc>
+<shortdoc>*DEPRECATED since RF 5.0. Use Native IF/ELSE or `Run Keyword If` instead.*</shortdoc>
 </kw>
-<kw name="Run Keywords" lineno="1870">
+<kw name="Run Keywords" lineno="1848">
 <arguments repr="*keywords">
 <arg kind="VAR_POSITIONAL" required="false" repr="*keywords">
 <name>keywords</name>
@@ -2761,7 +2612,7 @@ Find Index
 &lt;p&gt;Notice that the &lt;code&gt;AND&lt;/code&gt; control argument must be used explicitly and cannot itself come from a variable. If you need to use literal &lt;code&gt;AND&lt;/code&gt; string as argument, you can either use variables or escape it with a backslash like &lt;code&gt;\AND&lt;/code&gt;.&lt;/p&gt;</doc>
 <shortdoc>Executes all the given keywords in a sequence.</shortdoc>
 </kw>
-<kw name="Set Global Variable" lineno="1777">
+<kw name="Set Global Variable" lineno="1750">
 <arguments repr="name, *values">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="name">
 <name>name</name>
@@ -2771,12 +2622,12 @@ Find Index
 </arg>
 </arguments>
 <doc>&lt;p&gt;Makes a variable available globally in all tests and suites.&lt;/p&gt;
-&lt;p&gt;Variables set with this keyword are globally available in all subsequent test suites, test cases and user keywords. Also variables in variable tables are overridden. Variables assigned locally based on keyword return values or by using &lt;a href="#Set%20Test%20Variable" class="name"&gt;Set Test Variable&lt;/a&gt; and &lt;a href="#Set%20Suite%20Variable" class="name"&gt;Set Suite Variable&lt;/a&gt; override these variables in that scope, but the global value is not changed in those cases.&lt;/p&gt;
+&lt;p&gt;Variables set with this keyword are globally available in all subsequent test suites, test cases and user keywords. Also variables created Variables sections are overridden. Variables assigned locally based on keyword return values or by using &lt;a href="#Set%20Suite%20Variable" class="name"&gt;Set Suite Variable&lt;/a&gt;, &lt;a href="#Set%20Test%20Variable" class="name"&gt;Set Test Variable&lt;/a&gt; or &lt;a href="#Set%20Local%20Variable" class="name"&gt;Set Local Variable&lt;/a&gt; override these variables in that scope, but the global value is not changed in those cases.&lt;/p&gt;
 &lt;p&gt;In practice setting variables with this keyword has the same effect as using command line options &lt;code&gt;--variable&lt;/code&gt; and &lt;code&gt;--variablefile&lt;/code&gt;. Because this keyword can change variables everywhere, it should be used with care.&lt;/p&gt;
-&lt;p&gt;See &lt;a href="#Set%20Suite%20Variable" class="name"&gt;Set Suite Variable&lt;/a&gt; for more information and examples.&lt;/p&gt;</doc>
+&lt;p&gt;See &lt;a href="#Set%20Suite%20Variable" class="name"&gt;Set Suite Variable&lt;/a&gt; for more information and usage examples. See also the &lt;a href="#Using%20variables%20with%20keywords%20creating%20or%20accessing%20variables" class="name"&gt;Using variables with keywords creating or accessing variables&lt;/a&gt; section for information why it is recommended to give the variable name in escaped format like &lt;code&gt;$name&lt;/code&gt; or &lt;code&gt;\${name}&lt;/code&gt; instead of the normal &lt;code&gt;${name}&lt;/code&gt;.&lt;/p&gt;</doc>
 <shortdoc>Makes a variable available globally in all tests and suites.</shortdoc>
 </kw>
-<kw name="Set Library Search Order" lineno="3110">
+<kw name="Set Library Search Order" lineno="3184">
 <arguments repr="*search_order">
 <arg kind="VAR_POSITIONAL" required="false" repr="*search_order">
 <name>search_order</name>
@@ -2835,7 +2686,7 @@ Find Index
 &lt;/ul&gt;</doc>
 <shortdoc>Sets the resolution order to use when a name matches multiple keywords.</shortdoc>
 </kw>
-<kw name="Set Local Variable" lineno="1653">
+<kw name="Set Local Variable" lineno="1617">
 <arguments repr="name, *values">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="name">
 <name>name</name>
@@ -2846,33 +2697,22 @@ Find Index
 </arguments>
 <doc>&lt;p&gt;Makes a variable available everywhere within the local scope.&lt;/p&gt;
 &lt;p&gt;Variables set with this keyword are available within the local scope of the currently executed test case or in the local scope of the keyword in which they are defined. For example, if you set a variable in a user keyword, it is available only in that keyword. Other test cases or keywords will not see variables set with this keyword.&lt;/p&gt;
-&lt;p&gt;This keyword is equivalent to a normal variable assignment based on a keyword return value.&lt;/p&gt;
-&lt;p&gt;Example:&lt;/p&gt;
-&lt;table border="1"&gt;
-&lt;tr&gt;
-&lt;td&gt;@{list} =&lt;/td&gt;
-&lt;td&gt;Create List&lt;/td&gt;
-&lt;td&gt;item1&lt;/td&gt;
-&lt;td&gt;item2&lt;/td&gt;
-&lt;td&gt;item3&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/table&gt;
-&lt;p&gt;is equivalent with&lt;/p&gt;
-&lt;table border="1"&gt;
-&lt;tr&gt;
-&lt;td&gt;Set Local Variable&lt;/td&gt;
-&lt;td&gt;@{list}&lt;/td&gt;
-&lt;td&gt;item1&lt;/td&gt;
-&lt;td&gt;item2&lt;/td&gt;
-&lt;td&gt;item3&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/table&gt;
-&lt;p&gt;This keyword will provide the option of setting local variables inside keywords like &lt;a href="#Run%20Keyword%20If" class="name"&gt;Run Keyword If&lt;/a&gt;, &lt;a href="#Run%20Keyword%20And%20Return%20If" class="name"&gt;Run Keyword And Return If&lt;/a&gt;, &lt;a href="#Run%20Keyword%20Unless" class="name"&gt;Run Keyword Unless&lt;/a&gt; which until now was not possible by using &lt;a href="#Set%20Variable" class="name"&gt;Set Variable&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;It will also be possible to use this keyword from external libraries that want to set local variables.&lt;/p&gt;
-&lt;p&gt;New in Robot Framework 3.2.&lt;/p&gt;</doc>
+&lt;p&gt;This keyword is equivalent to a normal variable assignment based on a keyword return value. For example,&lt;/p&gt;
+&lt;pre&gt;
+${var} =    &lt;a href="#Set%20Variable" class="name"&gt;Set Variable&lt;/a&gt;    value
+@{list} =    &lt;a href="#Create%20List" class="name"&gt;Create List&lt;/a&gt;    item1    item2    item3
+&lt;/pre&gt;
+&lt;p&gt;are equivalent with&lt;/p&gt;
+&lt;pre&gt;
+&lt;a href="#Set%20Local%20Variable" class="name"&gt;Set Local Variable&lt;/a&gt;    @var    value
+&lt;a href="#Set%20Local%20Variable" class="name"&gt;Set Local Variable&lt;/a&gt;    @list    item1    item2    item3
+&lt;/pre&gt;
+&lt;p&gt;The main use case for this keyword is creating local variables in libraries.&lt;/p&gt;
+&lt;p&gt;See &lt;a href="#Set%20Suite%20Variable" class="name"&gt;Set Suite Variable&lt;/a&gt; for more information and usage examples. See also the &lt;a href="#Using%20variables%20with%20keywords%20creating%20or%20accessing%20variables" class="name"&gt;Using variables with keywords creating or accessing variables&lt;/a&gt; section for information why it is recommended to give the variable name in escaped format like &lt;code&gt;$name&lt;/code&gt; or &lt;code&gt;\${name}&lt;/code&gt; instead of the normal &lt;code&gt;${name}&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;See also &lt;a href="#Set%20Global%20Variable" class="name"&gt;Set Global Variable&lt;/a&gt; and &lt;a href="#Set%20Test%20Variable" class="name"&gt;Set Test Variable&lt;/a&gt;.&lt;/p&gt;</doc>
 <shortdoc>Makes a variable available everywhere within the local scope.</shortdoc>
 </kw>
-<kw name="Set Log Level" lineno="2993">
+<kw name="Set Log Level" lineno="3068">
 <arguments repr="level">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="level">
 <name>level</name>
@@ -2883,7 +2723,7 @@ Find Index
 &lt;p&gt;The available levels: TRACE, DEBUG, INFO (default), WARN, ERROR and NONE (no logging).&lt;/p&gt;</doc>
 <shortdoc>Sets the log threshold to the specified level and returns the old level.</shortdoc>
 </kw>
-<kw name="Set Suite Documentation" lineno="3429">
+<kw name="Set Suite Documentation" lineno="3503">
 <arguments repr="doc, append=False, top=False">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="doc">
 <name>doc</name>
@@ -2903,7 +2743,7 @@ Find Index
 &lt;p&gt;The documentation of the current suite is available as a built-in variable &lt;code&gt;${SUITE DOCUMENTATION}&lt;/code&gt;.&lt;/p&gt;</doc>
 <shortdoc>Sets documentation for the current test suite.</shortdoc>
 </kw>
-<kw name="Set Suite Metadata" lineno="3449">
+<kw name="Set Suite Metadata" lineno="3523">
 <arguments repr="name, value, append=False, top=False">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="name">
 <name>name</name>
@@ -2926,7 +2766,7 @@ Find Index
 &lt;p&gt;The metadata of the current suite is available as a built-in variable &lt;code&gt;${SUITE METADATA}&lt;/code&gt; in a Python dictionary. Notice that modifying this variable directly has no effect on the actual metadata the suite has.&lt;/p&gt;</doc>
 <shortdoc>Sets metadata for the current test suite.</shortdoc>
 </kw>
-<kw name="Set Suite Variable" lineno="1713">
+<kw name="Set Suite Variable" lineno="1689">
 <arguments repr="name, *values">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="name">
 <name>name</name>
@@ -2936,93 +2776,30 @@ Find Index
 </arg>
 </arguments>
 <doc>&lt;p&gt;Makes a variable available everywhere within the scope of the current suite.&lt;/p&gt;
-&lt;p&gt;Variables set with this keyword are available everywhere within the scope of the currently executed test suite. Setting variables with this keyword thus has the same effect as creating them using the Variable table in the test data file or importing them from variable files.&lt;/p&gt;
-&lt;p&gt;Possible child test suites do not see variables set with this keyword by default, but that can be controlled by using &lt;code&gt;children=&amp;lt;option&amp;gt;&lt;/code&gt; as the last argument. If the specified &lt;code&gt;&amp;lt;option&amp;gt;&lt;/code&gt; given a true value (see &lt;a href="#Boolean%20arguments" class="name"&gt;Boolean arguments&lt;/a&gt;), the variable is set also to the child suites. Parent and sibling suites will never see variables set with this keyword.&lt;/p&gt;
-&lt;p&gt;The name of the variable can be given either as a normal variable name (e.g. &lt;code&gt;${NAME}&lt;/code&gt;) or in escaped format as &lt;code&gt;\${NAME}&lt;/code&gt; or &lt;code&gt;$NAME&lt;/code&gt;. Variable value can be given using the same syntax as when variables are created in the Variable table.&lt;/p&gt;
-&lt;p&gt;If a variable already exists within the new scope, its value will be overwritten. Otherwise a new variable is created. If a variable already exists within the current scope, the value can be left empty and the variable within the new scope gets the value within the current scope.&lt;/p&gt;
+&lt;p&gt;Variables set with this keyword are available everywhere within the scope of the currently executed test suite. Setting variables with this keyword thus has the same effect as creating them using the Variables section in the data file or importing them from variable files.&lt;/p&gt;
+&lt;p&gt;Possible child test suites do not see variables set with this keyword by default, but that can be controlled by using &lt;code&gt;children=&amp;lt;option&amp;gt;&lt;/code&gt; as the last argument. If the specified &lt;code&gt;&amp;lt;option&amp;gt;&lt;/code&gt; is given a true value (see &lt;a href="#Boolean%20arguments" class="name"&gt;Boolean arguments&lt;/a&gt;), the variable is set also to the child suites. Parent and sibling suites will never see variables set with this keyword.&lt;/p&gt;
+&lt;p&gt;The name of the variable can be given either as a normal variable name like &lt;code&gt;${NAME}&lt;/code&gt; or in escaped format as &lt;code&gt;\${NAME}&lt;/code&gt; or &lt;code&gt;$NAME&lt;/code&gt;. For the reasons explained in the &lt;a href="#Using%20variables%20with%20keywords%20creating%20or%20accessing%20variables" class="name"&gt;Using variables with keywords creating or accessing variables&lt;/a&gt; section, &lt;b&gt;using the escaped format is highly recommended&lt;/b&gt;.&lt;/p&gt;
+&lt;p&gt;Variable value can be specified using the same syntax as when variables are created in the Variables section. Same way as in that section, it is possible to create scalar values, lists and dictionaries. The type is got from the variable name prefix &lt;code&gt;$&lt;/code&gt;, &lt;code&gt;@&lt;/code&gt; and &lt;code&gt;&amp;amp;&lt;/code&gt;, respectively.&lt;/p&gt;
+&lt;p&gt;If a variable already exists within the new scope, its value will be overwritten. If a variable already exists within the current scope, the value can be left empty and the variable within the new scope gets the value within the current scope.&lt;/p&gt;
 &lt;p&gt;Examples:&lt;/p&gt;
-&lt;table border="1"&gt;
-&lt;tr&gt;
-&lt;td&gt;Set Suite Variable&lt;/td&gt;
-&lt;td&gt;${SCALAR}&lt;/td&gt;
-&lt;td&gt;Hello, world!&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Set Suite Variable&lt;/td&gt;
-&lt;td&gt;${SCALAR}&lt;/td&gt;
-&lt;td&gt;Hello, world!&lt;/td&gt;
-&lt;td&gt;children=true&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Set Suite Variable&lt;/td&gt;
-&lt;td&gt;@{LIST}&lt;/td&gt;
-&lt;td&gt;First item&lt;/td&gt;
-&lt;td&gt;Second item&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Set Suite Variable&lt;/td&gt;
-&lt;td&gt;&amp;amp;{DICT}&lt;/td&gt;
-&lt;td&gt;key=value&lt;/td&gt;
-&lt;td&gt;foo=bar&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;${ID} =&lt;/td&gt;
-&lt;td&gt;Get ID&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Set Suite Variable&lt;/td&gt;
-&lt;td&gt;${ID}&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/table&gt;
+&lt;pre&gt;
+Set Suite Variable    $SCALAR    Hello, world!
+Set Suite Variable    $SCALAR    Hello, world!    children=True
+Set Suite Variable    @LIST      First item       Second item
+Set Suite Variable    &amp;amp;DICT      key=value        foo=bar
+${ID} =    Get ID
+Set Suite Variable    $ID
+&lt;/pre&gt;
 &lt;p&gt;To override an existing value with an empty value, use built-in variables &lt;code&gt;${EMPTY}&lt;/code&gt;, &lt;code&gt;@{EMPTY}&lt;/code&gt; or &lt;code&gt;&amp;amp;{EMPTY}&lt;/code&gt;:&lt;/p&gt;
-&lt;table border="1"&gt;
-&lt;tr&gt;
-&lt;td&gt;Set Suite Variable&lt;/td&gt;
-&lt;td&gt;${SCALAR}&lt;/td&gt;
-&lt;td&gt;${EMPTY}&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Set Suite Variable&lt;/td&gt;
-&lt;td&gt;@{LIST}&lt;/td&gt;
-&lt;td&gt;@{EMPTY}&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Set Suite Variable&lt;/td&gt;
-&lt;td&gt;&amp;amp;{DICT}&lt;/td&gt;
-&lt;td&gt;&amp;amp;{EMPTY}&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/table&gt;
-&lt;p&gt;&lt;b&gt;NOTE:&lt;/b&gt; If the variable has value which itself is a variable (escaped or not), you must always use the escaped format to set the variable:&lt;/p&gt;
-&lt;p&gt;Example:&lt;/p&gt;
-&lt;table border="1"&gt;
-&lt;tr&gt;
-&lt;td&gt;${NAME} =&lt;/td&gt;
-&lt;td&gt;Set Variable&lt;/td&gt;
-&lt;td&gt;\${var}&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Set Suite Variable&lt;/td&gt;
-&lt;td&gt;${NAME}&lt;/td&gt;
-&lt;td&gt;value&lt;/td&gt;
-&lt;td&gt;# Sets variable ${var}&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Set Suite Variable&lt;/td&gt;
-&lt;td&gt;\${NAME}&lt;/td&gt;
-&lt;td&gt;value&lt;/td&gt;
-&lt;td&gt;# Sets variable ${NAME}&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/table&gt;
-&lt;p&gt;This limitation applies also to &lt;a href="#Set%20Test%20Variable" class="name"&gt;Set Test Variable&lt;/a&gt;, &lt;a href="#Set%20Global%20Variable" class="name"&gt;Set Global Variable&lt;/a&gt;, &lt;a href="#Variable%20Should%20Exist" class="name"&gt;Variable Should Exist&lt;/a&gt;, &lt;a href="#Variable%20Should%20Not%20Exist" class="name"&gt;Variable Should Not Exist&lt;/a&gt; and &lt;a href="#Get%20Variable%20Value" class="name"&gt;Get Variable Value&lt;/a&gt; keywords.&lt;/p&gt;</doc>
+&lt;pre&gt;
+Set Suite Variable    $SCALAR    ${EMPTY}
+Set Suite Variable    @LIST      @{EMPTY}
+Set Suite Variable    &amp;amp;DICT      &amp;amp;{EMPTY}
+&lt;/pre&gt;
+&lt;p&gt;See also &lt;a href="#Set%20Global%20Variable" class="name"&gt;Set Global Variable&lt;/a&gt;, &lt;a href="#Set%20Test%20Variable" class="name"&gt;Set Test Variable&lt;/a&gt; and &lt;a href="#Set%20Local%20Variable" class="name"&gt;Set Local Variable&lt;/a&gt;.&lt;/p&gt;</doc>
 <shortdoc>Makes a variable available everywhere within the scope of the current suite.</shortdoc>
 </kw>
-<kw name="Set Tags" lineno="3472">
+<kw name="Set Tags" lineno="3546">
 <arguments repr="*tags">
 <arg kind="VAR_POSITIONAL" required="false" repr="*tags">
 <name>tags</name>
@@ -3035,7 +2812,7 @@ Find Index
 &lt;p&gt;See &lt;a href="#Remove%20Tags" class="name"&gt;Remove Tags&lt;/a&gt; if you want to remove certain tags and &lt;a href="#Fail" class="name"&gt;Fail&lt;/a&gt; if you want to fail the test case after setting and/or removing tags.&lt;/p&gt;</doc>
 <shortdoc>Adds given ``tags`` for the current test or all tests in a suite.</shortdoc>
 </kw>
-<kw name="Set Task Variable" lineno="1704">
+<kw name="Set Task Variable" lineno="1680">
 <arguments repr="name, *values">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="name">
 <name>name</name>
@@ -3048,7 +2825,7 @@ Find Index
 &lt;p&gt;This is an alias for &lt;a href="#Set%20Test%20Variable" class="name"&gt;Set Test Variable&lt;/a&gt; that is more applicable when creating tasks, not tests.&lt;/p&gt;</doc>
 <shortdoc>Makes a variable available everywhere within the scope of the current task.</shortdoc>
 </kw>
-<kw name="Set Test Documentation" lineno="3410">
+<kw name="Set Test Documentation" lineno="3484">
 <arguments repr="doc, append=False">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="doc">
 <name>doc</name>
@@ -3063,7 +2840,7 @@ Find Index
 &lt;p&gt;The current test documentation is available as a built-in variable &lt;code&gt;${TEST DOCUMENTATION}&lt;/code&gt;. This keyword can not be used in suite setup or suite teardown.&lt;/p&gt;</doc>
 <shortdoc>Sets documentation for the current test case.</shortdoc>
 </kw>
-<kw name="Set Test Message" lineno="3357">
+<kw name="Set Test Message" lineno="3431">
 <arguments repr="message, append=False">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="message">
 <name>message</name>
@@ -3103,7 +2880,7 @@ Find Index
 &lt;p&gt;This keyword can not be used in suite setup or suite teardown.&lt;/p&gt;</doc>
 <shortdoc>Sets message for the current test case.</shortdoc>
 </kw>
-<kw name="Set Test Variable" lineno="1687">
+<kw name="Set Test Variable" lineno="1654">
 <arguments repr="name, *values">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="name">
 <name>name</name>
@@ -3113,11 +2890,12 @@ Find Index
 </arg>
 </arguments>
 <doc>&lt;p&gt;Makes a variable available everywhere within the scope of the current test.&lt;/p&gt;
-&lt;p&gt;Variables set with this keyword are available everywhere within the scope of the currently executed test case. For example, if you set a variable in a user keyword, it is available both in the test case level and also in all other user keywords used in the current test. Other test cases will not see variables set with this keyword.&lt;/p&gt;
-&lt;p&gt;See &lt;a href="#Set%20Suite%20Variable" class="name"&gt;Set Suite Variable&lt;/a&gt; for more information and examples.&lt;/p&gt;</doc>
+&lt;p&gt;Variables set with this keyword are available everywhere within the scope of the currently executed test case. For example, if you set a variable in a user keyword, it is available both in the test case level and also in all other user keywords used in the current test. Other test cases will not see variables set with this keyword. It is an error to call &lt;a href="#Set%20Test%20Variable" class="name"&gt;Set Test Variable&lt;/a&gt; outside the scope of a test (e.g. in a Suite Setup or Teardown).&lt;/p&gt;
+&lt;p&gt;See &lt;a href="#Set%20Suite%20Variable" class="name"&gt;Set Suite Variable&lt;/a&gt; for more information and usage examples. See also the &lt;a href="#Using%20variables%20with%20keywords%20creating%20or%20accessing%20variables" class="name"&gt;Using variables with keywords creating or accessing variables&lt;/a&gt; section for information why it is recommended to give the variable name in escaped format like &lt;code&gt;$name&lt;/code&gt; or &lt;code&gt;\${name}&lt;/code&gt; instead of the normal &lt;code&gt;${name}&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;When creating automated tasks, not tests, it is possible to use &lt;a href="#Set%20Task%20Variable" class="name"&gt;Set Task Variable&lt;/a&gt;. See also &lt;a href="#Set%20Global%20Variable" class="name"&gt;Set Global Variable&lt;/a&gt; and &lt;a href="#Set%20Local%20Variable" class="name"&gt;Set Local Variable&lt;/a&gt;.&lt;/p&gt;</doc>
 <shortdoc>Makes a variable available everywhere within the scope of the current test.</shortdoc>
 </kw>
-<kw name="Set Variable" lineno="1625">
+<kw name="Set Variable" lineno="1589">
 <arguments repr="*values">
 <arg kind="VAR_POSITIONAL" required="false" repr="*values">
 <name>values</name>
@@ -3166,7 +2944,7 @@ Find Index
 &lt;p&gt;Variables created with this keyword are available only in the scope where they are created. See &lt;a href="#Set%20Global%20Variable" class="name"&gt;Set Global Variable&lt;/a&gt;, &lt;a href="#Set%20Test%20Variable" class="name"&gt;Set Test Variable&lt;/a&gt; and &lt;a href="#Set%20Suite%20Variable" class="name"&gt;Set Suite Variable&lt;/a&gt; for information on how to set variables so that they are available also in a larger scope.&lt;/p&gt;</doc>
 <shortdoc>Returns the given values which can then be assigned to a variables.</shortdoc>
 </kw>
-<kw name="Set Variable If" lineno="2356">
+<kw name="Set Variable If" lineno="2335">
 <arguments repr="condition, *values">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="condition">
 <name>condition</name>
@@ -3266,7 +3044,7 @@ ${var3} = None
 &lt;p&gt;Use &lt;a href="#Get%20Variable%20Value" class="name"&gt;Get Variable Value&lt;/a&gt; if you need to set variables dynamically based on whether a variable exist or not.&lt;/p&gt;</doc>
 <shortdoc>Sets variable based on the given condition.</shortdoc>
 </kw>
-<kw name="Should Be Empty" lineno="1459">
+<kw name="Should Be Empty" lineno="1422">
 <arguments repr="item, msg=None">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="item">
 <name>item</name>
@@ -3280,7 +3058,7 @@ ${var3} = None
 &lt;p&gt;The length of the item is got using the &lt;a href="#Get%20Length" class="name"&gt;Get Length&lt;/a&gt; keyword. The default error message can be overridden with the &lt;code&gt;msg&lt;/code&gt; argument.&lt;/p&gt;</doc>
 <shortdoc>Verifies that the given item is empty.</shortdoc>
 </kw>
-<kw name="Should Be Equal" lineno="599">
+<kw name="Should Be Equal" lineno="561">
 <arguments repr="first, second, msg=None, values=True, ignore_case=False, formatter=str, strip_spaces=False, collapse_spaces=False">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="first">
 <name>first</name>
@@ -3358,7 +3136,7 @@ ${var3} = None
 &lt;p&gt;&lt;code&gt;strip_spaces&lt;/code&gt; is new in Robot Framework 4.0 and &lt;code&gt;collapse_spaces&lt;/code&gt; is new in Robot Framework 4.1.&lt;/p&gt;</doc>
 <shortdoc>Fails if the given objects are unequal.</shortdoc>
 </kw>
-<kw name="Should Be Equal As Integers" lineno="755">
+<kw name="Should Be Equal As Integers" lineno="718">
 <arguments repr="first, second, msg=None, values=True, base=None">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="first">
 <name>first</name>
@@ -3405,7 +3183,7 @@ ${var3} = None
 &lt;/table&gt;</doc>
 <shortdoc>Fails if objects are unequal after converting them to integers.</shortdoc>
 </kw>
-<kw name="Should Be Equal As Numbers" lineno="792">
+<kw name="Should Be Equal As Numbers" lineno="755">
 <arguments repr="first, second, msg=None, values=True, precision=6">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="first">
 <name>first</name>
@@ -3464,7 +3242,7 @@ ${var3} = None
 &lt;p&gt;See &lt;a href="#Should%20Not%20Be%20Equal%20As%20Numbers" class="name"&gt;Should Not Be Equal As Numbers&lt;/a&gt; for a negative version of this keyword and &lt;a href="#Should%20Be%20Equal" class="name"&gt;Should Be Equal&lt;/a&gt; for an explanation on how to override the default error message with &lt;code&gt;msg&lt;/code&gt; and &lt;code&gt;values&lt;/code&gt;.&lt;/p&gt;</doc>
 <shortdoc>Fails if objects are unequal after converting them to real numbers.</shortdoc>
 </kw>
-<kw name="Should Be Equal As Strings" lineno="871">
+<kw name="Should Be Equal As Strings" lineno="834">
 <arguments repr="first, second, msg=None, values=True, ignore_case=False, strip_spaces=False, formatter=str, collapse_spaces=False">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="first">
 <name>first</name>
@@ -3506,7 +3284,7 @@ ${var3} = None
 &lt;p&gt;&lt;code&gt;strip_spaces&lt;/code&gt; is new in Robot Framework 4.0 and &lt;code&gt;collapse_spaces&lt;/code&gt; is new in Robot Framework 4.1.&lt;/p&gt;</doc>
 <shortdoc>Fails if objects are unequal after converting them to strings.</shortdoc>
 </kw>
-<kw name="Should Be True" lineno="558">
+<kw name="Should Be True" lineno="530">
 <arguments repr="condition, msg=None">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="condition">
 <name>condition</name>
@@ -3555,33 +3333,10 @@ ${var3} = None
 &lt;td&gt;$status == 'PASS'&lt;/td&gt;
 &lt;td&gt;# Expected string must be quoted&lt;/td&gt;
 &lt;/tr&gt;
-&lt;/table&gt;
-&lt;p&gt;&lt;a href="#Should%20Be%20True" class="name"&gt;Should Be True&lt;/a&gt; automatically imports Python's &lt;a href="http://docs.python.org/library/os.html"&gt;os&lt;/a&gt; and &lt;a href="http://docs.python.org/library/sys.html"&gt;sys&lt;/a&gt; modules that contain several useful attributes:&lt;/p&gt;
-&lt;table border="1"&gt;
-&lt;tr&gt;
-&lt;td&gt;Should Be True&lt;/td&gt;
-&lt;td&gt;os.linesep == '\n'&lt;/td&gt;
-&lt;td&gt;# Unixy&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Should Be True&lt;/td&gt;
-&lt;td&gt;os.linesep == '\r\n'&lt;/td&gt;
-&lt;td&gt;# Windows&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Should Be True&lt;/td&gt;
-&lt;td&gt;sys.platform == 'darwin'&lt;/td&gt;
-&lt;td&gt;# OS X&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Should Be True&lt;/td&gt;
-&lt;td&gt;sys.platform.startswith('java')&lt;/td&gt;
-&lt;td&gt;# Jython&lt;/td&gt;
-&lt;/tr&gt;
 &lt;/table&gt;</doc>
 <shortdoc>Fails if the given condition is not true.</shortdoc>
 </kw>
-<kw name="Should Contain" lineno="1055">
+<kw name="Should Contain" lineno="1018">
 <arguments repr="container, item, msg=None, values=True, ignore_case=False, strip_spaces=False, collapse_spaces=False">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="container">
 <name>container</name>
@@ -3643,7 +3398,7 @@ ${var3} = None
 &lt;p&gt;&lt;code&gt;strip_spaces&lt;/code&gt; is new in Robot Framework 4.0 and &lt;code&gt;collapse_spaces&lt;/code&gt; is new in Robot Framework 4.1.&lt;/p&gt;</doc>
 <shortdoc>Fails if ``container`` does not contain ``item`` one or more times.</shortdoc>
 </kw>
-<kw name="Should Contain Any" lineno="1111">
+<kw name="Should Contain Any" lineno="1074">
 <arguments repr="container, *items, **configuration">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="container">
 <name>container</name>
@@ -3696,7 +3451,7 @@ ${var3} = None
 &lt;/table&gt;</doc>
 <shortdoc>Fails if ``container`` does not contain any of the ``*items``.</shortdoc>
 </kw>
-<kw name="Should Contain X Times" lineno="1228">
+<kw name="Should Contain X Times" lineno="1191">
 <arguments repr="container, item, count, msg=None, ignore_case=False, strip_spaces=False, collapse_spaces=False">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="container">
 <name>container</name>
@@ -3749,7 +3504,7 @@ ${var3} = None
 &lt;p&gt;&lt;code&gt;strip_spaces&lt;/code&gt; is new in Robot Framework 4.0 and &lt;code&gt;collapse_spaces&lt;/code&gt; is new in Robot Framework 4.1.&lt;/p&gt;</doc>
 <shortdoc>Fails if ``container`` does not contain ``item`` ``count`` times.</shortdoc>
 </kw>
-<kw name="Should End With" lineno="977">
+<kw name="Should End With" lineno="940">
 <arguments repr="str1, str2, msg=None, values=True, ignore_case=False, strip_spaces=False, collapse_spaces=False">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="str1">
 <name>str1</name>
@@ -3782,7 +3537,7 @@ ${var3} = None
 &lt;p&gt;See &lt;a href="#Should%20Be%20Equal" class="name"&gt;Should Be Equal&lt;/a&gt; for an explanation on how to override the default error message with &lt;code&gt;msg&lt;/code&gt; and &lt;code&gt;values&lt;/code&gt;, as well as for semantics of the &lt;code&gt;ignore_case&lt;/code&gt;, &lt;code&gt;strip_spaces&lt;/code&gt;, and &lt;code&gt;collapse_spaces&lt;/code&gt; options.&lt;/p&gt;</doc>
 <shortdoc>Fails if the string ``str1`` does not end with the string ``str2``.</shortdoc>
 </kw>
-<kw name="Should Match" lineno="1324">
+<kw name="Should Match" lineno="1287">
 <arguments repr="string, pattern, msg=None, values=True, ignore_case=False">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="string">
 <name>string</name>
@@ -3809,7 +3564,7 @@ ${var3} = None
 &lt;p&gt;See &lt;a href="#Should%20Be%20Equal" class="name"&gt;Should Be Equal&lt;/a&gt; for an explanation on how to override the default error message with &lt;code&gt;msg&lt;/code&gt; and &lt;code&gt;values&lt;/code&gt;.&lt;/p&gt;</doc>
 <shortdoc>Fails if the given ``string`` does not match the given ``pattern``.</shortdoc>
 </kw>
-<kw name="Should Match Regexp" lineno="1343">
+<kw name="Should Match Regexp" lineno="1306">
 <arguments repr="string, pattern, msg=None, values=True">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="string">
 <name>string</name>
@@ -3874,7 +3629,7 @@ ${group2} = '43'
 &lt;/pre&gt;</doc>
 <shortdoc>Fails if ``string`` does not match ``pattern`` as a regular expression.</shortdoc>
 </kw>
-<kw name="Should Not Be Empty" lineno="1468">
+<kw name="Should Not Be Empty" lineno="1431">
 <arguments repr="item, msg=None">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="item">
 <name>item</name>
@@ -3888,7 +3643,7 @@ ${group2} = '43'
 &lt;p&gt;The length of the item is got using the &lt;a href="#Get%20Length" class="name"&gt;Get Length&lt;/a&gt; keyword. The default error message can be overridden with the &lt;code&gt;msg&lt;/code&gt; argument.&lt;/p&gt;</doc>
 <shortdoc>Verifies that the given item is not empty.</shortdoc>
 </kw>
-<kw name="Should Not Be Equal" lineno="698">
+<kw name="Should Not Be Equal" lineno="661">
 <arguments repr="first, second, msg=None, values=True, ignore_case=False, strip_spaces=False, collapse_spaces=False">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="first">
 <name>first</name>
@@ -3925,7 +3680,7 @@ ${group2} = '43'
 &lt;p&gt;&lt;code&gt;strip_spaces&lt;/code&gt; is new in Robot Framework 4.0 and &lt;code&gt;collapse_spaces&lt;/code&gt; is new in Robot Framework 4.1.&lt;/p&gt;</doc>
 <shortdoc>Fails if the given objects are equal.</shortdoc>
 </kw>
-<kw name="Should Not Be Equal As Integers" lineno="738">
+<kw name="Should Not Be Equal As Integers" lineno="701">
 <arguments repr="first, second, msg=None, values=True, base=None">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="first">
 <name>first</name>
@@ -3952,7 +3707,7 @@ ${group2} = '43'
 &lt;p&gt;See &lt;a href="#Should%20Be%20Equal%20As%20Integers" class="name"&gt;Should Be Equal As Integers&lt;/a&gt; for some usage examples.&lt;/p&gt;</doc>
 <shortdoc>Fails if objects are equal after converting them to integers.</shortdoc>
 </kw>
-<kw name="Should Not Be Equal As Numbers" lineno="775">
+<kw name="Should Not Be Equal As Numbers" lineno="738">
 <arguments repr="first, second, msg=None, values=True, precision=6">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="first">
 <name>first</name>
@@ -3978,7 +3733,7 @@ ${group2} = '43'
 &lt;p&gt;See &lt;a href="#Should%20Be%20Equal%20As%20Numbers" class="name"&gt;Should Be Equal As Numbers&lt;/a&gt; for examples on how to use &lt;code&gt;precision&lt;/code&gt; and why it does not always work as expected. See also &lt;a href="#Should%20Be%20Equal" class="name"&gt;Should Be Equal&lt;/a&gt; for an explanation on how to override the default error message with &lt;code&gt;msg&lt;/code&gt; and &lt;code&gt;values&lt;/code&gt;.&lt;/p&gt;</doc>
 <shortdoc>Fails if objects are equal after converting them to real numbers.</shortdoc>
 </kw>
-<kw name="Should Not Be Equal As Strings" lineno="830">
+<kw name="Should Not Be Equal As Strings" lineno="793">
 <arguments repr="first, second, msg=None, values=True, ignore_case=False, strip_spaces=False, collapse_spaces=False">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="first">
 <name>first</name>
@@ -4016,7 +3771,7 @@ ${group2} = '43'
 &lt;p&gt;&lt;code&gt;strip_spaces&lt;/code&gt; is new in Robot Framework 4.0 and &lt;code&gt;collapse_spaces&lt;/code&gt; is new in Robot Framework 4.1.&lt;/p&gt;</doc>
 <shortdoc>Fails if objects are equal after converting them to strings.</shortdoc>
 </kw>
-<kw name="Should Not Be True" lineno="549">
+<kw name="Should Not Be True" lineno="521">
 <arguments repr="condition, msg=None">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="condition">
 <name>condition</name>
@@ -4030,7 +3785,7 @@ ${group2} = '43'
 &lt;p&gt;See &lt;a href="#Should%20Be%20True" class="name"&gt;Should Be True&lt;/a&gt; for details about how &lt;code&gt;condition&lt;/code&gt; is evaluated and how &lt;code&gt;msg&lt;/code&gt; can be used to override the default error message.&lt;/p&gt;</doc>
 <shortdoc>Fails if the given condition is true.</shortdoc>
 </kw>
-<kw name="Should Not Contain" lineno="998">
+<kw name="Should Not Contain" lineno="961">
 <arguments repr="container, item, msg=None, values=True, ignore_case=False, strip_spaces=False, collapse_spaces=False">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="container">
 <name>container</name>
@@ -4082,7 +3837,7 @@ ${group2} = '43'
 &lt;p&gt;&lt;code&gt;strip_spaces&lt;/code&gt; is new in Robot Framework 4.0 and &lt;code&gt;collapse_spaces&lt;/code&gt; is new in Robot Framework 4.1.&lt;/p&gt;</doc>
 <shortdoc>Fails if ``container`` contains ``item`` one or more times.</shortdoc>
 </kw>
-<kw name="Should Not Contain Any" lineno="1170">
+<kw name="Should Not Contain Any" lineno="1133">
 <arguments repr="container, *items, **configuration">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="container">
 <name>container</name>
@@ -4135,7 +3890,7 @@ ${group2} = '43'
 &lt;/table&gt;</doc>
 <shortdoc>Fails if ``container`` contains one or more of the ``*items``.</shortdoc>
 </kw>
-<kw name="Should Not End With" lineno="955">
+<kw name="Should Not End With" lineno="918">
 <arguments repr="str1, str2, msg=None, values=True, ignore_case=False, strip_spaces=False, collapse_spaces=False">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="str1">
 <name>str1</name>
@@ -4168,7 +3923,7 @@ ${group2} = '43'
 &lt;p&gt;See &lt;a href="#Should%20Be%20Equal" class="name"&gt;Should Be Equal&lt;/a&gt; for an explanation on how to override the default error message with &lt;code&gt;msg&lt;/code&gt; and &lt;code&gt;values&lt;/code&gt;, as well as for semantics of the &lt;code&gt;ignore_case&lt;/code&gt;, &lt;code&gt;strip_spaces&lt;/code&gt;, and &lt;code&gt;collapse_spaces&lt;/code&gt; options.&lt;/p&gt;</doc>
 <shortdoc>Fails if the string ``str1`` ends with the string ``str2``.</shortdoc>
 </kw>
-<kw name="Should Not Match" lineno="1306">
+<kw name="Should Not Match" lineno="1269">
 <arguments repr="string, pattern, msg=None, values=True, ignore_case=False">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="string">
 <name>string</name>
@@ -4195,7 +3950,7 @@ ${group2} = '43'
 &lt;p&gt;See &lt;a href="#Should%20Be%20Equal" class="name"&gt;Should Be Equal&lt;/a&gt; for an explanation on how to override the default error message with &lt;code&gt;msg&lt;/code&gt; and &lt;span class="name"&gt;`values&lt;/span&gt;.&lt;/p&gt;</doc>
 <shortdoc>Fails if the given ``string`` matches the given ``pattern``.</shortdoc>
 </kw>
-<kw name="Should Not Match Regexp" lineno="1390">
+<kw name="Should Not Match Regexp" lineno="1353">
 <arguments repr="string, pattern, msg=None, values=True">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="string">
 <name>string</name>
@@ -4216,7 +3971,7 @@ ${group2} = '43'
 &lt;p&gt;See &lt;a href="#Should%20Match%20Regexp" class="name"&gt;Should Match Regexp&lt;/a&gt; for more information about arguments.&lt;/p&gt;</doc>
 <shortdoc>Fails if ``string`` matches ``pattern`` as a regular expression.</shortdoc>
 </kw>
-<kw name="Should Not Start With" lineno="912">
+<kw name="Should Not Start With" lineno="875">
 <arguments repr="str1, str2, msg=None, values=True, ignore_case=False, strip_spaces=False, collapse_spaces=False">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="str1">
 <name>str1</name>
@@ -4249,7 +4004,7 @@ ${group2} = '43'
 &lt;p&gt;See &lt;a href="#Should%20Be%20Equal" class="name"&gt;Should Be Equal&lt;/a&gt; for an explanation on how to override the default error message with &lt;code&gt;msg&lt;/code&gt; and &lt;code&gt;values&lt;/code&gt;, as well as for semantics of the &lt;code&gt;ignore_case&lt;/code&gt;, &lt;code&gt;strip_spaces&lt;/code&gt;, and &lt;code&gt;collapse_spaces&lt;/code&gt; options.&lt;/p&gt;</doc>
 <shortdoc>Fails if the string ``str1`` starts with the string ``str2``.</shortdoc>
 </kw>
-<kw name="Should Start With" lineno="934">
+<kw name="Should Start With" lineno="897">
 <arguments repr="str1, str2, msg=None, values=True, ignore_case=False, strip_spaces=False, collapse_spaces=False">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="str1">
 <name>str1</name>
@@ -4282,7 +4037,7 @@ ${group2} = '43'
 &lt;p&gt;See &lt;a href="#Should%20Be%20Equal" class="name"&gt;Should Be Equal&lt;/a&gt; for an explanation on how to override the default error message with &lt;code&gt;msg&lt;/code&gt; and &lt;code&gt;values&lt;/code&gt;, as well as for semantics of the &lt;code&gt;ignore_case&lt;/code&gt;, &lt;code&gt;strip_spaces&lt;/code&gt;, and &lt;code&gt;collapse_spaces&lt;/code&gt; options.&lt;/p&gt;</doc>
 <shortdoc>Fails if the string ``str1`` does not start with the string ``str2``.</shortdoc>
 </kw>
-<kw name="Skip" lineno="2509">
+<kw name="Skip" lineno="2477">
 <arguments repr="msg=Skipped with Skip keyword.">
 <arg kind="POSITIONAL_OR_NAMED" required="false" repr="msg=Skipped with Skip keyword.">
 <name>msg</name>
@@ -4293,7 +4048,7 @@ ${group2} = '43'
 &lt;p&gt;Skips the remaining keywords in the current test and sets the given message to the test. If the test has teardown, it will be executed.&lt;/p&gt;</doc>
 <shortdoc>Skips the rest of the current test.</shortdoc>
 </kw>
-<kw name="Skip If" lineno="2517">
+<kw name="Skip If" lineno="2485">
 <arguments repr="condition, msg=None">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="condition">
 <name>condition</name>
@@ -4308,7 +4063,7 @@ ${group2} = '43'
 &lt;p&gt;If the &lt;code&gt;condition&lt;/code&gt; evaluates to False, does nothing.&lt;/p&gt;</doc>
 <shortdoc>Skips the rest of the current test if the ``condition`` is True.</shortdoc>
 </kw>
-<kw name="Sleep" lineno="2798">
+<kw name="Sleep" lineno="2857">
 <arguments repr="time_, reason=None">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="time_">
 <name>time_</name>
@@ -4345,7 +4100,7 @@ ${group2} = '43'
 &lt;/table&gt;</doc>
 <shortdoc>Pauses the test executed for the given time.</shortdoc>
 </kw>
-<kw name="Variable Should Exist" lineno="1567">
+<kw name="Variable Should Exist" lineno="1529">
 <arguments repr="name, msg=None">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="name">
 <name>name</name>
@@ -4356,12 +4111,12 @@ ${group2} = '43'
 </arg>
 </arguments>
 <doc>&lt;p&gt;Fails unless the given variable exists within the current scope.&lt;/p&gt;
-&lt;p&gt;The name of the variable can be given either as a normal variable name (e.g. &lt;code&gt;${NAME}&lt;/code&gt;) or in escaped format (e.g. &lt;code&gt;\${NAME}&lt;/code&gt;). Notice that the former has some limitations explained in &lt;a href="#Set%20Suite%20Variable" class="name"&gt;Set Suite Variable&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;The name of the variable can be given either as a normal variable name like &lt;code&gt;${name}&lt;/code&gt; or in escaped format like &lt;code&gt;$name&lt;/code&gt; or &lt;code&gt;\${name}&lt;/code&gt;. For the reasons explained in the &lt;a href="#Using%20variables%20with%20keywords%20creating%20or%20accessing%20variables" class="name"&gt;Using variables with keywords creating or accessing variables&lt;/a&gt; section, using the escaped format is recommended.&lt;/p&gt;
 &lt;p&gt;The default error message can be overridden with the &lt;code&gt;msg&lt;/code&gt; argument.&lt;/p&gt;
 &lt;p&gt;See also &lt;a href="#Variable%20Should%20Not%20Exist" class="name"&gt;Variable Should Not Exist&lt;/a&gt; and &lt;a href="#Keyword%20Should%20Exist" class="name"&gt;Keyword Should Exist&lt;/a&gt;.&lt;/p&gt;</doc>
 <shortdoc>Fails unless the given variable exists within the current scope.</shortdoc>
 </kw>
-<kw name="Variable Should Not Exist" lineno="1586">
+<kw name="Variable Should Not Exist" lineno="1549">
 <arguments repr="name, msg=None">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="name">
 <name>name</name>
@@ -4372,12 +4127,12 @@ ${group2} = '43'
 </arg>
 </arguments>
 <doc>&lt;p&gt;Fails if the given variable exists within the current scope.&lt;/p&gt;
-&lt;p&gt;The name of the variable can be given either as a normal variable name (e.g. &lt;code&gt;${NAME}&lt;/code&gt;) or in escaped format (e.g. &lt;code&gt;\${NAME}&lt;/code&gt;). Notice that the former has some limitations explained in &lt;a href="#Set%20Suite%20Variable" class="name"&gt;Set Suite Variable&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;The name of the variable can be given either as a normal variable name like &lt;code&gt;${name}&lt;/code&gt; or in escaped format like &lt;code&gt;$name&lt;/code&gt; or &lt;code&gt;\${name}&lt;/code&gt;. For the reasons explained in the &lt;a href="#Using%20variables%20with%20keywords%20creating%20or%20accessing%20variables" class="name"&gt;Using variables with keywords creating or accessing variables&lt;/a&gt; section, using the escaped format is recommended.&lt;/p&gt;
 &lt;p&gt;The default error message can be overridden with the &lt;code&gt;msg&lt;/code&gt; argument.&lt;/p&gt;
 &lt;p&gt;See also &lt;a href="#Variable%20Should%20Exist" class="name"&gt;Variable Should Exist&lt;/a&gt; and &lt;a href="#Keyword%20Should%20Exist" class="name"&gt;Keyword Should Exist&lt;/a&gt;.&lt;/p&gt;</doc>
 <shortdoc>Fails if the given variable exists within the current scope.</shortdoc>
 </kw>
-<kw name="Wait Until Keyword Succeeds" lineno="2274">
+<kw name="Wait Until Keyword Succeeds" lineno="2253">
 <arguments repr="retry, retry_interval, name, *args">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="retry">
 <name>retry</name>
@@ -4429,4 +4184,6 @@ ${group2} = '43'
 </keywords>
 <datatypes>
 </datatypes>
+<typedocs>
+</typedocs>
 </keywordspec>

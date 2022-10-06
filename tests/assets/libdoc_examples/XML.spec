@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<keywordspec name="XML" type="LIBRARY" format="HTML" scope="GLOBAL" generated="2021-08-20T15:17:14Z" specversion="3" source="../../../../.cache/pypoetry/virtualenvs/rfdocsindexer--g8aZv4K-py3.9/lib/python3.9/site-packages/robot/libraries/XML.py" lineno="37">
-<version>4.1</version>
-<doc>&lt;p&gt;Robot Framework test library for verifying and modifying XML documents.&lt;/p&gt;
-&lt;p&gt;As the name implies, &lt;i&gt;XML&lt;/i&gt; is a test library for verifying contents of XML files. In practice it is a pretty thin wrapper on top of Python's &lt;a href="http://docs.python.org/library/xml.etree.elementtree.html"&gt;ElementTree XML API&lt;/a&gt;.&lt;/p&gt;
+<keywordspec name="XML" type="LIBRARY" format="HTML" scope="GLOBAL" generated="2022-10-06T17:00:29Z" specversion="4" source="/home/kali/Code/rfdocsindexer/.tox/py39/lib/python3.9/site-packages/robot/libraries/XML.py" lineno="38">
+<version>5.0.1</version>
+<doc>&lt;p&gt;Robot Framework library for verifying and modifying XML documents.&lt;/p&gt;
+&lt;p&gt;As the name implies, &lt;i&gt;XML&lt;/i&gt; is a library for verifying contents of XML files. In practice, it is a pretty thin wrapper on top of Python's &lt;a href="http://docs.python.org/library/xml.etree.elementtree.html"&gt;ElementTree XML API&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;The library has the following main usages:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Parsing an XML file, or a string containing XML, into an XML element structure and finding certain elements from it for for further analysis (e.g. &lt;a href="#Parse%20Xml" class="name"&gt;Parse XML&lt;/a&gt; and &lt;a href="#Get%20Element" class="name"&gt;Get Element&lt;/a&gt; keywords).&lt;/li&gt;
@@ -25,11 +25,11 @@
 &lt;h2 id="Parsing XML"&gt;Parsing XML&lt;/h2&gt;
 &lt;p&gt;XML can be parsed into an element structure using &lt;a href="#Parse%20Xml" class="name"&gt;Parse XML&lt;/a&gt; keyword. The XML to be parsed can be specified using a path to an XML file or as a string or bytes that contain XML directly. The keyword returns the root element of the structure, which then contains other elements as its children and their children. Possible comments and processing instructions in the source XML are removed.&lt;/p&gt;
 &lt;p&gt;XML is not validated during parsing even if has a schema defined. How possible doctype elements are handled otherwise depends on the used XML module and on the platform. The standard ElementTree strips doctypes altogether but when &lt;a href="#Using%20lxml" class="name"&gt;using lxml&lt;/a&gt; they are preserved when XML is saved.&lt;/p&gt;
-&lt;p&gt;The element structure returned by &lt;a href="#Parse%20Xml" class="name"&gt;Parse XML&lt;/a&gt;, as well as elements returned by keywords such as &lt;a href="#Get%20Element" class="name"&gt;Get Element&lt;/a&gt;, can be used as the &lt;code&gt;source&lt;/code&gt; argument with other keywords. In addition to an already parsed XML structure, other keywords also accept paths to XML files and strings containing XML similarly as &lt;a href="#Parse%20Xml" class="name"&gt;Parse XML&lt;/a&gt;. Notice that keywords that modify XML do not write those changes back to disk even if the source would be given as a path to a file. Changes must always saved explicitly using &lt;a href="#Save%20Xml" class="name"&gt;Save XML&lt;/a&gt; keyword.&lt;/p&gt;
-&lt;p&gt;When the source is given as a path to a file, the forward slash character (&lt;code&gt;/&lt;/code&gt;) can be used as the path separator regardless the operating system. On Windows also the backslash works, but it the test data it needs to be escaped by doubling it (&lt;code&gt;\\&lt;/code&gt;). Using the built-in variable &lt;code&gt;${/}&lt;/code&gt; naturally works too.&lt;/p&gt;
+&lt;p&gt;The element structure returned by &lt;a href="#Parse%20Xml" class="name"&gt;Parse XML&lt;/a&gt;, as well as elements returned by keywords such as &lt;a href="#Get%20Element" class="name"&gt;Get Element&lt;/a&gt;, can be used as the &lt;code&gt;source&lt;/code&gt; argument with other keywords. In addition to an already parsed XML structure, other keywords also accept paths to XML files and strings containing XML similarly as &lt;a href="#Parse%20Xml" class="name"&gt;Parse XML&lt;/a&gt;. Notice that keywords that modify XML do not write those changes back to disk even if the source would be given as a path to a file. Changes must always be saved explicitly using &lt;a href="#Save%20Xml" class="name"&gt;Save XML&lt;/a&gt; keyword.&lt;/p&gt;
+&lt;p&gt;When the source is given as a path to a file, the forward slash character (&lt;code&gt;/&lt;/code&gt;) can be used as the path separator regardless the operating system. On Windows also the backslash works, but in the data it needs to be escaped by doubling it (&lt;code&gt;\\&lt;/code&gt;). Using the built-in variable &lt;code&gt;${/}&lt;/code&gt; naturally works too.&lt;/p&gt;
 &lt;p&gt;Note: Support for XML as bytes is new in Robot Framework 3.2.&lt;/p&gt;
 &lt;h2 id="Using lxml"&gt;Using lxml&lt;/h2&gt;
-&lt;p&gt;By default this library uses Python's standard &lt;a href="http://docs.python.org/library/xml.etree.elementtree.html"&gt;ElementTree&lt;/a&gt; module for parsing XML, but it can be configured to use &lt;a href="http://lxml.de"&gt;lxml&lt;/a&gt; module instead when &lt;a href="#Importing" class="name"&gt;importing&lt;/a&gt; the library. The resulting element structure has same API regardless which module is used for parsing.&lt;/p&gt;
+&lt;p&gt;By default, this library uses Python's standard &lt;a href="http://docs.python.org/library/xml.etree.elementtree.html"&gt;ElementTree&lt;/a&gt; module for parsing XML, but it can be configured to use &lt;a href="http://lxml.de"&gt;lxml&lt;/a&gt; module instead when &lt;a href="#Importing" class="name"&gt;importing&lt;/a&gt; the library. The resulting element structure has same API regardless which module is used for parsing.&lt;/p&gt;
 &lt;p&gt;The main benefits of using lxml is that it supports richer xpath syntax than the standard ElementTree and enables using &lt;a href="#Evaluate%20Xpath" class="name"&gt;Evaluate Xpath&lt;/a&gt; keyword. It also preserves the doctype and possible namespace prefixes saving XML.&lt;/p&gt;
 &lt;h2 id="Example"&gt;Example&lt;/h2&gt;
 &lt;p&gt;The following simple example demonstrates parsing XML and verifying its contents both using keywords in this library and in &lt;i&gt;BuiltIn&lt;/i&gt; and &lt;i&gt;Collections&lt;/i&gt; libraries. How to use xpath expressions to find elements and what attributes the returned elements contain are discussed, with more examples, in &lt;a href="#Finding%20elements%20with%20xpath" class="name"&gt;Finding elements with xpath&lt;/a&gt; and &lt;a href="#Element%20attributes" class="name"&gt;Element attributes&lt;/a&gt; sections.&lt;/p&gt;
@@ -271,7 +271,7 @@
 &lt;p&gt;Predicates can also be stacked like &lt;code&gt;path[predicate1][predicate2]&lt;/code&gt;. A limitation is that possible position predicate must always be first.&lt;/p&gt;
 &lt;h2 id="Element attributes"&gt;Element attributes&lt;/h2&gt;
 &lt;p&gt;All keywords returning elements, such as &lt;a href="#Parse%20Xml" class="name"&gt;Parse XML&lt;/a&gt;, and &lt;a href="#Get%20Element" class="name"&gt;Get Element&lt;/a&gt;, return ElementTree's &lt;a href="http://docs.python.org/library/xml.etree.elementtree.html#element-objects"&gt;Element objects&lt;/a&gt;. These elements can be used as inputs for other keywords, but they also contain several useful attributes that can be accessed directly using the extended variable syntax.&lt;/p&gt;
-&lt;p&gt;The attributes that are both useful and convenient to use in the test data are explained below. Also other attributes, including methods, can be accessed, but that is typically better to do in custom libraries than directly in the test data.&lt;/p&gt;
+&lt;p&gt;The attributes that are both useful and convenient to use in the data are explained below. Also other attributes, including methods, can be accessed, but that is typically better to do in custom libraries than directly in the data.&lt;/p&gt;
 &lt;p&gt;The examples use the same &lt;code&gt;${XML}&lt;/code&gt; structure as the earlier examples.&lt;/p&gt;
 &lt;h3 id="tag"&gt;tag&lt;/h3&gt;
 &lt;p&gt;The tag of the element.&lt;/p&gt;
@@ -585,7 +585,7 @@
 <tags>
 </tags>
 <inits>
-<init name="Init" lineno="452">
+<init name="__init__" lineno="453">
 <arguments repr="use_lxml=False">
 <arg kind="POSITIONAL_OR_NAMED" required="false" repr="use_lxml=False">
 <name>use_lxml</name>
@@ -599,7 +599,7 @@
 </init>
 </inits>
 <keywords>
-<kw name="Add Element" lineno="1114">
+<kw name="Add Element" lineno="1127">
 <arguments repr="source, element, index=None, xpath=.">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="source">
 <name>source</name>
@@ -660,7 +660,7 @@
 &lt;p&gt;Use &lt;a href="#Remove%20Element" class="name"&gt;Remove Element&lt;/a&gt; or &lt;a href="#Remove%20Elements" class="name"&gt;Remove Elements&lt;/a&gt; to remove elements.&lt;/p&gt;</doc>
 <shortdoc>Adds a child element to the specified element.</shortdoc>
 </kw>
-<kw name="Clear Element" lineno="1224">
+<kw name="Clear Element" lineno="1236">
 <arguments repr="source, xpath=., clear_tail=False">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="source">
 <name>source</name>
@@ -732,7 +732,7 @@
 &lt;p&gt;Use &lt;a href="#Remove%20Element" class="name"&gt;Remove Element&lt;/a&gt; to remove the whole element.&lt;/p&gt;</doc>
 <shortdoc>Clears the contents of the specified element.</shortdoc>
 </kw>
-<kw name="Copy Element" lineno="1257">
+<kw name="Copy Element" lineno="1269">
 <arguments repr="source, xpath=.">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="source">
 <name>source</name>
@@ -798,7 +798,7 @@
 &lt;/table&gt;</doc>
 <shortdoc>Returns a copy of the specified element.</shortdoc>
 </kw>
-<kw name="Element Attribute Should Be" lineno="804">
+<kw name="Element Attribute Should Be" lineno="807">
 <arguments repr="source, name, expected, xpath=., message=None">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="source">
 <name>source</name>
@@ -842,7 +842,7 @@
 &lt;p&gt;See also &lt;a href="#Element%20Attribute%20Should%20Match" class="name"&gt;Element Attribute Should Match&lt;/a&gt; and &lt;a href="#Get%20Element%20Attribute" class="name"&gt;Get Element Attribute&lt;/a&gt;.&lt;/p&gt;</doc>
 <shortdoc>Verifies that the specified attribute is ``expected``.</shortdoc>
 </kw>
-<kw name="Element Attribute Should Match" lineno="829">
+<kw name="Element Attribute Should Match" lineno="832">
 <arguments repr="source, name, pattern, xpath=., message=None">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="source">
 <name>source</name>
@@ -884,7 +884,7 @@
 &lt;/table&gt;</doc>
 <shortdoc>Verifies that the specified attribute matches ``expected``.</shortdoc>
 </kw>
-<kw name="Element Should Exist" lineno="615">
+<kw name="Element Should Exist" lineno="618">
 <arguments repr="source, xpath=., message=None">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="source">
 <name>source</name>
@@ -903,7 +903,7 @@
 &lt;p&gt;See also &lt;a href="#Element%20Should%20Not%20Exist" class="name"&gt;Element Should Not Exist&lt;/a&gt; as well as &lt;a href="#Get%20Element%20Count" class="name"&gt;Get Element Count&lt;/a&gt; that this keyword uses internally.&lt;/p&gt;</doc>
 <shortdoc>Verifies that one or more element match the given ``xpath``.</shortdoc>
 </kw>
-<kw name="Element Should Not Exist" lineno="630">
+<kw name="Element Should Not Exist" lineno="633">
 <arguments repr="source, xpath=., message=None">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="source">
 <name>source</name>
@@ -922,7 +922,7 @@
 &lt;p&gt;See also &lt;a href="#Element%20Should%20Exist" class="name"&gt;Element Should Exist&lt;/a&gt; as well as &lt;a href="#Get%20Element%20Count" class="name"&gt;Get Element Count&lt;/a&gt; that this keyword uses internally.&lt;/p&gt;</doc>
 <shortdoc>Verifies that no element match the given ``xpath``.</shortdoc>
 </kw>
-<kw name="Element Should Not Have Attribute" lineno="850">
+<kw name="Element Should Not Have Attribute" lineno="853">
 <arguments repr="source, name, xpath=., message=None">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="source">
 <name>source</name>
@@ -939,7 +939,7 @@
 <default>None</default>
 </arg>
 </arguments>
-<doc>&lt;p&gt;Verifies that the specified element does not have  attribute &lt;code&gt;name&lt;/code&gt;.&lt;/p&gt;
+<doc>&lt;p&gt;Verifies that the specified element does not have attribute &lt;code&gt;name&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;The element whose attribute is verified is specified using &lt;code&gt;source&lt;/code&gt; and &lt;code&gt;xpath&lt;/code&gt;. They have exactly the same semantics as with &lt;a href="#Get%20Element" class="name"&gt;Get Element&lt;/a&gt; keyword.&lt;/p&gt;
 &lt;p&gt;The keyword fails if the specified element has attribute &lt;code&gt;name&lt;/code&gt;. The default error message can be overridden with the &lt;code&gt;message&lt;/code&gt; argument.&lt;/p&gt;
 &lt;p&gt;Examples using &lt;code&gt;${XML}&lt;/code&gt; structure from &lt;a href="#Example" class="name"&gt;Example&lt;/a&gt;:&lt;/p&gt;
@@ -958,9 +958,9 @@
 &lt;/tr&gt;
 &lt;/table&gt;
 &lt;p&gt;See also &lt;a href="#Get%20Element%20Attribute" class="name"&gt;Get Element Attribute&lt;/a&gt;, &lt;a href="#Get%20Element%20Attributes" class="name"&gt;Get Element Attributes&lt;/a&gt;, &lt;a href="#Element%20Text%20Should%20Be" class="name"&gt;Element Text Should Be&lt;/a&gt; and &lt;a href="#Element%20Text%20Should%20Match" class="name"&gt;Element Text Should Match&lt;/a&gt;.&lt;/p&gt;</doc>
-<shortdoc>Verifies that the specified element does not have  attribute ``name``.</shortdoc>
+<shortdoc>Verifies that the specified element does not have attribute ``name``.</shortdoc>
 </kw>
-<kw name="Element Text Should Be" lineno="714">
+<kw name="Element Text Should Be" lineno="717">
 <arguments repr="source, expected, xpath=., normalize_whitespace=False, message=None">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="source">
 <name>source</name>
@@ -1014,7 +1014,7 @@
 &lt;/table&gt;</doc>
 <shortdoc>Verifies that the text of the specified element is ``expected``.</shortdoc>
 </kw>
-<kw name="Element Text Should Match" lineno="741">
+<kw name="Element Text Should Match" lineno="744">
 <arguments repr="source, pattern, xpath=., normalize_whitespace=False, message=None">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="source">
 <name>source</name>
@@ -1061,7 +1061,7 @@
 &lt;/table&gt;</doc>
 <shortdoc>Verifies that the text of the specified element matches ``expected``.</shortdoc>
 </kw>
-<kw name="Element To String" lineno="1278">
+<kw name="Element To String" lineno="1290">
 <arguments repr="source, xpath=., encoding=None">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="source">
 <name>source</name>
@@ -1081,7 +1081,7 @@
 &lt;p&gt;See also &lt;a href="#Log%20Element" class="name"&gt;Log Element&lt;/a&gt; and &lt;a href="#Save%20Xml" class="name"&gt;Save XML&lt;/a&gt;.&lt;/p&gt;</doc>
 <shortdoc>Returns the string representation of the specified element.</shortdoc>
 </kw>
-<kw name="Elements Should Be Equal" lineno="872">
+<kw name="Elements Should Be Equal" lineno="875">
 <arguments repr="source, expected, exclude_children=False, normalize_whitespace=False">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="source">
 <name>source</name>
@@ -1144,7 +1144,7 @@
 &lt;p&gt;See also &lt;a href="#Elements%20Should%20Match" class="name"&gt;Elements Should Match&lt;/a&gt;.&lt;/p&gt;</doc>
 <shortdoc>Verifies that the given ``source`` element is equal to ``expected``.</shortdoc>
 </kw>
-<kw name="Elements Should Match" lineno="912">
+<kw name="Elements Should Match" lineno="915">
 <arguments repr="source, expected, exclude_children=False, normalize_whitespace=False">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="source">
 <name>source</name>
@@ -1182,7 +1182,7 @@
 &lt;p&gt;See &lt;a href="#Elements%20Should%20Be%20Equal" class="name"&gt;Elements Should Be Equal&lt;/a&gt; for more examples.&lt;/p&gt;</doc>
 <shortdoc>Verifies that the given ``source`` element matches ``expected``.</shortdoc>
 </kw>
-<kw name="Evaluate Xpath" lineno="1351">
+<kw name="Evaluate Xpath" lineno="1363">
 <arguments repr="source, expression, context=.">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="source">
 <name>source</name>
@@ -1246,7 +1246,7 @@
 &lt;p&gt;This keyword works only if lxml mode is taken into use when &lt;a href="#Importing" class="name"&gt;importing&lt;/a&gt; the library.&lt;/p&gt;</doc>
 <shortdoc>Evaluates the given xpath expression and returns results.</shortdoc>
 </kw>
-<kw name="Get Child Elements" lineno="585">
+<kw name="Get Child Elements" lineno="588">
 <arguments repr="source, xpath=.">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="source">
 <name>source</name>
@@ -1288,7 +1288,7 @@
 &lt;/table&gt;</doc>
 <shortdoc>Returns the child elements of the specified element as a list.</shortdoc>
 </kw>
-<kw name="Get Element" lineno="520">
+<kw name="Get Element" lineno="523">
 <arguments repr="source, xpath=.">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="source">
 <name>source</name>
@@ -1320,7 +1320,7 @@
 &lt;p&gt;Many other keywords use this keyword internally, and keywords modifying XML are typically documented to both to modify the given source and to return it. Modifying the source does not apply if the source is given as a string. The XML structure parsed based on the string and then modified is nevertheless returned.&lt;/p&gt;</doc>
 <shortdoc>Returns an element in the ``source`` matching the ``xpath``.</shortdoc>
 </kw>
-<kw name="Get Element Attribute" lineno="762">
+<kw name="Get Element Attribute" lineno="765">
 <arguments repr="source, name, xpath=., default=None">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="source">
 <name>source</name>
@@ -1378,7 +1378,7 @@
 &lt;p&gt;See also &lt;a href="#Get%20Element%20Attributes" class="name"&gt;Get Element Attributes&lt;/a&gt;, &lt;a href="#Element%20Attribute%20Should%20Be" class="name"&gt;Element Attribute Should Be&lt;/a&gt;, &lt;a href="#Element%20Attribute%20Should%20Match" class="name"&gt;Element Attribute Should Match&lt;/a&gt; and &lt;a href="#Element%20Should%20Not%20Have%20Attribute" class="name"&gt;Element Should Not Have Attribute&lt;/a&gt;.&lt;/p&gt;</doc>
 <shortdoc>Returns the named attribute of the specified element.</shortdoc>
 </kw>
-<kw name="Get Element Attributes" lineno="784">
+<kw name="Get Element Attributes" lineno="787">
 <arguments repr="source, xpath=.">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="source">
 <name>source</name>
@@ -1421,7 +1421,7 @@
 &lt;p&gt;Use &lt;a href="#Get%20Element%20Attribute" class="name"&gt;Get Element Attribute&lt;/a&gt; to get the value of a single attribute.&lt;/p&gt;</doc>
 <shortdoc>Returns all attributes of the specified element.</shortdoc>
 </kw>
-<kw name="Get Element Count" lineno="603">
+<kw name="Get Element Count" lineno="606">
 <arguments repr="source, xpath=.">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="source">
 <name>source</name>
@@ -1436,7 +1436,7 @@
 &lt;p&gt;See also &lt;a href="#Element%20Should%20Exist" class="name"&gt;Element Should Exist&lt;/a&gt; and &lt;a href="#Element%20Should%20Not%20Exist" class="name"&gt;Element Should Not Exist&lt;/a&gt;.&lt;/p&gt;</doc>
 <shortdoc>Returns and logs how many elements the given ``xpath`` matches.</shortdoc>
 </kw>
-<kw name="Get Element Text" lineno="645">
+<kw name="Get Element Text" lineno="648">
 <arguments repr="source, xpath=., normalize_whitespace=False">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="source">
 <name>source</name>
@@ -1502,7 +1502,7 @@
 &lt;p&gt;See also &lt;a href="#Get%20Elements%20Texts" class="name"&gt;Get Elements Texts&lt;/a&gt;, &lt;a href="#Element%20Text%20Should%20Be" class="name"&gt;Element Text Should Be&lt;/a&gt; and &lt;a href="#Element%20Text%20Should%20Match" class="name"&gt;Element Text Should Match&lt;/a&gt;.&lt;/p&gt;</doc>
 <shortdoc>Returns all text of the element, possibly whitespace normalized.</shortdoc>
 </kw>
-<kw name="Get Elements" lineno="563">
+<kw name="Get Elements" lineno="566">
 <arguments repr="source, xpath">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="source">
 <name>source</name>
@@ -1543,7 +1543,7 @@
 &lt;/table&gt;</doc>
 <shortdoc>Returns a list of elements in the ``source`` matching the ``xpath``.</shortdoc>
 </kw>
-<kw name="Get Elements Texts" lineno="694">
+<kw name="Get Elements Texts" lineno="697">
 <arguments repr="source, xpath, normalize_whitespace=False">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="source">
 <name>source</name>
@@ -1588,7 +1588,7 @@
 &lt;/table&gt;</doc>
 <shortdoc>Returns text of all elements matching ``xpath`` as a list.</shortdoc>
 </kw>
-<kw name="Log Element" lineno="1298">
+<kw name="Log Element" lineno="1310">
 <arguments repr="source, level=INFO, xpath=.">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="source">
 <name>source</name>
@@ -1607,7 +1607,7 @@
 &lt;p&gt;The logged string is also returned.&lt;/p&gt;</doc>
 <shortdoc>Logs the string representation of the specified element.</shortdoc>
 </kw>
-<kw name="Parse Xml" lineno="479">
+<kw name="Parse Xml" lineno="480">
 <arguments repr="source, keep_clark_notation=False, strip_namespaces=False">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="source">
 <name>source</name>
@@ -1649,7 +1649,7 @@
 &lt;p&gt;Use &lt;a href="#Get%20Element" class="name"&gt;Get Element&lt;/a&gt; keyword if you want to get a certain element and not the whole structure. See &lt;a href="#Parsing%20XML" class="name"&gt;Parsing XML&lt;/a&gt; section for more details and examples.&lt;/p&gt;</doc>
 <shortdoc>Parses the given XML file or string into an element structure.</shortdoc>
 </kw>
-<kw name="Remove Element" lineno="1150">
+<kw name="Remove Element" lineno="1163">
 <arguments repr="source, xpath=, remove_tail=False">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="source">
 <name>source</name>
@@ -1700,7 +1700,7 @@
 &lt;/table&gt;</doc>
 <shortdoc>Removes the element matching ``xpath`` from the ``source`` structure.</shortdoc>
 </kw>
-<kw name="Remove Element Attribute" lineno="1049">
+<kw name="Remove Element Attribute" lineno="1058">
 <arguments repr="source, name, xpath=.">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="source">
 <name>source</name>
@@ -1734,7 +1734,7 @@
 &lt;p&gt;Can only remove an attribute from a single element. Use &lt;a href="#Remove%20Elements%20Attribute" class="name"&gt;Remove Elements Attribute&lt;/a&gt; to remove an attribute of multiple elements in one call.&lt;/p&gt;</doc>
 <shortdoc>Removes attribute ``name`` from the specified element.</shortdoc>
 </kw>
-<kw name="Remove Element Attributes" lineno="1083">
+<kw name="Remove Element Attributes" lineno="1094">
 <arguments repr="source, xpath=.">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="source">
 <name>source</name>
@@ -1765,7 +1765,7 @@
 &lt;p&gt;Can only remove attributes from a single element. Use &lt;a href="#Remove%20Elements%20Attributes" class="name"&gt;Remove Elements Attributes&lt;/a&gt; to remove all attributes of multiple elements in one call.&lt;/p&gt;</doc>
 <shortdoc>Removes all attributes from the specified element.</shortdoc>
 </kw>
-<kw name="Remove Elements" lineno="1176">
+<kw name="Remove Elements" lineno="1189">
 <arguments repr="source, xpath=, remove_tail=False">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="source">
 <name>source</name>
@@ -1803,7 +1803,7 @@
 &lt;/table&gt;</doc>
 <shortdoc>Removes all elements matching ``xpath`` from the ``source`` structure.</shortdoc>
 </kw>
-<kw name="Remove Elements Attribute" lineno="1074">
+<kw name="Remove Elements Attribute" lineno="1083">
 <arguments repr="source, name, xpath=.">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="source">
 <name>source</name>
@@ -1820,7 +1820,7 @@
 &lt;p&gt;Like &lt;a href="#Remove%20Element%20Attribute" class="name"&gt;Remove Element Attribute&lt;/a&gt; but removes the attribute of all elements matching the given &lt;code&gt;xpath&lt;/code&gt;.&lt;/p&gt;</doc>
 <shortdoc>Removes attribute ``name`` from the specified elements.</shortdoc>
 </kw>
-<kw name="Remove Elements Attributes" lineno="1105">
+<kw name="Remove Elements Attributes" lineno="1116">
 <arguments repr="source, xpath=.">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="source">
 <name>source</name>
@@ -1834,7 +1834,7 @@
 &lt;p&gt;Like &lt;a href="#Remove%20Element%20Attributes" class="name"&gt;Remove Element Attributes&lt;/a&gt; but removes all attributes of all elements matching the given &lt;code&gt;xpath&lt;/code&gt;.&lt;/p&gt;</doc>
 <shortdoc>Removes all attributes from the specified elements.</shortdoc>
 </kw>
-<kw name="Save Xml" lineno="1311">
+<kw name="Save Xml" lineno="1323">
 <arguments repr="source, path, encoding=UTF-8">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="source">
 <name>source</name>
@@ -1859,7 +1859,7 @@
 &lt;p&gt;Use &lt;a href="#Element%20To%20String" class="name"&gt;Element To String&lt;/a&gt; if you just need a string representation of the element.&lt;/p&gt;</doc>
 <shortdoc>Saves the given element to the specified file.</shortdoc>
 </kw>
-<kw name="Set Element Attribute" lineno="1013">
+<kw name="Set Element Attribute" lineno="1020">
 <arguments repr="source, name, value, xpath=.">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="source">
 <name>source</name>
@@ -1912,7 +1912,7 @@
 &lt;p&gt;Can only set an attribute of a single element. Use &lt;a href="#Set%20Elements%20Attribute" class="name"&gt;Set Elements Attribute&lt;/a&gt; to set an attribute of multiple elements in one call.&lt;/p&gt;</doc>
 <shortdoc>Sets attribute ``name`` of the specified element to ``value``.</shortdoc>
 </kw>
-<kw name="Set Element Tag" lineno="940">
+<kw name="Set Element Tag" lineno="943">
 <arguments repr="source, tag, xpath=.">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="source">
 <name>source</name>
@@ -1963,7 +1963,7 @@
 &lt;p&gt;Can only set the tag of a single element. Use &lt;a href="#Set%20Elements%20Tag" class="name"&gt;Set Elements Tag&lt;/a&gt; to set the tag of multiple elements in one call.&lt;/p&gt;</doc>
 <shortdoc>Sets the tag of the specified element.</shortdoc>
 </kw>
-<kw name="Set Element Text" lineno="972">
+<kw name="Set Element Text" lineno="977">
 <arguments repr="source, text=None, tail=None, xpath=.">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="source">
 <name>source</name>
@@ -2032,7 +2032,7 @@
 &lt;p&gt;Can only set the text/tail of a single element. Use &lt;a href="#Set%20Elements%20Text" class="name"&gt;Set Elements Text&lt;/a&gt; to set the text/tail of multiple elements in one call.&lt;/p&gt;</doc>
 <shortdoc>Sets text and/or tail text of the specified element.</shortdoc>
 </kw>
-<kw name="Set Elements Attribute" lineno="1040">
+<kw name="Set Elements Attribute" lineno="1047">
 <arguments repr="source, name, value, xpath=.">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="source">
 <name>source</name>
@@ -2052,7 +2052,7 @@
 &lt;p&gt;Like &lt;a href="#Set%20Element%20Attribute" class="name"&gt;Set Element Attribute&lt;/a&gt; but sets the attribute of all elements matching the given &lt;code&gt;xpath&lt;/code&gt;.&lt;/p&gt;</doc>
 <shortdoc>Sets attribute ``name`` of the specified elements to ``value``.</shortdoc>
 </kw>
-<kw name="Set Elements Tag" lineno="962">
+<kw name="Set Elements Tag" lineno="965">
 <arguments repr="source, tag, xpath=.">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="source">
 <name>source</name>
@@ -2069,7 +2069,7 @@
 &lt;p&gt;Like &lt;a href="#Set%20Element%20Tag" class="name"&gt;Set Element Tag&lt;/a&gt; but sets the tag of all elements matching the given &lt;code&gt;xpath&lt;/code&gt;.&lt;/p&gt;</doc>
 <shortdoc>Sets the tag of the specified elements.</shortdoc>
 </kw>
-<kw name="Set Elements Text" lineno="1004">
+<kw name="Set Elements Text" lineno="1009">
 <arguments repr="source, text=None, tail=None, xpath=.">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="source">
 <name>source</name>
@@ -2094,4 +2094,6 @@
 </keywords>
 <datatypes>
 </datatypes>
+<typedocs>
+</typedocs>
 </keywordspec>

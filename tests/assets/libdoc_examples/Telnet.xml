@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<keywordspec name="Telnet" type="LIBRARY" format="ROBOT" scope="SUITE" generated="2021-08-20T15:17:14Z" specversion="3" source="../../../../.cache/pypoetry/virtualenvs/rfdocsindexer--g8aZv4K-py3.9/lib/python3.9/site-packages/robot/libraries/Telnet.py" lineno="36">
-<version>4.1</version>
-<doc>A test library providing communication over Telnet connections.
+<keywordspec name="Telnet" type="LIBRARY" format="ROBOT" scope="SUITE" generated="2022-10-06T16:55:18Z" specversion="4" source="/home/kali/Code/rfdocsindexer/.tox/py39/lib/python3.9/site-packages/robot/libraries/Telnet.py" lineno="36">
+<version>5.0.1</version>
+<doc>A library providing communication over Telnet connections.
 
 ``Telnet`` is Robot Framework's standard library that makes it possible to
 connect to Telnet servers and execute commands on the opened connections.
@@ -119,7 +119,7 @@ received from the connection as-is.
 
 Notice that when writing to the connection, only Unicode strings are
 encoded using the defined encoding. Byte strings are expected to be already
-encoded correctly. Notice also that normal text in test data is passed to
+encoded correctly. Notice also that normal text in data is passed to
 the library as Unicode and you need to use variables to use bytes.
 
 It is also possible to configure the error handler to use if encoding or
@@ -252,7 +252,7 @@ considering also ``OFF`` and ``0`` false is new in Robot Framework 3.1.</doc>
 <tags>
 </tags>
 <inits>
-<init name="Init" lineno="281">
+<init name="__init__" lineno="281">
 <arguments repr="timeout=3 seconds, newline=CRLF, prompt=None, prompt_is_regexp=False, encoding=UTF-8, encoding_errors=ignore, default_log_level=INFO, window_size=None, environ_user=None, terminal_emulation=False, terminal_type=None, telnetlib_log_level=TRACE, connection_timeout=None">
 <arg kind="POSITIONAL_OR_NAMED" required="false" repr="timeout=3 seconds">
 <name>timeout</name>
@@ -340,14 +340,14 @@ Examples (use only one of these):
 
 If multiple connections are opened, this keyword should be used in
 a test or suite teardown to make sure that all connections are closed.
-It is not an error is some of the connections have already been closed
+It is not an error if some of the connections have already been closed
 by `Close Connection`.
 
 After this keyword, new indexes returned by `Open Connection`
 keyword are reset to 1.</doc>
 <shortdoc>Closes all open connections and empties the connection cache.</shortdoc>
 </kw>
-<kw name="Close Connection" lineno="687">
+<kw name="Close Connection" lineno="686">
 <arguments repr="loglevel=None">
 <arg kind="POSITIONAL_OR_NAMED" required="false" repr="loglevel=None">
 <name>loglevel</name>
@@ -365,7 +365,7 @@ connections are closed.
 See `Logging` section for more information about log levels.</doc>
 <shortdoc>Closes the current Telnet connection.</shortdoc>
 </kw>
-<kw name="Execute Command" lineno="1056">
+<kw name="Execute Command" lineno="1054">
 <arguments repr="command, loglevel=None, strip_prompt=False">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="command">
 <name>command</name>
@@ -396,7 +396,7 @@ See `Logging` section for more information about log levels and `Read
 Until Prompt` for more information about the ``strip_prompt`` parameter.</doc>
 <shortdoc>Executes the given ``command`` and reads, logs, and returns everything until the prompt.</shortdoc>
 </kw>
-<kw name="Login" lineno="705">
+<kw name="Login" lineno="704">
 <arguments repr="username, password, login_prompt=login: \, password_prompt=Password: \, login_timeout=1 second, login_incorrect=Login incorrect">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="username">
 <name>username</name>
@@ -529,7 +529,7 @@ by this keyword. Indexing starts from 1 and is reset back to it by
 `Close All Connections` keyword.</doc>
 <shortdoc>Opens a new Telnet connection to the given host and port.</shortdoc>
 </kw>
-<kw name="Read" lineno="875">
+<kw name="Read" lineno="874">
 <arguments repr="loglevel=None">
 <arg kind="POSITIONAL_OR_NAMED" required="false" repr="loglevel=None">
 <name>loglevel</name>
@@ -542,7 +542,7 @@ Read output is both returned and logged. See `Logging` section for more
 information about log levels.</doc>
 <shortdoc>Reads everything that is currently available in the output.</shortdoc>
 </kw>
-<kw name="Read Until" lineno="889">
+<kw name="Read Until" lineno="888">
 <arguments repr="expected, loglevel=None">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="expected">
 <name>expected</name>
@@ -562,7 +562,7 @@ See `Logging` section for more information about log levels. Use
 `Read Until Regexp` if more complex matching is needed.</doc>
 <shortdoc>Reads output until ``expected`` text is encountered.</shortdoc>
 </kw>
-<kw name="Read Until Prompt" lineno="1011">
+<kw name="Read Until Prompt" lineno="1009">
 <arguments repr="loglevel=None, strip_prompt=False">
 <arg kind="POSITIONAL_OR_NAMED" required="false" repr="loglevel=None">
 <name>loglevel</name>
@@ -591,7 +591,7 @@ regular expression is stripped away.
 See `Logging` section for more information about log levels.</doc>
 <shortdoc>Reads output until the prompt is encountered.</shortdoc>
 </kw>
-<kw name="Read Until Regexp" lineno="973">
+<kw name="Read Until Regexp" lineno="972">
 <arguments repr="*expected">
 <arg kind="VAR_POSITIONAL" required="false" repr="*expected">
 <name>expected</name>
@@ -611,8 +611,7 @@ as ``loglevel`` similarly as with `Read Until` keyword.
 See the documentation of
 [http://docs.python.org/library/re.html|Python re module]
 for more information about the supported regular expression syntax.
-Notice that possible backslashes need to be escaped in Robot Framework
-test data.
+Notice that possible backslashes need to be escaped in Robot Framework data.
 
 Examples:
 | `Read Until Regexp` | (#|$) |
@@ -620,7 +619,7 @@ Examples:
 | `Read Until Regexp` | \\d{4}-\\d{2}-\\d{2} | DEBUG |</doc>
 <shortdoc>Reads output until any of the ``expected`` regular expressions match.</shortdoc>
 </kw>
-<kw name="Set Default Log Level" lineno="661">
+<kw name="Set Default Log Level" lineno="660">
 <arguments repr="level">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="level">
 <name>level</name>
@@ -635,7 +634,7 @@ See `Configuration` section for more information about global and
 connection specific configuration.</doc>
 <shortdoc>Sets the default log level used for `logging` in the current connection.</shortdoc>
 </kw>
-<kw name="Set Encoding" lineno="602">
+<kw name="Set Encoding" lineno="601">
 <arguments repr="encoding=None, errors=None">
 <arg kind="POSITIONAL_OR_NAMED" required="false" repr="encoding=None">
 <name>encoding</name>
@@ -708,14 +707,13 @@ Example:
 See the documentation of
 [http://docs.python.org/library/re.html|Python re module]
 for more information about the supported regular expression syntax.
-Notice that possible backslashes need to be escaped in Robot Framework
-test data.
+Notice that possible backslashes need to be escaped in Robot Framework data.
 
 See `Configuration` section for more information about global and
 connection specific configuration.</doc>
 <shortdoc>Sets the prompt used by `Read Until Prompt` and `Login` in the current connection.</shortdoc>
 </kw>
-<kw name="Set Telnetlib Log Level" lineno="643">
+<kw name="Set Telnetlib Log Level" lineno="642">
 <arguments repr="level">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="level">
 <name>level</name>
@@ -789,7 +787,7 @@ shown below.
 | `Switch Connection` | ${index}          |            |</doc>
 <shortdoc>Switches between active connections using an index or an alias.</shortdoc>
 </kw>
-<kw name="Write" lineno="760">
+<kw name="Write" lineno="759">
 <arguments repr="text, loglevel=None">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="text">
 <name>text</name>
@@ -816,7 +814,7 @@ used. See `Writing and reading` section for more details.
 See `Logging` section for more information about log levels.</doc>
 <shortdoc>Writes the given text plus a newline into the connection.</shortdoc>
 </kw>
-<kw name="Write Bare" lineno="790">
+<kw name="Write Bare" lineno="789">
 <arguments repr="text">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="text">
 <name>text</name>
@@ -828,7 +826,7 @@ This keyword does not append a newline nor consume the written text.
 Use `Write` if these features are needed.</doc>
 <shortdoc>Writes the given text, and nothing else, into the connection.</shortdoc>
 </kw>
-<kw name="Write Control Character" lineno="836">
+<kw name="Write Control Character" lineno="835">
 <arguments repr="character">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="character">
 <name>character</name>
@@ -848,7 +846,7 @@ Example:
 | Write Control Character | 241 | # Send No operation command |</doc>
 <shortdoc>Writes the given control character into the connection.</shortdoc>
 </kw>
-<kw name="Write Until Expected Output" lineno="799">
+<kw name="Write Until Expected Output" lineno="798">
 <arguments repr="text, expected, timeout, retry_interval, loglevel=None">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="text">
 <name>text</name>
@@ -893,4 +891,6 @@ the output in 5 seconds.</doc>
 </keywords>
 <datatypes>
 </datatypes>
+<typedocs>
+</typedocs>
 </keywordspec>

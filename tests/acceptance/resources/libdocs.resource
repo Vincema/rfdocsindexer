@@ -2,6 +2,8 @@
 Documentation       Keywords to perform operations on generated dirs and files.
 
 Library             OperatingSystem
+Library             Collections
+Resource            testutils.resource
 
 *** Keywords ***
 Output Dir Should Exist
@@ -115,3 +117,4 @@ Libdoc Should Be Valid
     ${read_libdoc_content}=    Get File    ${libdoc_filepath}
 
     Strings Should Be Almost Equal    ${expected_libdoc_content}    ${read_libdoc_content}    treshold=${90}
+

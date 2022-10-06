@@ -1,27 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<keywordspec name="Screenshot" type="LIBRARY" format="HTML" scope="SUITE" generated="2021-08-20T15:17:13Z" specversion="3" source="../../../../.cache/pypoetry/virtualenvs/rfdocsindexer--g8aZv4K-py3.9/lib/python3.9/site-packages/robot/libraries/Screenshot.py" lineno="51">
-<version>4.1</version>
-<doc>&lt;p&gt;Test library for taking screenshots on the machine where tests are run.&lt;/p&gt;
-&lt;p&gt;Notice that successfully taking screenshots requires tests to be run with a physical or virtual display.&lt;/p&gt;
+<keywordspec name="Screenshot" type="LIBRARY" format="HTML" scope="SUITE" generated="2022-10-06T17:00:29Z" specversion="4" source="/home/kali/Code/rfdocsindexer/.tox/py39/lib/python3.9/site-packages/robot/libraries/Screenshot.py" lineno="39">
+<version>5.0.1</version>
+<doc>&lt;p&gt;Library for taking screenshots on the machine where tests are executed.&lt;/p&gt;
+&lt;p&gt;Taking the actual screenshot requires a suitable tool or module that may need to be installed separately. Taking screenshots also requires tests to be run with a physical or virtual display.&lt;/p&gt;
 &lt;h3 id="Table of contents"&gt;Table of contents&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href="#Using%20with%20Python" class="name"&gt;Using with Python&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#Using%20with%20Jython%20and%20IronPython" class="name"&gt;Using with Jython and IronPython&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#Supported%20screenshot%20taking%20tools%20and%20modules" class="name"&gt;Supported screenshot taking tools and modules&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="#Where%20screenshots%20are%20saved" class="name"&gt;Where screenshots are saved&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="#ScreenCapLibrary" class="name"&gt;ScreenCapLibrary&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="#Importing" class="name"&gt;Importing&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="#Keywords" class="name"&gt;Keywords&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h2 id="Using with Python"&gt;Using with Python&lt;/h2&gt;
-&lt;p&gt;How screenshots are taken when using Python depends on the operating system. On OSX screenshots are taken using the built-in &lt;code&gt;screencapture&lt;/code&gt; utility. On other operating systems you need to have one of the following tools or Python modules installed. You can specify the tool/module to use when &lt;a href="#Importing" class="name"&gt;importing&lt;/a&gt; the library. If no tool or module is specified, the first one found will be used.&lt;/p&gt;
+&lt;h2 id="Supported screenshot taking tools and modules"&gt;Supported screenshot taking tools and modules&lt;/h2&gt;
+&lt;p&gt;How screenshots are taken depends on the operating system. On OSX screenshots are taken using the built-in &lt;code&gt;screencapture&lt;/code&gt; utility. On other operating systems you need to have one of the following tools or Python modules installed. You can specify the tool/module to use when &lt;a href="#Importing" class="name"&gt;importing&lt;/a&gt; the library. If no tool or module is specified, the first one found will be used.&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;wxPython :: &lt;a href="http://wxpython.org"&gt;http://wxpython.org&lt;/a&gt; :: Required also by RIDE so many Robot Framework users already have this module installed.&lt;/li&gt;
+&lt;li&gt;wxPython :: &lt;a href="http://wxpython.org"&gt;http://wxpython.org&lt;/a&gt; :: Generic Python GUI toolkit.&lt;/li&gt;
 &lt;li&gt;PyGTK :: &lt;a href="http://pygtk.org"&gt;http://pygtk.org&lt;/a&gt; :: This module is available by default on most Linux distributions.&lt;/li&gt;
 &lt;li&gt;Pillow :: &lt;a href="http://python-pillow.github.io"&gt;http://python-pillow.github.io&lt;/a&gt; :: Only works on Windows. Also the original PIL package is supported.&lt;/li&gt;
 &lt;li&gt;Scrot :: &lt;a href="http://en.wikipedia.org/wiki/Scrot"&gt;http://en.wikipedia.org/wiki/Scrot&lt;/a&gt; :: Not used on Windows. Install with &lt;code&gt;apt-get install scrot&lt;/code&gt; or similar.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h2 id="Using with Jython and IronPython"&gt;Using with Jython and IronPython&lt;/h2&gt;
-&lt;p&gt;With Jython and IronPython this library uses APIs provided by JVM and .NET platforms, respectively. These APIs are always available and thus no external modules are needed.&lt;/p&gt;
 &lt;h2 id="Where screenshots are saved"&gt;Where screenshots are saved&lt;/h2&gt;
 &lt;p&gt;By default screenshots are saved into the same directory where the Robot Framework log file is written. If no log is created, screenshots are saved into the directory where the XML output file is written.&lt;/p&gt;
 &lt;p&gt;It is possible to specify a custom location for screenshots using &lt;code&gt;screenshot_directory&lt;/code&gt; argument when &lt;a href="#Importing" class="name"&gt;importing&lt;/a&gt; the library and using &lt;a href="#Set%20Screenshot%20Directory" class="name"&gt;Set Screenshot Directory&lt;/a&gt; keyword during execution. It is also possible to save screenshots using an absolute path.&lt;/p&gt;
@@ -30,7 +27,7 @@
 <tags>
 </tags>
 <inits>
-<init name="Init" lineno="107">
+<init name="__init__" lineno="89">
 <arguments repr="screenshot_directory=None, screenshot_module=None">
 <arg kind="POSITIONAL_OR_NAMED" required="false" repr="screenshot_directory=None">
 <name>screenshot_directory</name>
@@ -43,8 +40,8 @@
 </arguments>
 <doc>&lt;p&gt;Configure where screenshots are saved.&lt;/p&gt;
 &lt;p&gt;If &lt;code&gt;screenshot_directory&lt;/code&gt; is not given, screenshots are saved into same directory as the log file. The directory can also be set using &lt;a href="#Set%20Screenshot%20Directory" class="name"&gt;Set Screenshot Directory&lt;/a&gt; keyword.&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;screenshot_module&lt;/code&gt; specifies the module or tool to use when using this library on Python outside OSX. Possible values are &lt;code&gt;wxPython&lt;/code&gt;, &lt;code&gt;PyGTK&lt;/code&gt;, &lt;code&gt;PIL&lt;/code&gt; and &lt;code&gt;scrot&lt;/code&gt;, case-insensitively. If no value is given, the first module/tool found is used in that order. See &lt;a href="#Using%20with%20Python" class="name"&gt;Using with Python&lt;/a&gt; for more information.&lt;/p&gt;
-&lt;p&gt;Examples (use only one of these):&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;screenshot_module&lt;/code&gt; specifies the module or tool to use when using this library outside OSX. Possible values are &lt;code&gt;wxPython&lt;/code&gt;, &lt;code&gt;PyGTK&lt;/code&gt;, &lt;code&gt;PIL&lt;/code&gt; and &lt;code&gt;scrot&lt;/code&gt;, case-insensitively. If no value is given, the first module/tool found is used in that order.&lt;/p&gt;
+&lt;p&gt;Examples:&lt;/p&gt;
 &lt;table border="1"&gt;
 &lt;tr&gt;
 &lt;th&gt;Setting&lt;/th&gt;
@@ -71,7 +68,7 @@
 </init>
 </inits>
 <keywords>
-<kw name="Set Screenshot Directory" lineno="146">
+<kw name="Set Screenshot Directory" lineno="127">
 <arguments repr="path">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="path">
 <name>path</name>
@@ -82,7 +79,7 @@
 &lt;p&gt;The directory can also be set in &lt;a href="#Importing" class="name"&gt;importing&lt;/a&gt;.&lt;/p&gt;</doc>
 <shortdoc>Sets the directory where screenshots are saved.</shortdoc>
 </kw>
-<kw name="Take Screenshot" lineno="161">
+<kw name="Take Screenshot" lineno="142">
 <arguments repr="name=screenshot, width=800px">
 <arg kind="POSITIONAL_OR_NAMED" required="false" repr="name=screenshot">
 <name>name</name>
@@ -139,7 +136,7 @@
 &lt;p&gt;The path where the screenshot is saved is returned.&lt;/p&gt;</doc>
 <shortdoc>Takes a screenshot in JPEG format and embeds it into the log file.</shortdoc>
 </kw>
-<kw name="Take Screenshot Without Embedding" lineno="190">
+<kw name="Take Screenshot Without Embedding" lineno="171">
 <arguments repr="name=screenshot">
 <arg kind="POSITIONAL_OR_NAMED" required="false" repr="name=screenshot">
 <name>name</name>
@@ -153,4 +150,6 @@
 </keywords>
 <datatypes>
 </datatypes>
+<typedocs>
+</typedocs>
 </keywordspec>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<keywordspec name="DateTime" type="LIBRARY" format="HTML" scope="GLOBAL" generated="2021-08-20T15:17:13Z" specversion="3" source="../../../../.cache/pypoetry/virtualenvs/rfdocsindexer--g8aZv4K-py3.9/lib/python3.9/site-packages/robot/libraries/DateTime.py" lineno="1">
-<version>4.1</version>
-<doc>&lt;p&gt;A test library for handling date and time values.&lt;/p&gt;
+<keywordspec name="DateTime" type="LIBRARY" format="HTML" scope="GLOBAL" generated="2022-10-06T17:00:29Z" specversion="4" source="/home/kali/Code/rfdocsindexer/.tox/py39/lib/python3.9/site-packages/robot/libraries/DateTime.py" lineno="1">
+<version>5.0.1</version>
+<doc>&lt;p&gt;A library for handling date and time values.&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;DateTime&lt;/code&gt; is a Robot Framework standard library that supports creating and converting date and time values (e.g. &lt;a href="#Get%20Current%20Date" class="name"&gt;Get Current Date&lt;/a&gt;, &lt;a href="#Convert%20Time" class="name"&gt;Convert Time&lt;/a&gt;), as well as doing simple calculations with them (e.g. &lt;a href="#Subtract%20Time%20From%20Date" class="name"&gt;Subtract Time From Date&lt;/a&gt;, &lt;a href="#Add%20Time%20To%20Time" class="name"&gt;Add Time To Time&lt;/a&gt;). It supports dates and times in various formats, and can also be used by other libraries programmatically.&lt;/p&gt;
 &lt;h3 id="Table of contents"&gt;Table of contents&lt;/h3&gt;
 &lt;ul&gt;
@@ -13,14 +13,14 @@
 &lt;li&gt;&lt;a href="#Keywords" class="name"&gt;Keywords&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id="Terminology"&gt;Terminology&lt;/h2&gt;
-&lt;p&gt;In the context of this library, &lt;code&gt;date&lt;/code&gt; and &lt;code&gt;time&lt;/code&gt; generally have following meanings:&lt;/p&gt;
+&lt;p&gt;In the context of this library, &lt;code&gt;date&lt;/code&gt; and &lt;code&gt;time&lt;/code&gt; generally have the following meanings:&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;code&gt;date&lt;/code&gt;: An entity with both date and time components but without any timezone information. For example, &lt;code&gt;2014-06-11 10:07:42&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;date&lt;/code&gt;: An entity with both date and time components but without any time zone information. For example, &lt;code&gt;2014-06-11 10:07:42&lt;/code&gt;.&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;time&lt;/code&gt;: A time interval. For example, &lt;code&gt;1 hour 20 minutes&lt;/code&gt; or &lt;code&gt;01:20:00&lt;/code&gt;.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;This terminology differs from what Python's standard &lt;a href="http://docs.python.org/library/datetime.html"&gt;datetime&lt;/a&gt; module uses. Basically its &lt;a href="http://docs.python.org/library/datetime.html#datetime-objects"&gt;datetime&lt;/a&gt; and &lt;a href="http://docs.python.org/library/datetime.html#timedelta-objects"&gt;timedelta&lt;/a&gt; objects match &lt;code&gt;date&lt;/code&gt; and &lt;code&gt;time&lt;/code&gt; as defined by this library.&lt;/p&gt;
 &lt;h2 id="Date formats"&gt;Date formats&lt;/h2&gt;
-&lt;p&gt;Dates can given to and received from keywords in &lt;a href="#Timestamp" class="name"&gt;timestamp&lt;/a&gt;, &lt;a href="#Custom%20timestamp" class="name"&gt;custom timestamp&lt;/a&gt;, &lt;a href="#Python%20datetime" class="name"&gt;Python datetime&lt;/a&gt; and &lt;a href="#Epoch%20time" class="name"&gt;epoch time&lt;/a&gt; formats. These formats are discussed thoroughly in subsequent sections.&lt;/p&gt;
+&lt;p&gt;Dates can be given to and received from keywords in &lt;a href="#Timestamp" class="name"&gt;timestamp&lt;/a&gt;, &lt;a href="#Custom%20timestamp" class="name"&gt;custom timestamp&lt;/a&gt;, &lt;a href="#Python%20datetime" class="name"&gt;Python datetime&lt;/a&gt; and &lt;a href="#Epoch%20time" class="name"&gt;epoch time&lt;/a&gt; formats. These formats are discussed thoroughly in subsequent sections.&lt;/p&gt;
 &lt;p&gt;Input format is determined automatically based on the given date except when using custom timestamps, in which case it needs to be given using &lt;code&gt;date_format&lt;/code&gt; argument. Default result format is timestamp, but it can be overridden using &lt;code&gt;result_format&lt;/code&gt; argument.&lt;/p&gt;
 &lt;h3 id="Timestamp"&gt;Timestamp&lt;/h3&gt;
 &lt;p&gt;If a date is given as a string, it is always considered to be a timestamp. If no custom formatting is given using &lt;code&gt;date_format&lt;/code&gt; argument, the timestamp is expected to be in &lt;a href="http://en.wikipedia.org/wiki/ISO_8601"&gt;ISO 8601&lt;/a&gt; like format &lt;code&gt;YYYY-MM-DD hh:mm:ss.mil&lt;/code&gt;, where any non-digit character can be used as a separator or separators can be omitted altogether. Additionally, only the date part is mandatory, all possibly missing time components are considered to be zeros.&lt;/p&gt;
@@ -88,7 +88,6 @@
 &lt;td&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/table&gt;
-&lt;p&gt;Notice that locale aware directives like &lt;code&gt;%b&lt;/code&gt;  do not work correctly with Jython on non-English locales: &lt;a href="http://bugs.jython.org/issue2285"&gt;http://bugs.jython.org/issue2285&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id="Python datetime"&gt;Python datetime&lt;/h3&gt;
 &lt;p&gt;Python's standard &lt;a href="http://docs.python.org/library/datetime.html#datetime-objects"&gt;datetime&lt;/a&gt; objects can be used both in input and output. In input they are recognized automatically, and in output it is possible to get them by giving &lt;code&gt;datetime&lt;/code&gt; value to &lt;code&gt;result_format&lt;/code&gt; argument.&lt;/p&gt;
 &lt;p&gt;One nice benefit with datetime objects is that they have different time components available as attributes that can be easily accessed using the extended variable syntax.&lt;/p&gt;
@@ -144,9 +143,9 @@
 &lt;/tr&gt;
 &lt;/table&gt;
 &lt;h3 id="Epoch time"&gt;Epoch time&lt;/h3&gt;
-&lt;p&gt;Epoch time is the time in seconds since the &lt;a href="http://en.wikipedia.org/wiki/Unix_time"&gt;UNIX epoch&lt;/a&gt; i.e. 00:00:00.000 (UTC) 1 January 1970. To give a date in epoch time, it must be given as a number (integer or float), not as a string. To return a date in epoch time, it is possible to use &lt;code&gt;epoch&lt;/code&gt; value with &lt;code&gt;result_format&lt;/code&gt; argument. Epoch time is returned as a floating point number.&lt;/p&gt;
-&lt;p&gt;Notice that epoch time itself is independent on timezones and thus same around the world at a certain time. What local time a certain epoch time matches obviously then depends on the timezone. For example, examples below were tested in Finland but verifications would fail on other timezones.&lt;/p&gt;
-&lt;p&gt;Examples:&lt;/p&gt;
+&lt;p&gt;Epoch time is the time in seconds since the &lt;a href="http://en.wikipedia.org/wiki/Unix_time"&gt;UNIX epoch&lt;/a&gt; i.e. 00:00:00.000 (UTC) January 1, 1970. To give a date as an epoch time, it must be given as a number (integer or float), not as a string. To return a date as an epoch time, it is possible to use &lt;code&gt;epoch&lt;/code&gt; value with &lt;code&gt;result_format&lt;/code&gt; argument. Epoch times are returned as floating point numbers.&lt;/p&gt;
+&lt;p&gt;Notice that epoch times are independent on time zones and thus same around the world at a certain time. For example, epoch times returned by &lt;a href="#Get%20Current%20Date" class="name"&gt;Get Current Date&lt;/a&gt; are not affected by the &lt;code&gt;time_zone&lt;/code&gt; argument. What local time a certain epoch time matches then depends on the time zone.&lt;/p&gt;
+&lt;p&gt;Following examples demonstrate using epoch times. They are tested in Finland, and due to the reasons explained above they would fail on other time zones.&lt;/p&gt;
 &lt;table border="1"&gt;
 &lt;tr&gt;
 &lt;td&gt;${date} =&lt;/td&gt;
@@ -178,7 +177,7 @@
 &lt;ul&gt;
 &lt;li&gt;Timestamps support year 1900 and above.&lt;/li&gt;
 &lt;li&gt;Python datetime objects support year 1 and above.&lt;/li&gt;
-&lt;li&gt;Epoch time supports 1970 and above on Windows with Python and IronPython.&lt;/li&gt;
+&lt;li&gt;Epoch time supports 1970 and above on Windows.&lt;/li&gt;
 &lt;li&gt;On other platforms epoch time supports 1900 and above or even earlier.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id="Time formats"&gt;Time formats&lt;/h2&gt;
@@ -449,7 +448,7 @@ def example_keyword(date, interval):
 <inits>
 </inits>
 <keywords>
-<kw name="Add Time To Date" lineno="423">
+<kw name="Add Time To Date" lineno="419">
 <arguments repr="date, time, result_format=timestamp, exclude_millis=False, date_format=None">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="date">
 <name>date</name>
@@ -508,7 +507,7 @@ def example_keyword(date, interval):
 &lt;/table&gt;</doc>
 <shortdoc>Adds time to date and returns the resulting date.</shortdoc>
 </kw>
-<kw name="Add Time To Time" lineno="471">
+<kw name="Add Time To Time" lineno="467">
 <arguments repr="time1, time2, result_format=number, exclude_millis=False">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="time1">
 <name>time1</name>
@@ -570,7 +569,7 @@ def example_keyword(date, interval):
 &lt;/table&gt;</doc>
 <shortdoc>Adds time to another time and returns the resulting time.</shortdoc>
 </kw>
-<kw name="Convert Date" lineno="354">
+<kw name="Convert Date" lineno="350">
 <arguments repr="date, result_format=timestamp, exclude_millis=False, date_format=None">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="date">
 <name>date</name>
@@ -643,7 +642,7 @@ def example_keyword(date, interval):
 &lt;/table&gt;</doc>
 <shortdoc>Converts between supported `date formats`.</shortdoc>
 </kw>
-<kw name="Convert Time" lineno="377">
+<kw name="Convert Time" lineno="373">
 <arguments repr="time, result_format=number, exclude_millis=False">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="time">
 <name>time</name>
@@ -711,7 +710,7 @@ def example_keyword(date, interval):
 &lt;/table&gt;</doc>
 <shortdoc>Converts between supported `time formats`.</shortdoc>
 </kw>
-<kw name="Get Current Date" lineno="312">
+<kw name="Get Current Date" lineno="307">
 <arguments repr="time_zone=local, increment=0, result_format=timestamp, exclude_millis=False">
 <arg kind="POSITIONAL_OR_NAMED" required="false" repr="time_zone=local">
 <name>time_zone</name>
@@ -733,7 +732,7 @@ def example_keyword(date, interval):
 <doc>&lt;p&gt;Returns current local or UTC time with an optional increment.&lt;/p&gt;
 &lt;p&gt;Arguments:&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;code&gt;time_zone:&lt;/code&gt;      Get the current time on this time zone. Currently only &lt;code&gt;local&lt;/code&gt; (default) and &lt;code&gt;UTC&lt;/code&gt; are supported.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;time_zone:&lt;/code&gt;      Get the current time on this time zone. Currently only &lt;code&gt;local&lt;/code&gt; (default) and &lt;code&gt;UTC&lt;/code&gt; are supported. Has no effect if date is returned as an &lt;a href="#Epoch%20time" class="name"&gt;epoch time&lt;/a&gt;.&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;increment:&lt;/code&gt;      Optional time increment to add to the returned date in one of the supported &lt;a href="#Time%20formats" class="name"&gt;time formats&lt;/a&gt;. Can be negative.&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;result_format:&lt;/code&gt;  Format of the returned date (see &lt;a href="#Date%20formats" class="name"&gt;date formats&lt;/a&gt;).&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;exclude_millis:&lt;/code&gt; When set to any true value, rounds and drops milliseconds as explained in &lt;a href="#Millisecond%20handling" class="name"&gt;millisecond handling&lt;/a&gt;.&lt;/li&gt;
@@ -809,7 +808,7 @@ def example_keyword(date, interval):
 &lt;/table&gt;</doc>
 <shortdoc>Returns current local or UTC time with an optional increment.</shortdoc>
 </kw>
-<kw name="Subtract Date From Date" lineno="397">
+<kw name="Subtract Date From Date" lineno="393">
 <arguments repr="date1, date2, result_format=number, exclude_millis=False, date1_format=None, date2_format=None">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="date1">
 <name>date1</name>
@@ -877,7 +876,7 @@ def example_keyword(date, interval):
 &lt;/table&gt;</doc>
 <shortdoc>Subtracts date from another date and returns time between.</shortdoc>
 </kw>
-<kw name="Subtract Time From Date" lineno="447">
+<kw name="Subtract Time From Date" lineno="443">
 <arguments repr="date, time, result_format=timestamp, exclude_millis=False, date_format=None">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="date">
 <name>date</name>
@@ -936,7 +935,7 @@ def example_keyword(date, interval):
 &lt;/table&gt;</doc>
 <shortdoc>Subtracts time from date and returns the resulting date.</shortdoc>
 </kw>
-<kw name="Subtract Time From Time" lineno="492">
+<kw name="Subtract Time From Time" lineno="488">
 <arguments repr="time1, time2, result_format=number, exclude_millis=False">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="time1">
 <name>time1</name>
@@ -997,4 +996,6 @@ def example_keyword(date, interval):
 </keywords>
 <datatypes>
 </datatypes>
+<typedocs>
+</typedocs>
 </keywordspec>

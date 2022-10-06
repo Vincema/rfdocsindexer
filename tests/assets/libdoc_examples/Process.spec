@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<keywordspec name="Process" type="LIBRARY" format="HTML" scope="GLOBAL" generated="2021-08-20T15:17:13Z" specversion="3" source="../../../../.cache/pypoetry/virtualenvs/rfdocsindexer--g8aZv4K-py3.9/lib/python3.9/site-packages/robot/libraries/Process.py" lineno="30">
-<version>4.1</version>
-<doc>&lt;p&gt;Robot Framework test library for running processes.&lt;/p&gt;
+<keywordspec name="Process" type="LIBRARY" format="HTML" scope="GLOBAL" generated="2022-10-06T17:00:29Z" specversion="4" source="/home/kali/Code/rfdocsindexer/.tox/py39/lib/python3.9/site-packages/robot/libraries/Process.py" lineno="30">
+<version>5.0.1</version>
+<doc>&lt;p&gt;Robot Framework library for running processes.&lt;/p&gt;
 &lt;p&gt;This library utilizes Python's &lt;a href="http://docs.python.org/library/subprocess.html"&gt;subprocess&lt;/a&gt; module and its &lt;a href="http://docs.python.org/library/subprocess.html#popen-constructor"&gt;Popen&lt;/a&gt; class.&lt;/p&gt;
 &lt;p&gt;The library has following main usages:&lt;/p&gt;
 &lt;ul&gt;
@@ -82,6 +82,10 @@
 &lt;td&gt;Path of a file where to write standard error.&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
+&lt;td&gt;stdin&lt;/td&gt;
+&lt;td&gt;Configure process standard input. New in RF 4.1.2.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
 &lt;td&gt;output_encoding&lt;/td&gt;
 &lt;td&gt;Encoding to use when reading command outputs.&lt;/td&gt;
 &lt;/tr&gt;
@@ -96,7 +100,7 @@
 &lt;p&gt;Giving the &lt;code&gt;shell&lt;/code&gt; argument any non-false value, such as &lt;code&gt;shell=True&lt;/code&gt;, changes the program to be executed in a shell. It allows using the shell capabilities, but can also make the process invocation operating system dependent. Having a shell between the actually started process and this library can also interfere communication with the process such as stopping it and reading its outputs. Because of these problems, it is recommended to use the shell only when absolutely necessary.&lt;/p&gt;
 &lt;p&gt;When using a shell it is possible to give the whole command to execute as a single string. See &lt;a href="#Specifying%20command%20and%20arguments" class="name"&gt;Specifying command and arguments&lt;/a&gt; section for examples and more details in general.&lt;/p&gt;
 &lt;h3 id="Current working directory"&gt;Current working directory&lt;/h3&gt;
-&lt;p&gt;By default the child process will be executed in the same directory as the parent process, the process running tests, is executed. This can be changed by giving an alternative location using the &lt;code&gt;cwd&lt;/code&gt; argument. Forward slashes in the given path are automatically converted to backslashes on Windows.&lt;/p&gt;
+&lt;p&gt;By default, the child process will be executed in the same directory as the parent process, the process running Robot Framework, is executed. This can be changed by giving an alternative location using the &lt;code&gt;cwd&lt;/code&gt; argument. Forward slashes in the given path are automatically converted to backslashes on Windows.&lt;/p&gt;
 &lt;p&gt;&lt;a href="#Standard%20output%20and%20error%20streams" class="name"&gt;Standard output and error streams&lt;/a&gt;, when redirected to files, are also relative to the current working directory possibly set using the &lt;code&gt;cwd&lt;/code&gt; argument.&lt;/p&gt;
 &lt;p&gt;Example:&lt;/p&gt;
 &lt;table border="1"&gt;
@@ -131,7 +135,7 @@
 &lt;/tr&gt;
 &lt;/table&gt;
 &lt;h3 id="Standard output and error streams"&gt;Standard output and error streams&lt;/h3&gt;
-&lt;p&gt;By default processes are run so that their standard output and standard error streams are kept in the memory. This works fine normally, but if there is a lot of output, the output buffers may get full and the program can hang. Additionally on Jython, everything written to these in-memory buffers can be lost if the process is terminated.&lt;/p&gt;
+&lt;p&gt;By default processes are run so that their standard output and standard error streams are kept in the memory. This works fine normally, but if there is a lot of output, the output buffers may get full and the program can hang.&lt;/p&gt;
 &lt;p&gt;To avoid the above mentioned problems, it is possible to use &lt;code&gt;stdout&lt;/code&gt; and &lt;code&gt;stderr&lt;/code&gt; arguments to specify files on the file system where to redirect the outputs. This can also be useful if other processes or other keywords need to read or manipulate the outputs somehow.&lt;/p&gt;
 &lt;p&gt;Given &lt;code&gt;stdout&lt;/code&gt; and &lt;code&gt;stderr&lt;/code&gt; paths are relative to the &lt;a href="#Current%20working%20directory" class="name"&gt;current working directory&lt;/a&gt;. Forward slashes in the given paths are automatically converted to backslashes on Windows.&lt;/p&gt;
 &lt;p&gt;As a special feature, it is possible to redirect the standard error to the standard output by using &lt;code&gt;stderr=STDOUT&lt;/code&gt;.&lt;/p&gt;
@@ -177,6 +181,54 @@
 &lt;/tr&gt;
 &lt;/table&gt;
 &lt;p&gt;Note that the created output files are not automatically removed after the test run. The user is responsible to remove them if needed.&lt;/p&gt;
+&lt;h3 id="Standard input stream"&gt;Standard input stream&lt;/h3&gt;
+&lt;p&gt;The &lt;code&gt;stdin&lt;/code&gt; argument makes it possible to pass information to the standard input stream of the started process. How its value is interpreted is explained in the table below.&lt;/p&gt;
+&lt;table border="1"&gt;
+&lt;tr&gt;
+&lt;th&gt;Value&lt;/th&gt;
+&lt;th&gt;Explanation&lt;/th&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;String &lt;code&gt;PIPE&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Make stdin a pipe that can be written to. This is the default.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;String &lt;code&gt;NONE&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Inherit stdin from the parent process. This value is case-insensitive.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Path to a file&lt;/td&gt;
+&lt;td&gt;Open the specified file and use it as the stdin.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Any other string&lt;/td&gt;
+&lt;td&gt;Create a temporary file with the text as its content and use it as the stdin.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Any non-string value&lt;/td&gt;
+&lt;td&gt;Used as-is. Could be a file descriptor, stdout of another process, etc.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+&lt;p&gt;Values &lt;code&gt;PIPE&lt;/code&gt; and &lt;code&gt;NONE&lt;/code&gt; are internally mapped directly to &lt;code&gt;subprocess.PIPE&lt;/code&gt; and &lt;code&gt;None&lt;/code&gt;, respectively, when calling &lt;a href="https://docs.python.org/3/library/subprocess.html#subprocess.Popen"&gt;subprocess.Popen&lt;/a&gt;. The default behavior may change from &lt;code&gt;PIPE&lt;/code&gt; to &lt;code&gt;NONE&lt;/code&gt; in future releases. If you depend on the &lt;code&gt;PIPE&lt;/code&gt; behavior, it is a good idea to use it explicitly.&lt;/p&gt;
+&lt;p&gt;Examples:&lt;/p&gt;
+&lt;table border="1"&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href="#Run%20Process" class="name"&gt;Run Process&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;command&lt;/td&gt;
+&lt;td&gt;stdin=NONE&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href="#Run%20Process" class="name"&gt;Run Process&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;command&lt;/td&gt;
+&lt;td&gt;stdin=${CURDIR}/stdin.txt&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href="#Run%20Process" class="name"&gt;Run Process&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;command&lt;/td&gt;
+&lt;td&gt;stdin=Stdin as text.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+&lt;p&gt;The support to configure &lt;code&gt;stdin&lt;/code&gt; is new in Robot Framework 4.1.2.&lt;/p&gt;
 &lt;h3 id="Output encoding"&gt;Output encoding&lt;/h3&gt;
 &lt;p&gt;Executed commands are, by default, expected to write outputs to the &lt;a href="#Standard%20output%20and%20error%20streams" class="name"&gt;standard output and error streams&lt;/a&gt; using the encoding used by the system console. If the command uses some other encoding, that can be configured using the &lt;code&gt;output_encoding&lt;/code&gt; argument. This is especially useful on Windows where the console uses a different encoding than rest of the system, and many commands use the general system encoding instead of the console encoding.&lt;/p&gt;
 &lt;p&gt;The value used with the &lt;code&gt;output_encoding&lt;/code&gt; argument must be a valid encoding and must match the encoding actually used by the command. As a convenience, it is possible to use strings &lt;code&gt;CONSOLE&lt;/code&gt; and &lt;code&gt;SYSTEM&lt;/code&gt; to specify that the console or system encoding is used, respectively. If produced outputs use different encoding then configured, values got through the &lt;a href="#Result%20object" class="name"&gt;result object&lt;/a&gt; will be invalid.&lt;/p&gt;
@@ -215,8 +267,8 @@
 &lt;/tr&gt;
 &lt;/table&gt;
 &lt;h2 id="Active process"&gt;Active process&lt;/h2&gt;
-&lt;p&gt;The test library keeps record which of the started processes is currently active. By default it is latest process started with &lt;a href="#Start%20Process" class="name"&gt;Start Process&lt;/a&gt;, but &lt;a href="#Switch%20Process" class="name"&gt;Switch Process&lt;/a&gt; can be used to select a different one. Using &lt;a href="#Run%20Process" class="name"&gt;Run Process&lt;/a&gt; does not affect the active process.&lt;/p&gt;
-&lt;p&gt;The keywords that operate on started processes will use the active process by default, but it is possible to explicitly select a different process using the &lt;code&gt;handle&lt;/code&gt; argument. The handle can be the identifier returned by &lt;a href="#Start%20Process" class="name"&gt;Start Process&lt;/a&gt; or an &lt;code&gt;alias&lt;/code&gt; explicitly given to &lt;a href="#Start%20Process" class="name"&gt;Start Process&lt;/a&gt; or &lt;a href="#Run%20Process" class="name"&gt;Run Process&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;The library keeps record which of the started processes is currently active. By default it is the latest process started with &lt;a href="#Start%20Process" class="name"&gt;Start Process&lt;/a&gt;, but &lt;a href="#Switch%20Process" class="name"&gt;Switch Process&lt;/a&gt; can be used to activate a different process. Using &lt;a href="#Run%20Process" class="name"&gt;Run Process&lt;/a&gt; does not affect the active process.&lt;/p&gt;
+&lt;p&gt;The keywords that operate on started processes will use the active process by default, but it is possible to explicitly select a different process using the &lt;code&gt;handle&lt;/code&gt; argument. The handle can be an &lt;code&gt;alias&lt;/code&gt; explicitly given to &lt;a href="#Start%20Process" class="name"&gt;Start Process&lt;/a&gt; or the process object returned by it.&lt;/p&gt;
 &lt;h2 id="Result object"&gt;Result object&lt;/h2&gt;
 &lt;p&gt;&lt;a href="#Run%20Process" class="name"&gt;Run Process&lt;/a&gt;, &lt;a href="#Wait%20For%20Process" class="name"&gt;Wait For Process&lt;/a&gt; and &lt;a href="#Terminate%20Process" class="name"&gt;Terminate Process&lt;/a&gt; keywords return a result object that contains information about the process execution as its attributes. The same result object, or some of its attributes, can also be get using &lt;a href="#Get%20Process%20Result" class="name"&gt;Get Process Result&lt;/a&gt; keyword. Attributes available in the object are documented in the table below.&lt;/p&gt;
 &lt;table border="1"&gt;
@@ -353,7 +405,7 @@ Example
 <inits>
 </inits>
 <keywords>
-<kw name="Get Process Id" lineno="623">
+<kw name="Get Process Id" lineno="665">
 <arguments repr="handle=None">
 <arg kind="POSITIONAL_OR_NAMED" required="false" repr="handle=None">
 <name>handle</name>
@@ -362,10 +414,10 @@ Example
 </arguments>
 <doc>&lt;p&gt;Returns the process ID (pid) of the process as an integer.&lt;/p&gt;
 &lt;p&gt;If &lt;code&gt;handle&lt;/code&gt; is not given, uses the current &lt;a href="#Active%20process" class="name"&gt;active process&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;Notice that the pid is not the same as the handle returned by &lt;a href="#Start%20Process" class="name"&gt;Start Process&lt;/a&gt; that is used internally by this library.&lt;/p&gt;</doc>
+&lt;p&gt;Starting from Robot Framework 5.0, it is also possible to directly access the &lt;code&gt;pid&lt;/code&gt; attribute of the &lt;code&gt;subprocess.Popen&lt;/code&gt; object returned by &lt;a href="#Start%20Process" class="name"&gt;Start Process&lt;/a&gt; like &lt;code&gt;${process.pid}&lt;/code&gt;.&lt;/p&gt;</doc>
 <shortdoc>Returns the process ID (pid) of the process as an integer.</shortdoc>
 </kw>
-<kw name="Get Process Object" lineno="633">
+<kw name="Get Process Object" lineno="676">
 <arguments repr="handle=None">
 <arg kind="POSITIONAL_OR_NAMED" required="false" repr="handle=None">
 <name>handle</name>
@@ -373,10 +425,11 @@ Example
 </arg>
 </arguments>
 <doc>&lt;p&gt;Return the underlying &lt;code&gt;subprocess.Popen&lt;/code&gt; object.&lt;/p&gt;
-&lt;p&gt;If &lt;code&gt;handle&lt;/code&gt; is not given, uses the current &lt;a href="#Active%20process" class="name"&gt;active process&lt;/a&gt;.&lt;/p&gt;</doc>
+&lt;p&gt;If &lt;code&gt;handle&lt;/code&gt; is not given, uses the current &lt;a href="#Active%20process" class="name"&gt;active process&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Starting from Robot Framework 5.0, &lt;a href="#Start%20Process" class="name"&gt;Start Process&lt;/a&gt; returns the created &lt;code&gt;subprocess.Popen&lt;/code&gt; object, not a generic handle, making this keyword mostly redundant.&lt;/p&gt;</doc>
 <shortdoc>Return the underlying ``subprocess.Popen`` object.</shortdoc>
 </kw>
-<kw name="Get Process Result" lineno="640">
+<kw name="Get Process Result" lineno="687">
 <arguments repr="handle=None, rc=False, stdout=False, stderr=False, stdout_path=False, stderr_path=False">
 <arg kind="POSITIONAL_OR_NAMED" required="false" repr="handle=None">
 <name>handle</name>
@@ -516,7 +569,7 @@ Example
 &lt;p&gt;Although getting results of a previously executed process can be handy in general, the main use case for this keyword is returning results over the remote library interface. The remote interface does not support returning the whole result object, but individual attributes can be returned without problems.&lt;/p&gt;</doc>
 <shortdoc>Returns the specified `result object` or some of its attributes.</shortdoc>
 </kw>
-<kw name="Is Process Running" lineno="368">
+<kw name="Is Process Running" lineno="419">
 <arguments repr="handle=None">
 <arg kind="POSITIONAL_OR_NAMED" required="false" repr="handle=None">
 <name>handle</name>
@@ -528,7 +581,7 @@ Example
 &lt;p&gt;Returns &lt;code&gt;True&lt;/code&gt; if the process is still running and &lt;code&gt;False&lt;/code&gt; otherwise.&lt;/p&gt;</doc>
 <shortdoc>Checks is the process running or not.</shortdoc>
 </kw>
-<kw name="Join Command Line" lineno="736">
+<kw name="Join Command Line" lineno="783">
 <arguments repr="*args">
 <arg kind="VAR_POSITIONAL" required="false" repr="*args">
 <name>args</name>
@@ -554,7 +607,7 @@ Example
 &lt;/table&gt;</doc>
 <shortdoc>Joins arguments into one command line string.</shortdoc>
 </kw>
-<kw name="Process Should Be Running" lineno="377">
+<kw name="Process Should Be Running" lineno="428">
 <arguments repr="handle=None, error_message=Process is not running.">
 <arg kind="POSITIONAL_OR_NAMED" required="false" repr="handle=None">
 <name>handle</name>
@@ -570,7 +623,7 @@ Example
 &lt;p&gt;Fails if the process has stopped.&lt;/p&gt;</doc>
 <shortdoc>Verifies that the process is running.</shortdoc>
 </kw>
-<kw name="Process Should Be Stopped" lineno="388">
+<kw name="Process Should Be Stopped" lineno="439">
 <arguments repr="handle=None, error_message=Process is running.">
 <arg kind="POSITIONAL_OR_NAMED" required="false" repr="handle=None">
 <name>handle</name>
@@ -586,7 +639,7 @@ Example
 &lt;p&gt;Fails if the process is still running.&lt;/p&gt;</doc>
 <shortdoc>Verifies that the process is not running.</shortdoc>
 </kw>
-<kw name="Run Process" lineno="302">
+<kw name="Run Process" lineno="328">
 <arguments repr="command, *arguments, **configuration">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="command">
 <name>command</name>
@@ -644,7 +697,7 @@ Example
 &lt;p&gt;This keyword does not change the &lt;a href="#Active%20process" class="name"&gt;active process&lt;/a&gt;.&lt;/p&gt;</doc>
 <shortdoc>Runs a process and waits for it to complete.</shortdoc>
 </kw>
-<kw name="Send Signal To Process" lineno="569">
+<kw name="Send Signal To Process" lineno="612">
 <arguments repr="signal, handle=None, group=False">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="signal">
 <name>signal</name>
@@ -683,10 +736,10 @@ Example
 &lt;/table&gt;
 &lt;p&gt;This keyword is only supported on Unix-like machines, not on Windows. What signals are supported depends on the system. For a list of existing signals on your system, see the Unix man pages related to signal handling (typically &lt;code&gt;man signal&lt;/code&gt; or &lt;code&gt;man 7 signal&lt;/code&gt;).&lt;/p&gt;
 &lt;p&gt;By default sends the signal only to the parent process, not to possible child processes started by it. Notice that when &lt;a href="#Running%20processes%20in%20shell" class="name"&gt;running processes in shell&lt;/a&gt;, the shell is the parent process and it depends on the system does the shell propagate the signal to the actual started process.&lt;/p&gt;
-&lt;p&gt;To send the signal to the whole process group, &lt;code&gt;group&lt;/code&gt; argument can be set to any true value (see &lt;a href="#Boolean%20arguments" class="name"&gt;Boolean arguments&lt;/a&gt;). This is not supported by Jython, however.&lt;/p&gt;</doc>
+&lt;p&gt;To send the signal to the whole process group, &lt;code&gt;group&lt;/code&gt; argument can be set to any true value (see &lt;a href="#Boolean%20arguments" class="name"&gt;Boolean arguments&lt;/a&gt;).&lt;/p&gt;</doc>
 <shortdoc>Sends the given ``signal`` to the specified process.</shortdoc>
 </kw>
-<kw name="Split Command Line" lineno="721">
+<kw name="Split Command Line" lineno="768">
 <arguments repr="args, escaping=False">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="args">
 <name>args</name>
@@ -713,7 +766,7 @@ Example
 &lt;/table&gt;</doc>
 <shortdoc>Splits command line string into a list of arguments.</shortdoc>
 </kw>
-<kw name="Start Process" lineno="341">
+<kw name="Start Process" lineno="367">
 <arguments repr="command, *arguments, **configuration">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="command">
 <name>command</name>
@@ -727,11 +780,89 @@ Example
 </arguments>
 <doc>&lt;p&gt;Starts a new process on background.&lt;/p&gt;
 &lt;p&gt;See &lt;a href="#Specifying%20command%20and%20arguments" class="name"&gt;Specifying command and arguments&lt;/a&gt; and &lt;a href="#Process%20configuration" class="name"&gt;Process configuration&lt;/a&gt; for more information about the arguments, and &lt;a href="#Run%20Process" class="name"&gt;Run Process&lt;/a&gt; keyword for related examples.&lt;/p&gt;
-&lt;p&gt;Makes the started process new &lt;a href="#Active%20process" class="name"&gt;active process&lt;/a&gt;. Returns an identifier that can be used as a handle to activate the started process if needed.&lt;/p&gt;
-&lt;p&gt;Processes are started so that they create a new process group. This allows sending signals to and terminating also possible child processes. This is not supported on Jython.&lt;/p&gt;</doc>
+&lt;p&gt;Makes the started process new &lt;a href="#Active%20process" class="name"&gt;active process&lt;/a&gt;. Returns the created &lt;a href="https://docs.python.org/3/library/subprocess.html#popen-constructor"&gt;subprocess.Popen&lt;/a&gt; object which can be be used later to active this process. &lt;code&gt;Popen&lt;/code&gt; attributes like &lt;code&gt;pid&lt;/code&gt; can also be accessed directly.&lt;/p&gt;
+&lt;p&gt;Processes are started so that they create a new process group. This allows terminating and sending signals to possible child processes.&lt;/p&gt;
+&lt;p&gt;Examples:&lt;/p&gt;
+&lt;p&gt;Start process and wait for it to end later using alias:&lt;/p&gt;
+&lt;table border="1"&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href="#Start%20Process" class="name"&gt;Start Process&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;${command}&lt;/td&gt;
+&lt;td&gt;alias=example&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;# Other keywords&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;${result} =&lt;/td&gt;
+&lt;td&gt;&lt;a href="#Wait%20For%20Process" class="name"&gt;Wait For Process&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;example&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+&lt;p&gt;Use returned &lt;code&gt;Popen&lt;/code&gt; object:&lt;/p&gt;
+&lt;table border="1"&gt;
+&lt;tr&gt;
+&lt;td&gt;${process} =&lt;/td&gt;
+&lt;td&gt;&lt;a href="#Start%20Process" class="name"&gt;Start Process&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;${command}&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;span class="name"&gt;Log&lt;/span&gt;&lt;/td&gt;
+&lt;td&gt;PID: ${process.pid}&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;# Other keywords&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;${result} =&lt;/td&gt;
+&lt;td&gt;&lt;a href="#Terminate%20Process" class="name"&gt;Terminate Process&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;${process}&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+&lt;p&gt;Use started process in a pipeline with another process:&lt;/p&gt;
+&lt;table border="1"&gt;
+&lt;tr&gt;
+&lt;td&gt;${process} =&lt;/td&gt;
+&lt;td&gt;&lt;a href="#Start%20Process" class="name"&gt;Start Process&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;python&lt;/td&gt;
+&lt;td&gt;-c&lt;/td&gt;
+&lt;td&gt;print('Hello, world!')&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;${result} =&lt;/td&gt;
+&lt;td&gt;&lt;a href="#Run%20Process" class="name"&gt;Run Process&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;python&lt;/td&gt;
+&lt;td&gt;-c&lt;/td&gt;
+&lt;td&gt;import sys; print(sys.stdin.read().upper().strip())&lt;/td&gt;
+&lt;td&gt;stdin=${process.stdout}&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href="#Wait%20For%20Process" class="name"&gt;Wait For Process&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;${process}&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;span class="name"&gt;Should Be Equal&lt;/span&gt;&lt;/td&gt;
+&lt;td&gt;${result.stdout}&lt;/td&gt;
+&lt;td&gt;HELLO, WORLD!&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+&lt;p&gt;Returning a &lt;code&gt;subprocess.Popen&lt;/code&gt; object is new in Robot Framework 5.0. Earlier versions returned a generic handle and getting the process object required using &lt;a href="#Get%20Process%20Object" class="name"&gt;Get Process Object&lt;/a&gt; separately.&lt;/p&gt;</doc>
 <shortdoc>Starts a new process on background.</shortdoc>
 </kw>
-<kw name="Switch Process" lineno="699">
+<kw name="Switch Process" lineno="746">
 <arguments repr="handle">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="handle">
 <name>handle</name>
@@ -769,7 +900,7 @@ Example
 &lt;/table&gt;</doc>
 <shortdoc>Makes the specified process the current `active process`.</shortdoc>
 </kw>
-<kw name="Terminate All Processes" lineno="554">
+<kw name="Terminate All Processes" lineno="597">
 <arguments repr="kill=False">
 <arg kind="POSITIONAL_OR_NAMED" required="false" repr="kill=False">
 <name>kill</name>
@@ -781,7 +912,7 @@ Example
 &lt;p&gt;By default tries to terminate processes gracefully, but can be configured to forcefully kill them immediately. See &lt;a href="#Terminate%20Process" class="name"&gt;Terminate Process&lt;/a&gt; that this keyword uses internally for more details.&lt;/p&gt;</doc>
 <shortdoc>Terminates all still running processes started by this library.</shortdoc>
 </kw>
-<kw name="Terminate Process" lineno="479">
+<kw name="Terminate Process" lineno="530">
 <arguments repr="handle=None, kill=False">
 <arg kind="POSITIONAL_OR_NAMED" required="false" repr="handle=None">
 <name>handle</name>
@@ -821,13 +952,11 @@ Example
 &lt;/table&gt;
 &lt;p&gt;Limitations:&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;Graceful termination is not supported on Windows when using Jython. Process is killed instead.&lt;/li&gt;
-&lt;li&gt;Stopping the whole process group is not supported when using Jython.&lt;/li&gt;
 &lt;li&gt;On Windows forceful kill only stops the main process, not possible child processes.&lt;/li&gt;
 &lt;/ul&gt;</doc>
 <shortdoc>Stops the process gracefully or forcefully.</shortdoc>
 </kw>
-<kw name="Wait For Process" lineno="399">
+<kw name="Wait For Process" lineno="450">
 <arguments repr="handle=None, timeout=None, on_timeout=continue">
 <arg kind="POSITIONAL_OR_NAMED" required="false" repr="handle=None">
 <name>handle</name>
@@ -947,4 +1076,6 @@ Example
 </keywords>
 <datatypes>
 </datatypes>
+<typedocs>
+</typedocs>
 </keywordspec>

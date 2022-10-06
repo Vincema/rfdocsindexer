@@ -1,12 +1,13 @@
 {
+  "specversion": 1,
   "name": "LibModule1",
   "doc": "LibModule1 library",
   "version": "",
-  "generated": "2021-08-20 17:17:13",
+  "generated": "2022-10-07 00:00:29",
   "type": "LIBRARY",
   "scope": "TEST",
   "docFormat": "ROBOT",
-  "source": "/home/vc/Workspace/rfdocsindexer/tests/assets/libraries_dir_examples/libraries_dir_recursive/LibModule1/__init__.py",
+  "source": "/home/kali/Code/rfdocsindexer/tests/assets/libraries_dir_examples/libraries_dir_recursive/LibModule1/__init__.py",
   "lineno": 9,
   "tags": [],
   "inits": [],
@@ -17,7 +18,7 @@
       "doc": "",
       "shortdoc": "",
       "tags": [],
-      "source": "/home/vc/Workspace/rfdocsindexer/tests/assets/libraries_dir_examples/libraries_dir_recursive/LibModule1/__init__.py",
+      "source": "/home/kali/Code/rfdocsindexer/tests/assets/libraries_dir_examples/libraries_dir_recursive/LibModule1/__init__.py",
       "lineno": 24
     },
     {
@@ -26,7 +27,7 @@
       "doc": "",
       "shortdoc": "",
       "tags": [],
-      "source": "/home/vc/Workspace/rfdocsindexer/tests/assets/libraries_dir_examples/libraries_dir_recursive/LibModule1/__init__.py",
+      "source": "/home/kali/Code/rfdocsindexer/tests/assets/libraries_dir_examples/libraries_dir_recursive/LibModule1/__init__.py",
       "lineno": 16
     },
     {
@@ -37,6 +38,9 @@
           "types": [
             "str"
           ],
+          "typedocs": {
+            "str": "string"
+          },
           "defaultValue": null,
           "kind": "POSITIONAL_OR_NAMED",
           "required": true,
@@ -46,12 +50,25 @@
       "doc": "",
       "shortdoc": "",
       "tags": [],
-      "source": "/home/vc/Workspace/rfdocsindexer/tests/assets/libraries_dir_examples/libraries_dir_recursive/LibModule1/__init__.py",
+      "source": "/home/kali/Code/rfdocsindexer/tests/assets/libraries_dir_examples/libraries_dir_recursive/LibModule1/__init__.py",
       "lineno": 20
     }
   ],
   "dataTypes": {
     "enums": [],
     "typedDicts": []
-  }
+  },
+  "typedocs": [
+    {
+      "type": "Standard",
+      "name": "string",
+      "doc": "All arguments are converted to Unicode strings.",
+      "usages": [
+        "Keyword2"
+      ],
+      "accepts": [
+        "Any"
+      ]
+    }
+  ]
 }

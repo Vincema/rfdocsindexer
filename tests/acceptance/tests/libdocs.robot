@@ -5,7 +5,6 @@ Library             OperatingSystem
 Resource            cli.resource
 Resource            config.resource
 Resource            libdocs.resource
-Resource            testutils.resource
 
 Test Teardown       Clear Test Dir
 
@@ -172,6 +171,7 @@ Libdocs Content Should Be Valid
     ${libpecs_dirpath}=    Join Path    ${TEST_DIR}    ${DEFCLI_OUTPUT_DIRNAME}    ${LIBSPECS_DIRNAME}
     Validate Libdocs Content    ${libpecs_dirpath}    SPEC
 
+
 *** Keywords ***
 Stdout Should Contain Success Message After Ext Resources Added
     [Arguments]    ${result}
@@ -185,3 +185,4 @@ Validate Libdocs Content
     FOR    ${libdoc_path}    IN    @{libdoc_paths}
         Libdoc Should Be Valid    ${libdoc_path}
     END
+
