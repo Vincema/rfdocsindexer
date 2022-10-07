@@ -10,6 +10,10 @@ An HTML index is also generated to centralize the generated documentations.
 
 ![RFDocsIndexer Diagram](https://github.com/Vincema/rfdocsindexer/raw/main/docs/diagrams/rfdocsindexer_diagram.svg)
 
+Below is an overview of the HTML index generated. It makes it easy to navigate among external resources and keywords documentation.
+
+![Index File Overview](https://github.com/Vincema/rfdocsindexer/raw/main/docs/rfdocsindexer-overview.gif)
+
 ## Installing the tool
 
 Install from Pypi:
