@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "rfdocsindexer"
-version = "1.0.0"
+version = "1.1.0"
 description = "A simple and configurable generator for RobotFramework documentation"
 license = "Apache-2.0"
 authors = ["Vincent Maire <maire.vincent31@gmail.com>"]
