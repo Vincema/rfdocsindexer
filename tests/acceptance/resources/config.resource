@@ -4,8 +4,10 @@ Documentation       Keyword to manage configuration from RobotFramework
 Library             Collections
 Library             OperatingSystem
 
+
 *** Variables ***
 ${CREATE_CONFIGFILE__FILENAME}=     conf.toml
+
 
 *** Keywords ***
 Convert Dict To TOML Str
@@ -13,8 +15,7 @@ Convert Dict To TOML Str
     [Arguments]    ${values_dict}
 
     ${toml_str}=    Evaluate    toml.dumps(${values_dict})    modules=toml
-
-    [Return]    ${toml_str}
+    RETURN    ${toml_str}
 
 Create Configfile
     [Documentation]    Create a configfile from the given arguments.

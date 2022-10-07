@@ -8,6 +8,7 @@ Resource            libdocs.resource
 
 Test Teardown       Clear Test Dir
 
+
 *** Test Cases ***
 Command No Args Should Create Libdocs For Default Libs
     [Documentation]    Execute command without args.
@@ -38,10 +39,9 @@ Command Should Not Erase The Existing Dir Content
     ...    contains_machine_libdocs=${DEFCONF}[${SECTION_NAME}][build_machine_readable_libdoc]
 
     FOR    ${file}    IN    @{CREATE_DIR_NOT_EMPTY__FILES}
-
-        Should Exist    ${TEST_DIR}${/}custom_outputdir${/}${file}
+        Should Exist
+        ...    ${TEST_DIR}${/}custom_outputdir${/}${file}
         ...    msg=Content of the output dir should not be deleted ("${file}" missing in "${TEST_DIR}${/}custom_outputdir"")
-
     END
 
 Command Should Erase The Existing Subdirs Content
@@ -69,12 +69,14 @@ Command With library_paths And library_names Specified Should Generate Libdocs
 
     Run Command    configfile=${CREATE_CONFIGFILE__FILENAME}
 
-    Output Dir Structure Should Be Valid    output_dirname=${DEFCLI_OUTPUT_DIRNAME}
+    Output Dir Structure Should Be Valid
+    ...    output_dirname=${DEFCLI_OUTPUT_DIRNAME}
     ...    contains_machine_libdocs=${CONFIG_LIBDOCS_FOR_LIBRARY_PATHS_AND_NAMES}[${SECTION_NAME}][build_machine_readable_libdoc]
 
     ${expected_library_names}=    Create List    lib1    lib2    LibModule1    LibModule2.LibModule2CustomName
     ...    LibModule3
-    Libdocs Should Be Generated    @{expected_library_names}
+    Libdocs Should Be Generated
+    ...    @{expected_library_names}
     ...    check_machine_libdocs=${CONFIG_LIBDOCS_FOR_LIBRARY_PATHS_AND_NAMES}[${SECTION_NAME}][build_machine_readable_libdoc]
     ...    output_dirname=${DEFCLI_OUTPUT_DIRNAME}
 
@@ -115,9 +117,7 @@ Success Message Should Be Prompted For Each Generated Libdocs And At The End
 
     Stderr Should Be Empty    ${result}
     FOR    ${libname}    IN    @{RF_DEFAULT_LIBRARY_NAMES}
-
         Stdout Should Match Regex    ${result}    Generated doc for "${libname}"
-
     END
 
 Success Message Should Be Prompted At The Command End
@@ -156,7 +156,8 @@ Libdocs Content Should Be Valid
 
     Run Command    configfile=${CREATE_CONFIGFILE__FILENAME}
 
-    Output Dir Structure Should Be Valid    output_dirname=${DEFCLI_OUTPUT_DIRNAME}
+    Output Dir Structure Should Be Valid
+    ...    output_dirname=${DEFCLI_OUTPUT_DIRNAME}
     ...    contains_machine_libdocs=${CONFIG_LIBDOCS_2_LIBS_AND_RF_LIBS}[${SECTION_NAME}][build_machine_readable_libdoc]
 
     ${html_libdocs_dirpath}=    Join Path    ${TEST_DIR}    ${DEFCLI_OUTPUT_DIRNAME}    ${HTML_LIBDOCS_DIRNAME}
@@ -170,6 +171,7 @@ Libdocs Content Should Be Valid
 
     ${libpecs_dirpath}=    Join Path    ${TEST_DIR}    ${DEFCLI_OUTPUT_DIRNAME}    ${LIBSPECS_DIRNAME}
     Validate Libdocs Content    ${libpecs_dirpath}    SPEC
+
 
 *** Keywords ***
 Stdout Should Contain Success Message After Ext Resources Added

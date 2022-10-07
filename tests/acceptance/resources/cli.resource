@@ -5,14 +5,14 @@ Library             BuiltIn
 Library             Collections
 Library             Process
 
+
 *** Keywords ***
 Execute CLI
     [Documentation]    Execute the CLI "indexrfdocs". Return the result of the process.
     [Arguments]    @{args}
 
     ${result}=    Run Process    indexrfdocs    @{args}    cwd=${TEST_DIR}    output_encoding=UTF-8    shell=${True}
-
-    [Return]    ${result}
+    RETURN    ${result}
 
 Run Command
     [Documentation]    Run application from CLI. Return the result of the process.
@@ -33,8 +33,7 @@ Run Command
     IF    ${success_expected}
         Command Should Have Returned Without Error    ${result}
     END
-
-    [Return]    ${result}
+    RETURN    ${result}
 
 Command Should Have Returned Without Error
     [Documentation]    Check if the rc of the command is 0.
@@ -47,7 +46,9 @@ Command Should Have Returned With An Error
     [Documentation]    Check if the rc of the command is != 0.
     [Arguments]    ${result}
 
-    Should Not Be Equal As Integers    0    ${result.rc}
+    Should Not Be Equal As Integers
+    ...    0
+    ...    ${result.rc}
     ...    msg=Command RC should not be 0, got ${result.rc} with stdout "${result.stdout}" and stderr "${result.stderr}"
 
 Stdout Should Match Regex
