@@ -3,6 +3,7 @@ Documentation       Keywords to perform misc tests related operation.
 
 Library             OperatingSystem
 Library             String
+Library             Collections
 
 
 *** Variables ***
