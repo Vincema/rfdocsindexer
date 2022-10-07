@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<keywordspec name="Telnet" type="LIBRARY" format="HTML" scope="SUITE" generated="2021-08-20T15:17:14Z" specversion="3" source="../../../../.cache/pypoetry/virtualenvs/rfdocsindexer--g8aZv4K-py3.9/lib/python3.9/site-packages/robot/libraries/Telnet.py" lineno="36">
-<version>4.1</version>
-<doc>&lt;p&gt;A test library providing communication over Telnet connections.&lt;/p&gt;
+<keywordspec name="Telnet" type="LIBRARY" format="HTML" scope="SUITE" generated="2022-10-06T17:00:29Z" specversion="4" source="/home/kali/Code/rfdocsindexer/.tox/py39/lib/python3.9/site-packages/robot/libraries/Telnet.py" lineno="36">
+<version>5.0.1</version>
+<doc>&lt;p&gt;A library providing communication over Telnet connections.&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;Telnet&lt;/code&gt; is Robot Framework's standard library that makes it possible to connect to Telnet servers and execute commands on the opened connections.&lt;/p&gt;
 &lt;h3 id="Table of contents"&gt;Table of contents&lt;/h3&gt;
 &lt;ul&gt;
@@ -63,7 +63,7 @@
 &lt;/table&gt;
 &lt;h3 id="Encoding"&gt;Encoding&lt;/h3&gt;
 &lt;p&gt;To ease handling text containing non-ASCII characters, all written text is encoded and read text decoded by default. The default encoding is UTF-8 that works also with ASCII. Encoding can be disabled by using a special encoding value &lt;code&gt;NONE&lt;/code&gt;. This is mainly useful if you need to get the bytes received from the connection as-is.&lt;/p&gt;
-&lt;p&gt;Notice that when writing to the connection, only Unicode strings are encoded using the defined encoding. Byte strings are expected to be already encoded correctly. Notice also that normal text in test data is passed to the library as Unicode and you need to use variables to use bytes.&lt;/p&gt;
+&lt;p&gt;Notice that when writing to the connection, only Unicode strings are encoded using the defined encoding. Byte strings are expected to be already encoded correctly. Notice also that normal text in data is passed to the library as Unicode and you need to use variables to use bytes.&lt;/p&gt;
 &lt;p&gt;It is also possible to configure the error handler to use if encoding or decoding characters fails. Accepted values are the same that encode/decode functions in Python strings accept. In practice the following values are the most useful:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;code&gt;ignore&lt;/code&gt;: ignore characters that cannot be encoded (default)&lt;/li&gt;
@@ -185,7 +185,7 @@
 <tags>
 </tags>
 <inits>
-<init name="Init" lineno="281">
+<init name="__init__" lineno="281">
 <arguments repr="timeout=3 seconds, newline=CRLF, prompt=None, prompt_is_regexp=False, encoding=UTF-8, encoding_errors=ignore, default_log_level=INFO, window_size=None, environ_user=None, terminal_emulation=False, terminal_type=None, telnetlib_log_level=TRACE, connection_timeout=None">
 <arg kind="POSITIONAL_OR_NAMED" required="false" repr="timeout=3 seconds">
 <name>timeout</name>
@@ -318,11 +318,11 @@
 <arguments repr="">
 </arguments>
 <doc>&lt;p&gt;Closes all open connections and empties the connection cache.&lt;/p&gt;
-&lt;p&gt;If multiple connections are opened, this keyword should be used in a test or suite teardown to make sure that all connections are closed. It is not an error is some of the connections have already been closed by &lt;a href="#Close%20Connection" class="name"&gt;Close Connection&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;If multiple connections are opened, this keyword should be used in a test or suite teardown to make sure that all connections are closed. It is not an error if some of the connections have already been closed by &lt;a href="#Close%20Connection" class="name"&gt;Close Connection&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;After this keyword, new indexes returned by &lt;a href="#Open%20Connection" class="name"&gt;Open Connection&lt;/a&gt; keyword are reset to 1.&lt;/p&gt;</doc>
 <shortdoc>Closes all open connections and empties the connection cache.</shortdoc>
 </kw>
-<kw name="Close Connection" lineno="687">
+<kw name="Close Connection" lineno="686">
 <arguments repr="loglevel=None">
 <arg kind="POSITIONAL_OR_NAMED" required="false" repr="loglevel=None">
 <name>loglevel</name>
@@ -335,7 +335,7 @@
 &lt;p&gt;See &lt;a href="#Logging" class="name"&gt;Logging&lt;/a&gt; section for more information about log levels.&lt;/p&gt;</doc>
 <shortdoc>Closes the current Telnet connection.</shortdoc>
 </kw>
-<kw name="Execute Command" lineno="1056">
+<kw name="Execute Command" lineno="1054">
 <arguments repr="command, loglevel=None, strip_prompt=False">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="command">
 <name>command</name>
@@ -372,7 +372,7 @@
 &lt;p&gt;See &lt;a href="#Logging" class="name"&gt;Logging&lt;/a&gt; section for more information about log levels and &lt;a href="#Read%20Until%20Prompt" class="name"&gt;Read Until Prompt&lt;/a&gt; for more information about the &lt;code&gt;strip_prompt&lt;/code&gt; parameter.&lt;/p&gt;</doc>
 <shortdoc>Executes the given ``command`` and reads, logs, and returns everything until the prompt.</shortdoc>
 </kw>
-<kw name="Login" lineno="705">
+<kw name="Login" lineno="704">
 <arguments repr="username, password, login_prompt=login: \, password_prompt=Password: \, login_timeout=1 second, login_incorrect=Login incorrect">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="username">
 <name>username</name>
@@ -476,7 +476,7 @@
 &lt;p&gt;Possible already opened connections are cached and it is possible to switch back to them using &lt;a href="#Switch%20Connection" class="name"&gt;Switch Connection&lt;/a&gt; keyword. It is possible to switch either using explicitly given &lt;code&gt;alias&lt;/code&gt; or using index returned by this keyword. Indexing starts from 1 and is reset back to it by &lt;a href="#Close%20All%20Connections" class="name"&gt;Close All Connections&lt;/a&gt; keyword.&lt;/p&gt;</doc>
 <shortdoc>Opens a new Telnet connection to the given host and port.</shortdoc>
 </kw>
-<kw name="Read" lineno="875">
+<kw name="Read" lineno="874">
 <arguments repr="loglevel=None">
 <arg kind="POSITIONAL_OR_NAMED" required="false" repr="loglevel=None">
 <name>loglevel</name>
@@ -487,7 +487,7 @@
 &lt;p&gt;Read output is both returned and logged. See &lt;a href="#Logging" class="name"&gt;Logging&lt;/a&gt; section for more information about log levels.&lt;/p&gt;</doc>
 <shortdoc>Reads everything that is currently available in the output.</shortdoc>
 </kw>
-<kw name="Read Until" lineno="889">
+<kw name="Read Until" lineno="888">
 <arguments repr="expected, loglevel=None">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="expected">
 <name>expected</name>
@@ -502,7 +502,7 @@
 &lt;p&gt;See &lt;a href="#Logging" class="name"&gt;Logging&lt;/a&gt; section for more information about log levels. Use &lt;a href="#Read%20Until%20Regexp" class="name"&gt;Read Until Regexp&lt;/a&gt; if more complex matching is needed.&lt;/p&gt;</doc>
 <shortdoc>Reads output until ``expected`` text is encountered.</shortdoc>
 </kw>
-<kw name="Read Until Prompt" lineno="1011">
+<kw name="Read Until Prompt" lineno="1009">
 <arguments repr="loglevel=None, strip_prompt=False">
 <arg kind="POSITIONAL_OR_NAMED" required="false" repr="loglevel=None">
 <name>loglevel</name>
@@ -520,7 +520,7 @@
 &lt;p&gt;See &lt;a href="#Logging" class="name"&gt;Logging&lt;/a&gt; section for more information about log levels.&lt;/p&gt;</doc>
 <shortdoc>Reads output until the prompt is encountered.</shortdoc>
 </kw>
-<kw name="Read Until Regexp" lineno="973">
+<kw name="Read Until Regexp" lineno="972">
 <arguments repr="*expected">
 <arg kind="VAR_POSITIONAL" required="false" repr="*expected">
 <name>expected</name>
@@ -529,7 +529,7 @@
 <doc>&lt;p&gt;Reads output until any of the &lt;code&gt;expected&lt;/code&gt; regular expressions match.&lt;/p&gt;
 &lt;p&gt;This keyword accepts any number of regular expressions patterns or compiled Python regular expression objects as arguments. Text up to and including the first match to any of the regular expressions is returned and logged. If no match is found, this keyword fails. How much to wait for the output depends on the &lt;a href="#Configuration"&gt;configured timeout&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;If the last given argument is a &lt;a href="#Logging"&gt;valid log level&lt;/a&gt;, it is used as &lt;code&gt;loglevel&lt;/code&gt; similarly as with &lt;a href="#Read%20Until" class="name"&gt;Read Until&lt;/a&gt; keyword.&lt;/p&gt;
-&lt;p&gt;See the documentation of &lt;a href="http://docs.python.org/library/re.html"&gt;Python re module&lt;/a&gt; for more information about the supported regular expression syntax. Notice that possible backslashes need to be escaped in Robot Framework test data.&lt;/p&gt;
+&lt;p&gt;See the documentation of &lt;a href="http://docs.python.org/library/re.html"&gt;Python re module&lt;/a&gt; for more information about the supported regular expression syntax. Notice that possible backslashes need to be escaped in Robot Framework data.&lt;/p&gt;
 &lt;p&gt;Examples:&lt;/p&gt;
 &lt;table border="1"&gt;
 &lt;tr&gt;
@@ -550,7 +550,7 @@
 &lt;/table&gt;</doc>
 <shortdoc>Reads output until any of the ``expected`` regular expressions match.</shortdoc>
 </kw>
-<kw name="Set Default Log Level" lineno="661">
+<kw name="Set Default Log Level" lineno="660">
 <arguments repr="level">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="level">
 <name>level</name>
@@ -561,7 +561,7 @@
 &lt;p&gt;See &lt;a href="#Configuration" class="name"&gt;Configuration&lt;/a&gt; section for more information about global and connection specific configuration.&lt;/p&gt;</doc>
 <shortdoc>Sets the default log level used for `logging` in the current connection.</shortdoc>
 </kw>
-<kw name="Set Encoding" lineno="602">
+<kw name="Set Encoding" lineno="601">
 <arguments repr="encoding=None, errors=None">
 <arg kind="POSITIONAL_OR_NAMED" required="false" repr="encoding=None">
 <name>encoding</name>
@@ -625,11 +625,11 @@
 &lt;td&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/table&gt;
-&lt;p&gt;See the documentation of &lt;a href="http://docs.python.org/library/re.html"&gt;Python re module&lt;/a&gt; for more information about the supported regular expression syntax. Notice that possible backslashes need to be escaped in Robot Framework test data.&lt;/p&gt;
+&lt;p&gt;See the documentation of &lt;a href="http://docs.python.org/library/re.html"&gt;Python re module&lt;/a&gt; for more information about the supported regular expression syntax. Notice that possible backslashes need to be escaped in Robot Framework data.&lt;/p&gt;
 &lt;p&gt;See &lt;a href="#Configuration" class="name"&gt;Configuration&lt;/a&gt; section for more information about global and connection specific configuration.&lt;/p&gt;</doc>
 <shortdoc>Sets the prompt used by `Read Until Prompt` and `Login` in the current connection.</shortdoc>
 </kw>
-<kw name="Set Telnetlib Log Level" lineno="643">
+<kw name="Set Telnetlib Log Level" lineno="642">
 <arguments repr="level">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="level">
 <name>level</name>
@@ -773,7 +773,7 @@
 &lt;/table&gt;</doc>
 <shortdoc>Switches between active connections using an index or an alias.</shortdoc>
 </kw>
-<kw name="Write" lineno="760">
+<kw name="Write" lineno="759">
 <arguments repr="text, loglevel=None">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="text">
 <name>text</name>
@@ -790,7 +790,7 @@
 &lt;p&gt;See &lt;a href="#Logging" class="name"&gt;Logging&lt;/a&gt; section for more information about log levels.&lt;/p&gt;</doc>
 <shortdoc>Writes the given text plus a newline into the connection.</shortdoc>
 </kw>
-<kw name="Write Bare" lineno="790">
+<kw name="Write Bare" lineno="789">
 <arguments repr="text">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="text">
 <name>text</name>
@@ -800,7 +800,7 @@
 &lt;p&gt;This keyword does not append a newline nor consume the written text. Use &lt;a href="#Write" class="name"&gt;Write&lt;/a&gt; if these features are needed.&lt;/p&gt;</doc>
 <shortdoc>Writes the given text, and nothing else, into the connection.</shortdoc>
 </kw>
-<kw name="Write Control Character" lineno="836">
+<kw name="Write Control Character" lineno="835">
 <arguments repr="character">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="character">
 <name>character</name>
@@ -824,7 +824,7 @@
 &lt;/table&gt;</doc>
 <shortdoc>Writes the given control character into the connection.</shortdoc>
 </kw>
-<kw name="Write Until Expected Output" lineno="799">
+<kw name="Write Until Expected Output" lineno="798">
 <arguments repr="text, expected, timeout, retry_interval, loglevel=None">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="text">
 <name>text</name>
@@ -866,4 +866,6 @@
 </keywords>
 <datatypes>
 </datatypes>
+<typedocs>
+</typedocs>
 </keywordspec>

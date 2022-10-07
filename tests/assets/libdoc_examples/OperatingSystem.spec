@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<keywordspec name="OperatingSystem" type="LIBRARY" format="HTML" scope="GLOBAL" generated="2021-08-20T15:17:13Z" specversion="3" source="../../../../.cache/pypoetry/virtualenvs/rfdocsindexer--g8aZv4K-py3.9/lib/python3.9/site-packages/robot/libraries/OperatingSystem.py" lineno="39">
-<version>4.1</version>
-<doc>&lt;p&gt;A test library providing keywords for OS related tasks.&lt;/p&gt;
+<keywordspec name="OperatingSystem" type="LIBRARY" format="HTML" scope="GLOBAL" generated="2022-10-06T17:00:29Z" specversion="4" source="/home/kali/Code/rfdocsindexer/.tox/py39/lib/python3.9/site-packages/robot/libraries/OperatingSystem.py" lineno="37">
+<version>5.0.1</version>
+<doc>&lt;p&gt;A library providing keywords for operating system related tasks.&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;OperatingSystem&lt;/code&gt; is Robot Framework's standard library that enables various operating system related tasks to be performed in the system where Robot Framework is running. It can, among other things, execute commands (e.g. &lt;a href="#Run" class="name"&gt;Run&lt;/a&gt;), create and remove files and directories (e.g. &lt;a href="#Create%20File" class="name"&gt;Create File&lt;/a&gt;, &lt;a href="#Remove%20Directory" class="name"&gt;Remove Directory&lt;/a&gt;), check whether files or directories exists or contain something (e.g. &lt;a href="#File%20Should%20Exist" class="name"&gt;File Should Exist&lt;/a&gt;, &lt;a href="#Directory%20Should%20Be%20Empty" class="name"&gt;Directory Should Be Empty&lt;/a&gt;) and manipulate environment variables (e.g. &lt;a href="#Set%20Environment%20Variable" class="name"&gt;Set Environment Variable&lt;/a&gt;).&lt;/p&gt;
 &lt;h3 id="Table of contents"&gt;Table of contents&lt;/h3&gt;
 &lt;ul&gt;
@@ -13,10 +13,12 @@
 &lt;li&gt;&lt;a href="#Keywords" class="name"&gt;Keywords&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id="Path separators"&gt;Path separators&lt;/h2&gt;
-&lt;p&gt;Because Robot Framework uses the backslash (&lt;code&gt;\&lt;/code&gt;) as an escape character in the test data, using a literal backslash requires duplicating it like in &lt;code&gt;c:\\path\\file.txt&lt;/code&gt;. That can be inconvenient especially with longer Windows paths, and thus all keywords expecting paths as arguments convert forward slashes to backslashes automatically on Windows. This also means that paths like &lt;code&gt;${CURDIR}/path/file.txt&lt;/code&gt; are operating system independent.&lt;/p&gt;
-&lt;p&gt;Notice that the automatic path separator conversion does not work if the path is only a part of an argument like with &lt;a href="#Run" class="name"&gt;Run&lt;/a&gt; and &lt;span class="name"&gt;Start Process&lt;/span&gt; keywords. In these cases the built-in variable &lt;code&gt;${/}&lt;/code&gt; that contains &lt;code&gt;\&lt;/code&gt; or &lt;code&gt;/&lt;/code&gt;, depending on the operating system, can be used instead.&lt;/p&gt;
+&lt;p&gt;Because Robot Framework uses the backslash (&lt;code&gt;\&lt;/code&gt;) as an escape character in its data, using a literal backslash requires duplicating it like in &lt;code&gt;c:\\path\\file.txt&lt;/code&gt;. That can be inconvenient especially with longer Windows paths, and thus all keywords expecting paths as arguments convert forward slashes to backslashes automatically on Windows. This also means that paths like &lt;code&gt;${CURDIR}/path/file.txt&lt;/code&gt; are operating system independent.&lt;/p&gt;
+&lt;p&gt;Notice that the automatic path separator conversion does not work if the path is only a part of an argument like with the &lt;a href="#Run" class="name"&gt;Run&lt;/a&gt; keyword. In these cases the built-in variable &lt;code&gt;${/}&lt;/code&gt; that contains &lt;code&gt;\&lt;/code&gt; or &lt;code&gt;/&lt;/code&gt;, depending on the operating system, can be used instead.&lt;/p&gt;
 &lt;h2 id="Pattern matching"&gt;Pattern matching&lt;/h2&gt;
-&lt;p&gt;Some keywords allow their arguments to be specified as &lt;a href="http://en.wikipedia.org/wiki/Glob_(programming)"&gt;glob patterns&lt;/a&gt; where:&lt;/p&gt;
+&lt;p&gt;Many keywords accepts arguments as either &lt;i&gt;glob&lt;/i&gt; or &lt;i&gt;regular expression&lt;/i&gt; patterns.&lt;/p&gt;
+&lt;h3 id="Glob patterns"&gt;Glob patterns&lt;/h3&gt;
+&lt;p&gt;Some keywords, for example &lt;a href="#List%20Directory" class="name"&gt;List Directory&lt;/a&gt;, support so called &lt;a href="http://en.wikipedia.org/wiki/Glob_(programming)"&gt;glob patterns&lt;/a&gt; where:&lt;/p&gt;
 &lt;table border="1"&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;*&lt;/code&gt;&lt;/td&gt;
@@ -44,9 +46,11 @@
 &lt;/tr&gt;
 &lt;/table&gt;
 &lt;p&gt;Unless otherwise noted, matching is case-insensitive on case-insensitive operating systems such as Windows.&lt;/p&gt;
+&lt;h3 id="Regular expressions"&gt;Regular expressions&lt;/h3&gt;
+&lt;p&gt;Some keywords, for example &lt;a href="#Grep%20File" class="name"&gt;Grep File&lt;/a&gt;, support &lt;a href="http://en.wikipedia.org/wiki/Regular_expression"&gt;regular expressions&lt;/a&gt; that are more powerful but also more complicated that glob patterns. The regular expression support is implemented using Python's &lt;a href="http://docs.python.org/library/re.html"&gt;re module&lt;/a&gt; and its documentation should be consulted for more information about the syntax.&lt;/p&gt;
+&lt;p&gt;Because the backslash character (&lt;code&gt;\&lt;/code&gt;) is an escape character in Robot Framework data, possible backslash characters in regular expressions need to be escaped with another backslash like &lt;code&gt;\\d\\w+&lt;/code&gt;. Strings that may contain special characters but should be handled as literal strings, can be escaped with the &lt;span class="name"&gt;Regexp Escape&lt;/span&gt; keyword from the BuiltIn library.&lt;/p&gt;
 &lt;h2 id="Tilde expansion"&gt;Tilde expansion&lt;/h2&gt;
 &lt;p&gt;Paths beginning with &lt;code&gt;~&lt;/code&gt; or &lt;code&gt;~username&lt;/code&gt; are expanded to the current or specified user's home directory, respectively. The resulting path is operating system dependent, but typically e.g. &lt;code&gt;~/robot&lt;/code&gt; is expanded to &lt;code&gt;C:\Users\&amp;lt;user&amp;gt;\robot&lt;/code&gt; on Windows and &lt;code&gt;/home/&amp;lt;user&amp;gt;/robot&lt;/code&gt; on Unixes.&lt;/p&gt;
-&lt;p&gt;The &lt;code&gt;~username&lt;/code&gt; form does not work on Jython.&lt;/p&gt;
 &lt;h2 id="Boolean arguments"&gt;Boolean arguments&lt;/h2&gt;
 &lt;p&gt;Some keywords accept arguments that are handled as Boolean values true or false. If such an argument is given as a string, it is considered false if it is an empty string or equal to &lt;code&gt;FALSE&lt;/code&gt;, &lt;code&gt;NONE&lt;/code&gt;, &lt;code&gt;NO&lt;/code&gt;, &lt;code&gt;OFF&lt;/code&gt; or &lt;code&gt;0&lt;/code&gt;, case-insensitively. Other strings are considered true regardless their value, and other argument types are tested using the same &lt;a href="http://docs.python.org/library/stdtypes.html#truth"&gt;rules as in Python&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;True examples:&lt;/p&gt;
@@ -103,66 +107,26 @@
 &lt;td&gt;# Python &lt;code&gt;False&lt;/code&gt; is false.&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/table&gt;
-&lt;p&gt;Considering &lt;span class="name"&gt;OFF&lt;/span&gt;` and &lt;code&gt;0&lt;/code&gt; false is new in Robot Framework 3.1.&lt;/p&gt;
 &lt;h2 id="Example"&gt;Example&lt;/h2&gt;
-&lt;table border="1"&gt;
-&lt;tr&gt;
-&lt;th&gt;Setting&lt;/th&gt;
-&lt;th&gt;Value&lt;/th&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Library&lt;/td&gt;
-&lt;td&gt;OperatingSystem&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/table&gt;
-&lt;table border="1"&gt;
-&lt;tr&gt;
-&lt;th&gt;Variable&lt;/th&gt;
-&lt;th&gt;Value&lt;/th&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;${PATH}&lt;/td&gt;
-&lt;td&gt;${CURDIR}/example.txt&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/table&gt;
-&lt;table border="1"&gt;
-&lt;tr&gt;
-&lt;th&gt;Test Case&lt;/th&gt;
-&lt;th&gt;Action&lt;/th&gt;
-&lt;th&gt;Argument&lt;/th&gt;
-&lt;th&gt;Argument&lt;/th&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Example&lt;/td&gt;
-&lt;td&gt;Create File&lt;/td&gt;
-&lt;td&gt;${PATH}&lt;/td&gt;
-&lt;td&gt;Some text&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;td&gt;File Should Exist&lt;/td&gt;
-&lt;td&gt;${PATH}&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;td&gt;Copy File&lt;/td&gt;
-&lt;td&gt;${PATH}&lt;/td&gt;
-&lt;td&gt;~/file.txt&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;td&gt;${output} =&lt;/td&gt;
-&lt;td&gt;Run&lt;/td&gt;
-&lt;td&gt;${TEMPDIR}${/}script.py arg&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/table&gt;</doc>
+&lt;pre&gt;
+&lt;b&gt;***&lt;/b&gt; Settings &lt;b&gt;***&lt;/b&gt;
+Library         OperatingSystem
+
+&lt;b&gt;***&lt;/b&gt; Variables &lt;b&gt;***&lt;/b&gt;
+${PATH}         ${CURDIR}/example.txt
+
+&lt;b&gt;***&lt;/b&gt; Test Cases &lt;b&gt;***&lt;/b&gt;
+Example
+    &lt;a href="#Create%20File" class="name"&gt;Create File&lt;/a&gt;          ${PATH}    Some text
+    &lt;a href="#File%20Should%20Exist" class="name"&gt;File Should Exist&lt;/a&gt;    ${PATH}
+    &lt;a href="#Copy%20File" class="name"&gt;Copy File&lt;/a&gt;            ${PATH}    ~/file.txt
+&lt;/pre&gt;</doc>
 <tags>
 </tags>
 <inits>
 </inits>
 <keywords>
-<kw name="Append To Environment Variable" lineno="962">
+<kw name="Append To Environment Variable" lineno="970">
 <arguments repr="name, *values, **config">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="name">
 <name>name</name>
@@ -230,7 +194,7 @@
 &lt;/table&gt;</doc>
 <shortdoc>Appends given ``values`` to environment variable ``name``.</shortdoc>
 </kw>
-<kw name="Append To File" lineno="612">
+<kw name="Append To File" lineno="629">
 <arguments repr="path, content, encoding=UTF-8">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="path">
 <name>path</name>
@@ -245,11 +209,10 @@
 </arguments>
 <doc>&lt;p&gt;Appends the given content to the specified file.&lt;/p&gt;
 &lt;p&gt;If the file exists, the given text is written to its end. If the file does not exist, it is created.&lt;/p&gt;
-&lt;p&gt;Other than not overwriting possible existing files, this keyword works exactly like &lt;a href="#Create%20File" class="name"&gt;Create File&lt;/a&gt;. See its documentation for more details about the usage.&lt;/p&gt;
-&lt;p&gt;Note that special encodings &lt;code&gt;SYSTEM&lt;/code&gt; and &lt;code&gt;CONSOLE&lt;/code&gt; only work with this keyword starting from Robot Framework 3.1.2.&lt;/p&gt;</doc>
+&lt;p&gt;Other than not overwriting possible existing files, this keyword works exactly like &lt;a href="#Create%20File" class="name"&gt;Create File&lt;/a&gt;. See its documentation for more details about the usage.&lt;/p&gt;</doc>
 <shortdoc>Appends the given content to the specified file.</shortdoc>
 </kw>
-<kw name="Copy Directory" lineno="885">
+<kw name="Copy Directory" lineno="899">
 <arguments repr="source, destination">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="source">
 <name>source</name>
@@ -262,7 +225,7 @@
 &lt;p&gt;If the destination exists, the source is copied under it. Otherwise the destination directory and the possible missing intermediate directories are created.&lt;/p&gt;</doc>
 <shortdoc>Copies the source directory into the destination.</shortdoc>
 </kw>
-<kw name="Copy File" lineno="714">
+<kw name="Copy File" lineno="728">
 <arguments repr="source, destination">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="source">
 <name>source</name>
@@ -272,7 +235,7 @@
 </arg>
 </arguments>
 <doc>&lt;p&gt;Copies the source file into the destination.&lt;/p&gt;
-&lt;p&gt;Source must be a path to an existing file or a glob pattern (see &lt;a href="#Pattern%20matching" class="name"&gt;Pattern matching&lt;/a&gt;) that matches exactly one file. How the destination is interpreted is explained below.&lt;/p&gt;
+&lt;p&gt;Source must be a path to an existing file or a glob pattern (see &lt;a href="#Glob%20patterns" class="name"&gt;Glob patterns&lt;/a&gt;) that matches exactly one file. How the destination is interpreted is explained below.&lt;/p&gt;
 &lt;p&gt;1) If the destination is an existing file, the source file is copied over it.&lt;/p&gt;
 &lt;p&gt;2) If the destination is an existing directory, the source file is copied into it. A possible file with the same name as the source is overwritten.&lt;/p&gt;
 &lt;p&gt;3) If the destination does not exist and it ends with a path separator (&lt;code&gt;/&lt;/code&gt; or &lt;code&gt;\&lt;/code&gt;), it is considered a directory. That directory is created and a source file copied into it. Possible missing intermediate directories are also created.&lt;/p&gt;
@@ -281,14 +244,14 @@
 &lt;p&gt;See also &lt;a href="#Copy%20Files" class="name"&gt;Copy Files&lt;/a&gt;, &lt;a href="#Move%20File" class="name"&gt;Move File&lt;/a&gt;, and &lt;a href="#Move%20Files" class="name"&gt;Move Files&lt;/a&gt;.&lt;/p&gt;</doc>
 <shortdoc>Copies the source file into the destination.</shortdoc>
 </kw>
-<kw name="Copy Files" lineno="838">
+<kw name="Copy Files" lineno="852">
 <arguments repr="*sources_and_destination">
 <arg kind="VAR_POSITIONAL" required="false" repr="*sources_and_destination">
 <name>sources_and_destination</name>
 </arg>
 </arguments>
 <doc>&lt;p&gt;Copies specified files to the target directory.&lt;/p&gt;
-&lt;p&gt;Source files can be given as exact paths and as glob patterns (see &lt;a href="#Pattern%20matching" class="name"&gt;Pattern matching&lt;/a&gt;). At least one source must be given, but it is not an error if it is a pattern that does not match anything.&lt;/p&gt;
+&lt;p&gt;Source files can be given as exact paths and as glob patterns (see &lt;a href="#Glob%20patterns" class="name"&gt;Glob patterns&lt;/a&gt;). At least one source must be given, but it is not an error if it is a pattern that does not match anything.&lt;/p&gt;
 &lt;p&gt;Last argument must be the destination directory. If the destination does not exist, it will be created.&lt;/p&gt;
 &lt;p&gt;Examples:&lt;/p&gt;
 &lt;table border="1"&gt;
@@ -308,7 +271,7 @@
 &lt;p&gt;See also &lt;a href="#Copy%20File" class="name"&gt;Copy File&lt;/a&gt;, &lt;a href="#Move%20File" class="name"&gt;Move File&lt;/a&gt;, and &lt;a href="#Move%20Files" class="name"&gt;Move Files&lt;/a&gt;.&lt;/p&gt;</doc>
 <shortdoc>Copies specified files to the target directory.</shortdoc>
 </kw>
-<kw name="Count Directories In Directory" lineno="1350">
+<kw name="Count Directories In Directory" lineno="1357">
 <arguments repr="path, pattern=None">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="path">
 <name>path</name>
@@ -321,7 +284,7 @@
 <doc>&lt;p&gt;Wrapper for &lt;a href="#Count%20Items%20In%20Directory" class="name"&gt;Count Items In Directory&lt;/a&gt; returning only directory count.&lt;/p&gt;</doc>
 <shortdoc>Wrapper for `Count Items In Directory` returning only directory count.</shortdoc>
 </kw>
-<kw name="Count Files In Directory" lineno="1344">
+<kw name="Count Files In Directory" lineno="1351">
 <arguments repr="path, pattern=None">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="path">
 <name>path</name>
@@ -334,7 +297,7 @@
 <doc>&lt;p&gt;Wrapper for &lt;a href="#Count%20Items%20In%20Directory" class="name"&gt;Count Items In Directory&lt;/a&gt; returning only file count.&lt;/p&gt;</doc>
 <shortdoc>Wrapper for `Count Items In Directory` returning only file count.</shortdoc>
 </kw>
-<kw name="Count Items In Directory" lineno="1333">
+<kw name="Count Items In Directory" lineno="1340">
 <arguments repr="path, pattern=None">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="path">
 <name>path</name>
@@ -348,7 +311,7 @@
 &lt;p&gt;The argument &lt;code&gt;pattern&lt;/code&gt; has the same semantics as with &lt;a href="#List%20Directory" class="name"&gt;List Directory&lt;/a&gt; keyword. The count is returned as an integer, so it must be checked e.g. with the built-in keyword &lt;span class="name"&gt;Should Be Equal As Integers&lt;/span&gt;.&lt;/p&gt;</doc>
 <shortdoc>Returns and logs the number of all items in the given directory.</shortdoc>
 </kw>
-<kw name="Create Binary File" lineno="586">
+<kw name="Create Binary File" lineno="603">
 <arguments repr="path, content">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="path">
 <name>path</name>
@@ -377,7 +340,7 @@
 &lt;p&gt;Use &lt;a href="#Create%20File" class="name"&gt;Create File&lt;/a&gt; if you want to create a text file using a certain encoding. &lt;a href="#File%20Should%20Not%20Exist" class="name"&gt;File Should Not Exist&lt;/a&gt; can be used to avoid overwriting existing files.&lt;/p&gt;</doc>
 <shortdoc>Creates a binary file with the given content.</shortdoc>
 </kw>
-<kw name="Create Directory" lineno="672">
+<kw name="Create Directory" lineno="686">
 <arguments repr="path">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="path">
 <name>path</name>
@@ -387,7 +350,7 @@
 &lt;p&gt;Also possible intermediate directories are created. Passes if the directory already exists, but fails if the path exists and is not a directory.&lt;/p&gt;</doc>
 <shortdoc>Creates the specified directory.</shortdoc>
 </kw>
-<kw name="Create File" lineno="542">
+<kw name="Create File" lineno="566">
 <arguments repr="path, content=, encoding=UTF-8">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="path">
 <name>path</name>
@@ -426,11 +389,10 @@
 &lt;td&gt;SYSTEM&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/table&gt;
-&lt;p&gt;Use &lt;a href="#Append%20To%20File" class="name"&gt;Append To File&lt;/a&gt; if you want to append to an existing file and &lt;a href="#Create%20Binary%20File" class="name"&gt;Create Binary File&lt;/a&gt; if you need to write bytes without encoding. &lt;a href="#File%20Should%20Not%20Exist" class="name"&gt;File Should Not Exist&lt;/a&gt; can be used to avoid overwriting existing files.&lt;/p&gt;
-&lt;p&gt;Automatically converting &lt;code&gt;\n&lt;/code&gt; to &lt;code&gt;\r\n&lt;/code&gt; on Windows is new in Robot Framework 3.1.&lt;/p&gt;</doc>
+&lt;p&gt;Use &lt;a href="#Append%20To%20File" class="name"&gt;Append To File&lt;/a&gt; if you want to append to an existing file and &lt;a href="#Create%20Binary%20File" class="name"&gt;Create Binary File&lt;/a&gt; if you need to write bytes without encoding. &lt;a href="#File%20Should%20Not%20Exist" class="name"&gt;File Should Not Exist&lt;/a&gt; can be used to avoid overwriting existing files.&lt;/p&gt;</doc>
 <shortdoc>Creates a file with the given content and encoding.</shortdoc>
 </kw>
-<kw name="Directory Should Be Empty" lineno="489">
+<kw name="Directory Should Be Empty" lineno="513">
 <arguments repr="path, msg=None">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="path">
 <name>path</name>
@@ -444,7 +406,7 @@
 &lt;p&gt;The default error message can be overridden with the &lt;code&gt;msg&lt;/code&gt; argument.&lt;/p&gt;</doc>
 <shortdoc>Fails unless the specified directory is empty.</shortdoc>
 </kw>
-<kw name="Directory Should Exist" lineno="407">
+<kw name="Directory Should Exist" lineno="429">
 <arguments repr="path, msg=None">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="path">
 <name>path</name>
@@ -455,10 +417,11 @@
 </arg>
 </arguments>
 <doc>&lt;p&gt;Fails unless the given path points to an existing directory.&lt;/p&gt;
-&lt;p&gt;The path can be given as an exact path or as a glob pattern. The pattern matching syntax is explained in &lt;a href="#Introduction" class="name"&gt;introduction&lt;/a&gt;. The default error message can be overridden with the &lt;code&gt;msg&lt;/code&gt; argument.&lt;/p&gt;</doc>
+&lt;p&gt;The path can be given as an exact path or as a glob pattern. See the &lt;a href="#Glob%20patterns" class="name"&gt;Glob patterns&lt;/a&gt; section for details about the supported syntax.&lt;/p&gt;
+&lt;p&gt;The default error message can be overridden with the &lt;code&gt;msg&lt;/code&gt; argument.&lt;/p&gt;</doc>
 <shortdoc>Fails unless the given path points to an existing directory.</shortdoc>
 </kw>
-<kw name="Directory Should Not Be Empty" lineno="501">
+<kw name="Directory Should Not Be Empty" lineno="525">
 <arguments repr="path, msg=None">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="path">
 <name>path</name>
@@ -472,7 +435,7 @@
 &lt;p&gt;The default error message can be overridden with the &lt;code&gt;msg&lt;/code&gt; argument.&lt;/p&gt;</doc>
 <shortdoc>Fails if the specified directory is empty.</shortdoc>
 </kw>
-<kw name="Directory Should Not Exist" lineno="420">
+<kw name="Directory Should Not Exist" lineno="443">
 <arguments repr="path, msg=None">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="path">
 <name>path</name>
@@ -483,10 +446,11 @@
 </arg>
 </arguments>
 <doc>&lt;p&gt;Fails if the given path points to an existing file.&lt;/p&gt;
-&lt;p&gt;The path can be given as an exact path or as a glob pattern. The pattern matching syntax is explained in &lt;a href="#Introduction" class="name"&gt;introduction&lt;/a&gt;. The default error message can be overridden with the &lt;code&gt;msg&lt;/code&gt; argument.&lt;/p&gt;</doc>
+&lt;p&gt;The path can be given as an exact path or as a glob pattern. See the &lt;a href="#Glob%20patterns" class="name"&gt;Glob patterns&lt;/a&gt; section for details about the supported syntax.&lt;/p&gt;
+&lt;p&gt;The default error message can be overridden with the &lt;code&gt;msg&lt;/code&gt; argument.&lt;/p&gt;</doc>
 <shortdoc>Fails if the given path points to an existing file.</shortdoc>
 </kw>
-<kw name="Empty Directory" lineno="657">
+<kw name="Empty Directory" lineno="671">
 <arguments repr="path">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="path">
 <name>path</name>
@@ -496,7 +460,7 @@
 &lt;p&gt;Deletes both files and sub-directories, but the specified directory itself if not removed. Use &lt;a href="#Remove%20Directory" class="name"&gt;Remove Directory&lt;/a&gt; if you want to remove the whole directory.&lt;/p&gt;</doc>
 <shortdoc>Deletes all the content from the given directory.</shortdoc>
 </kw>
-<kw name="Environment Variable Should Be Set" lineno="1009">
+<kw name="Environment Variable Should Be Set" lineno="1017">
 <arguments repr="name, msg=None">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="name">
 <name>name</name>
@@ -510,7 +474,7 @@
 &lt;p&gt;The default error message can be overridden with the &lt;code&gt;msg&lt;/code&gt; argument.&lt;/p&gt;</doc>
 <shortdoc>Fails if the specified environment variable is not set.</shortdoc>
 </kw>
-<kw name="Environment Variable Should Not Be Set" lineno="1019">
+<kw name="Environment Variable Should Not Be Set" lineno="1027">
 <arguments repr="name, msg=None">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="name">
 <name>name</name>
@@ -524,7 +488,7 @@
 &lt;p&gt;The default error message can be overridden with the &lt;code&gt;msg&lt;/code&gt; argument.&lt;/p&gt;</doc>
 <shortdoc>Fails if the specified environment variable is set.</shortdoc>
 </kw>
-<kw name="File Should Be Empty" lineno="513">
+<kw name="File Should Be Empty" lineno="537">
 <arguments repr="path, msg=None">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="path">
 <name>path</name>
@@ -538,7 +502,7 @@
 &lt;p&gt;The default error message can be overridden with the &lt;code&gt;msg&lt;/code&gt; argument.&lt;/p&gt;</doc>
 <shortdoc>Fails unless the specified file is empty.</shortdoc>
 </kw>
-<kw name="File Should Exist" lineno="381">
+<kw name="File Should Exist" lineno="401">
 <arguments repr="path, msg=None">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="path">
 <name>path</name>
@@ -549,10 +513,11 @@
 </arg>
 </arguments>
 <doc>&lt;p&gt;Fails unless the given &lt;code&gt;path&lt;/code&gt; points to an existing file.&lt;/p&gt;
-&lt;p&gt;The path can be given as an exact path or as a glob pattern. The pattern matching syntax is explained in &lt;a href="#Introduction" class="name"&gt;introduction&lt;/a&gt;. The default error message can be overridden with the &lt;code&gt;msg&lt;/code&gt; argument.&lt;/p&gt;</doc>
+&lt;p&gt;The path can be given as an exact path or as a glob pattern. See the &lt;a href="#Glob%20patterns" class="name"&gt;Glob patterns&lt;/a&gt; section for details about the supported syntax.&lt;/p&gt;
+&lt;p&gt;The default error message can be overridden with the &lt;code&gt;msg&lt;/code&gt; argument.&lt;/p&gt;</doc>
 <shortdoc>Fails unless the given ``path`` points to an existing file.</shortdoc>
 </kw>
-<kw name="File Should Not Be Empty" lineno="527">
+<kw name="File Should Not Be Empty" lineno="551">
 <arguments repr="path, msg=None">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="path">
 <name>path</name>
@@ -562,11 +527,11 @@
 <default>None</default>
 </arg>
 </arguments>
-<doc>&lt;p&gt;Fails if the specified directory is empty.&lt;/p&gt;
+<doc>&lt;p&gt;Fails if the specified file is empty.&lt;/p&gt;
 &lt;p&gt;The default error message can be overridden with the &lt;code&gt;msg&lt;/code&gt; argument.&lt;/p&gt;</doc>
-<shortdoc>Fails if the specified directory is empty.</shortdoc>
+<shortdoc>Fails if the specified file is empty.</shortdoc>
 </kw>
-<kw name="File Should Not Exist" lineno="394">
+<kw name="File Should Not Exist" lineno="415">
 <arguments repr="path, msg=None">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="path">
 <name>path</name>
@@ -577,10 +542,11 @@
 </arg>
 </arguments>
 <doc>&lt;p&gt;Fails if the given path points to an existing file.&lt;/p&gt;
-&lt;p&gt;The path can be given as an exact path or as a glob pattern. The pattern matching syntax is explained in &lt;a href="#Introduction" class="name"&gt;introduction&lt;/a&gt;. The default error message can be overridden with the &lt;code&gt;msg&lt;/code&gt; argument.&lt;/p&gt;</doc>
+&lt;p&gt;The path can be given as an exact path or as a glob pattern. See the &lt;a href="#Glob%20patterns" class="name"&gt;Glob patterns&lt;/a&gt; section for details about the supported syntax.&lt;/p&gt;
+&lt;p&gt;The default error message can be overridden with the &lt;code&gt;msg&lt;/code&gt; argument.&lt;/p&gt;</doc>
 <shortdoc>Fails if the given path points to an existing file.</shortdoc>
 </kw>
-<kw name="Get Binary File" lineno="275">
+<kw name="Get Binary File" lineno="283">
 <arguments repr="path">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="path">
 <name>path</name>
@@ -590,7 +556,7 @@
 &lt;p&gt;This keyword reads the specified file and returns the contents as is. See also &lt;a href="#Get%20File" class="name"&gt;Get File&lt;/a&gt;.&lt;/p&gt;</doc>
 <shortdoc>Returns the contents of a specified file.</shortdoc>
 </kw>
-<kw name="Get Environment Variable" lineno="935">
+<kw name="Get Environment Variable" lineno="943">
 <arguments repr="name, default=None">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="name">
 <name>name</name>
@@ -601,19 +567,19 @@
 </arg>
 </arguments>
 <doc>&lt;p&gt;Returns the value of an environment variable with the given name.&lt;/p&gt;
-&lt;p&gt;If no such environment variable is set, returns the default value, if given. Otherwise fails the test case.&lt;/p&gt;
+&lt;p&gt;If no environment variable is found, returns possible default value. If no default value is given, the keyword fails.&lt;/p&gt;
 &lt;p&gt;Returned variables are automatically decoded to Unicode using the system encoding.&lt;/p&gt;
 &lt;p&gt;Note that you can also access environment variables directly using the variable syntax &lt;code&gt;%{ENV_VAR_NAME}&lt;/code&gt;.&lt;/p&gt;</doc>
 <shortdoc>Returns the value of an environment variable with the given name.</shortdoc>
 </kw>
-<kw name="Get Environment Variables" lineno="1030">
+<kw name="Get Environment Variables" lineno="1038">
 <arguments repr="">
 </arguments>
 <doc>&lt;p&gt;Returns currently available environment variables as a dictionary.&lt;/p&gt;
 &lt;p&gt;Both keys and values are decoded to Unicode using the system encoding. Altering the returned dictionary has no effect on the actual environment variables.&lt;/p&gt;</doc>
 <shortdoc>Returns currently available environment variables as a dictionary.</shortdoc>
 </kw>
-<kw name="Get File" lineno="229">
+<kw name="Get File" lineno="242">
 <arguments repr="path, encoding=UTF-8, encoding_errors=strict">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="path">
 <name>path</name>
@@ -642,7 +608,7 @@
 &lt;/ul&gt;</doc>
 <shortdoc>Returns the contents of a specified file.</shortdoc>
 </kw>
-<kw name="Get File Size" lineno="1281">
+<kw name="Get File Size" lineno="1287">
 <arguments repr="path">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="path">
 <name>path</name>
@@ -651,7 +617,7 @@
 <doc>&lt;p&gt;Returns and logs file size as an integer in bytes.&lt;/p&gt;</doc>
 <shortdoc>Returns and logs file size as an integer in bytes.</shortdoc>
 </kw>
-<kw name="Get Modified Time" lineno="1192">
+<kw name="Get Modified Time" lineno="1198">
 <arguments repr="path, format=timestamp">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="path">
 <name>path</name>
@@ -714,8 +680,8 @@
 &lt;/ul&gt;</doc>
 <shortdoc>Returns the last modification time of a file or directory.</shortdoc>
 </kw>
-<kw name="Grep File" lineno="286">
-<arguments repr="path, pattern, encoding=UTF-8, encoding_errors=strict">
+<kw name="Grep File" lineno="294">
+<arguments repr="path, pattern, encoding=UTF-8, encoding_errors=strict, regexp=False">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="path">
 <name>path</name>
 </arg>
@@ -730,10 +696,19 @@
 <name>encoding_errors</name>
 <default>strict</default>
 </arg>
+<arg kind="POSITIONAL_OR_NAMED" required="false" repr="regexp=False">
+<name>regexp</name>
+<default>False</default>
+</arg>
 </arguments>
 <doc>&lt;p&gt;Returns the lines of the specified file that match the &lt;code&gt;pattern&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;This keyword reads a file from the file system using the defined &lt;code&gt;path&lt;/code&gt;, &lt;code&gt;encoding&lt;/code&gt; and &lt;code&gt;encoding_errors&lt;/code&gt; similarly as &lt;a href="#Get%20File" class="name"&gt;Get File&lt;/a&gt;. A difference is that only the lines that match the given &lt;code&gt;pattern&lt;/code&gt; are returned. Lines are returned as a single string catenated back together with newlines and the number of matched lines is automatically logged. Possible trailing newline is never returned.&lt;/p&gt;
-&lt;p&gt;A line matches if it contains the &lt;code&gt;pattern&lt;/code&gt; anywhere in it and it &lt;b&gt;does not need to match the pattern fully&lt;/b&gt;. The pattern matching syntax is explained in &lt;a href="#Introduction" class="name"&gt;introduction&lt;/a&gt;, and in this case matching is case-sensitive.&lt;/p&gt;
+&lt;p&gt;This keyword reads a file from the file system using the defined &lt;code&gt;path&lt;/code&gt;, &lt;code&gt;encoding&lt;/code&gt; and &lt;code&gt;encoding_errors&lt;/code&gt; similarly as &lt;a href="#Get%20File" class="name"&gt;Get File&lt;/a&gt;. A difference is that only the lines that match the given &lt;code&gt;pattern&lt;/code&gt; are returned. Lines are returned as a single string concatenated back together with newlines and the number of matched lines is automatically logged. Possible trailing newline is never returned.&lt;/p&gt;
+&lt;p&gt;A line matches if it contains the &lt;code&gt;pattern&lt;/code&gt; anywhere in it i.e. it does not need to match the pattern fully. There are two supported pattern types:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;By default the pattern is considered a &lt;i&gt;glob&lt;/i&gt; pattern where, for example, &lt;code&gt;*&lt;/code&gt; and &lt;code&gt;?&lt;/code&gt; can be used as wildcards.&lt;/li&gt;
+&lt;li&gt;If the &lt;code&gt;regexp&lt;/code&gt; argument is given a true value, the pattern is considered to be a &lt;i&gt;regular expression&lt;/i&gt;. These patterns are more powerful but also more complicated than glob patterns. They often use the backslash character and it needs to be escaped in Robot Framework date like &lt;span class="name"&gt;\\&lt;/span&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;For more information about glob and regular expression syntax, see the &lt;a href="#Pattern%20matching" class="name"&gt;Pattern matching&lt;/a&gt; section. With this keyword matching is always case-sensitive.&lt;/p&gt;
 &lt;p&gt;Examples:&lt;/p&gt;
 &lt;table border="1"&gt;
 &lt;tr&gt;
@@ -741,19 +716,28 @@
 &lt;td&gt;Grep File&lt;/td&gt;
 &lt;td&gt;/var/log/myapp.log&lt;/td&gt;
 &lt;td&gt;ERROR&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;${ret} =&lt;/td&gt;
 &lt;td&gt;Grep File&lt;/td&gt;
 &lt;td&gt;${CURDIR}/file.txt&lt;/td&gt;
 &lt;td&gt;[Ww]ildc??d ex*ple&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;${ret} =&lt;/td&gt;
+&lt;td&gt;Grep File&lt;/td&gt;
+&lt;td&gt;${CURDIR}/file.txt&lt;/td&gt;
+&lt;td&gt;[Ww]ildc\\w+d ex.*ple&lt;/td&gt;
+&lt;td&gt;regexp=True&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/table&gt;
-&lt;p&gt;If more complex pattern matching is needed, it is possible to use &lt;a href="#Get%20File" class="name"&gt;Get File&lt;/a&gt; in combination with String library keywords like &lt;span class="name"&gt;Get Lines Matching Regexp&lt;/span&gt;.&lt;/p&gt;
-&lt;p&gt;This keyword supports special &lt;code&gt;SYSTEM&lt;/code&gt; and &lt;code&gt;CONSOLE&lt;/code&gt; encodings that &lt;a href="#Get%20File" class="name"&gt;Get File&lt;/a&gt; supports only with Robot Framework 4.0 and newer. When using Python 3, it is possible to use &lt;code&gt;${NONE}&lt;/code&gt; instead of &lt;code&gt;SYSTEM&lt;/code&gt; with earlier versions.&lt;/p&gt;</doc>
+&lt;p&gt;Special encoding values &lt;code&gt;SYSTEM&lt;/code&gt; and &lt;code&gt;CONSOLE&lt;/code&gt; that &lt;a href="#Get%20File" class="name"&gt;Get File&lt;/a&gt; supports are supported by this keyword only with Robot Framework 4.0 and newer.&lt;/p&gt;
+&lt;p&gt;Support for regular expressions is new in Robot Framework 5.0.&lt;/p&gt;</doc>
 <shortdoc>Returns the lines of the specified file that match the ``pattern``.</shortdoc>
 </kw>
-<kw name="Join Path" lineno="1052">
+<kw name="Join Path" lineno="1060">
 <arguments repr="base, *parts">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="base">
 <name>base</name>
@@ -817,7 +801,7 @@
 &lt;/ul&gt;</doc>
 <shortdoc>Joins the given path part(s) to the given base path.</shortdoc>
 </kw>
-<kw name="Join Paths" lineno="1076">
+<kw name="Join Paths" lineno="1084">
 <arguments repr="base, *paths">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="base">
 <name>base</name>
@@ -863,7 +847,7 @@
 &lt;/ul&gt;</doc>
 <shortdoc>Joins given paths with base and returns resulted paths.</shortdoc>
 </kw>
-<kw name="List Directories In Directory" lineno="1325">
+<kw name="List Directories In Directory" lineno="1332">
 <arguments repr="path, pattern=None, absolute=False">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="path">
 <name>path</name>
@@ -880,7 +864,7 @@
 <doc>&lt;p&gt;Wrapper for &lt;a href="#List%20Directory" class="name"&gt;List Directory&lt;/a&gt; that returns only directories.&lt;/p&gt;</doc>
 <shortdoc>Wrapper for `List Directory` that returns only directories.</shortdoc>
 </kw>
-<kw name="List Directory" lineno="1291">
+<kw name="List Directory" lineno="1297">
 <arguments repr="path, pattern=None, absolute=False">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="path">
 <name>path</name>
@@ -897,7 +881,7 @@
 <doc>&lt;p&gt;Returns and logs items in a directory, optionally filtered with &lt;code&gt;pattern&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;File and directory names are returned in case-sensitive alphabetical order, e.g. &lt;code&gt;['A Name', 'Second', 'a lower case name', 'one more']&lt;/code&gt;. Implicit directories &lt;code&gt;.&lt;/code&gt; and &lt;code&gt;..&lt;/code&gt; are not returned. The returned items are automatically logged.&lt;/p&gt;
 &lt;p&gt;File and directory names are returned relative to the given path (e.g. &lt;code&gt;'file.txt'&lt;/code&gt;) by default. If you want them be returned in absolute format (e.g. &lt;code&gt;'/home/robot/file.txt'&lt;/code&gt;), give the &lt;code&gt;absolute&lt;/code&gt; argument a true value (see &lt;a href="#Boolean%20arguments" class="name"&gt;Boolean arguments&lt;/a&gt;).&lt;/p&gt;
-&lt;p&gt;If &lt;code&gt;pattern&lt;/code&gt; is given, only items matching it are returned. The pattern matching syntax is explained in &lt;a href="#Introduction" class="name"&gt;introduction&lt;/a&gt;, and in this case matching is case-sensitive.&lt;/p&gt;
+&lt;p&gt;If &lt;code&gt;pattern&lt;/code&gt; is given, only items matching it are returned. The pattern is considered to be a &lt;i&gt;glob pattern&lt;/i&gt; and the full syntax is explained in the &lt;a href="#Glob%20patterns" class="name"&gt;Glob patterns&lt;/a&gt; section. With this keyword matching is always case-sensitive.&lt;/p&gt;
 &lt;p&gt;Examples (using also other &lt;a href="#List%20Directory" class="name"&gt;List Directory&lt;/a&gt; variants):&lt;/p&gt;
 &lt;table border="1"&gt;
 &lt;tr&gt;
@@ -924,7 +908,7 @@
 &lt;/table&gt;</doc>
 <shortdoc>Returns and logs items in a directory, optionally filtered with ``pattern``.</shortdoc>
 </kw>
-<kw name="List Files In Directory" lineno="1318">
+<kw name="List Files In Directory" lineno="1325">
 <arguments repr="path, pattern=None, absolute=False">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="path">
 <name>path</name>
@@ -941,7 +925,7 @@
 <doc>&lt;p&gt;Wrapper for &lt;a href="#List%20Directory" class="name"&gt;List Directory&lt;/a&gt; that returns only files.&lt;/p&gt;</doc>
 <shortdoc>Wrapper for `List Directory` that returns only files.</shortdoc>
 </kw>
-<kw name="Log Environment Variables" lineno="1039">
+<kw name="Log Environment Variables" lineno="1047">
 <arguments repr="level=INFO">
 <arg kind="POSITIONAL_OR_NAMED" required="false" repr="level=INFO">
 <name>level</name>
@@ -952,7 +936,7 @@
 &lt;p&gt;Environment variables are also returned the same way as with &lt;a href="#Get%20Environment%20Variables" class="name"&gt;Get Environment Variables&lt;/a&gt; keyword.&lt;/p&gt;</doc>
 <shortdoc>Logs all environment variables using the given log level.</shortdoc>
 </kw>
-<kw name="Log File" lineno="329">
+<kw name="Log File" lineno="347">
 <arguments repr="path, encoding=UTF-8, encoding_errors=strict">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="path">
 <name>path</name>
@@ -971,7 +955,7 @@
 &lt;p&gt;See &lt;a href="#Get%20File" class="name"&gt;Get File&lt;/a&gt; for more information about &lt;code&gt;encoding&lt;/code&gt; and &lt;code&gt;encoding_errors&lt;/code&gt; arguments.&lt;/p&gt;</doc>
 <shortdoc>Wrapper for `Get File` that also logs the returned file.</shortdoc>
 </kw>
-<kw name="Move Directory" lineno="920">
+<kw name="Move Directory" lineno="928">
 <arguments repr="source, destination">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="source">
 <name>source</name>
@@ -984,7 +968,7 @@
 &lt;p&gt;Uses &lt;a href="#Copy%20Directory" class="name"&gt;Copy Directory&lt;/a&gt; keyword internally, and &lt;code&gt;source&lt;/code&gt; and &lt;code&gt;destination&lt;/code&gt; arguments have exactly same semantics as with that keyword.&lt;/p&gt;</doc>
 <shortdoc>Moves the source directory into a destination.</shortdoc>
 </kw>
-<kw name="Move File" lineno="819">
+<kw name="Move File" lineno="833">
 <arguments repr="source, destination">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="source">
 <name>source</name>
@@ -999,7 +983,7 @@
 &lt;p&gt;See also &lt;a href="#Move%20Files" class="name"&gt;Move Files&lt;/a&gt;, &lt;a href="#Copy%20File" class="name"&gt;Copy File&lt;/a&gt;, and &lt;a href="#Copy%20Files" class="name"&gt;Copy Files&lt;/a&gt;.&lt;/p&gt;</doc>
 <shortdoc>Moves the source file into the destination.</shortdoc>
 </kw>
-<kw name="Move Files" lineno="873">
+<kw name="Move Files" lineno="887">
 <arguments repr="*sources_and_destination">
 <arg kind="VAR_POSITIONAL" required="false" repr="*sources_and_destination">
 <name>sources_and_destination</name>
@@ -1010,7 +994,7 @@
 &lt;p&gt;See also &lt;a href="#Move%20File" class="name"&gt;Move File&lt;/a&gt;, &lt;a href="#Copy%20File" class="name"&gt;Copy File&lt;/a&gt;, and &lt;a href="#Copy%20Files" class="name"&gt;Copy Files&lt;/a&gt;.&lt;/p&gt;</doc>
 <shortdoc>Moves specified files to the target directory.</shortdoc>
 </kw>
-<kw name="Normalize Path" lineno="1092">
+<kw name="Normalize Path" lineno="1100">
 <arguments repr="path, case_normalize=False">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="path">
 <name>path</name>
@@ -1024,8 +1008,8 @@
 &lt;ul&gt;
 &lt;li&gt;Collapses redundant separators and up-level references.&lt;/li&gt;
 &lt;li&gt;Converts &lt;code&gt;/&lt;/code&gt; to &lt;code&gt;\&lt;/code&gt; on Windows.&lt;/li&gt;
-&lt;li&gt;Replaces initial &lt;code&gt;~&lt;/code&gt; or &lt;code&gt;~user&lt;/code&gt; by that user's home directory. The latter is not supported on Jython.&lt;/li&gt;
-&lt;li&gt;If &lt;code&gt;case_normalize&lt;/code&gt; is given a true value (see &lt;a href="#Boolean%20arguments" class="name"&gt;Boolean arguments&lt;/a&gt;) on Windows, converts the path to all lowercase. New in Robot Framework 3.1.&lt;/li&gt;
+&lt;li&gt;Replaces initial &lt;code&gt;~&lt;/code&gt; or &lt;code&gt;~user&lt;/code&gt; by that user's home directory.&lt;/li&gt;
+&lt;li&gt;If &lt;code&gt;case_normalize&lt;/code&gt; is given a true value (see &lt;a href="#Boolean%20arguments" class="name"&gt;Boolean arguments&lt;/a&gt;) on Windows, converts the path to all lowercase.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;Examples:&lt;/p&gt;
 &lt;table border="1"&gt;
@@ -1060,7 +1044,7 @@
 &lt;p&gt;On Windows result would use &lt;code&gt;\&lt;/code&gt; instead of &lt;code&gt;/&lt;/code&gt; and home directory would be different.&lt;/p&gt;</doc>
 <shortdoc>Normalizes the given path.</shortdoc>
 </kw>
-<kw name="Remove Directory" lineno="688">
+<kw name="Remove Directory" lineno="702">
 <arguments repr="path, recursive=False">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="path">
 <name>path</name>
@@ -1075,7 +1059,7 @@
 &lt;p&gt;If the directory pointed to by the &lt;code&gt;path&lt;/code&gt; does not exist, the keyword passes, but it fails, if the &lt;code&gt;path&lt;/code&gt; points to a file.&lt;/p&gt;</doc>
 <shortdoc>Removes the directory pointed to by the given ``path``.</shortdoc>
 </kw>
-<kw name="Remove Environment Variable" lineno="994">
+<kw name="Remove Environment Variable" lineno="1002">
 <arguments repr="*names">
 <arg kind="VAR_POSITIONAL" required="false" repr="*names">
 <name>names</name>
@@ -1086,7 +1070,7 @@
 &lt;p&gt;It is possible to remove multiple variables by passing them to this keyword as separate arguments.&lt;/p&gt;</doc>
 <shortdoc>Deletes the specified environment variable.</shortdoc>
 </kw>
-<kw name="Remove File" lineno="628">
+<kw name="Remove File" lineno="642">
 <arguments repr="path">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="path">
 <name>path</name>
@@ -1094,10 +1078,10 @@
 </arguments>
 <doc>&lt;p&gt;Removes a file with the given path.&lt;/p&gt;
 &lt;p&gt;Passes if the file does not exist, but fails if the path does not point to a regular file (e.g. it points to a directory).&lt;/p&gt;
-&lt;p&gt;The path can be given as an exact path or as a glob pattern. The pattern matching syntax is explained in &lt;a href="#Introduction" class="name"&gt;introduction&lt;/a&gt;. If the path is a pattern, all files matching it are removed.&lt;/p&gt;</doc>
+&lt;p&gt;The path can be given as an exact path or as a glob pattern. See the &lt;a href="#Glob%20patterns" class="name"&gt;Glob patterns&lt;/a&gt; section for details about the supported syntax. If the path is a pattern, all files matching it are removed.&lt;/p&gt;</doc>
 <shortdoc>Removes a file with the given path.</shortdoc>
 </kw>
-<kw name="Remove Files" lineno="648">
+<kw name="Remove Files" lineno="662">
 <arguments repr="*paths">
 <arg kind="VAR_POSITIONAL" required="false" repr="*paths">
 <name>paths</name>
@@ -1115,7 +1099,7 @@
 &lt;/table&gt;</doc>
 <shortdoc>Uses `Remove File` to remove multiple files one-by-one.</shortdoc>
 </kw>
-<kw name="Run" lineno="135">
+<kw name="Run" lineno="148">
 <arguments repr="command">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="command">
 <name>command</name>
@@ -1166,7 +1150,7 @@
 &lt;p&gt;&lt;b&gt;TIP:&lt;/b&gt; &lt;span class="name"&gt;Run Process&lt;/span&gt; keyword provided by the &lt;a href="http://robotframework.org/robotframework/latest/libraries/Process.html"&gt;Process library&lt;/a&gt; supports better process configuration and is generally recommended as a replacement for this keyword.&lt;/p&gt;</doc>
 <shortdoc>Runs the given command in the system and returns the output.</shortdoc>
 </kw>
-<kw name="Run And Return Rc" lineno="173">
+<kw name="Run And Return Rc" lineno="186">
 <arguments repr="command">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="command">
 <name>command</name>
@@ -1201,7 +1185,7 @@
 &lt;p&gt;&lt;b&gt;TIP:&lt;/b&gt; &lt;span class="name"&gt;Run Process&lt;/span&gt; keyword provided by the &lt;a href="http://robotframework.org/robotframework/latest/libraries/Process.html"&gt;Process library&lt;/a&gt; supports better process configuration and is generally recommended as a replacement for this keyword.&lt;/p&gt;</doc>
 <shortdoc>Runs the given command in the system and returns the return code.</shortdoc>
 </kw>
-<kw name="Run And Return Rc And Output" lineno="200">
+<kw name="Run And Return Rc And Output" lineno="213">
 <arguments repr="command">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="command">
 <name>command</name>
@@ -1257,7 +1241,7 @@
 &lt;p&gt;&lt;b&gt;TIP:&lt;/b&gt; &lt;span class="name"&gt;Run Process&lt;/span&gt; keyword provided by the &lt;a href="http://robotframework.org/robotframework/latest/libraries/Process.html"&gt;Process library&lt;/a&gt; supports better process configuration and is generally recommended as a replacement for this keyword.&lt;/p&gt;</doc>
 <shortdoc>Runs the given command in the system and returns the RC and output.</shortdoc>
 </kw>
-<kw name="Set Environment Variable" lineno="952">
+<kw name="Set Environment Variable" lineno="960">
 <arguments repr="name, value">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="name">
 <name>name</name>
@@ -1270,7 +1254,7 @@
 &lt;p&gt;Values are converted to strings automatically. Set variables are automatically encoded using the system encoding.&lt;/p&gt;</doc>
 <shortdoc>Sets an environment variable to a specified value.</shortdoc>
 </kw>
-<kw name="Set Modified Time" lineno="1234">
+<kw name="Set Modified Time" lineno="1240">
 <arguments repr="path, mtime">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="path">
 <name>path</name>
@@ -1321,7 +1305,7 @@
 &lt;/table&gt;</doc>
 <shortdoc>Sets the file modification and access times.</shortdoc>
 </kw>
-<kw name="Should Exist" lineno="345">
+<kw name="Should Exist" lineno="363">
 <arguments repr="path, msg=None">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="path">
 <name>path</name>
@@ -1332,10 +1316,11 @@
 </arg>
 </arguments>
 <doc>&lt;p&gt;Fails unless the given path (file or directory) exists.&lt;/p&gt;
-&lt;p&gt;The path can be given as an exact path or as a glob pattern. The pattern matching syntax is explained in &lt;a href="#Introduction" class="name"&gt;introduction&lt;/a&gt;. The default error message can be overridden with the &lt;code&gt;msg&lt;/code&gt; argument.&lt;/p&gt;</doc>
+&lt;p&gt;The path can be given as an exact path or as a glob pattern. See the &lt;a href="#Glob%20patterns" class="name"&gt;Glob patterns&lt;/a&gt; section for details about the supported syntax.&lt;/p&gt;
+&lt;p&gt;The default error message can be overridden with the &lt;code&gt;msg&lt;/code&gt; argument.&lt;/p&gt;</doc>
 <shortdoc>Fails unless the given path (file or directory) exists.</shortdoc>
 </kw>
-<kw name="Should Not Exist" lineno="357">
+<kw name="Should Not Exist" lineno="376">
 <arguments repr="path, msg=None">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="path">
 <name>path</name>
@@ -1346,10 +1331,11 @@
 </arg>
 </arguments>
 <doc>&lt;p&gt;Fails if the given path (file or directory) exists.&lt;/p&gt;
-&lt;p&gt;The path can be given as an exact path or as a glob pattern. The pattern matching syntax is explained in &lt;a href="#Introduction" class="name"&gt;introduction&lt;/a&gt;. The default error message can be overridden with the &lt;code&gt;msg&lt;/code&gt; argument.&lt;/p&gt;</doc>
+&lt;p&gt;The path can be given as an exact path or as a glob pattern. See the &lt;a href="#Glob%20patterns" class="name"&gt;Glob patterns&lt;/a&gt; section for details about the supported syntax.&lt;/p&gt;
+&lt;p&gt;The default error message can be overridden with the &lt;code&gt;msg&lt;/code&gt; argument.&lt;/p&gt;</doc>
 <shortdoc>Fails if the given path (file or directory) exists.</shortdoc>
 </kw>
-<kw name="Split Extension" lineno="1145">
+<kw name="Split Extension" lineno="1151">
 <arguments repr="path">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="path">
 <name>path</name>
@@ -1407,7 +1393,7 @@
 &lt;/ul&gt;</doc>
 <shortdoc>Splits the extension from the given path.</shortdoc>
 </kw>
-<kw name="Split Path" lineno="1126">
+<kw name="Split Path" lineno="1132">
 <arguments repr="path">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="path">
 <name>path</name>
@@ -1444,7 +1430,7 @@
 &lt;/ul&gt;</doc>
 <shortdoc>Splits the given path from the last path separator (``/`` or ``\``).</shortdoc>
 </kw>
-<kw name="Touch" lineno="1378">
+<kw name="Touch" lineno="1385">
 <arguments repr="path">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="path">
 <name>path</name>
@@ -1455,7 +1441,7 @@
 &lt;p&gt;Fails if used with the directories or the parent directory of the given file does not exist.&lt;/p&gt;</doc>
 <shortdoc>Emulates the UNIX touch command.</shortdoc>
 </kw>
-<kw name="Wait Until Created" lineno="461">
+<kw name="Wait Until Created" lineno="485">
 <arguments repr="path, timeout=1 minute">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="path">
 <name>path</name>
@@ -1466,12 +1452,12 @@
 </arg>
 </arguments>
 <doc>&lt;p&gt;Waits until the given file or directory is created.&lt;/p&gt;
-&lt;p&gt;The path can be given as an exact path or as a glob pattern. The pattern matching syntax is explained in &lt;a href="#Introduction" class="name"&gt;introduction&lt;/a&gt;. If the path is a pattern, the keyword returns when an item matching it is created.&lt;/p&gt;
+&lt;p&gt;The path can be given as an exact path or as a glob pattern. See the &lt;a href="#Glob%20patterns" class="name"&gt;Glob patterns&lt;/a&gt; section for details about the supported syntax. If the path is a pattern, the keyword returns when an item matching it is created.&lt;/p&gt;
 &lt;p&gt;The optional &lt;code&gt;timeout&lt;/code&gt; can be used to control the maximum time of waiting. The timeout is given as a timeout string, e.g. in a format &lt;code&gt;15 seconds&lt;/code&gt;, &lt;code&gt;1min 10s&lt;/code&gt; or just &lt;code&gt;10&lt;/code&gt;. The time string format is described in an appendix of Robot Framework User Guide.&lt;/p&gt;
 &lt;p&gt;If the timeout is negative, the keyword is never timed-out. The keyword returns immediately, if the path already exists.&lt;/p&gt;</doc>
 <shortdoc>Waits until the given file or directory is created.</shortdoc>
 </kw>
-<kw name="Wait Until Removed" lineno="435">
+<kw name="Wait Until Removed" lineno="459">
 <arguments repr="path, timeout=1 minute">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="path">
 <name>path</name>
@@ -1482,7 +1468,7 @@
 </arg>
 </arguments>
 <doc>&lt;p&gt;Waits until the given file or directory is removed.&lt;/p&gt;
-&lt;p&gt;The path can be given as an exact path or as a glob pattern. The pattern matching syntax is explained in &lt;a href="#Introduction" class="name"&gt;introduction&lt;/a&gt;. If the path is a pattern, the keyword waits until all matching items are removed.&lt;/p&gt;
+&lt;p&gt;The path can be given as an exact path or as a glob pattern. See the &lt;a href="#Glob%20patterns" class="name"&gt;Glob patterns&lt;/a&gt; section for details about the supported syntax. If the path is a pattern, the keyword waits until all matching items are removed.&lt;/p&gt;
 &lt;p&gt;The optional &lt;code&gt;timeout&lt;/code&gt; can be used to control the maximum time of waiting. The timeout is given as a timeout string, e.g. in a format &lt;code&gt;15 seconds&lt;/code&gt;, &lt;code&gt;1min 10s&lt;/code&gt; or just &lt;code&gt;10&lt;/code&gt;. The time string format is described in an appendix of Robot Framework User Guide.&lt;/p&gt;
 &lt;p&gt;If the timeout is negative, the keyword is never timed-out. The keyword returns immediately, if the path does not exist in the first place.&lt;/p&gt;</doc>
 <shortdoc>Waits until the given file or directory is removed.</shortdoc>
@@ -1490,4 +1476,6 @@
 </keywords>
 <datatypes>
 </datatypes>
+<typedocs>
+</typedocs>
 </keywordspec>

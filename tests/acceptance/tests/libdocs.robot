@@ -5,7 +5,6 @@ Library             OperatingSystem
 Resource            cli.resource
 Resource            config.resource
 Resource            libdocs.resource
-Resource            testutils.resource
 
 Test Teardown       Clear Test Dir
 

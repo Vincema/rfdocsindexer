@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<keywordspec name="lib1" type="RESOURCE" format="HTML" scope="GLOBAL" generated="2021-08-20T15:17:13Z" specversion="3" source="../../tests/assets/libraries_dir_examples/libraries_dir_recursive/lib1.resource" lineno="1">
+<keywordspec name="lib1" type="RESOURCE" format="HTML" scope="GLOBAL" generated="2022-10-06T17:00:29Z" specversion="4" source="/home/kali/Code/rfdocsindexer/tests/assets/libraries_dir_examples/libraries_dir_recursive/lib1.resource" lineno="1">
 <version/>
 <doc>&lt;p&gt;An example resource file&lt;/p&gt;</doc>
 <tags>
@@ -34,4 +34,6 @@
 </keywords>
 <datatypes>
 </datatypes>
+<typedocs>
+</typedocs>
 </keywordspec>

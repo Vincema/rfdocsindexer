@@ -1,43 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<keywordspec name="Screenshot" type="LIBRARY" format="ROBOT" scope="SUITE" generated="2021-08-20T15:17:13Z" specversion="3" source="../../../../.cache/pypoetry/virtualenvs/rfdocsindexer--g8aZv4K-py3.9/lib/python3.9/site-packages/robot/libraries/Screenshot.py" lineno="51">
-<version>4.1</version>
-<doc>Test library for taking screenshots on the machine where tests are run.
+<keywordspec name="Screenshot" type="LIBRARY" format="ROBOT" scope="SUITE" generated="2022-10-06T16:55:18Z" specversion="4" source="/home/kali/Code/rfdocsindexer/.tox/py39/lib/python3.9/site-packages/robot/libraries/Screenshot.py" lineno="39">
+<version>5.0.1</version>
+<doc>Library for taking screenshots on the machine where tests are executed.
 
-Notice that successfully taking screenshots requires tests to be run with
-a physical or virtual display.
+Taking the actual screenshot requires a suitable tool or module that may
+need to be installed separately. Taking screenshots also requires tests
+to be run with a physical or virtual display.
 
 == Table of contents ==
 
-- `Using with Python`
-- `Using with Jython and IronPython`
+- `Supported screenshot taking tools and modules`
 - `Where screenshots are saved`
 - `ScreenCapLibrary`
 - `Importing`
 - `Keywords`
 
-= Using with Python =
+= Supported screenshot taking tools and modules =
 
-How screenshots are taken when using Python depends on the operating
-system. On OSX screenshots are taken using the built-in ``screencapture``
-utility. On other operating systems you need to have one of the following
-tools or Python modules installed. You can specify the tool/module to use
-when `importing` the library. If no tool or module is specified, the first
+How screenshots are taken depends on the operating system. On OSX
+screenshots are taken using the built-in ``screencapture`` utility. On
+other operating systems you need to have one of the following tools or
+Python modules installed. You can specify the tool/module to use when
+`importing` the library. If no tool or module is specified, the first
 one found will be used.
 
-- wxPython :: http://wxpython.org :: Required also by RIDE so many Robot
-  Framework users already have this module installed.
+- wxPython :: http://wxpython.org :: Generic Python GUI toolkit.
 - PyGTK :: http://pygtk.org :: This module is available by default on most
   Linux distributions.
 - Pillow :: http://python-pillow.github.io ::
   Only works on Windows. Also the original PIL package is supported.
 - Scrot :: http://en.wikipedia.org/wiki/Scrot :: Not used on Windows.
   Install with ``apt-get install scrot`` or similar.
-
-= Using with Jython and IronPython =
-
-With Jython and IronPython this library uses APIs provided by JVM and .NET
-platforms, respectively. These APIs are always available and thus no
-external modules are needed.
 
 = Where screenshots are saved =
 
@@ -59,7 +52,7 @@ quality, using GIFs and video capturing.</doc>
 <tags>
 </tags>
 <inits>
-<init name="Init" lineno="107">
+<init name="__init__" lineno="89">
 <arguments repr="screenshot_directory=None, screenshot_module=None">
 <arg kind="POSITIONAL_OR_NAMED" required="false" repr="screenshot_directory=None">
 <name>screenshot_directory</name>
@@ -77,12 +70,11 @@ same directory as the log file. The directory can also be set using
 `Set Screenshot Directory` keyword.
 
 ``screenshot_module`` specifies the module or tool to use when using
-this library on Python outside OSX. Possible values are ``wxPython``,
+this library outside OSX. Possible values are ``wxPython``,
 ``PyGTK``, ``PIL`` and ``scrot``, case-insensitively. If no value is
-given, the first module/tool found is used in that order. See `Using
-with Python` for more information.
+given, the first module/tool found is used in that order.
 
-Examples (use only one of these):
+Examples:
 | =Setting= |  =Value=   |  =Value=   |
 | Library   | Screenshot |            |
 | Library   | Screenshot | ${TEMPDIR} |
@@ -91,7 +83,7 @@ Examples (use only one of these):
 </init>
 </inits>
 <keywords>
-<kw name="Set Screenshot Directory" lineno="146">
+<kw name="Set Screenshot Directory" lineno="127">
 <arguments repr="path">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="path">
 <name>path</name>
@@ -105,7 +97,7 @@ systems. Path to the old directory is returned.
 The directory can also be set in `importing`.</doc>
 <shortdoc>Sets the directory where screenshots are saved.</shortdoc>
 </kw>
-<kw name="Take Screenshot" lineno="161">
+<kw name="Take Screenshot" lineno="142">
 <arguments repr="name=screenshot, width=800px">
 <arg kind="POSITIONAL_OR_NAMED" required="false" repr="name=screenshot">
 <name>name</name>
@@ -141,7 +133,7 @@ Examples: (LOGDIR is determined automatically by the library)
 The path where the screenshot is saved is returned.</doc>
 <shortdoc>Takes a screenshot in JPEG format and embeds it into the log file.</shortdoc>
 </kw>
-<kw name="Take Screenshot Without Embedding" lineno="190">
+<kw name="Take Screenshot Without Embedding" lineno="171">
 <arguments repr="name=screenshot">
 <arg kind="POSITIONAL_OR_NAMED" required="false" repr="name=screenshot">
 <name>name</name>
@@ -158,4 +150,6 @@ so it is nevertheless easily available.</doc>
 </keywords>
 <datatypes>
 </datatypes>
+<typedocs>
+</typedocs>
 </keywordspec>

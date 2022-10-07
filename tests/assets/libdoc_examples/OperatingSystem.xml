@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<keywordspec name="OperatingSystem" type="LIBRARY" format="ROBOT" scope="GLOBAL" generated="2021-08-20T15:17:13Z" specversion="3" source="../../../../.cache/pypoetry/virtualenvs/rfdocsindexer--g8aZv4K-py3.9/lib/python3.9/site-packages/robot/libraries/OperatingSystem.py" lineno="39">
-<version>4.1</version>
-<doc>A test library providing keywords for OS related tasks.
+<keywordspec name="OperatingSystem" type="LIBRARY" format="ROBOT" scope="GLOBAL" generated="2022-10-06T16:55:18Z" specversion="4" source="/home/kali/Code/rfdocsindexer/.tox/py39/lib/python3.9/site-packages/robot/libraries/OperatingSystem.py" lineno="37">
+<version>5.0.1</version>
+<doc>A library providing keywords for operating system related tasks.
 
 ``OperatingSystem`` is Robot Framework's standard library that
 enables various operating system related tasks to be performed in
@@ -24,7 +24,7 @@ manipulate environment variables (e.g. `Set Environment Variable`).
 = Path separators =
 
 Because Robot Framework uses the backslash (``\``) as an escape character
-in the test data, using a literal backslash requires duplicating it like
+in its data, using a literal backslash requires duplicating it like
 in ``c:\\path\\file.txt``. That can be inconvenient especially with
 longer Windows paths, and thus all keywords expecting paths as arguments
 convert forward slashes to backslashes automatically on Windows. This also
@@ -32,13 +32,17 @@ means that paths like ``${CURDIR}/path/file.txt`` are operating system
 independent.
 
 Notice that the automatic path separator conversion does not work if
-the path is only a part of an argument like with `Run` and `Start Process`
-keywords. In these cases the built-in variable ``${/}`` that contains
-``\`` or ``/``, depending on the operating system, can be used instead.
+the path is only a part of an argument like with the `Run` keyword.
+In these cases the built-in variable ``${/}`` that contains ``\`` or ``/``,
+depending on the operating system, can be used instead.
 
 = Pattern matching =
 
-Some keywords allow their arguments to be specified as
+Many keywords accepts arguments as either _glob_ or _regular expression_ patterns.
+
+== Glob patterns ==
+
+Some keywords, for example `List Directory`, support so called
 [http://en.wikipedia.org/wiki/Glob_(programming)|glob patterns] where:
 
 | ``*``        | matches any string, even an empty string                |
@@ -48,18 +52,31 @@ Some keywords allow their arguments to be specified as
 | ``[a-z]``    | matches one character from the range in the bracket     |
 | ``[!a-z]``   | matches one character not from the range in the bracket |
 
-Unless otherwise noted, matching is case-insensitive on
-case-insensitive operating systems such as Windows.
+Unless otherwise noted, matching is case-insensitive on case-insensitive
+operating systems such as Windows.
+
+== Regular expressions ==
+
+Some keywords, for example `Grep File`, support
+[http://en.wikipedia.org/wiki/Regular_expression|regular expressions]
+that are more powerful but also more complicated that glob patterns.
+The regular expression support is implemented using Python's
+[http://docs.python.org/library/re.html|re module] and its documentation
+should be consulted for more information about the syntax.
+
+Because the backslash character (``\``) is an escape character in
+Robot Framework data, possible backslash characters in regular
+expressions need to be escaped with another backslash like ``\\d\\w+``.
+Strings that may contain special characters but should be handled
+as literal strings, can be escaped with the `Regexp Escape` keyword
+from the BuiltIn library.
 
 = Tilde expansion =
 
 Paths beginning with ``~`` or ``~username`` are expanded to the current or
 specified user's home directory, respectively. The resulting path is
 operating system dependent, but typically e.g. ``~/robot`` is expanded to
-``C:\Users\&lt;user&gt;\robot`` on Windows and ``/home/&lt;user&gt;/robot`` on
-Unixes.
-
-The ``~username`` form does not work on Jython.
+``C:\Users\&lt;user&gt;\robot`` on Windows and ``/home/&lt;user&gt;/robot`` on Unixes.
 
 = Boolean arguments =
 
@@ -82,27 +99,25 @@ False examples:
 | `Remove Directory` | ${path} | recursive=${EMPTY} | # Empty string is false.       |
 | `Remove Directory` | ${path} | recursive=${FALSE} | # Python ``False`` is false.   |
 
-Considering `OFF`` and ``0`` false is new in Robot Framework 3.1.
-
 = Example =
 
-|  =Setting=  |     =Value=     |
-| Library     | OperatingSystem |
-
-| =Variable=  |       =Value=         |
-| ${PATH}     | ${CURDIR}/example.txt |
-
-| =Test Case= |     =Action=      | =Argument= |    =Argument=        |
-| Example     | Create File       | ${PATH}    | Some text            |
-|             | File Should Exist | ${PATH}    |                      |
-|             | Copy File         | ${PATH}    | ~/file.txt           |
-|             | ${output} =       | Run | ${TEMPDIR}${/}script.py arg |</doc>
+| ***** Settings *****
+| Library         OperatingSystem
+|
+| ***** Variables *****
+| ${PATH}         ${CURDIR}/example.txt
+|
+| ***** Test Cases *****
+| Example
+|     `Create File`          ${PATH}    Some text
+|     `File Should Exist`    ${PATH}
+|     `Copy File`            ${PATH}    ~/file.txt</doc>
 <tags>
 </tags>
 <inits>
 </inits>
 <keywords>
-<kw name="Append To Environment Variable" lineno="962">
+<kw name="Append To Environment Variable" lineno="970">
 <arguments repr="name, *values, **config">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="name">
 <name>name</name>
@@ -135,7 +150,7 @@ Examples (assuming ``NAME`` and ``NAME2`` do not exist initially):
 | Should Be Equal                | %{NAME2} | first-second             |</doc>
 <shortdoc>Appends given ``values`` to environment variable ``name``.</shortdoc>
 </kw>
-<kw name="Append To File" lineno="612">
+<kw name="Append To File" lineno="629">
 <arguments repr="path, content, encoding=UTF-8">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="path">
 <name>path</name>
@@ -155,13 +170,10 @@ does not exist, it is created.
 
 Other than not overwriting possible existing files, this keyword works
 exactly like `Create File`. See its documentation for more details
-about the usage.
-
-Note that special encodings ``SYSTEM`` and ``CONSOLE`` only work
-with this keyword starting from Robot Framework 3.1.2.</doc>
+about the usage.</doc>
 <shortdoc>Appends the given content to the specified file.</shortdoc>
 </kw>
-<kw name="Copy Directory" lineno="885">
+<kw name="Copy Directory" lineno="899">
 <arguments repr="source, destination">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="source">
 <name>source</name>
@@ -177,7 +189,7 @@ the destination directory and the possible missing intermediate
 directories are created.</doc>
 <shortdoc>Copies the source directory into the destination.</shortdoc>
 </kw>
-<kw name="Copy File" lineno="714">
+<kw name="Copy File" lineno="728">
 <arguments repr="source, destination">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="source">
 <name>source</name>
@@ -189,7 +201,7 @@ directories are created.</doc>
 <doc>Copies the source file into the destination.
 
 Source must be a path to an existing file or a glob pattern (see
-`Pattern matching`) that matches exactly one file. How the
+`Glob patterns`) that matches exactly one file. How the
 destination is interpreted is explained below.
 
 1) If the destination is an existing file, the source file is copied
@@ -213,7 +225,7 @@ The resulting destination path is returned.
 See also `Copy Files`, `Move File`, and `Move Files`.</doc>
 <shortdoc>Copies the source file into the destination.</shortdoc>
 </kw>
-<kw name="Copy Files" lineno="838">
+<kw name="Copy Files" lineno="852">
 <arguments repr="*sources_and_destination">
 <arg kind="VAR_POSITIONAL" required="false" repr="*sources_and_destination">
 <name>sources_and_destination</name>
@@ -222,7 +234,7 @@ See also `Copy Files`, `Move File`, and `Move Files`.</doc>
 <doc>Copies specified files to the target directory.
 
 Source files can be given as exact paths and as glob patterns (see
-`Pattern matching`). At least one source must be given, but it is
+`Glob patterns`). At least one source must be given, but it is
 not an error if it is a pattern that does not match anything.
 
 Last argument must be the destination directory. If the destination
@@ -235,7 +247,7 @@ Examples:
 See also `Copy File`, `Move File`, and `Move Files`.</doc>
 <shortdoc>Copies specified files to the target directory.</shortdoc>
 </kw>
-<kw name="Count Directories In Directory" lineno="1350">
+<kw name="Count Directories In Directory" lineno="1357">
 <arguments repr="path, pattern=None">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="path">
 <name>path</name>
@@ -248,7 +260,7 @@ See also `Copy File`, `Move File`, and `Move Files`.</doc>
 <doc>Wrapper for `Count Items In Directory` returning only directory count.</doc>
 <shortdoc>Wrapper for `Count Items In Directory` returning only directory count.</shortdoc>
 </kw>
-<kw name="Count Files In Directory" lineno="1344">
+<kw name="Count Files In Directory" lineno="1351">
 <arguments repr="path, pattern=None">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="path">
 <name>path</name>
@@ -261,7 +273,7 @@ See also `Copy File`, `Move File`, and `Move Files`.</doc>
 <doc>Wrapper for `Count Items In Directory` returning only file count.</doc>
 <shortdoc>Wrapper for `Count Items In Directory` returning only file count.</shortdoc>
 </kw>
-<kw name="Count Items In Directory" lineno="1333">
+<kw name="Count Items In Directory" lineno="1340">
 <arguments repr="path, pattern=None">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="path">
 <name>path</name>
@@ -278,7 +290,7 @@ keyword. The count is returned as an integer, so it must be checked e.g.
 with the built-in keyword `Should Be Equal As Integers`.</doc>
 <shortdoc>Returns and logs the number of all items in the given directory.</shortdoc>
 </kw>
-<kw name="Create Binary File" lineno="586">
+<kw name="Create Binary File" lineno="603">
 <arguments repr="path, content">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="path">
 <name>path</name>
@@ -300,7 +312,7 @@ If the directory for the file does not exist, it is created, along
 with missing intermediate directories.
 
 Examples:
-| Create Binary File | ${dir}/example.png | ${image content}     |
+| Create Binary File | ${dir}/example.png | ${image content} |
 | Create Binary File | ${path}            | \x01\x00\xe4\x00 |
 
 Use `Create File` if you want to create a text file using a certain
@@ -308,7 +320,7 @@ encoding. `File Should Not Exist` can be used to avoid overwriting
 existing files.</doc>
 <shortdoc>Creates a binary file with the given content.</shortdoc>
 </kw>
-<kw name="Create Directory" lineno="672">
+<kw name="Create Directory" lineno="686">
 <arguments repr="path">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="path">
 <name>path</name>
@@ -321,7 +333,7 @@ directory already exists, but fails if the path exists and is not
 a directory.</doc>
 <shortdoc>Creates the specified directory.</shortdoc>
 </kw>
-<kw name="Create File" lineno="542">
+<kw name="Create File" lineno="566">
 <arguments repr="path, content=, encoding=UTF-8">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="path">
 <name>path</name>
@@ -355,13 +367,10 @@ Examples:
 Use `Append To File` if you want to append to an existing file
 and `Create Binary File` if you need to write bytes without encoding.
 `File Should Not Exist` can be used to avoid overwriting existing
-files.
-
-Automatically converting ``\n`` to ``\r\n`` on Windows is new in
-Robot Framework 3.1.</doc>
+files.</doc>
 <shortdoc>Creates a file with the given content and encoding.</shortdoc>
 </kw>
-<kw name="Directory Should Be Empty" lineno="489">
+<kw name="Directory Should Be Empty" lineno="513">
 <arguments repr="path, msg=None">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="path">
 <name>path</name>
@@ -376,7 +385,7 @@ Robot Framework 3.1.</doc>
 The default error message can be overridden with the ``msg`` argument.</doc>
 <shortdoc>Fails unless the specified directory is empty.</shortdoc>
 </kw>
-<kw name="Directory Should Exist" lineno="407">
+<kw name="Directory Should Exist" lineno="429">
 <arguments repr="path, msg=None">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="path">
 <name>path</name>
@@ -389,11 +398,12 @@ The default error message can be overridden with the ``msg`` argument.</doc>
 <doc>Fails unless the given path points to an existing directory.
 
 The path can be given as an exact path or as a glob pattern.
-The pattern matching syntax is explained in `introduction`.
+See the `Glob patterns` section for details about the supported syntax.
+
 The default error message can be overridden with the ``msg`` argument.</doc>
 <shortdoc>Fails unless the given path points to an existing directory.</shortdoc>
 </kw>
-<kw name="Directory Should Not Be Empty" lineno="501">
+<kw name="Directory Should Not Be Empty" lineno="525">
 <arguments repr="path, msg=None">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="path">
 <name>path</name>
@@ -408,7 +418,7 @@ The default error message can be overridden with the ``msg`` argument.</doc>
 The default error message can be overridden with the ``msg`` argument.</doc>
 <shortdoc>Fails if the specified directory is empty.</shortdoc>
 </kw>
-<kw name="Directory Should Not Exist" lineno="420">
+<kw name="Directory Should Not Exist" lineno="443">
 <arguments repr="path, msg=None">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="path">
 <name>path</name>
@@ -421,11 +431,12 @@ The default error message can be overridden with the ``msg`` argument.</doc>
 <doc>Fails if the given path points to an existing file.
 
 The path can be given as an exact path or as a glob pattern.
-The pattern matching syntax is explained in `introduction`.
+See the `Glob patterns` section for details about the supported syntax.
+
 The default error message can be overridden with the ``msg`` argument.</doc>
 <shortdoc>Fails if the given path points to an existing file.</shortdoc>
 </kw>
-<kw name="Empty Directory" lineno="657">
+<kw name="Empty Directory" lineno="671">
 <arguments repr="path">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="path">
 <name>path</name>
@@ -438,7 +449,7 @@ itself if not removed. Use `Remove Directory` if you want to remove
 the whole directory.</doc>
 <shortdoc>Deletes all the content from the given directory.</shortdoc>
 </kw>
-<kw name="Environment Variable Should Be Set" lineno="1009">
+<kw name="Environment Variable Should Be Set" lineno="1017">
 <arguments repr="name, msg=None">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="name">
 <name>name</name>
@@ -453,7 +464,7 @@ the whole directory.</doc>
 The default error message can be overridden with the ``msg`` argument.</doc>
 <shortdoc>Fails if the specified environment variable is not set.</shortdoc>
 </kw>
-<kw name="Environment Variable Should Not Be Set" lineno="1019">
+<kw name="Environment Variable Should Not Be Set" lineno="1027">
 <arguments repr="name, msg=None">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="name">
 <name>name</name>
@@ -468,7 +479,7 @@ The default error message can be overridden with the ``msg`` argument.</doc>
 The default error message can be overridden with the ``msg`` argument.</doc>
 <shortdoc>Fails if the specified environment variable is set.</shortdoc>
 </kw>
-<kw name="File Should Be Empty" lineno="513">
+<kw name="File Should Be Empty" lineno="537">
 <arguments repr="path, msg=None">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="path">
 <name>path</name>
@@ -483,7 +494,7 @@ The default error message can be overridden with the ``msg`` argument.</doc>
 The default error message can be overridden with the ``msg`` argument.</doc>
 <shortdoc>Fails unless the specified file is empty.</shortdoc>
 </kw>
-<kw name="File Should Exist" lineno="381">
+<kw name="File Should Exist" lineno="401">
 <arguments repr="path, msg=None">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="path">
 <name>path</name>
@@ -496,11 +507,12 @@ The default error message can be overridden with the ``msg`` argument.</doc>
 <doc>Fails unless the given ``path`` points to an existing file.
 
 The path can be given as an exact path or as a glob pattern.
-The pattern matching syntax is explained in `introduction`.
+See the `Glob patterns` section for details about the supported syntax.
+
 The default error message can be overridden with the ``msg`` argument.</doc>
 <shortdoc>Fails unless the given ``path`` points to an existing file.</shortdoc>
 </kw>
-<kw name="File Should Not Be Empty" lineno="527">
+<kw name="File Should Not Be Empty" lineno="551">
 <arguments repr="path, msg=None">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="path">
 <name>path</name>
@@ -510,12 +522,12 @@ The default error message can be overridden with the ``msg`` argument.</doc>
 <default>None</default>
 </arg>
 </arguments>
-<doc>Fails if the specified directory is empty.
+<doc>Fails if the specified file is empty.
 
 The default error message can be overridden with the ``msg`` argument.</doc>
-<shortdoc>Fails if the specified directory is empty.</shortdoc>
+<shortdoc>Fails if the specified file is empty.</shortdoc>
 </kw>
-<kw name="File Should Not Exist" lineno="394">
+<kw name="File Should Not Exist" lineno="415">
 <arguments repr="path, msg=None">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="path">
 <name>path</name>
@@ -528,11 +540,12 @@ The default error message can be overridden with the ``msg`` argument.</doc>
 <doc>Fails if the given path points to an existing file.
 
 The path can be given as an exact path or as a glob pattern.
-The pattern matching syntax is explained in `introduction`.
+See the `Glob patterns` section for details about the supported syntax.
+
 The default error message can be overridden with the ``msg`` argument.</doc>
 <shortdoc>Fails if the given path points to an existing file.</shortdoc>
 </kw>
-<kw name="Get Binary File" lineno="275">
+<kw name="Get Binary File" lineno="283">
 <arguments repr="path">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="path">
 <name>path</name>
@@ -544,7 +557,7 @@ This keyword reads the specified file and returns the contents as is.
 See also `Get File`.</doc>
 <shortdoc>Returns the contents of a specified file.</shortdoc>
 </kw>
-<kw name="Get Environment Variable" lineno="935">
+<kw name="Get Environment Variable" lineno="943">
 <arguments repr="name, default=None">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="name">
 <name>name</name>
@@ -556,8 +569,8 @@ See also `Get File`.</doc>
 </arguments>
 <doc>Returns the value of an environment variable with the given name.
 
-If no such environment variable is set, returns the default value, if
-given. Otherwise fails the test case.
+If no environment variable is found, returns possible default value.
+If no default value is given, the keyword fails.
 
 Returned variables are automatically decoded to Unicode using
 the system encoding.
@@ -566,7 +579,7 @@ Note that you can also access environment variables directly using
 the variable syntax ``%{ENV_VAR_NAME}``.</doc>
 <shortdoc>Returns the value of an environment variable with the given name.</shortdoc>
 </kw>
-<kw name="Get Environment Variables" lineno="1030">
+<kw name="Get Environment Variables" lineno="1038">
 <arguments repr="">
 </arguments>
 <doc>Returns currently available environment variables as a dictionary.
@@ -576,7 +589,7 @@ Altering the returned dictionary has no effect on the actual environment
 variables.</doc>
 <shortdoc>Returns currently available environment variables as a dictionary.</shortdoc>
 </kw>
-<kw name="Get File" lineno="229">
+<kw name="Get File" lineno="242">
 <arguments repr="path, encoding=UTF-8, encoding_errors=strict">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="path">
 <name>path</name>
@@ -616,7 +629,7 @@ in practice the following values are most useful:
   a replacement character.</doc>
 <shortdoc>Returns the contents of a specified file.</shortdoc>
 </kw>
-<kw name="Get File Size" lineno="1281">
+<kw name="Get File Size" lineno="1287">
 <arguments repr="path">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="path">
 <name>path</name>
@@ -625,7 +638,7 @@ in practice the following values are most useful:
 <doc>Returns and logs file size as an integer in bytes.</doc>
 <shortdoc>Returns and logs file size as an integer in bytes.</shortdoc>
 </kw>
-<kw name="Get Modified Time" lineno="1192">
+<kw name="Get Modified Time" lineno="1198">
 <arguments repr="path, format=timestamp">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="path">
 <name>path</name>
@@ -670,8 +683,8 @@ Examples (when the modified time of ``${CURDIR}`` is
 - @{time} = ['2006', '03', '29', '15', '06', '21']</doc>
 <shortdoc>Returns the last modification time of a file or directory.</shortdoc>
 </kw>
-<kw name="Grep File" lineno="286">
-<arguments repr="path, pattern, encoding=UTF-8, encoding_errors=strict">
+<kw name="Grep File" lineno="294">
+<arguments repr="path, pattern, encoding=UTF-8, encoding_errors=strict, regexp=False">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="path">
 <name>path</name>
 </arg>
@@ -686,36 +699,47 @@ Examples (when the modified time of ``${CURDIR}`` is
 <name>encoding_errors</name>
 <default>strict</default>
 </arg>
+<arg kind="POSITIONAL_OR_NAMED" required="false" repr="regexp=False">
+<name>regexp</name>
+<default>False</default>
+</arg>
 </arguments>
 <doc>Returns the lines of the specified file that match the ``pattern``.
 
 This keyword reads a file from the file system using the defined
 ``path``, ``encoding`` and ``encoding_errors`` similarly as `Get File`.
 A difference is that only the lines that match the given ``pattern`` are
-returned. Lines are returned as a single string catenated back together
+returned. Lines are returned as a single string concatenated back together
 with newlines and the number of matched lines is automatically logged.
 Possible trailing newline is never returned.
 
-A line matches if it contains the ``pattern`` anywhere in it and
-it *does not need to match the pattern fully*. The pattern
-matching syntax is explained in `introduction`, and in this
-case matching is case-sensitive.
+A line matches if it contains the ``pattern`` anywhere in it i.e. it does
+not need to match the pattern fully. There are two supported pattern types:
+
+- By default the pattern is considered a _glob_ pattern where, for example,
+  ``*`` and ``?`` can be used as wildcards.
+- If the ``regexp`` argument is given a true value, the pattern is
+  considered to be a _regular expression_. These patterns are more
+  powerful but also more complicated than glob patterns. They often use
+  the backslash character and it needs to be escaped in Robot Framework
+  date like `\\`.
+
+For more information about glob and regular expression syntax, see
+the `Pattern matching` section. With this keyword matching is always
+case-sensitive.
 
 Examples:
 | ${errors} = | Grep File | /var/log/myapp.log | ERROR |
 | ${ret} = | Grep File | ${CURDIR}/file.txt | [Ww]ildc??d ex*ple |
+| ${ret} = | Grep File | ${CURDIR}/file.txt | [Ww]ildc\\w+d ex.*ple | regexp=True |
 
-If more complex pattern matching is needed, it is possible to use
-`Get File` in combination with String library keywords like `Get
-Lines Matching Regexp`.
+Special encoding values ``SYSTEM`` and ``CONSOLE`` that `Get File` supports
+are supported by this keyword only with Robot Framework 4.0 and newer.
 
-This keyword supports special ``SYSTEM`` and ``CONSOLE`` encodings that
-`Get File` supports only with Robot Framework 4.0 and newer. When using
-Python 3, it is possible to use ``${NONE}`` instead of ``SYSTEM`` with
-earlier versions.</doc>
+Support for regular expressions is new in Robot Framework 5.0.</doc>
 <shortdoc>Returns the lines of the specified file that match the ``pattern``.</shortdoc>
 </kw>
-<kw name="Join Path" lineno="1052">
+<kw name="Join Path" lineno="1060">
 <arguments repr="base, *parts">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="base">
 <name>base</name>
@@ -744,7 +768,7 @@ Examples:
 - ${p5} = '/my/path2'</doc>
 <shortdoc>Joins the given path part(s) to the given base path.</shortdoc>
 </kw>
-<kw name="Join Paths" lineno="1076">
+<kw name="Join Paths" lineno="1084">
 <arguments repr="base, *paths">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="base">
 <name>base</name>
@@ -767,7 +791,7 @@ Examples:
 - @{p3} = ['my/base/example/path', 'my/base/other', 'my/base/one/more']</doc>
 <shortdoc>Joins given paths with base and returns resulted paths.</shortdoc>
 </kw>
-<kw name="List Directories In Directory" lineno="1325">
+<kw name="List Directories In Directory" lineno="1332">
 <arguments repr="path, pattern=None, absolute=False">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="path">
 <name>path</name>
@@ -784,7 +808,7 @@ Examples:
 <doc>Wrapper for `List Directory` that returns only directories.</doc>
 <shortdoc>Wrapper for `List Directory` that returns only directories.</shortdoc>
 </kw>
-<kw name="List Directory" lineno="1291">
+<kw name="List Directory" lineno="1297">
 <arguments repr="path, pattern=None, absolute=False">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="path">
 <name>path</name>
@@ -811,8 +835,9 @@ absolute format (e.g. ``'/home/robot/file.txt'``), give the ``absolute``
 argument a true value (see `Boolean arguments`).
 
 If ``pattern`` is given, only items matching it are returned. The pattern
-matching syntax is explained in `introduction`, and in this case
-matching is case-sensitive.
+is considered to be a _glob pattern_ and the full syntax is explained in
+the `Glob patterns` section. With this keyword matching is always
+case-sensitive.
 
 Examples (using also other `List Directory` variants):
 | @{items} = | List Directory           | ${TEMPDIR} |
@@ -820,7 +845,7 @@ Examples (using also other `List Directory` variants):
 | ${count} = | Count Files In Directory | ${CURDIR} | ??? |</doc>
 <shortdoc>Returns and logs items in a directory, optionally filtered with ``pattern``.</shortdoc>
 </kw>
-<kw name="List Files In Directory" lineno="1318">
+<kw name="List Files In Directory" lineno="1325">
 <arguments repr="path, pattern=None, absolute=False">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="path">
 <name>path</name>
@@ -837,7 +862,7 @@ Examples (using also other `List Directory` variants):
 <doc>Wrapper for `List Directory` that returns only files.</doc>
 <shortdoc>Wrapper for `List Directory` that returns only files.</shortdoc>
 </kw>
-<kw name="Log Environment Variables" lineno="1039">
+<kw name="Log Environment Variables" lineno="1047">
 <arguments repr="level=INFO">
 <arg kind="POSITIONAL_OR_NAMED" required="false" repr="level=INFO">
 <name>level</name>
@@ -850,7 +875,7 @@ Environment variables are also returned the same way as with
 `Get Environment Variables` keyword.</doc>
 <shortdoc>Logs all environment variables using the given log level.</shortdoc>
 </kw>
-<kw name="Log File" lineno="329">
+<kw name="Log File" lineno="347">
 <arguments repr="path, encoding=UTF-8, encoding_errors=strict">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="path">
 <name>path</name>
@@ -874,7 +899,7 @@ See `Get File` for more information about ``encoding`` and
 ``encoding_errors`` arguments.</doc>
 <shortdoc>Wrapper for `Get File` that also logs the returned file.</shortdoc>
 </kw>
-<kw name="Move Directory" lineno="920">
+<kw name="Move Directory" lineno="928">
 <arguments repr="source, destination">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="source">
 <name>source</name>
@@ -890,7 +915,7 @@ Uses `Copy Directory` keyword internally, and ``source`` and
 that keyword.</doc>
 <shortdoc>Moves the source directory into a destination.</shortdoc>
 </kw>
-<kw name="Move File" lineno="819">
+<kw name="Move File" lineno="833">
 <arguments repr="source, destination">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="source">
 <name>source</name>
@@ -911,7 +936,7 @@ filesystem and then removed from the original filesystem.
 See also `Move Files`, `Copy File`, and `Copy Files`.</doc>
 <shortdoc>Moves the source file into the destination.</shortdoc>
 </kw>
-<kw name="Move Files" lineno="873">
+<kw name="Move Files" lineno="887">
 <arguments repr="*sources_and_destination">
 <arg kind="VAR_POSITIONAL" required="false" repr="*sources_and_destination">
 <name>sources_and_destination</name>
@@ -924,7 +949,7 @@ Arguments have exactly same semantics as with `Copy Files` keyword.
 See also `Move File`, `Copy File`, and `Copy Files`.</doc>
 <shortdoc>Moves specified files to the target directory.</shortdoc>
 </kw>
-<kw name="Normalize Path" lineno="1092">
+<kw name="Normalize Path" lineno="1100">
 <arguments repr="path, case_normalize=False">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="path">
 <name>path</name>
@@ -939,10 +964,8 @@ See also `Move File`, `Copy File`, and `Copy Files`.</doc>
 - Collapses redundant separators and up-level references.
 - Converts ``/`` to ``\`` on Windows.
 - Replaces initial ``~`` or ``~user`` by that user's home directory.
-  The latter is not supported on Jython.
 - If ``case_normalize`` is given a true value (see `Boolean arguments`)
-  on Windows, converts the path to all lowercase. New in Robot
-  Framework 3.1.
+  on Windows, converts the path to all lowercase.
 
 Examples:
 | ${path1} = | Normalize Path | abc/           |
@@ -959,7 +982,7 @@ On Windows result would use ``\`` instead of ``/`` and home directory
 would be different.</doc>
 <shortdoc>Normalizes the given path.</shortdoc>
 </kw>
-<kw name="Remove Directory" lineno="688">
+<kw name="Remove Directory" lineno="702">
 <arguments repr="path, recursive=False">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="path">
 <name>path</name>
@@ -979,7 +1002,7 @@ If the directory pointed to by the ``path`` does not exist, the keyword
 passes, but it fails, if the ``path`` points to a file.</doc>
 <shortdoc>Removes the directory pointed to by the given ``path``.</shortdoc>
 </kw>
-<kw name="Remove Environment Variable" lineno="994">
+<kw name="Remove Environment Variable" lineno="1002">
 <arguments repr="*names">
 <arg kind="VAR_POSITIONAL" required="false" repr="*names">
 <name>names</name>
@@ -993,7 +1016,7 @@ It is possible to remove multiple variables by passing them to this
 keyword as separate arguments.</doc>
 <shortdoc>Deletes the specified environment variable.</shortdoc>
 </kw>
-<kw name="Remove File" lineno="628">
+<kw name="Remove File" lineno="642">
 <arguments repr="path">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="path">
 <name>path</name>
@@ -1005,11 +1028,11 @@ Passes if the file does not exist, but fails if the path does
 not point to a regular file (e.g. it points to a directory).
 
 The path can be given as an exact path or as a glob pattern.
-The pattern matching syntax is explained in `introduction`.
+See the `Glob patterns` section for details about the supported syntax.
 If the path is a pattern, all files matching it are removed.</doc>
 <shortdoc>Removes a file with the given path.</shortdoc>
 </kw>
-<kw name="Remove Files" lineno="648">
+<kw name="Remove Files" lineno="662">
 <arguments repr="*paths">
 <arg kind="VAR_POSITIONAL" required="false" repr="*paths">
 <name>paths</name>
@@ -1021,7 +1044,7 @@ Example:
 | Remove Files | ${TEMPDIR}${/}foo.txt | ${TEMPDIR}${/}bar.txt | ${TEMPDIR}${/}zap.txt |</doc>
 <shortdoc>Uses `Remove File` to remove multiple files one-by-one.</shortdoc>
 </kw>
-<kw name="Run" lineno="135">
+<kw name="Run" lineno="148">
 <arguments repr="command">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="command">
 <name>command</name>
@@ -1063,7 +1086,7 @@ Process library] supports better process configuration and is generally
 recommended as a replacement for this keyword.</doc>
 <shortdoc>Runs the given command in the system and returns the output.</shortdoc>
 </kw>
-<kw name="Run And Return Rc" lineno="173">
+<kw name="Run And Return Rc" lineno="186">
 <arguments repr="command">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="command">
 <name>command</name>
@@ -1094,7 +1117,7 @@ Process library] supports better process configuration and is generally
 recommended as a replacement for this keyword.</doc>
 <shortdoc>Runs the given command in the system and returns the return code.</shortdoc>
 </kw>
-<kw name="Run And Return Rc And Output" lineno="200">
+<kw name="Run And Return Rc And Output" lineno="213">
 <arguments repr="command">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="command">
 <name>command</name>
@@ -1120,7 +1143,7 @@ Process library] supports better process configuration and is generally
 recommended as a replacement for this keyword.</doc>
 <shortdoc>Runs the given command in the system and returns the RC and output.</shortdoc>
 </kw>
-<kw name="Set Environment Variable" lineno="952">
+<kw name="Set Environment Variable" lineno="960">
 <arguments repr="name, value">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="name">
 <name>name</name>
@@ -1135,7 +1158,7 @@ Values are converted to strings automatically. Set variables are
 automatically encoded using the system encoding.</doc>
 <shortdoc>Sets an environment variable to a specified value.</shortdoc>
 </kw>
-<kw name="Set Modified Time" lineno="1234">
+<kw name="Set Modified Time" lineno="1240">
 <arguments repr="path, mtime">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="path">
 <name>path</name>
@@ -1180,7 +1203,7 @@ Examples:
 | Set Modified Time | /path/file | UTC + 1h 2min 3s   | # 1h 2min 3s added to the UTC time |</doc>
 <shortdoc>Sets the file modification and access times.</shortdoc>
 </kw>
-<kw name="Should Exist" lineno="345">
+<kw name="Should Exist" lineno="363">
 <arguments repr="path, msg=None">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="path">
 <name>path</name>
@@ -1193,11 +1216,12 @@ Examples:
 <doc>Fails unless the given path (file or directory) exists.
 
 The path can be given as an exact path or as a glob pattern.
-The pattern matching syntax is explained in `introduction`.
+See the `Glob patterns` section for details about the supported syntax.
+
 The default error message can be overridden with the ``msg`` argument.</doc>
 <shortdoc>Fails unless the given path (file or directory) exists.</shortdoc>
 </kw>
-<kw name="Should Not Exist" lineno="357">
+<kw name="Should Not Exist" lineno="376">
 <arguments repr="path, msg=None">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="path">
 <name>path</name>
@@ -1210,11 +1234,12 @@ The default error message can be overridden with the ``msg`` argument.</doc>
 <doc>Fails if the given path (file or directory) exists.
 
 The path can be given as an exact path or as a glob pattern.
-The pattern matching syntax is explained in `introduction`.
+See the `Glob patterns` section for details about the supported syntax.
+
 The default error message can be overridden with the ``msg`` argument.</doc>
 <shortdoc>Fails if the given path (file or directory) exists.</shortdoc>
 </kw>
-<kw name="Split Extension" lineno="1145">
+<kw name="Split Extension" lineno="1151">
 <arguments repr="path">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="path">
 <name>path</name>
@@ -1246,7 +1271,7 @@ Examples:
 - ${p6} = 'path/.file' &amp; ${e6} = ''</doc>
 <shortdoc>Splits the extension from the given path.</shortdoc>
 </kw>
-<kw name="Split Path" lineno="1126">
+<kw name="Split Path" lineno="1132">
 <arguments repr="path">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="path">
 <name>path</name>
@@ -1269,7 +1294,7 @@ Examples:
 - ${path3} = 'def' &amp; ${d2} = 'ghi'</doc>
 <shortdoc>Splits the given path from the last path separator (``/`` or ``\``).</shortdoc>
 </kw>
-<kw name="Touch" lineno="1378">
+<kw name="Touch" lineno="1385">
 <arguments repr="path">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="path">
 <name>path</name>
@@ -1284,7 +1309,7 @@ Fails if used with the directories or the parent directory of the given
 file does not exist.</doc>
 <shortdoc>Emulates the UNIX touch command.</shortdoc>
 </kw>
-<kw name="Wait Until Created" lineno="461">
+<kw name="Wait Until Created" lineno="485">
 <arguments repr="path, timeout=1 minute">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="path">
 <name>path</name>
@@ -1297,7 +1322,7 @@ file does not exist.</doc>
 <doc>Waits until the given file or directory is created.
 
 The path can be given as an exact path or as a glob pattern.
-The pattern matching syntax is explained in `introduction`.
+See the `Glob patterns` section for details about the supported syntax.
 If the path is a pattern, the keyword returns when an item matching
 it is created.
 
@@ -1310,7 +1335,7 @@ If the timeout is negative, the keyword is never timed-out. The keyword
 returns immediately, if the path already exists.</doc>
 <shortdoc>Waits until the given file or directory is created.</shortdoc>
 </kw>
-<kw name="Wait Until Removed" lineno="435">
+<kw name="Wait Until Removed" lineno="459">
 <arguments repr="path, timeout=1 minute">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="path">
 <name>path</name>
@@ -1323,7 +1348,7 @@ returns immediately, if the path already exists.</doc>
 <doc>Waits until the given file or directory is removed.
 
 The path can be given as an exact path or as a glob pattern.
-The pattern matching syntax is explained in `introduction`.
+See the `Glob patterns` section for details about the supported syntax.
 If the path is a pattern, the keyword waits until all matching
 items are removed.
 
@@ -1339,4 +1364,6 @@ returns immediately, if the path does not exist in the first place.</doc>
 </keywords>
 <datatypes>
 </datatypes>
+<typedocs>
+</typedocs>
 </keywordspec>

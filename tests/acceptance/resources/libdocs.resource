@@ -2,6 +2,8 @@
 Documentation       Keywords to perform operations on generated dirs and files.
 
 Library             OperatingSystem
+Library             Collections
+Resource            testutils.resource
 
 *** Keywords ***
 Output Dir Should Exist

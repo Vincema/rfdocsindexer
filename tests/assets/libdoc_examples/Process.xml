@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<keywordspec name="Process" type="LIBRARY" format="ROBOT" scope="GLOBAL" generated="2021-08-20T15:17:13Z" specversion="3" source="../../../../.cache/pypoetry/virtualenvs/rfdocsindexer--g8aZv4K-py3.9/lib/python3.9/site-packages/robot/libraries/Process.py" lineno="30">
-<version>4.1</version>
-<doc>Robot Framework test library for running processes.
+<keywordspec name="Process" type="LIBRARY" format="ROBOT" scope="GLOBAL" generated="2022-10-06T16:55:18Z" specversion="4" source="/home/kali/Code/rfdocsindexer/.tox/py39/lib/python3.9/site-packages/robot/libraries/Process.py" lineno="30">
+<version>5.0.1</version>
+<doc>Robot Framework library for running processes.
 
 This library utilizes Python's
 [http://docs.python.org/library/subprocess.html|subprocess]
@@ -63,6 +63,7 @@ listed below and discussed further in sections afterwards.
 | env:&lt;name&gt; | Overrides the named environment variable(s) only.     |
 | stdout     | Path of a file where to write standard output.        |
 | stderr     | Path of a file where to write standard error.         |
+| stdin      | Configure process standard input. New in RF 4.1.2.    |
 | output_encoding | Encoding to use when reading command outputs.    |
 | alias      | Alias given to the process.                           |
 
@@ -92,8 +93,8 @@ examples and more details in general.
 
 == Current working directory ==
 
-By default the child process will be executed in the same directory
-as the parent process, the process running tests, is executed. This
+By default, the child process will be executed in the same directory
+as the parent process, the process running Robot Framework, is executed. This
 can be changed by giving an alternative location using the ``cwd`` argument.
 Forward slashes in the given path are automatically converted to
 backslashes on Windows.
@@ -124,8 +125,7 @@ Examples:
 By default processes are run so that their standard output and standard
 error streams are kept in the memory. This works fine normally,
 but if there is a lot of output, the output buffers may get full and
-the program can hang. Additionally on Jython, everything written to
-these in-memory buffers can be lost if the process is terminated.
+the program can hang.
 
 To avoid the above mentioned problems, it is possible to use ``stdout``
 and ``stderr`` arguments to specify files on the file system where to
@@ -163,6 +163,33 @@ Examples:
 Note that the created output files are not automatically removed after
 the test run. The user is responsible to remove them if needed.
 
+== Standard input stream ==
+
+The ``stdin`` argument makes it possible to pass information to the standard
+input stream of the started process. How its value is interpreted is
+explained in the table below.
+
+| = Value =        | = Explanation = |
+| String ``PIPE``  | Make stdin a pipe that can be written to. This is the default. |
+| String ``NONE``  | Inherit stdin from the parent process. This value is case-insensitive. |
+| Path to a file   | Open the specified file and use it as the stdin. |
+| Any other string | Create a temporary file with the text as its content and use it as the stdin. |
+| Any non-string value | Used as-is. Could be a file descriptor, stdout of another process, etc. |
+
+Values ``PIPE`` and ``NONE`` are internally mapped directly to
+``subprocess.PIPE`` and ``None``, respectively, when calling
+[https://docs.python.org/3/library/subprocess.html#subprocess.Popen|subprocess.Popen].
+The default behavior may change from ``PIPE`` to ``NONE`` in future
+releases. If you depend on the ``PIPE`` behavior, it is a good idea to use
+it explicitly.
+
+Examples:
+| `Run Process` | command | stdin=NONE |
+| `Run Process` | command | stdin=${CURDIR}/stdin.txt |
+| `Run Process` | command | stdin=Stdin as text. |
+
+The support to configure ``stdin`` is new in Robot Framework 4.1.2.
+
 == Output encoding ==
 
 Executed commands are, by default, expected to write outputs to the
@@ -195,16 +222,15 @@ Examples:
 
 = Active process =
 
-The test library keeps record which of the started processes is currently
-active. By default it is latest process started with `Start Process`,
-but `Switch Process` can be used to select a different one. Using
+The library keeps record which of the started processes is currently active.
+By default it is the latest process started with `Start Process`,
+but `Switch Process` can be used to activate a different process. Using
 `Run Process` does not affect the active process.
 
 The keywords that operate on started processes will use the active process
 by default, but it is possible to explicitly select a different process
-using the ``handle`` argument. The handle can be the identifier returned by
-`Start Process` or an ``alias`` explicitly given to `Start Process` or
-`Run Process`.
+using the ``handle`` argument. The handle can be an ``alias`` explicitly
+given to `Start Process` or the process object returned by it.
 
 = Result object =
 
@@ -273,7 +299,7 @@ Considering ``OFF`` and ``0`` false is new in Robot Framework 3.1.
 <inits>
 </inits>
 <keywords>
-<kw name="Get Process Id" lineno="623">
+<kw name="Get Process Id" lineno="665">
 <arguments repr="handle=None">
 <arg kind="POSITIONAL_OR_NAMED" required="false" repr="handle=None">
 <name>handle</name>
@@ -284,11 +310,12 @@ Considering ``OFF`` and ``0`` false is new in Robot Framework 3.1.
 
 If ``handle`` is not given, uses the current `active process`.
 
-Notice that the pid is not the same as the handle returned by
-`Start Process` that is used internally by this library.</doc>
+Starting from Robot Framework 5.0, it is also possible to directly access
+the ``pid`` attribute of the ``subprocess.Popen`` object returned by
+`Start Process` like ``${process.pid}``.</doc>
 <shortdoc>Returns the process ID (pid) of the process as an integer.</shortdoc>
 </kw>
-<kw name="Get Process Object" lineno="633">
+<kw name="Get Process Object" lineno="676">
 <arguments repr="handle=None">
 <arg kind="POSITIONAL_OR_NAMED" required="false" repr="handle=None">
 <name>handle</name>
@@ -297,10 +324,14 @@ Notice that the pid is not the same as the handle returned by
 </arguments>
 <doc>Return the underlying ``subprocess.Popen`` object.
 
-If ``handle`` is not given, uses the current `active process`.</doc>
+If ``handle`` is not given, uses the current `active process`.
+
+Starting from Robot Framework 5.0, `Start Process` returns the created
+``subprocess.Popen`` object, not a generic handle, making this keyword
+mostly redundant.</doc>
 <shortdoc>Return the underlying ``subprocess.Popen`` object.</shortdoc>
 </kw>
-<kw name="Get Process Result" lineno="640">
+<kw name="Get Process Result" lineno="687">
 <arguments repr="handle=None, rc=False, stdout=False, stderr=False, stdout_path=False, stderr_path=False">
 <arg kind="POSITIONAL_OR_NAMED" required="false" repr="handle=None">
 <name>handle</name>
@@ -367,7 +398,7 @@ support returning the whole result object, but individual attributes
 can be returned without problems.</doc>
 <shortdoc>Returns the specified `result object` or some of its attributes.</shortdoc>
 </kw>
-<kw name="Is Process Running" lineno="368">
+<kw name="Is Process Running" lineno="419">
 <arguments repr="handle=None">
 <arg kind="POSITIONAL_OR_NAMED" required="false" repr="handle=None">
 <name>handle</name>
@@ -381,7 +412,7 @@ If ``handle`` is not given, uses the current `active process`.
 Returns ``True`` if the process is still running and ``False`` otherwise.</doc>
 <shortdoc>Checks is the process running or not.</shortdoc>
 </kw>
-<kw name="Join Command Line" lineno="736">
+<kw name="Join Command Line" lineno="783">
 <arguments repr="*args">
 <arg kind="VAR_POSITIONAL" required="false" repr="*args">
 <name>args</name>
@@ -401,7 +432,7 @@ Example:
 | Should Be Equal | ${cmd} | --option "value with spaces" |</doc>
 <shortdoc>Joins arguments into one command line string.</shortdoc>
 </kw>
-<kw name="Process Should Be Running" lineno="377">
+<kw name="Process Should Be Running" lineno="428">
 <arguments repr="handle=None, error_message=Process is not running.">
 <arg kind="POSITIONAL_OR_NAMED" required="false" repr="handle=None">
 <name>handle</name>
@@ -419,7 +450,7 @@ If ``handle`` is not given, uses the current `active process`.
 Fails if the process has stopped.</doc>
 <shortdoc>Verifies that the process is running.</shortdoc>
 </kw>
-<kw name="Process Should Be Stopped" lineno="388">
+<kw name="Process Should Be Stopped" lineno="439">
 <arguments repr="handle=None, error_message=Process is running.">
 <arg kind="POSITIONAL_OR_NAMED" required="false" repr="handle=None">
 <name>handle</name>
@@ -437,7 +468,7 @@ If ``handle`` is not given, uses the current `active process`.
 Fails if the process is still running.</doc>
 <shortdoc>Verifies that the process is not running.</shortdoc>
 </kw>
-<kw name="Run Process" lineno="302">
+<kw name="Run Process" lineno="328">
 <arguments repr="command, *arguments, **configuration">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="command">
 <name>command</name>
@@ -479,7 +510,7 @@ Examples:
 This keyword does not change the `active process`.</doc>
 <shortdoc>Runs a process and waits for it to complete.</shortdoc>
 </kw>
-<kw name="Send Signal To Process" lineno="569">
+<kw name="Send Signal To Process" lineno="612">
 <arguments repr="signal, handle=None, group=False">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="signal">
 <name>signal</name>
@@ -517,11 +548,10 @@ shell`, the shell is the parent process and it depends on the system
 does the shell propagate the signal to the actual started process.
 
 To send the signal to the whole process group, ``group`` argument can
-be set to any true value (see `Boolean arguments`). This is not
-supported by Jython, however.</doc>
+be set to any true value (see `Boolean arguments`).</doc>
 <shortdoc>Sends the given ``signal`` to the specified process.</shortdoc>
 </kw>
-<kw name="Split Command Line" lineno="721">
+<kw name="Split Command Line" lineno="768">
 <arguments repr="args, escaping=False">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="args">
 <name>args</name>
@@ -544,7 +574,7 @@ Examples:
 | Should Be True | $cmd == ['--option', 'value with spaces'] |</doc>
 <shortdoc>Splits command line string into a list of arguments.</shortdoc>
 </kw>
-<kw name="Start Process" lineno="341">
+<kw name="Start Process" lineno="367">
 <arguments repr="command, *arguments, **configuration">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="command">
 <name>command</name>
@@ -562,15 +592,39 @@ See `Specifying command and arguments` and `Process configuration`
 for more information about the arguments, and `Run Process` keyword
 for related examples.
 
-Makes the started process new `active process`. Returns an identifier
-that can be used as a handle to activate the started process if needed.
+Makes the started process new `active process`. Returns the created
+[https://docs.python.org/3/library/subprocess.html#popen-constructor |
+subprocess.Popen] object which can be be used later to active this
+process. ``Popen`` attributes like ``pid`` can also be accessed directly.
 
 Processes are started so that they create a new process group. This
-allows sending signals to and terminating also possible child
-processes. This is not supported on Jython.</doc>
+allows terminating and sending signals to possible child processes.
+
+Examples:
+
+Start process and wait for it to end later using alias:
+| `Start Process` | ${command} | alias=example |
+| # Other keywords |
+| ${result} = | `Wait For Process` | example |
+
+Use returned ``Popen`` object:
+| ${process} = | `Start Process` | ${command} |
+| `Log` | PID: ${process.pid} |
+| # Other keywords |
+| ${result} = | `Terminate Process` | ${process} |
+
+Use started process in a pipeline with another process:
+| ${process} = | `Start Process` | python | -c | print('Hello, world!') |
+| ${result} = | `Run Process` | python | -c | import sys; print(sys.stdin.read().upper().strip()) | stdin=${process.stdout} |
+| `Wait For Process` | ${process} |
+| `Should Be Equal` | ${result.stdout} | HELLO, WORLD! |
+
+Returning a ``subprocess.Popen`` object is new in Robot Framework 5.0.
+Earlier versions returned a generic handle and getting the process object
+required using `Get Process Object` separately.</doc>
 <shortdoc>Starts a new process on background.</shortdoc>
 </kw>
-<kw name="Switch Process" lineno="699">
+<kw name="Switch Process" lineno="746">
 <arguments repr="handle">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="handle">
 <name>handle</name>
@@ -589,7 +643,7 @@ Example:
 | # now active process is process1 |</doc>
 <shortdoc>Makes the specified process the current `active process`.</shortdoc>
 </kw>
-<kw name="Terminate All Processes" lineno="554">
+<kw name="Terminate All Processes" lineno="597">
 <arguments repr="kill=False">
 <arg kind="POSITIONAL_OR_NAMED" required="false" repr="kill=False">
 <name>kill</name>
@@ -606,7 +660,7 @@ configured to forcefully kill them immediately. See `Terminate Process`
 that this keyword uses internally for more details.</doc>
 <shortdoc>Terminates all still running processes started by this library.</shortdoc>
 </kw>
-<kw name="Terminate Process" lineno="479">
+<kw name="Terminate Process" lineno="530">
 <arguments repr="handle=None, kill=False">
 <arg kind="POSITIONAL_OR_NAMED" required="false" repr="handle=None">
 <name>handle</name>
@@ -644,14 +698,11 @@ Examples:
 | Terminate Process           | myproc            | kill=true |
 
 Limitations:
-- Graceful termination is not supported on Windows when using Jython.
-  Process is killed instead.
-- Stopping the whole process group is not supported when using Jython.
 - On Windows forceful kill only stops the main process, not possible
   child processes.</doc>
 <shortdoc>Stops the process gracefully or forcefully.</shortdoc>
 </kw>
-<kw name="Wait For Process" lineno="399">
+<kw name="Wait For Process" lineno="450">
 <arguments repr="handle=None, timeout=None, on_timeout=continue">
 <arg kind="POSITIONAL_OR_NAMED" required="false" repr="handle=None">
 <name>handle</name>
@@ -718,4 +769,6 @@ in Robot Framework 3.2.</doc>
 </keywords>
 <datatypes>
 </datatypes>
+<typedocs>
+</typedocs>
 </keywordspec>

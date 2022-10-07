@@ -1,12 +1,13 @@
 {
+  "specversion": 1,
   "name": "lib1",
   "doc": "An example resource file",
   "version": "",
-  "generated": "2021-08-20 17:17:13",
+  "generated": "2022-10-07 00:00:29",
   "type": "RESOURCE",
   "scope": "GLOBAL",
   "docFormat": "ROBOT",
-  "source": "tests/assets/libraries_dir_examples/libraries_dir_recursive/lib1.resource",
+  "source": "/home/kali/Code/rfdocsindexer/tests/assets/libraries_dir_examples/libraries_dir_recursive/lib1.resource",
   "lineno": 1,
   "tags": [],
   "inits": [],
@@ -17,6 +18,7 @@
         {
           "name": "name",
           "types": [],
+          "typedocs": {},
           "defaultValue": null,
           "kind": "POSITIONAL_OR_NAMED",
           "required": true,
@@ -26,7 +28,7 @@
       "doc": "",
       "shortdoc": "",
       "tags": [],
-      "source": "tests/assets/libraries_dir_examples/libraries_dir_recursive/lib1.resource",
+      "source": "/home/kali/Code/rfdocsindexer/tests/assets/libraries_dir_examples/libraries_dir_recursive/lib1.resource",
       "lineno": 18
     },
     {
@@ -35,6 +37,7 @@
         {
           "name": "password",
           "types": [],
+          "typedocs": {},
           "defaultValue": null,
           "kind": "POSITIONAL_OR_NAMED",
           "required": true,
@@ -44,7 +47,7 @@
       "doc": "",
       "shortdoc": "",
       "tags": [],
-      "source": "tests/assets/libraries_dir_examples/libraries_dir_recursive/lib1.resource",
+      "source": "/home/kali/Code/rfdocsindexer/tests/assets/libraries_dir_examples/libraries_dir_recursive/lib1.resource",
       "lineno": 22
     },
     {
@@ -53,12 +56,13 @@
       "doc": "Opens browser to login page",
       "shortdoc": "Opens browser to login page",
       "tags": [],
-      "source": "tests/assets/libraries_dir_examples/libraries_dir_recursive/lib1.resource",
+      "source": "/home/kali/Code/rfdocsindexer/tests/assets/libraries_dir_examples/libraries_dir_recursive/lib1.resource",
       "lineno": 13
     }
   ],
   "dataTypes": {
     "enums": [],
     "typedDicts": []
-  }
+  },
+  "typedocs": []
 }
