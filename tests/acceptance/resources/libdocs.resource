@@ -5,6 +5,7 @@ Library             OperatingSystem
 Library             Collections
 Resource            testutils.resource
 
+
 *** Keywords ***
 Output Dir Should Exist
     [Documentation]    Simple test to check if the output directory exists.
@@ -30,25 +31,19 @@ Output Dir Should Contain Index And Libdocs Dirs
     ${unexpected_dirnames}=    Create List
 
     IF    ${contains_machine_libdocs}
-
         Append to List    ${expected_dirnames}    @{machine_libdocs_dirnames}
     ELSE
-
         Append to List    ${unexpected_dirnames}    @{machine_libdocs_dirnames}
     END
 
     FOR    ${dirname}    IN    @{expected_dirnames}
-
         Directory Should Exist    ${outdir_path}${/}${dirname}
         ...    msg=The directory "${dirname}" should be created in "${outdir_path}"
-
     END
 
     FOR    ${dirname}    IN    @{unexpected_dirnames}
-
         Directory Should Not Exist    ${outdir_path}${/}${dirname}
         ...    msg=The directory "${dirname}" should not be created in "${outdir_path}"
-
     END
 
 Output Dir Structure Should Be Valid
@@ -84,7 +79,6 @@ Libdocs Should Be Generated
     ...    suffix=html
 
     IF    ${check_machine_libdocs}
-
         ${xml_subdir_path}=    Join Path    ${TEST_DIR}    ${output_dirname}    ${XML_LIBDOCS_DIRNAME}
         ${json_subdir_path}=    Join Path    ${TEST_DIR}    ${output_dirname}    ${JSON_LIBDOCS_DIRNAME}
         ${spec_subdir_path}=    Join Path    ${TEST_DIR}    ${output_dirname}    ${LIBSPECS_DIRNAME}

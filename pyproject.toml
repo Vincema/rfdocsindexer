@@ -30,7 +30,7 @@ classifiers = [
 indexrfdocs = "rfdocsindexer.cli:cli"
 
 [tool.poetry.dependencies]
-python = "^3.7"
+python = "^3.8"
 click = "^8.0.1"
 Jinja2 = "^3.0.1"
 pydantic = "^1.8.2"
@@ -41,15 +41,14 @@ toml = "^0.10.2"
 beautifulsoup4 = "^4.9.3"
 black = "^22.1"
 coverage = "^6.0"
-flake8 = "^5.0.1"
+flake8 = "^5.0.4"
 invoke = "^1.6.0"
 isort = "^5.9.3"
-poetry-core = "1.0.4"
 mypy = "^0.982"
 pytest = "^7.0.1"
-robotframework-tidy = "^1.4.0"
+robotframework-tidy = "^3.2"
 tox = "^3.24.0"
-tox-poetry-installer = {extras = ["poetry"], version = "^0.8.5"}
+tox-poetry-installer = {extras = ["poetry"], version = "^0.10.0"}
 types-toml = "^0.10.0"
 
 

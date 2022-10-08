@@ -9,6 +9,7 @@ Resource            testutils.resource
 
 Test Teardown       Clear Test Dir
 
+
 *** Test Cases ***
 Index File Should Be Identical To The One In Tests Assets
     [Documentation]    Assert that the generated index file is identical to the one in the tests assets.
