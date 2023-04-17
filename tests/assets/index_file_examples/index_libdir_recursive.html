@@ -114,11 +114,11 @@
                         <a href="libdocs_html/BuiltIn.html#Length%20Should%20Be" target="_blank" class="list-group-item list-group-item-action kw-item">Length Should Be
                             <p style="font-size: small; margin: 0;">item | length | msg=None</p></a>
                         <a href="libdocs_html/BuiltIn.html#Log" target="_blank" class="list-group-item list-group-item-action kw-item">Log
-                            <p style="font-size: small; margin: 0;">message | level=INFO | html=False | console=False | repr=False | formatter=str</p></a>
+                            <p style="font-size: small; margin: 0;">message | level=INFO | html=False | console=False | repr=DEPRECATED | formatter=str</p></a>
                         <a href="libdocs_html/BuiltIn.html#Log%20Many" target="_blank" class="list-group-item list-group-item-action kw-item">Log Many
                             <p style="font-size: small; margin: 0;">*messages</p></a>
                         <a href="libdocs_html/BuiltIn.html#Log%20To%20Console" target="_blank" class="list-group-item list-group-item-action kw-item">Log To Console
-                            <p style="font-size: small; margin: 0;">message | stream=STDOUT | no_newline=False</p></a>
+                            <p style="font-size: small; margin: 0;">message | stream=STDOUT | no_newline=False | format=</p></a>
                         <a href="libdocs_html/BuiltIn.html#Log%20Variables" target="_blank" class="list-group-item list-group-item-action kw-item">Log Variables
                             <p style="font-size: small; margin: 0;">level=INFO</p></a>
                         <a href="libdocs_html/BuiltIn.html#No%20Operation" target="_blank" class="list-group-item list-group-item-action kw-item">No Operation
@@ -159,11 +159,7 @@
                             <p style="font-size: small; margin: 0;">name | *args</p></a>
                         <a href="libdocs_html/BuiltIn.html#Run%20Keyword%20If" target="_blank" class="list-group-item list-group-item-action kw-item">Run Keyword If
                             <p style="font-size: small; margin: 0;">condition | name | *args</p></a>
-                        <a href="libdocs_html/BuiltIn.html#Run%20Keyword%20If%20All%20Critical%20Tests%20Passed" target="_blank" class="list-group-item list-group-item-action kw-item">Run Keyword If All Critical Tests Passed
-                            <p style="font-size: small; margin: 0;">name | *args</p></a>
                         <a href="libdocs_html/BuiltIn.html#Run%20Keyword%20If%20All%20Tests%20Passed" target="_blank" class="list-group-item list-group-item-action kw-item">Run Keyword If All Tests Passed
-                            <p style="font-size: small; margin: 0;">name | *args</p></a>
-                        <a href="libdocs_html/BuiltIn.html#Run%20Keyword%20If%20Any%20Critical%20Tests%20Failed" target="_blank" class="list-group-item list-group-item-action kw-item">Run Keyword If Any Critical Tests Failed
                             <p style="font-size: small; margin: 0;">name | *args</p></a>
                         <a href="libdocs_html/BuiltIn.html#Run%20Keyword%20If%20Any%20Tests%20Failed" target="_blank" class="list-group-item list-group-item-action kw-item">Run Keyword If Any Tests Failed
                             <p style="font-size: small; margin: 0;">name | *args</p></a>
@@ -228,7 +224,7 @@
                         <a href="libdocs_html/BuiltIn.html#Should%20Match" target="_blank" class="list-group-item list-group-item-action kw-item">Should Match
                             <p style="font-size: small; margin: 0;">string | pattern | msg=None | values=True | ignore_case=False</p></a>
                         <a href="libdocs_html/BuiltIn.html#Should%20Match%20Regexp" target="_blank" class="list-group-item list-group-item-action kw-item">Should Match Regexp
-                            <p style="font-size: small; margin: 0;">string | pattern | msg=None | values=True</p></a>
+                            <p style="font-size: small; margin: 0;">string | pattern | msg=None | values=True | flags=None</p></a>
                         <a href="libdocs_html/BuiltIn.html#Should%20Not%20Be%20Empty" target="_blank" class="list-group-item list-group-item-action kw-item">Should Not Be Empty
                             <p style="font-size: small; margin: 0;">item | msg=None</p></a>
                         <a href="libdocs_html/BuiltIn.html#Should%20Not%20Be%20Equal" target="_blank" class="list-group-item list-group-item-action kw-item">Should Not Be Equal
@@ -250,7 +246,7 @@
                         <a href="libdocs_html/BuiltIn.html#Should%20Not%20Match" target="_blank" class="list-group-item list-group-item-action kw-item">Should Not Match
                             <p style="font-size: small; margin: 0;">string | pattern | msg=None | values=True | ignore_case=False</p></a>
                         <a href="libdocs_html/BuiltIn.html#Should%20Not%20Match%20Regexp" target="_blank" class="list-group-item list-group-item-action kw-item">Should Not Match Regexp
-                            <p style="font-size: small; margin: 0;">string | pattern | msg=None | values=True</p></a>
+                            <p style="font-size: small; margin: 0;">string | pattern | msg=None | values=True | flags=None</p></a>
                         <a href="libdocs_html/BuiltIn.html#Should%20Not%20Start%20With" target="_blank" class="list-group-item list-group-item-action kw-item">Should Not Start With
                             <p style="font-size: small; margin: 0;">str1 | str2 | msg=None | values=True | ignore_case=False | strip_spaces=False | collapse_spaces=False</p></a>
                         <a href="libdocs_html/BuiltIn.html#Should%20Start%20With" target="_blank" class="list-group-item list-group-item-action kw-item">Should Start With
@@ -317,7 +313,7 @@
                         <a href="libdocs_html/Collections.html#Get%20Dictionary%20Values" target="_blank" class="list-group-item list-group-item-action kw-item">Get Dictionary Values
                             <p style="font-size: small; margin: 0;">dictionary | sort_keys=True</p></a>
                         <a href="libdocs_html/Collections.html#Get%20From%20Dictionary" target="_blank" class="list-group-item list-group-item-action kw-item">Get From Dictionary
-                            <p style="font-size: small; margin: 0;">dictionary | key</p></a>
+                            <p style="font-size: small; margin: 0;">dictionary | key | default=</p></a>
                         <a href="libdocs_html/Collections.html#Get%20From%20List" target="_blank" class="list-group-item list-group-item-action kw-item">Get From List
                             <p style="font-size: small; margin: 0;">list_ | index</p></a>
                         <a href="libdocs_html/Collections.html#Get%20Index%20From%20List" target="_blank" class="list-group-item list-group-item-action kw-item">Get Index From List
@@ -530,7 +526,7 @@
                         <a href="libdocs_html/OperatingSystem.html#Get%20Modified%20Time" target="_blank" class="list-group-item list-group-item-action kw-item">Get Modified Time
                             <p style="font-size: small; margin: 0;">path | format=timestamp</p></a>
                         <a href="libdocs_html/OperatingSystem.html#Grep%20File" target="_blank" class="list-group-item list-group-item-action kw-item">Grep File
-                            <p style="font-size: small; margin: 0;">path | pattern | encoding=UTF-8 | encoding_errors=strict</p></a>
+                            <p style="font-size: small; margin: 0;">path | pattern | encoding=UTF-8 | encoding_errors=strict | regexp=False</p></a>
                         <a href="libdocs_html/OperatingSystem.html#Join%20Path" target="_blank" class="list-group-item list-group-item-action kw-item">Join Path
                             <p style="font-size: small; margin: 0;">base | *parts</p></a>
                         <a href="libdocs_html/OperatingSystem.html#Join%20Paths" target="_blank" class="list-group-item list-group-item-action kw-item">Join Paths
@@ -693,19 +689,19 @@
                         <a href="libdocs_html/String.html#Get%20Lines%20Matching%20Pattern" target="_blank" class="list-group-item list-group-item-action kw-item">Get Lines Matching Pattern
                             <p style="font-size: small; margin: 0;">string | pattern | case_insensitive=False</p></a>
                         <a href="libdocs_html/String.html#Get%20Lines%20Matching%20Regexp" target="_blank" class="list-group-item list-group-item-action kw-item">Get Lines Matching Regexp
-                            <p style="font-size: small; margin: 0;">string | pattern | partial_match=False</p></a>
+                            <p style="font-size: small; margin: 0;">string | pattern | partial_match=False | flags=None</p></a>
                         <a href="libdocs_html/String.html#Get%20Regexp%20Matches" target="_blank" class="list-group-item list-group-item-action kw-item">Get Regexp Matches
-                            <p style="font-size: small; margin: 0;">string | pattern | *groups</p></a>
+                            <p style="font-size: small; margin: 0;">string | pattern | *groups | flags=None</p></a>
                         <a href="libdocs_html/String.html#Get%20Substring" target="_blank" class="list-group-item list-group-item-action kw-item">Get Substring
                             <p style="font-size: small; margin: 0;">string | start | end=None</p></a>
                         <a href="libdocs_html/String.html#Remove%20String" target="_blank" class="list-group-item list-group-item-action kw-item">Remove String
                             <p style="font-size: small; margin: 0;">string | *removables</p></a>
                         <a href="libdocs_html/String.html#Remove%20String%20Using%20Regexp" target="_blank" class="list-group-item list-group-item-action kw-item">Remove String Using Regexp
-                            <p style="font-size: small; margin: 0;">string | *patterns</p></a>
+                            <p style="font-size: small; margin: 0;">string | *patterns | flags=None</p></a>
                         <a href="libdocs_html/String.html#Replace%20String" target="_blank" class="list-group-item list-group-item-action kw-item">Replace String
                             <p style="font-size: small; margin: 0;">string | search_for | replace_with | count=-1</p></a>
                         <a href="libdocs_html/String.html#Replace%20String%20Using%20Regexp" target="_blank" class="list-group-item list-group-item-action kw-item">Replace String Using Regexp
-                            <p style="font-size: small; margin: 0;">string | pattern | replace_with | count=-1</p></a>
+                            <p style="font-size: small; margin: 0;">string | pattern | replace_with | count=-1 | flags=None</p></a>
                         <a href="libdocs_html/String.html#Should%20Be%20Byte%20String" target="_blank" class="list-group-item list-group-item-action kw-item">Should Be Byte String
                             <p style="font-size: small; margin: 0;">item | msg=None</p></a>
                         <a href="libdocs_html/String.html#Should%20Be%20Lower%20Case" target="_blank" class="list-group-item list-group-item-action kw-item">Should Be Lower Case

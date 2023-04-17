@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<keywordspec name="Process" type="LIBRARY" format="ROBOT" scope="GLOBAL" generated="2022-10-06T16:55:18Z" specversion="4" source="/home/kali/Code/rfdocsindexer/.tox/py39/lib/python3.9/site-packages/robot/libraries/Process.py" lineno="30">
-<version>5.0.1</version>
+<keywordspec name="Process" type="LIBRARY" format="ROBOT" scope="GLOBAL" generated="2023-04-17T12:52:22+00:00" specversion="4" source="/home/kali/Code/rfdocsindexer/.venv/lib/python3.10/site-packages/robot/libraries/Process.py" lineno="30">
+<version>6.0.2</version>
 <doc>Robot Framework library for running processes.
 
 This library utilizes Python's

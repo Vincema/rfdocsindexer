@@ -1,12 +1,13 @@
 {
+  "specversion": 1,
   "name": "lib2",
   "doc": "An example resource file",
   "version": "",
-  "generated": "2021-08-20 17:17:13",
+  "generated": "2023-04-17T12:52:22+00:00",
   "type": "RESOURCE",
   "scope": "GLOBAL",
   "docFormat": "ROBOT",
-  "source": "tests/assets/libraries_dir_examples/libraries_dir_recursive/lib2.resource",
+  "source": "/home/kali/Code/rfdocsindexer/tests/assets/libraries_dir_examples/libraries_dir_recursive/lib2.resource",
   "lineno": 1,
   "tags": [],
   "inits": [],
@@ -17,6 +18,7 @@
         {
           "name": "name",
           "types": [],
+          "typedocs": {},
           "defaultValue": null,
           "kind": "POSITIONAL_OR_NAMED",
           "required": true,
@@ -26,8 +28,8 @@
       "doc": "",
       "shortdoc": "",
       "tags": [],
-      "source": "tests/assets/libraries_dir_examples/libraries_dir_recursive/lib2.resource",
-      "lineno": 18
+      "source": "/home/kali/Code/rfdocsindexer/tests/assets/libraries_dir_examples/libraries_dir_recursive/lib2.resource",
+      "lineno": 19
     },
     {
       "name": "Input Password",
@@ -35,6 +37,7 @@
         {
           "name": "password",
           "types": [],
+          "typedocs": {},
           "defaultValue": null,
           "kind": "POSITIONAL_OR_NAMED",
           "required": true,
@@ -44,8 +47,8 @@
       "doc": "",
       "shortdoc": "",
       "tags": [],
-      "source": "tests/assets/libraries_dir_examples/libraries_dir_recursive/lib2.resource",
-      "lineno": 22
+      "source": "/home/kali/Code/rfdocsindexer/tests/assets/libraries_dir_examples/libraries_dir_recursive/lib2.resource",
+      "lineno": 23
     },
     {
       "name": "Open Login Page",
@@ -53,12 +56,13 @@
       "doc": "Opens browser to login page",
       "shortdoc": "Opens browser to login page",
       "tags": [],
-      "source": "tests/assets/libraries_dir_examples/libraries_dir_recursive/lib2.resource",
-      "lineno": 13
+      "source": "/home/kali/Code/rfdocsindexer/tests/assets/libraries_dir_examples/libraries_dir_recursive/lib2.resource",
+      "lineno": 14
     }
   ],
   "dataTypes": {
     "enums": [],
     "typedDicts": []
-  }
+  },
+  "typedocs": []
 }

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<keywordspec name="String" type="LIBRARY" format="ROBOT" scope="GLOBAL" generated="2022-10-06T16:55:18Z" specversion="4" source="/home/kali/Code/rfdocsindexer/.tox/py39/lib/python3.9/site-packages/robot/libraries/String.py" lineno="29">
-<version>5.0.1</version>
+<keywordspec name="String" type="LIBRARY" format="ROBOT" scope="GLOBAL" generated="2023-04-17T12:52:22+00:00" specversion="4" source="/home/kali/Code/rfdocsindexer/.venv/lib/python3.10/site-packages/robot/libraries/String.py" lineno="29">
+<version>6.0.2</version>
 <doc>A library for string manipulation and verification.
 
 ``String`` is Robot Framework's standard library for manipulating
@@ -180,7 +180,7 @@ need to convert byte strings to Unicode strings and `Convert To String`
 in ``BuiltIn`` if you need to convert arbitrary objects to Unicode.</doc>
 <shortdoc>Encodes the given Unicode ``string`` to bytes using the given ``encoding``.</shortdoc>
 </kw>
-<kw name="Fetch From Left" lineno="551">
+<kw name="Fetch From Left" lineno="579">
 <arguments repr="string, marker">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="string">
 <name>string</name>
@@ -197,7 +197,7 @@ See also `Fetch From Right`, `Split String` and `Split String
 From Right`.</doc>
 <shortdoc>Returns contents of the ``string`` before the first occurrence of ``marker``.</shortdoc>
 </kw>
-<kw name="Fetch From Right" lineno="561">
+<kw name="Fetch From Right" lineno="589">
 <arguments repr="string, marker">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="string">
 <name>string</name>
@@ -250,7 +250,7 @@ Examples:
 New in Robot Framework 3.1.</doc>
 <shortdoc>Formats a ``template`` using the given ``positional`` and ``named`` arguments.</shortdoc>
 </kw>
-<kw name="Generate Random String" lineno="571">
+<kw name="Generate Random String" lineno="599">
 <arguments repr="length=8, chars=[LETTERS][NUMBERS]">
 <arg kind="POSITIONAL_OR_NAMED" required="false" repr="length=8">
 <name>length</name>
@@ -399,7 +399,7 @@ literal strings is enough.</doc>
 <shortdoc>Returns lines of the given ``string`` that match the ``pattern``.</shortdoc>
 </kw>
 <kw name="Get Lines Matching Regexp" lineno="338">
-<arguments repr="string, pattern, partial_match=False">
+<arguments repr="string, pattern, partial_match=False, flags=None">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="string">
 <name>string</name>
 </arg>
@@ -410,6 +410,10 @@ literal strings is enough.</doc>
 <name>partial_match</name>
 <default>False</default>
 </arg>
+<arg kind="POSITIONAL_OR_NAMED" required="false" repr="flags=None">
+<name>flags</name>
+<default>None</default>
+</arg>
 </arguments>
 <doc>Returns lines of the given ``string`` that match the regexp ``pattern``.
 
@@ -417,7 +421,7 @@ See `BuiltIn.Should Match Regexp` for more information about
 Python regular expression syntax in general and how to use it
 in Robot Framework data in particular.
 
-By default lines match only if they match the pattern fully, but
+Lines match only if they match the pattern fully by default, but
 partial matching can be enabled by giving the ``partial_match``
 argument a true value. The value is considered true
 if it is a non-empty string that is not equal to ``false``, ``none`` or
@@ -427,8 +431,10 @@ in Python.
 If the pattern is empty, it matches only empty lines by default.
 When partial matching is enabled, empty pattern matches all lines.
 
-Notice that to make the match case-insensitive, you need to prefix
-the pattern with case-insensitive flag ``(?i)``.
+Possible flags altering how the expression is parsed (e.g. ``re.IGNORECASE``,
+``re.VERBOSE``) can be given using the ``flags`` argument (e.g.
+``flags=IGNORECASE | VERBOSE``) or embedded to the pattern (e.g.
+``(?ix)pattern``).
 
 Lines are returned as one string concatenated back together with
 newlines. Possible trailing newline is never returned. The
@@ -438,14 +444,16 @@ Examples:
 | ${lines} = | Get Lines Matching Regexp | ${result} | Reg\\w{3} example |
 | ${lines} = | Get Lines Matching Regexp | ${result} | Reg\\w{3} example | partial_match=true |
 | ${ret} =   | Get Lines Matching Regexp | ${ret}    | (?i)FAIL: .* |
+| ${ret} =   | Get Lines Matching Regexp | ${ret}    | FAIL: .* | flags=IGNORECASE |
 
-See `Get Lines Matching Pattern` and `Get Lines Containing
-String` if you do not need full regular expression powers (and
-complexity).</doc>
+See `Get Lines Matching Pattern` and `Get Lines Containing String` if you
+do not need the full regular expression powers (and complexity).
+
+The ``flags`` argument is new in Robot Framework 6.0.</doc>
 <shortdoc>Returns lines of the given ``string`` that match the regexp ``pattern``.</shortdoc>
 </kw>
-<kw name="Get Regexp Matches" lineno="381">
-<arguments repr="string, pattern, *groups">
+<kw name="Get Regexp Matches" lineno="387">
+<arguments repr="string, pattern, *groups, flags=None">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="string">
 <name>string</name>
 </arg>
@@ -454,6 +462,10 @@ complexity).</doc>
 </arg>
 <arg kind="VAR_POSITIONAL" required="false" repr="*groups">
 <name>groups</name>
+</arg>
+<arg kind="NAMED_ONLY" required="false" repr="flags=None">
+<name>flags</name>
+<default>None</default>
 </arg>
 </arguments>
 <doc>Returns a list of all non-overlapping matches in the given string.
@@ -469,9 +481,15 @@ multiple groups are used, the list contains tuples that contain
 individual group contents. All groups can be given as indexes (starting
 from 1) and named groups also as names.
 
+Possible flags altering how the expression is parsed (e.g. ``re.IGNORECASE``,
+``re.MULTILINE``) can be given using the ``flags`` argument (e.g.
+``flags=IGNORECASE | MULTILINE``) or embedded to the pattern (e.g.
+``(?im)pattern``).
+
 Examples:
 | ${no match} =    | Get Regexp Matches | the string | xxx     |
 | ${matches} =     | Get Regexp Matches | the string | t..     |
+| ${matches} =     | Get Regexp Matches | the string | T..     | flags=IGNORECASE |
 | ${one group} =   | Get Regexp Matches | the string | t(..)   | 1 |
 | ${named group} = | Get Regexp Matches | the string | t(?P&lt;name&gt;..) | name |
 | ${two groups} =  | Get Regexp Matches | the string | t(.)(.) | 1 | 2 |
@@ -480,10 +498,12 @@ Examples:
 | ${matches} = ['the', 'tri']
 | ${one group} = ['he', 'ri']
 | ${named group} = ['he', 'ri']
-| ${two groups} = [('h', 'e'), ('r', 'i')]</doc>
+| ${two groups} = [('h', 'e'), ('r', 'i')]
+
+The ``flags`` argument is new in Robot Framework 6.0.</doc>
 <shortdoc>Returns a list of all non-overlapping matches in the given string.</shortdoc>
 </kw>
-<kw name="Get Substring" lineno="614">
+<kw name="Get Substring" lineno="642">
 <arguments repr="string, start, end=None">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="string">
 <name>string</name>
@@ -510,7 +530,7 @@ Examples:
 | ${last two} =     | Get Substring | ${string} | -2 |    |</doc>
 <shortdoc>Returns a substring from ``start`` index to ``end`` index.</shortdoc>
 </kw>
-<kw name="Remove String" lineno="463">
+<kw name="Remove String" lineno="484">
 <arguments repr="string, *removables">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="string">
 <name>string</name>
@@ -539,13 +559,17 @@ Examples:
 | Should Be Equal | ${str}        | R Framewrk      |</doc>
 <shortdoc>Removes all ``removables`` from the given ``string``.</shortdoc>
 </kw>
-<kw name="Remove String Using Regexp" lineno="487">
-<arguments repr="string, *patterns">
+<kw name="Remove String Using Regexp" lineno="508">
+<arguments repr="string, *patterns, flags=None">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="string">
 <name>string</name>
 </arg>
 <arg kind="VAR_POSITIONAL" required="false" repr="*patterns">
 <name>patterns</name>
+</arg>
+<arg kind="NAMED_ONLY" required="false" repr="flags=None">
+<name>flags</name>
+<default>None</default>
 </arg>
 </arguments>
 <doc>Removes ``patterns`` from the given ``string``.
@@ -555,10 +579,17 @@ the ``patterns`` to search for are considered to be a regular
 expression. See `Replace String Using Regexp` for more information
 about the regular expression syntax. That keyword can also be
 used if there is a need to remove only a certain number of
-occurrences.</doc>
+occurrences.
+
+Possible flags altering how the expression is parsed (e.g. ``re.IGNORECASE``,
+``re.MULTILINE``) can be given using the ``flags`` argument (e.g.
+``flags=IGNORECASE | MULTILINE``) or embedded to the pattern (e.g.
+``(?im)pattern``).
+
+The ``flags`` argument is new in Robot Framework 6.0.</doc>
 <shortdoc>Removes ``patterns`` from the given ``string``.</shortdoc>
 </kw>
-<kw name="Replace String" lineno="418">
+<kw name="Replace String" lineno="432">
 <arguments repr="string, search_for, replace_with, count=-1">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="string">
 <name>string</name>
@@ -595,8 +626,8 @@ Examples:
 | Should Be Equal | ${str}         | Helo, world!   |       |          |</doc>
 <shortdoc>Replaces ``search_for`` in the given ``string`` with ``replace_with``.</shortdoc>
 </kw>
-<kw name="Replace String Using Regexp" lineno="442">
-<arguments repr="string, pattern, replace_with, count=-1">
+<kw name="Replace String Using Regexp" lineno="456">
+<arguments repr="string, pattern, replace_with, count=-1, flags=None">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="string">
 <name>string</name>
 </arg>
@@ -610,6 +641,10 @@ Examples:
 <name>count</name>
 <default>-1</default>
 </arg>
+<arg kind="POSITIONAL_OR_NAMED" required="false" repr="flags=None">
+<name>flags</name>
+<default>None</default>
+</arg>
 </arguments>
 <doc>Replaces ``pattern`` in the given ``string`` with ``replace_with``.
 
@@ -619,14 +654,21 @@ expression.  See `BuiltIn.Should Match Regexp` for more
 information about Python regular expression syntax in general
 and how to use it in Robot Framework data in particular.
 
+Possible flags altering how the expression is parsed (e.g. ``re.IGNORECASE``,
+``re.MULTILINE``) can be given using the ``flags`` argument (e.g.
+``flags=IGNORECASE | MULTILINE``) or embedded to the pattern (e.g.
+``(?im)pattern``).
+
 If you need to just remove a string see `Remove String Using Regexp`.
 
 Examples:
 | ${str} = | Replace String Using Regexp | ${str} | 20\\d\\d-\\d\\d-\\d\\d | &lt;DATE&gt; |
-| ${str} = | Replace String Using Regexp | ${str} | (Hello|Hi) | ${EMPTY} | count=1 |</doc>
+| ${str} = | Replace String Using Regexp | ${str} | (Hello|Hi) | ${EMPTY} | count=1 |
+
+The ``flags`` argument is new in Robot Framework 6.0.</doc>
 <shortdoc>Replaces ``pattern`` in the given ``string`` with ``replace_with``.</shortdoc>
 </kw>
-<kw name="Should Be Byte String" lineno="688">
+<kw name="Should Be Byte String" lineno="716">
 <arguments repr="item, msg=None">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="item">
 <name>item</name>
@@ -643,7 +685,7 @@ Use `Should Be String` if you want to verify the ``item`` is a string.
 The default error message can be overridden with the optional ``msg`` argument.</doc>
 <shortdoc>Fails if the given ``item`` is not a byte string.</shortdoc>
 </kw>
-<kw name="Should Be Lower Case" lineno="698">
+<kw name="Should Be Lower Case" lineno="726">
 <arguments repr="string, msg=None">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="string">
 <name>string</name>
@@ -664,7 +706,7 @@ The default error message can be overridden with the optional
 See also `Should Be Upper Case` and `Should Be Title Case`.</doc>
 <shortdoc>Fails if the given ``string`` is not in lower case.</shortdoc>
 </kw>
-<kw name="Should Be String" lineno="663">
+<kw name="Should Be String" lineno="691">
 <arguments repr="item, msg=None">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="item">
 <name>item</name>
@@ -679,7 +721,7 @@ See also `Should Be Upper Case` and `Should Be Title Case`.</doc>
 The default error message can be overridden with the optional ``msg`` argument.</doc>
 <shortdoc>Fails if the given ``item`` is not a string.</shortdoc>
 </kw>
-<kw name="Should Be Title Case" lineno="727">
+<kw name="Should Be Title Case" lineno="755">
 <arguments repr="string, msg=None, exclude=None">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="string">
 <name>string</name>
@@ -722,7 +764,7 @@ Framework data in particular.
 See also `Should Be Upper Case` and `Should Be Lower Case`.</doc>
 <shortdoc>Fails if given ``string`` is not title.</shortdoc>
 </kw>
-<kw name="Should Be Unicode String" lineno="679">
+<kw name="Should Be Unicode String" lineno="707">
 <arguments repr="item, msg=None">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="item">
 <name>item</name>
@@ -738,7 +780,7 @@ On Python 3 this keyword behaves exactly the same way `Should Be String`.
 That keyword should be used instead and this keyword will be deprecated.</doc>
 <shortdoc>Fails if the given ``item`` is not a Unicode string.</shortdoc>
 </kw>
-<kw name="Should Be Upper Case" lineno="712">
+<kw name="Should Be Upper Case" lineno="740">
 <arguments repr="string, msg=None">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="string">
 <name>string</name>
@@ -759,7 +801,7 @@ The default error message can be overridden with the optional
 See also `Should Be Title Case` and `Should Be Lower Case`.</doc>
 <shortdoc>Fails if the given ``string`` is not in upper case.</shortdoc>
 </kw>
-<kw name="Should Not Be String" lineno="671">
+<kw name="Should Not Be String" lineno="699">
 <arguments repr="item, msg=None">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="item">
 <name>item</name>
@@ -774,7 +816,7 @@ See also `Should Be Title Case` and `Should Be Lower Case`.</doc>
 The default error message can be overridden with the optional ``msg`` argument.</doc>
 <shortdoc>Fails if the given ``item`` is a string.</shortdoc>
 </kw>
-<kw name="Split String" lineno="502">
+<kw name="Split String" lineno="530">
 <arguments repr="string, separator=None, max_split=-1">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="string">
 <name>string</name>
@@ -808,7 +850,7 @@ from right, and `Fetch From Left` and `Fetch From Right` if
 you only want to get first/last part of the string.</doc>
 <shortdoc>Splits the ``string`` using ``separator`` as a delimiter string.</shortdoc>
 </kw>
-<kw name="Split String From Right" lineno="528">
+<kw name="Split String From Right" lineno="556">
 <arguments repr="string, separator=None, max_split=-1">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="string">
 <name>string</name>
@@ -832,7 +874,7 @@ Examples:
 | ${rest}  | ${last} = | Split String From Right | ${string} | - | 1 |</doc>
 <shortdoc>Splits the ``string`` using ``separator`` starting from right.</shortdoc>
 </kw>
-<kw name="Split String To Characters" lineno="543">
+<kw name="Split String To Characters" lineno="571">
 <arguments repr="string">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="string">
 <name>string</name>
@@ -879,7 +921,7 @@ Examples:
 Use `Get Line` if you only need to get a single line.</doc>
 <shortdoc>Splits the given string to lines.</shortdoc>
 </kw>
-<kw name="Strip String" lineno="633">
+<kw name="Strip String" lineno="661">
 <arguments repr="string, mode=both, characters=None">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="string">
 <name>string</name>

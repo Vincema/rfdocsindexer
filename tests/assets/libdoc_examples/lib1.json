@@ -3,7 +3,7 @@
   "name": "lib1",
   "doc": "An example resource file",
   "version": "",
-  "generated": "2022-10-07 00:00:29",
+  "generated": "2023-04-17T12:52:22+00:00",
   "type": "RESOURCE",
   "scope": "GLOBAL",
   "docFormat": "ROBOT",
@@ -29,7 +29,7 @@
       "shortdoc": "",
       "tags": [],
       "source": "/home/kali/Code/rfdocsindexer/tests/assets/libraries_dir_examples/libraries_dir_recursive/lib1.resource",
-      "lineno": 18
+      "lineno": 19
     },
     {
       "name": "Input Password",
@@ -48,7 +48,7 @@
       "shortdoc": "",
       "tags": [],
       "source": "/home/kali/Code/rfdocsindexer/tests/assets/libraries_dir_examples/libraries_dir_recursive/lib1.resource",
-      "lineno": 22
+      "lineno": 23
     },
     {
       "name": "Open Login Page",
@@ -57,7 +57,7 @@
       "shortdoc": "Opens browser to login page",
       "tags": [],
       "source": "/home/kali/Code/rfdocsindexer/tests/assets/libraries_dir_examples/libraries_dir_recursive/lib1.resource",
-      "lineno": 13
+      "lineno": 14
     }
   ],
   "dataTypes": {
