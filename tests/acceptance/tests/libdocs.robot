@@ -64,7 +64,13 @@ Command Should Erase The Existing Subdirs Content
 
 Command With library_paths And library_names Specified Should Generate Libdocs
     [Documentation]    Execute command with library_paths and library_names specified.
-    [Tags]    config_library_paths    config_library_names    config_extra_modules_searchpaths    config_include_robotframework_resources    config_build_machine_readable_libdoc    cliconfig_configfile
+    [Tags]
+    ...    config_library_paths
+    ...    config_library_names
+    ...    config_extra_modules_searchpaths
+    ...    config_include_robotframework_resources
+    ...    config_build_machine_readable_libdoc
+    ...    cliconfig_configfile
     [Setup]    Create Configfile    config_dict=${CONFIG_LIBDOCS_FOR_LIBRARY_PATHS_AND_NAMES}
 
     Run Command    configfile=${CREATE_CONFIGFILE__FILENAME}
@@ -151,7 +157,13 @@ Success Message If No Externals Resources Added Should Not Be Prompted
 
 Libdocs Content Should Be Valid
     [Documentation]    Validate the content for the generated HTML libdocs.
-    [Tags]    config_library_paths    config_library_names    config_extra_modules_searchpaths    config_include_robotframework_resources    config_build_machine_readable_libdoc    cliconfig_configfile
+    [Tags]
+    ...    config_library_paths
+    ...    config_library_names
+    ...    config_extra_modules_searchpaths
+    ...    config_include_robotframework_resources
+    ...    config_build_machine_readable_libdoc
+    ...    cliconfig_configfile
     [Setup]    Create Configfile    config_dict=${CONFIG_LIBDOCS_2_LIBS_AND_RF_LIBS}
 
     Run Command    configfile=${CREATE_CONFIGFILE__FILENAME}

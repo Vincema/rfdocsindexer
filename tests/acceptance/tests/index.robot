@@ -14,7 +14,14 @@ Test Teardown       Clear Test Dir
 Index File Should Be Identical To The One In Tests Assets
     [Documentation]    Assert that the generated index file is identical to the one in the tests assets.
     ...    Non regression test.
-    [Tags]    config_library_paths    config_library_names    config_extra_modules_searchpaths    config_include_robotframework_resources    config_build_machine_readable_libdoc    config_external_resources    cliconfig_configfile
+    [Tags]
+    ...    config_library_paths
+    ...    config_library_names
+    ...    config_extra_modules_searchpaths
+    ...    config_include_robotframework_resources
+    ...    config_build_machine_readable_libdoc
+    ...    config_external_resources
+    ...    cliconfig_configfile
     [Setup]    Create Configfile    config_dict=${CONFIG_INDEX_INCLUDE_ALL_LIBS_FROM_RECURSIVE_DIR}
 
     Run Command    configfile=${CREATE_CONFIGFILE__FILENAME}
@@ -23,7 +30,14 @@ Index File Should Be Identical To The One In Tests Assets
 
 Index File Should Contain The External Resources
     [Documentation]    Assert that the generated index file contains the external resources.
-    [Tags]    config_library_paths    config_library_names    config_extra_modules_searchpaths    config_include_robotframework_resources    config_build_machine_readable_libdoc    config_external_resources    cliconfig_configfile
+    [Tags]
+    ...    config_library_paths
+    ...    config_library_names
+    ...    config_extra_modules_searchpaths
+    ...    config_include_robotframework_resources
+    ...    config_build_machine_readable_libdoc
+    ...    config_external_resources
+    ...    cliconfig_configfile
     [Setup]    Create Configfile    config_dict=${CONFIG_INDEX_INCLUDE_ALL_LIBS_FROM_RECURSIVE_DIR}
 
     Run Command    configfile=${CREATE_CONFIGFILE__FILENAME}
@@ -48,7 +62,13 @@ Index File Should Not Contain The External Resources Section If Empty
 Index File Should Contain The Library List
     [Documentation]    Assert that the indexfile contains the list of the libraries with
     ...    a link to its corresponding libdoc.
-    [Tags]    config_library_paths    config_library_names    config_extra_modules_searchpaths    config_include_robotframework_resources    config_build_machine_readable_libdoc    cliconfig_configfile
+    [Tags]
+    ...    config_library_paths
+    ...    config_library_names
+    ...    config_extra_modules_searchpaths
+    ...    config_include_robotframework_resources
+    ...    config_build_machine_readable_libdoc
+    ...    cliconfig_configfile
     [Setup]    Create Configfile    config_dict=${CONFIG_LIBDOCS_FOR_LIBRARY_PATHS_AND_NAMES}
 
     Run Command    configfile=${CREATE_CONFIGFILE__FILENAME}

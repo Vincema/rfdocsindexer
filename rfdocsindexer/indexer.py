@@ -168,7 +168,6 @@ def _index_external_resources(urls: List[str]) -> List[ExternalResource]:
         return []
 
     for raw_url in urls:
-
         # Extract url components (can be "name | http://example")
         name_delimiter = " | "
         name: str = raw_url
@@ -187,7 +186,7 @@ def _index_external_resources(urls: List[str]) -> List[ExternalResource]:
         except ValueError:
             raise RuntimeError(f'Url format is invalid for url "{url}"')
 
-        ext_resources += [ExternalResource(url=url, name=name)]
+        ext_resources += [ExternalResource(url=url, name=name)]  # type: ignore
 
     print("Indexed external resources")
 
@@ -281,6 +280,7 @@ def _generate_libdocs(
 
         xml_filepath: Optional[Path] = None
         json_filepath: Optional[Path] = None
+        libspec_filepath: Optional[Path] = None
         if gen_machine_readable_libdocs:
             libdoc_robot = copy.deepcopy(lib.libdoc)
 
@@ -291,13 +291,14 @@ def _generate_libdocs(
             libdoc_robot.save(json_filepath, "JSON")
 
             libspec_filepath = output_dir / LIBSPEC_DIR / (lib.name + ".spec")
-            libdoc_html.save(libspec_filepath, "LIBSPEC")
+            libdoc_robot.save(libspec_filepath, "LIBSPEC")
 
         indexed_libraries += [
             IndexedRFLibrary(
                 html_libdoc_path=html_filepath,
                 xml_libdoc_path=xml_filepath,
                 json_libdoc_path=json_filepath,
+                libspec_path=libspec_filepath,
                 libdata=lib.copy(deep=True),
             )
         ]
