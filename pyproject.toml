@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "rfdocsindexer"
-version = "1.1.0"
+version = "1.2.0"
 description = "A simple and configurable generator for RobotFramework documentation"
 license = "Apache-2.0"
 authors = ["Vincent Maire <maire.vincent31@gmail.com>"]
@@ -9,14 +9,15 @@ homepage = "https://github.com/Vincema/rfdocsindexer"
 repository = "https://github.com/Vincema/rfdocsindexer"
 keywords = ["RobotFramework", "Documentation", "Libdocs", "Testing"]
 classifiers = [
-    "Development Status :: 4 - Beta",
+    "Development Status :: 5 - Production/Stable",
     "Framework :: Robot Framework",
     "Framework :: Robot Framework :: Tool",
     "Intended Audience :: Developers",
     "License :: OSI Approved :: Apache Software License",
-    "Programming Language :: Python :: 3.7",
     "Programming Language :: Python :: 3.8",
     "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
     "Topic :: Documentation",
     "Topic :: Software Development :: Testing",
     "Topic :: Software Development :: Quality Assurance",
@@ -31,26 +32,26 @@ indexrfdocs = "rfdocsindexer.cli:cli"
 
 [tool.poetry.dependencies]
 python = "^3.8"
-click = "^8.0.1"
-Jinja2 = "^3.0.1"
-pydantic = "^1.8.2"
-robotframework = ">=4,<7"
-toml = "^0.10.2"
+click = ">= 8"
+Jinja2 = ">= 3"
+pydantic = ">= 1"
+robotframework = ">= 4"
+toml = ">= 0"
 
 [tool.poetry.dev-dependencies]
 beautifulsoup4 = "^4.9.3"
-black = "^22.1"
+black = "^23.3"
 coverage = "^7.0"
 flake8 = "^5.0.4"
-invoke = "^1.6.0"
+invoke = "^2.0"
 isort = "^5.9.3"
-mypy = "^0.991"
+mypy = "^1.2"
 pytest = "^7.0.1"
-robotframework-tidy = "^3.2"
+robotframework-tidy = "^4.1"
 tox = "^3.24.0"
 tox-poetry-installer = {extras = ["poetry"], version = "^0.10.0"}
 types-toml = "^0.10.0"
-
+tox-gh-actions = "^2"
 
 [build-system]
 requires = ["poetry-core"]

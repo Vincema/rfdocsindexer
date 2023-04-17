@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<keywordspec name="DateTime" type="LIBRARY" format="ROBOT" scope="GLOBAL" generated="2022-10-06T16:55:18Z" specversion="4" source="/home/kali/Code/rfdocsindexer/.tox/py39/lib/python3.9/site-packages/robot/libraries/DateTime.py" lineno="1">
-<version>5.0.1</version>
+<keywordspec name="DateTime" type="LIBRARY" format="ROBOT" scope="GLOBAL" generated="2023-04-17T12:52:22+00:00" specversion="4" source="/home/kali/Code/rfdocsindexer/.venv/lib/python3.10/site-packages/robot/libraries/DateTime.py" lineno="1">
+<version>6.0.2</version>
 <doc>A library for handling date and time values.
 
 ``DateTime`` is a Robot Framework standard library that supports creating and
@@ -179,6 +179,8 @@ times. The available time specifiers are:
 - ``minutes``, ``minute``, ``mins``, ``min``, ``m``
 - ``seconds``, ``second``, ``secs``, ``sec``, ``s``
 - ``milliseconds``, ``millisecond``, ``millis``, ``ms``
+- ``microseconds``, ``microsecond``, ``us``, ``μs`` (new in RF 6.0)
+- ``nanoseconds``, ``nanosecond``, ``ns`` (new in RF 6.0)
 
 When returning a time string, it is possible to select between ``verbose``
 and ``compact`` representations using ``result_format`` argument. The verbose
@@ -287,7 +289,7 @@ Additionally helper classes ``Date`` and ``Time`` can be used directly:
 <inits>
 </inits>
 <keywords>
-<kw name="Add Time To Date" lineno="419">
+<kw name="Add Time To Date" lineno="421">
 <arguments repr="date, time, result_format=timestamp, exclude_millis=False, date_format=None">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="date">
 <name>date</name>
@@ -327,7 +329,7 @@ Examples:
 | Should Be Equal | ${date}          | 2014-05-28 13:07:06.115 |</doc>
 <shortdoc>Adds time to date and returns the resulting date.</shortdoc>
 </kw>
-<kw name="Add Time To Time" lineno="467">
+<kw name="Add Time To Time" lineno="469">
 <arguments repr="time1, time2, result_format=number, exclude_millis=False">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="time1">
 <name>time1</name>
@@ -360,7 +362,7 @@ Examples:
 | Should Be Equal | ${time}          | 04:07:03          |</doc>
 <shortdoc>Adds time to another time and returns the resulting time.</shortdoc>
 </kw>
-<kw name="Convert Date" lineno="350">
+<kw name="Convert Date" lineno="352">
 <arguments repr="date, result_format=timestamp, exclude_millis=False, date_format=None">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="date">
 <name>date</name>
@@ -396,7 +398,7 @@ Examples:
 | Should Be Equal | ${date}      | 2014-05-28 12:05:00     |</doc>
 <shortdoc>Converts between supported `date formats`.</shortdoc>
 </kw>
-<kw name="Convert Time" lineno="373">
+<kw name="Convert Time" lineno="375">
 <arguments repr="time, result_format=number, exclude_millis=False">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="time">
 <name>time</name>
@@ -427,7 +429,7 @@ Examples:
 | Should Be Equal | ${time}       | 01:01:02          |</doc>
 <shortdoc>Converts between supported `time formats`.</shortdoc>
 </kw>
-<kw name="Get Current Date" lineno="307">
+<kw name="Get Current Date" lineno="309">
 <arguments repr="time_zone=local, increment=0, result_format=timestamp, exclude_millis=False">
 <arg kind="POSITIONAL_OR_NAMED" required="false" repr="time_zone=local">
 <name>time_zone</name>
@@ -472,7 +474,7 @@ Examples:
 | Should Be Equal | ${date.month}    | ${6}                    |</doc>
 <shortdoc>Returns current local or UTC time with an optional increment.</shortdoc>
 </kw>
-<kw name="Subtract Date From Date" lineno="393">
+<kw name="Subtract Date From Date" lineno="395">
 <arguments repr="date1, date2, result_format=number, exclude_millis=False, date1_format=None, date2_format=None">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="date1">
 <name>date1</name>
@@ -517,7 +519,7 @@ Arguments:
 | Should Be Equal | ${time}                 | 1 day 42 seconds        |</doc>
 <shortdoc>Subtracts date from another date and returns time between.</shortdoc>
 </kw>
-<kw name="Subtract Time From Date" lineno="443">
+<kw name="Subtract Time From Date" lineno="445">
 <arguments repr="date, time, result_format=timestamp, exclude_millis=False, date_format=None">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="date">
 <name>date</name>
@@ -557,7 +559,7 @@ Examples:
 | Should Be Equal | ${date}                 | 2014-05-28 12:05:03.111 |</doc>
 <shortdoc>Subtracts time from date and returns the resulting date.</shortdoc>
 </kw>
-<kw name="Subtract Time From Time" lineno="488">
+<kw name="Subtract Time From Time" lineno="490">
 <arguments repr="time1, time2, result_format=number, exclude_millis=False">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="time1">
 <name>time1</name>

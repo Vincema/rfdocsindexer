@@ -29,7 +29,5 @@ jobs:
 
           poetry install
 
-          poetry run pip install tox tox-gh-actions
-
       - name: Run Tox
         run: poetry run tox

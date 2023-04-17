@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<keywordspec name="LibModule1" type="LIBRARY" format="HTML" scope="TEST" generated="2022-10-06T17:00:29Z" specversion="4" source="/home/kali/Code/rfdocsindexer/tests/assets/libraries_dir_examples/libraries_dir_recursive/LibModule1/__init__.py" lineno="9">
+<keywordspec name="LibModule1" type="LIBRARY" format="ROBOT" scope="TEST" generated="2023-04-17T12:52:22+00:00" specversion="4" source="/home/kali/Code/rfdocsindexer/tests/assets/libraries_dir_examples/libraries_dir_recursive/LibModule1/__init__.py" lineno="9">
 <version/>
-<doc>&lt;p&gt;LibModule1 library&lt;/p&gt;</doc>
+<doc>LibModule1 library</doc>
 <tags>
 </tags>
 <inits>
@@ -34,7 +34,7 @@
 </datatypes>
 <typedocs>
 <type name="string" type="Standard">
-<doc>&lt;p&gt;All arguments are converted to Unicode strings.&lt;/p&gt;</doc>
+<doc>All arguments are converted to Unicode strings.</doc>
 <accepts>
 <type>Any</type>
 </accepts>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<keywordspec name="Collections" type="LIBRARY" format="ROBOT" scope="GLOBAL" generated="2022-10-06T16:55:18Z" specversion="4" source="/home/kali/Code/rfdocsindexer/.tox/py39/lib/python3.9/site-packages/robot/libraries/Collections.py" lineno="828">
-<version>5.0.1</version>
+<keywordspec name="Collections" type="LIBRARY" format="ROBOT" scope="GLOBAL" generated="2023-04-17T12:52:22+00:00" specversion="4" source="/home/kali/Code/rfdocsindexer/.venv/lib/python3.10/site-packages/robot/libraries/Collections.py" lineno="839">
+<version>6.0.2</version>
 <doc>A library providing keywords for handling lists and dictionaries.
 
 ``Collections`` is Robot Framework's standard library that provides a
@@ -125,7 +125,7 @@ Example:
 | ${L1} and ${L2} are not changed.</doc>
 <shortdoc>Combines the given ``lists`` together and returns the result.</shortdoc>
 </kw>
-<kw name="Convert To Dictionary" lineno="482">
+<kw name="Convert To Dictionary" lineno="485">
 <arguments repr="item">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="item">
 <name>item</name>
@@ -153,7 +153,7 @@ Mainly useful for converting tuples and other iterable to lists.
 Use `Create List` from the BuiltIn library for constructing new lists.</doc>
 <shortdoc>Converts the given ``item`` to a Python ``list`` type.</shortdoc>
 </kw>
-<kw name="Copy Dictionary" lineno="573">
+<kw name="Copy Dictionary" lineno="576">
 <arguments repr="dictionary, deepcopy=False">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="dictionary">
 <name>dictionary</name>
@@ -223,7 +223,7 @@ Example:
 | ${L3} is not changed</doc>
 <shortdoc>Returns the number of occurrences of the given ``value`` in ``list``.</shortdoc>
 </kw>
-<kw name="Dictionaries Should Be Equal" lineno="742">
+<kw name="Dictionaries Should Be Equal" lineno="754">
 <arguments repr="dict1, dict2, msg=None, values=True">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="dict1">
 <name>dict1</name>
@@ -251,7 +251,7 @@ See `Lists Should Be Equal` for more information about configuring
 the error message with ``msg`` and ``values`` arguments.</doc>
 <shortdoc>Fails if the given dictionaries are not equal.</shortdoc>
 </kw>
-<kw name="Dictionary Should Contain Item" lineno="711">
+<kw name="Dictionary Should Contain Item" lineno="721">
 <arguments repr="dictionary, key, value, msg=None">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="dictionary">
 <name>dictionary</name>
@@ -274,7 +274,7 @@ Value is converted to unicode for comparison.
 Use the ``msg`` argument to override the default error message.</doc>
 <shortdoc>An item of ``key`` / ``value`` must be found in a ``dictionary``.</shortdoc>
 </kw>
-<kw name="Dictionary Should Contain Key" lineno="693">
+<kw name="Dictionary Should Contain Key" lineno="701">
 <arguments repr="dictionary, key, msg=None">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="dictionary">
 <name>dictionary</name>
@@ -292,7 +292,7 @@ Use the ``msg`` argument to override the default error message.</doc>
 Use the ``msg`` argument to override the default error message.</doc>
 <shortdoc>Fails if ``key`` is not found from ``dictionary``.</shortdoc>
 </kw>
-<kw name="Dictionary Should Contain Sub Dictionary" lineno="758">
+<kw name="Dictionary Should Contain Sub Dictionary" lineno="770">
 <arguments repr="dict1, dict2, msg=None, values=True">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="dict1">
 <name>dict1</name>
@@ -315,7 +315,7 @@ See `Lists Should Be Equal` for more information about configuring
 the error message with ``msg`` and ``values`` arguments.</doc>
 <shortdoc>Fails unless all items in ``dict2`` are found from ``dict1``.</shortdoc>
 </kw>
-<kw name="Dictionary Should Contain Value" lineno="724">
+<kw name="Dictionary Should Contain Value" lineno="734">
 <arguments repr="dictionary, value, msg=None">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="dictionary">
 <name>dictionary</name>
@@ -333,7 +333,7 @@ the error message with ``msg`` and ``values`` arguments.</doc>
 Use the ``msg`` argument to override the default error message.</doc>
 <shortdoc>Fails if ``value`` is not found from ``dictionary``.</shortdoc>
 </kw>
-<kw name="Dictionary Should Not Contain Key" lineno="702">
+<kw name="Dictionary Should Not Contain Key" lineno="711">
 <arguments repr="dictionary, key, msg=None">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="dictionary">
 <name>dictionary</name>
@@ -351,7 +351,7 @@ Use the ``msg`` argument to override the default error message.</doc>
 Use the ``msg`` argument to override the default error message.</doc>
 <shortdoc>Fails if ``key`` is found from ``dictionary``.</shortdoc>
 </kw>
-<kw name="Dictionary Should Not Contain Value" lineno="733">
+<kw name="Dictionary Should Not Contain Value" lineno="744">
 <arguments repr="dictionary, value, msg=None">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="dictionary">
 <name>dictionary</name>
@@ -369,7 +369,7 @@ Use the ``msg`` argument to override the default error message.</doc>
 Use the ``msg`` argument to override the default error message.</doc>
 <shortdoc>Fails if ``value`` is found from ``dictionary``.</shortdoc>
 </kw>
-<kw name="Get Dictionary Items" lineno="645">
+<kw name="Get Dictionary Items" lineno="648">
 <arguments repr="dictionary, sort_keys=True">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="dictionary">
 <name>dictionary</name>
@@ -404,7 +404,7 @@ Example:
 were always sorted based on keys.</doc>
 <shortdoc>Returns items of the given ``dictionary`` as a list.</shortdoc>
 </kw>
-<kw name="Get Dictionary Keys" lineno="590">
+<kw name="Get Dictionary Keys" lineno="593">
 <arguments repr="dictionary, sort_keys=True">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="dictionary">
 <name>dictionary</name>
@@ -435,7 +435,7 @@ Example:
 were always sorted.</doc>
 <shortdoc>Returns keys of the given ``dictionary`` as a list.</shortdoc>
 </kw>
-<kw name="Get Dictionary Values" lineno="620">
+<kw name="Get Dictionary Values" lineno="623">
 <arguments repr="dictionary, sort_keys=True">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="dictionary">
 <name>dictionary</name>
@@ -466,26 +466,33 @@ Example:
 were always sorted based on keys.</doc>
 <shortdoc>Returns values of the given ``dictionary`` as a list.</shortdoc>
 </kw>
-<kw name="Get From Dictionary" lineno="674">
-<arguments repr="dictionary, key">
+<kw name="Get From Dictionary" lineno="677">
+<arguments repr="dictionary, key, default=">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="dictionary">
 <name>dictionary</name>
 </arg>
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="key">
 <name>key</name>
 </arg>
+<arg kind="POSITIONAL_OR_NAMED" required="false" repr="default=">
+<name>default</name>
+<default/>
+</arg>
 </arguments>
 <doc>Returns a value from the given ``dictionary`` based on the given ``key``.
 
 If the given ``key`` cannot be found from the ``dictionary``, this
-keyword fails.
+keyword fails. If optional ``default`` value is given, it will be
+returned instead of failing.
 
 The given dictionary is never altered by this keyword.
 
 Example:
 | ${value} = | Get From Dictionary | ${D3} | b |
 =&gt;
-| ${value} = 2</doc>
+| ${value} = 2
+
+Support for ``default`` is new in Robot Framework 6.0.</doc>
 <shortdoc>Returns a value from the given ``dictionary`` based on the given ``key``.</shortdoc>
 </kw>
 <kw name="Get From List" lineno="174">
@@ -547,7 +554,7 @@ Example:
 | ${L5} is not changed</doc>
 <shortdoc>Returns the index of the first occurrence of the ``value`` on the list.</shortdoc>
 </kw>
-<kw name="Get Match Count" lineno="986">
+<kw name="Get Match Count" lineno="995">
 <arguments repr="list, pattern, case_insensitive=False, whitespace_insensitive=False">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="list">
 <name>list</name>
@@ -575,7 +582,7 @@ Examples:
 | ${count}= | Get Match Count | ${list} | a* | case_insensitive=${True} | # ${matches} will be the count of strings beginning with 'a' or 'A' |</doc>
 <shortdoc>Returns the count of matches to ``pattern`` in ``list``.</shortdoc>
 </kw>
-<kw name="Get Matches" lineno="970">
+<kw name="Get Matches" lineno="979">
 <arguments repr="list, pattern, case_insensitive=False, whitespace_insensitive=False">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="list">
 <name>list</name>
@@ -674,7 +681,7 @@ Example:
 | ${L2} = ['a', 'xxx', 'b']</doc>
 <shortdoc>Inserts ``value`` into ``list`` to the position specified with ``index``.</shortdoc>
 </kw>
-<kw name="Keep In Dictionary" lineno="558">
+<kw name="Keep In Dictionary" lineno="561">
 <arguments repr="dictionary, *keys">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="dictionary">
 <name>dictionary</name>
@@ -694,7 +701,7 @@ Example:
 | ${D5} = {'b': 2, 'd': 4}</doc>
 <shortdoc>Keeps the given ``keys`` in the ``dictionary`` and removes all other.</shortdoc>
 </kw>
-<kw name="List Should Contain Sub List" lineno="423">
+<kw name="List Should Contain Sub List" lineno="426">
 <arguments repr="list1, list2, msg=None, values=True">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="list1">
 <name>list1</name>
@@ -711,14 +718,14 @@ Example:
 <default>True</default>
 </arg>
 </arguments>
-<doc>Fails if not all of the elements in ``list2`` are found in ``list1``.
+<doc>Fails if not all elements in ``list2`` are found in ``list1``.
 
 The order of values and the number of values are not taken into
 account.
 
 See `Lists Should Be Equal` for more information about configuring
 the error message with ``msg`` and ``values`` arguments.</doc>
-<shortdoc>Fails if not all of the elements in ``list2`` are found in ``list1``.</shortdoc>
+<shortdoc>Fails if not all elements in ``list2`` are found in ``list1``.</shortdoc>
 </kw>
 <kw name="List Should Contain Value" lineno="307">
 <arguments repr="list_, value, msg=None">
@@ -738,7 +745,7 @@ the error message with ``msg`` and ``values`` arguments.</doc>
 Use the ``msg`` argument to override the default error message.</doc>
 <shortdoc>Fails if the ``value`` is not found from ``list``.</shortdoc>
 </kw>
-<kw name="List Should Not Contain Duplicates" lineno="325">
+<kw name="List Should Not Contain Duplicates" lineno="327">
 <arguments repr="list_, msg=None">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="list_">
 <name>list_</name>
@@ -759,7 +766,7 @@ This keyword works with all iterables that can be converted to a list.
 The original iterable is never altered.</doc>
 <shortdoc>Fails if any element in the ``list`` is found from it more than once.</shortdoc>
 </kw>
-<kw name="List Should Not Contain Value" lineno="316">
+<kw name="List Should Not Contain Value" lineno="317">
 <arguments repr="list_, value, msg=None">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="list_">
 <name>list_</name>
@@ -777,7 +784,7 @@ The original iterable is never altered.</doc>
 Use the ``msg`` argument to override the default error message.</doc>
 <shortdoc>Fails if the ``value`` is found from ``list``.</shortdoc>
 </kw>
-<kw name="Lists Should Be Equal" lineno="350">
+<kw name="Lists Should Be Equal" lineno="351">
 <arguments repr="list1, list2, msg=None, values=True, names=None, ignore_order=False">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="list1">
 <name>list1</name>
@@ -822,8 +829,8 @@ arguments:
 The optional ``names`` argument can be used for naming the indices
 shown in the default error message. It can either be a list of names
 matching the indices in the lists or a dictionary where keys are
-indices that need to be named. It is not necessary to name all of
-the indices.  When using a dictionary, keys can be either integers
+indices that need to be named. It is not necessary to name all indices.
+When using a dictionary, keys can be either integers
 or strings that can be converted to integers.
 
 Examples:
@@ -846,7 +853,7 @@ Example:
 | Lists Should Be Equal | ${list1} | ${list2} | ignore_order=True |</doc>
 <shortdoc>Fails if given lists are unequal.</shortdoc>
 </kw>
-<kw name="Log Dictionary" lineno="774">
+<kw name="Log Dictionary" lineno="786">
 <arguments repr="dictionary, level=INFO">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="dictionary">
 <name>dictionary</name>
@@ -864,7 +871,7 @@ If you only want to log the size, use keyword `Get Length` from
 the BuiltIn library.</doc>
 <shortdoc>Logs the size and contents of the ``dictionary`` using given ``level``.</shortdoc>
 </kw>
-<kw name="Log List" lineno="437">
+<kw name="Log List" lineno="441">
 <arguments repr="list_, level=INFO">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="list_">
 <name>list_</name>
@@ -882,7 +889,7 @@ If you only want to the length, use keyword `Get Length` from
 the BuiltIn library.</doc>
 <shortdoc>Logs the length and contents of the ``list`` using given ``level``.</shortdoc>
 </kw>
-<kw name="Pop From Dictionary" lineno="539">
+<kw name="Pop From Dictionary" lineno="542">
 <arguments repr="dictionary, key, default=">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="dictionary">
 <name>dictionary</name>
@@ -922,7 +929,7 @@ the new list is the same as in the original except for missing
 duplicates. Number of the removed duplicates is logged.</doc>
 <shortdoc>Returns a list without duplicates based on the given ``list``.</shortdoc>
 </kw>
-<kw name="Remove From Dictionary" lineno="520">
+<kw name="Remove From Dictionary" lineno="523">
 <arguments repr="dictionary, *keys">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="dictionary">
 <name>dictionary</name>
@@ -1028,7 +1035,7 @@ Example:
 | ${L3} = ['a', 'xxx', 'yyy']</doc>
 <shortdoc>Sets the value of ``list`` specified by ``index`` to the given ``value``.</shortdoc>
 </kw>
-<kw name="Set To Dictionary" lineno="494">
+<kw name="Set To Dictionary" lineno="497">
 <arguments repr="dictionary, *key_value_pairs, **items">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="dictionary">
 <name>dictionary</name>
@@ -1057,7 +1064,7 @@ a limitation that keys must be strings.
 If given keys already exist in the dictionary, their values are updated.</doc>
 <shortdoc>Adds the given ``key_value_pairs`` and ``items`` to the ``dictionary``.</shortdoc>
 </kw>
-<kw name="Should Contain Match" lineno="910">
+<kw name="Should Contain Match" lineno="921">
 <arguments repr="list, pattern, msg=None, case_insensitive=False, whitespace_insensitive=False">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="list">
 <name>list</name>
@@ -1114,7 +1121,7 @@ Examples:
 | Should Contain Match | ${list} | ab* | whitespace_insensitive=true | case_insensitive=true | # Same as the above but also ignore case. |</doc>
 <shortdoc>Fails if ``pattern`` is not found in ``list``.</shortdoc>
 </kw>
-<kw name="Should Not Contain Match" lineno="955">
+<kw name="Should Not Contain Match" lineno="965">
 <arguments repr="list, pattern, msg=None, case_insensitive=False, whitespace_insensitive=False">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="list">
 <name>list</name>

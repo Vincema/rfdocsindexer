@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<keywordspec name="Screenshot" type="LIBRARY" format="ROBOT" scope="SUITE" generated="2022-10-06T16:55:18Z" specversion="4" source="/home/kali/Code/rfdocsindexer/.tox/py39/lib/python3.9/site-packages/robot/libraries/Screenshot.py" lineno="39">
-<version>5.0.1</version>
+<keywordspec name="Screenshot" type="LIBRARY" format="ROBOT" scope="SUITE" generated="2023-04-17T12:52:22+00:00" specversion="4" source="/home/kali/Code/rfdocsindexer/.venv/lib/python3.10/site-packages/robot/libraries/Screenshot.py" lineno="39">
+<version>6.0.2</version>
 <doc>Library for taking screenshots on the machine where tests are executed.
 
 Taking the actual screenshot requires a suitable tool or module that may
@@ -83,7 +83,7 @@ Examples:
 </init>
 </inits>
 <keywords>
-<kw name="Set Screenshot Directory" lineno="127">
+<kw name="Set Screenshot Directory" lineno="131">
 <arguments repr="path">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="path">
 <name>path</name>
@@ -97,7 +97,7 @@ systems. Path to the old directory is returned.
 The directory can also be set in `importing`.</doc>
 <shortdoc>Sets the directory where screenshots are saved.</shortdoc>
 </kw>
-<kw name="Take Screenshot" lineno="142">
+<kw name="Take Screenshot" lineno="146">
 <arguments repr="name=screenshot, width=800px">
 <arg kind="POSITIONAL_OR_NAMED" required="false" repr="name=screenshot">
 <name>name</name>
@@ -133,7 +133,7 @@ Examples: (LOGDIR is determined automatically by the library)
 The path where the screenshot is saved is returned.</doc>
 <shortdoc>Takes a screenshot in JPEG format and embeds it into the log file.</shortdoc>
 </kw>
-<kw name="Take Screenshot Without Embedding" lineno="171">
+<kw name="Take Screenshot Without Embedding" lineno="175">
 <arguments repr="name=screenshot">
 <arg kind="POSITIONAL_OR_NAMED" required="false" repr="name=screenshot">
 <name>name</name>

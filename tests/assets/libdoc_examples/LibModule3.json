@@ -1,12 +1,13 @@
 {
+  "specversion": 1,
   "name": "LibModule3",
   "doc": "LibModule3 library",
   "version": "",
-  "generated": "2021-08-20 17:17:13",
+  "generated": "2023-04-17T12:52:22+00:00",
   "type": "LIBRARY",
   "scope": "TEST",
   "docFormat": "ROBOT",
-  "source": "/home/vc/Workspace/rfdocsindexer/tests/assets/libraries_dir_examples/libraries_dir_recursive/subdir1/LibModule3/__init__.py",
+  "source": "/home/kali/Code/rfdocsindexer/tests/assets/libraries_dir_examples/libraries_dir_recursive/subdir1/LibModule3/__init__.py",
   "lineno": 7,
   "tags": [],
   "inits": [],
@@ -17,7 +18,7 @@
       "doc": "",
       "shortdoc": "",
       "tags": [],
-      "source": "/home/vc/Workspace/rfdocsindexer/tests/assets/libraries_dir_examples/libraries_dir_recursive/subdir1/LibModule3/__init__.py",
+      "source": "/home/kali/Code/rfdocsindexer/tests/assets/libraries_dir_examples/libraries_dir_recursive/subdir1/LibModule3/__init__.py",
       "lineno": 14
     },
     {
@@ -28,6 +29,9 @@
           "types": [
             "str"
           ],
+          "typedocs": {
+            "str": "string"
+          },
           "defaultValue": null,
           "kind": "POSITIONAL_OR_NAMED",
           "required": true,
@@ -37,12 +41,25 @@
       "doc": "",
       "shortdoc": "",
       "tags": [],
-      "source": "/home/vc/Workspace/rfdocsindexer/tests/assets/libraries_dir_examples/libraries_dir_recursive/subdir1/LibModule3/__init__.py",
+      "source": "/home/kali/Code/rfdocsindexer/tests/assets/libraries_dir_examples/libraries_dir_recursive/subdir1/LibModule3/__init__.py",
       "lineno": 18
     }
   ],
   "dataTypes": {
     "enums": [],
     "typedDicts": []
-  }
+  },
+  "typedocs": [
+    {
+      "type": "Standard",
+      "name": "string",
+      "doc": "All arguments are converted to Unicode strings.",
+      "usages": [
+        "Keyword2"
+      ],
+      "accepts": [
+        "Any"
+      ]
+    }
+  ]
 }
