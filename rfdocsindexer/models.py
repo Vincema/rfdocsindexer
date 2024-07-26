@@ -1,7 +1,7 @@
 import functools
 from typing import List, Optional
 
-from pydantic import AnyUrl, BaseModel, FilePath
+from pydantic import BaseModel, FilePath
 from robot.libdocpkg.model import LibraryDoc
 from typing_extensions import Literal
 
@@ -116,7 +116,7 @@ class ExternalResource(BaseModel):
     """
 
     name: str
-    url: AnyUrl
+    url: str
 
     def __eq__(self, other: object) -> bool:
         assert isinstance(
