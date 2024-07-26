@@ -3,7 +3,7 @@ from invoke import task
 
 
 @task
-def generate_test_assets(c):
+def generatetestassets(c):
     """
     Recreate the examples files used in acceptance tests.
     """
