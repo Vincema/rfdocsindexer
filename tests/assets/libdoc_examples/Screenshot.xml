@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<keywordspec name="Screenshot" type="LIBRARY" format="ROBOT" scope="SUITE" generated="2023-04-17T12:52:22+00:00" specversion="4" source="/home/kali/Code/rfdocsindexer/.venv/lib/python3.10/site-packages/robot/libraries/Screenshot.py" lineno="39">
-<version>6.0.2</version>
+<keywordspec name="Screenshot" type="LIBRARY" format="ROBOT" scope="SUITE" generated="2024-07-26T11:05:34+00:00" specversion="6" source="C:\Users\maire\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0\LocalCache\local-packages\Python310\site-packages\robot\libraries\Screenshot.py" lineno="39">
+<version>7.0.1</version>
 <doc>Library for taking screenshots on the machine where tests are executed.
 
 Taking the actual screenshot requires a suitable tool or module that may
@@ -148,8 +148,6 @@ so it is nevertheless easily available.</doc>
 <shortdoc>Takes a screenshot and links it from the log file.</shortdoc>
 </kw>
 </keywords>
-<datatypes>
-</datatypes>
 <typedocs>
 </typedocs>
 </keywordspec>

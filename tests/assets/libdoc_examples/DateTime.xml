@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<keywordspec name="DateTime" type="LIBRARY" format="ROBOT" scope="GLOBAL" generated="2023-04-17T12:52:22+00:00" specversion="4" source="/home/kali/Code/rfdocsindexer/.venv/lib/python3.10/site-packages/robot/libraries/DateTime.py" lineno="1">
-<version>6.0.2</version>
+<keywordspec name="DateTime" type="LIBRARY" format="ROBOT" scope="GLOBAL" generated="2024-07-26T11:05:33+00:00" specversion="6" source="C:\Users\maire\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0\LocalCache\local-packages\Python310\site-packages\robot\libraries\DateTime.py" lineno="1">
+<version>7.0.1</version>
 <doc>A library for handling date and time values.
 
 ``DateTime`` is a Robot Framework standard library that supports creating and
@@ -89,10 +89,10 @@ Examples:
 == Python datetime ==
 
 Python's standard
-[http://docs.python.org/library/datetime.html#datetime-objects|datetime]
-objects can be used both in input and output. In input they are recognized
-automatically, and in output it is possible to get them by giving ``datetime``
-value to ``result_format`` argument.
+[https://docs.python.org/library/datetime.html#datetime.datetime|datetime]
+objects can be used both in input and output. In input, they are recognized
+automatically, and in output it is possible to get them by using the ``datetime``
+value with the ``result_format`` argument.
 
 One nice benefit with datetime objects is that they have different time
 components available as attributes that can be easily accessed using the
@@ -107,6 +107,16 @@ Examples:
 | Should Be Equal As Integers | ${datetime.minute}      | 7      |
 | Should Be Equal As Integers | ${datetime.second}      | 42     |
 | Should Be Equal As Integers | ${datetime.microsecond} | 123000 |
+
+== Python date ==
+
+Python's standard [https://docs.python.org/library/datetime.html#datetime.date|date]
+objects are automatically recognized in input starting from Robot Framework 7.0.
+They are not supported in output, but ``datetime`` objects can be converted
+to ``date`` objects if needed:
+
+| ${datetime} = | Convert Date | 2023-12-18 11:10:42 | datetime |
+| Log | ${datetime.date()} | # The time part is ignored. |
 
 == Epoch time ==
 
@@ -276,7 +286,7 @@ are available as functions that can be easily imported:
 |     seconds = convert_time(timeout)
 |     # ...
 
-Additionally helper classes ``Date`` and ``Time`` can be used directly:
+Additionally, helper classes ``Date`` and ``Time`` can be used directly:
 
 | from robot.libraries.DateTime import Date, Time
 |
@@ -289,7 +299,7 @@ Additionally helper classes ``Date`` and ``Time`` can be used directly:
 <inits>
 </inits>
 <keywords>
-<kw name="Add Time To Date" lineno="421">
+<kw name="Add Time To Date" lineno="430">
 <arguments repr="date, time, result_format=timestamp, exclude_millis=False, date_format=None">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="date">
 <name>date</name>
@@ -329,7 +339,7 @@ Examples:
 | Should Be Equal | ${date}          | 2014-05-28 13:07:06.115 |</doc>
 <shortdoc>Adds time to date and returns the resulting date.</shortdoc>
 </kw>
-<kw name="Add Time To Time" lineno="469">
+<kw name="Add Time To Time" lineno="478">
 <arguments repr="time1, time2, result_format=number, exclude_millis=False">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="time1">
 <name>time1</name>
@@ -362,7 +372,7 @@ Examples:
 | Should Be Equal | ${time}          | 04:07:03          |</doc>
 <shortdoc>Adds time to another time and returns the resulting time.</shortdoc>
 </kw>
-<kw name="Convert Date" lineno="352">
+<kw name="Convert Date" lineno="362">
 <arguments repr="date, result_format=timestamp, exclude_millis=False, date_format=None">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="date">
 <name>date</name>
@@ -398,7 +408,7 @@ Examples:
 | Should Be Equal | ${date}      | 2014-05-28 12:05:00     |</doc>
 <shortdoc>Converts between supported `date formats`.</shortdoc>
 </kw>
-<kw name="Convert Time" lineno="375">
+<kw name="Convert Time" lineno="384">
 <arguments repr="time, result_format=number, exclude_millis=False">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="time">
 <name>time</name>
@@ -429,7 +439,7 @@ Examples:
 | Should Be Equal | ${time}       | 01:01:02          |</doc>
 <shortdoc>Converts between supported `time formats`.</shortdoc>
 </kw>
-<kw name="Get Current Date" lineno="309">
+<kw name="Get Current Date" lineno="320">
 <arguments repr="time_zone=local, increment=0, result_format=timestamp, exclude_millis=False">
 <arg kind="POSITIONAL_OR_NAMED" required="false" repr="time_zone=local">
 <name>time_zone</name>
@@ -474,7 +484,7 @@ Examples:
 | Should Be Equal | ${date.month}    | ${6}                    |</doc>
 <shortdoc>Returns current local or UTC time with an optional increment.</shortdoc>
 </kw>
-<kw name="Subtract Date From Date" lineno="395">
+<kw name="Subtract Date From Date" lineno="404">
 <arguments repr="date1, date2, result_format=number, exclude_millis=False, date1_format=None, date2_format=None">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="date1">
 <name>date1</name>
@@ -519,7 +529,7 @@ Arguments:
 | Should Be Equal | ${time}                 | 1 day 42 seconds        |</doc>
 <shortdoc>Subtracts date from another date and returns time between.</shortdoc>
 </kw>
-<kw name="Subtract Time From Date" lineno="445">
+<kw name="Subtract Time From Date" lineno="454">
 <arguments repr="date, time, result_format=timestamp, exclude_millis=False, date_format=None">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="date">
 <name>date</name>
@@ -559,7 +569,7 @@ Examples:
 | Should Be Equal | ${date}                 | 2014-05-28 12:05:03.111 |</doc>
 <shortdoc>Subtracts time from date and returns the resulting date.</shortdoc>
 </kw>
-<kw name="Subtract Time From Time" lineno="490">
+<kw name="Subtract Time From Time" lineno="499">
 <arguments repr="time1, time2, result_format=number, exclude_millis=False">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="time1">
 <name>time1</name>
@@ -594,8 +604,6 @@ Examples:
 <shortdoc>Subtracts time from another time and returns the resulting time.</shortdoc>
 </kw>
 </keywords>
-<datatypes>
-</datatypes>
 <typedocs>
 </typedocs>
 </keywordspec>

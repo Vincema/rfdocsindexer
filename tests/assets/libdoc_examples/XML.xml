@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<keywordspec name="XML" type="LIBRARY" format="ROBOT" scope="GLOBAL" generated="2023-04-17T12:52:22+00:00" specversion="4" source="/home/kali/Code/rfdocsindexer/.venv/lib/python3.10/site-packages/robot/libraries/XML.py" lineno="46">
-<version>6.0.2</version>
+<keywordspec name="XML" type="LIBRARY" format="ROBOT" scope="GLOBAL" generated="2024-07-26T11:05:34+00:00" specversion="6" source="C:\Users\maire\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0\LocalCache\local-packages\Python310\site-packages\robot\libraries\XML.py" lineno="45">
+<version>7.0.1</version>
 <doc>Robot Framework library for verifying and modifying XML documents.
 
 As the name implies, _XML_ is a library for verifying contents of XML files.
@@ -10,7 +10,7 @@ In practice, it is a pretty thin wrapper on top of Python's
 The library has the following main usages:
 
 - Parsing an XML file, or a string containing XML, into an XML element
-  structure and finding certain elements from it for for further analysis
+  structure and finding certain elements from it for further analysis
   (e.g. `Parse XML` and `Get Element` keywords).
 - Getting text or attributes of elements
   (e.g. `Get Element Text` and `Get Element Attribute`).
@@ -40,10 +40,10 @@ element of the structure, which then contains other elements as its
 children and their children. Possible comments and processing instructions
 in the source XML are removed.
 
-XML is not validated during parsing even if has a schema defined. How
+XML is not validated during parsing even if it has a schema defined. How
 possible doctype elements are handled otherwise depends on the used XML
 module and on the platform. The standard ElementTree strips doctypes
-altogether but when `using lxml` they are preserved when XML is saved.
+altogether, but when `using lxml` they are preserved when XML is saved.
 
 The element structure returned by `Parse XML`, as well as elements
 returned by keywords such as `Get Element`, can be used as the ``source``
@@ -59,8 +59,6 @@ When the source is given as a path to a file, the forward slash character
 On Windows also the backslash works, but in the data it needs to be
 escaped by doubling it (``\\``). Using the built-in variable ``${/}``
 naturally works too.
-
-Note: Support for XML as bytes is new in Robot Framework 3.2.
 
 = Using lxml =
 
@@ -133,7 +131,7 @@ ElementTree documentation] provides more details. In the examples
 
 If lxml support is enabled when `importing` the library, the whole
 [http://www.w3.org/TR/xpath/|xpath 1.0 standard] is supported.
-That includes everything listed below but also lot of other useful
+That includes everything listed below but also a lot of other useful
 constructs.
 
 == Tag names ==
@@ -269,7 +267,7 @@ A Python dictionary containing attributes of the element.
 = Handling XML namespaces =
 
 ElementTree and lxml handle possible namespaces in XML documents by adding
-the namespace URI to tag names in so called Clark Notation. That is
+the namespace URI to tag names in so-called Clark Notation. That is
 inconvenient especially with xpaths, and by default this library strips
 those namespaces away and moves them to ``xmlns`` attribute instead. That
 can be avoided by passing ``keep_clark_notation`` argument to `Parse XML`
@@ -398,8 +396,6 @@ False examples:
 | `Parse XML` | ${XML} | keep_clark_notation=${EMPTY} | # Empty string is false.       |
 | `Parse XML` | ${XML} | keep_clark_notation=${FALSE} | # Python ``False`` is false.   |
 
-Considering ``OFF`` and ``0`` false is new in Robot Framework 3.1.
-
 == Pattern matching ==
 
 Some keywords, for example `Elements Should Match`, support so called
@@ -414,14 +410,11 @@ Some keywords, for example `Elements Should Match`, support so called
 
 Unlike with glob patterns normally, path separator characters ``/`` and
 ``\`` and the newline character ``\n`` are matches by the above
-wildcards.
-
-Support for brackets like ``[abc]`` and ``[!a-z]`` is new in
-Robot Framework 3.1</doc>
+wildcards.</doc>
 <tags>
 </tags>
 <inits>
-<init name="__init__" lineno="461">
+<init name="__init__" lineno="452">
 <arguments repr="use_lxml=False">
 <arg kind="POSITIONAL_OR_NAMED" required="false" repr="use_lxml=False">
 <name>use_lxml</name>
@@ -430,15 +423,15 @@ Robot Framework 3.1</doc>
 </arguments>
 <doc>Import library with optionally lxml mode enabled.
 
-By default this library uses Python's standard
+This library uses Python's standard
 [http://docs.python.org/library/xml.etree.elementtree.html|ElementTree]
-module for parsing XML. If ``use_lxml`` argument is given a true value
-(see `Boolean arguments`), the library will use [http://lxml.de|lxml]
-module instead. See `Using lxml` section for benefits provided by lxml.
+module for parsing XML by default. If ``use_lxml`` argument is given
+a true value (see `Boolean arguments`), the [http://lxml.de|lxml] module
+is used instead. See the `Using lxml` section for benefits provided by lxml.
 
 Using lxml requires that the lxml module is installed on the system.
 If lxml mode is enabled but the module is not installed, this library
-will emit a warning and revert back to using the standard ElementTree.</doc>
+emits a warning and reverts back to using the standard ElementTree.</doc>
 <shortdoc>Import library with optionally lxml mode enabled.</shortdoc>
 </init>
 </inits>
@@ -541,7 +534,7 @@ Use `Remove Element` to remove the whole element.</doc>
 The element to copy is specified using ``source`` and ``xpath``. They
 have exactly the same semantics as with `Get Element` keyword.
 
-If the copy or the original element is modified afterwards, the changes
+If the copy or the original element is modified afterward, the changes
 have no effect on the other.
 
 Examples using ``${XML}`` structure from `Example`:
@@ -555,7 +548,7 @@ Examples using ``${XML}`` structure from `Example`:
 | Elements Should Be Equal | ${copy2} | &lt;first id="1"&gt;text&lt;/first&gt;     |</doc>
 <shortdoc>Returns a copy of the specified element.</shortdoc>
 </kw>
-<kw name="Element Attribute Should Be" lineno="815">
+<kw name="Element Attribute Should Be" lineno="805">
 <arguments repr="source, name, expected, xpath=., message=None">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="source">
 <name>source</name>
@@ -596,7 +589,7 @@ Examples using ``${XML}`` structure from `Example`:
 See also `Element Attribute Should Match` and `Get Element Attribute`.</doc>
 <shortdoc>Verifies that the specified attribute is ``expected``.</shortdoc>
 </kw>
-<kw name="Element Attribute Should Match" lineno="840">
+<kw name="Element Attribute Should Match" lineno="830">
 <arguments repr="source, name, pattern, xpath=., message=None">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="source">
 <name>source</name>
@@ -631,7 +624,7 @@ Examples using ``${XML}`` structure from `Example`:
 | Element Attribute Should Match | ${XML} | id | c*d | xpath=third/second |</doc>
 <shortdoc>Verifies that the specified attribute matches ``expected``.</shortdoc>
 </kw>
-<kw name="Element Should Exist" lineno="626">
+<kw name="Element Should Exist" lineno="616">
 <arguments repr="source, xpath=., message=None">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="source">
 <name>source</name>
@@ -656,7 +649,7 @@ See also `Element Should Not Exist` as well as `Get Element Count`
 that this keyword uses internally.</doc>
 <shortdoc>Verifies that one or more element match the given ``xpath``.</shortdoc>
 </kw>
-<kw name="Element Should Not Exist" lineno="641">
+<kw name="Element Should Not Exist" lineno="631">
 <arguments repr="source, xpath=., message=None">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="source">
 <name>source</name>
@@ -681,7 +674,7 @@ See also `Element Should Exist` as well as `Get Element Count`
 that this keyword uses internally.</doc>
 <shortdoc>Verifies that no element match the given ``xpath``.</shortdoc>
 </kw>
-<kw name="Element Should Not Have Attribute" lineno="861">
+<kw name="Element Should Not Have Attribute" lineno="851">
 <arguments repr="source, name, xpath=., message=None">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="source">
 <name>source</name>
@@ -715,7 +708,7 @@ See also `Get Element Attribute`, `Get Element Attributes`,
 `Element Text Should Be` and `Element Text Should Match`.</doc>
 <shortdoc>Verifies that the specified element does not have attribute ``name``.</shortdoc>
 </kw>
-<kw name="Element Text Should Be" lineno="725">
+<kw name="Element Text Should Be" lineno="715">
 <arguments repr="source, expected, xpath=., normalize_whitespace=False, message=None">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="source">
 <name>source</name>
@@ -759,7 +752,7 @@ Examples using ``${XML}`` structure from `Example`:
 | Element Text Should Be | ${paragraph} | Text with bold and italics. | normalize_whitespace=yes |</doc>
 <shortdoc>Verifies that the text of the specified element is ``expected``.</shortdoc>
 </kw>
-<kw name="Element Text Should Match" lineno="752">
+<kw name="Element Text Should Match" lineno="742">
 <arguments repr="source, pattern, xpath=., normalize_whitespace=False, message=None">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="source">
 <name>source</name>
@@ -816,15 +809,15 @@ The element to convert to a string is specified using ``source`` and
 ``xpath``. They have exactly the same semantics as with `Get Element`
 keyword.
 
-By default the string is returned as Unicode. If ``encoding`` argument
+The string is returned as Unicode by default. If ``encoding`` argument
 is given any value, the string is returned as bytes in the specified
 encoding. The resulting string never contains the XML declaration.
 
 See also `Log Element` and `Save XML`.</doc>
 <shortdoc>Returns the string representation of the specified element.</shortdoc>
 </kw>
-<kw name="Elements Should Be Equal" lineno="883">
-<arguments repr="source, expected, exclude_children=False, normalize_whitespace=False">
+<kw name="Elements Should Be Equal" lineno="873">
+<arguments repr="source, expected, exclude_children=False, normalize_whitespace=False, sort_children=False">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="source">
 <name>source</name>
 </arg>
@@ -839,6 +832,10 @@ See also `Log Element` and `Save XML`.</doc>
 <name>normalize_whitespace</name>
 <default>False</default>
 </arg>
+<arg kind="POSITIONAL_OR_NAMED" required="false" repr="sort_children=False">
+<name>sort_children</name>
+<default>False</default>
+</arg>
 </arguments>
 <doc>Verifies that the given ``source`` element is equal to ``expected``.
 
@@ -849,12 +846,14 @@ general.
 
 The keyword passes if the ``source`` element and ``expected`` element
 are equal. This includes testing the tag names, texts, and attributes
-of the elements. By default also child elements are verified the same
+of the elements. By default, also child elements are verified the same
 way, but this can be disabled by setting ``exclude_children`` to a
-true value (see `Boolean arguments`).
+true value (see `Boolean arguments`). Child elements are expected to
+be in the same order, but that can be changed by giving ``sort_children``
+a true value. Notice that elements are sorted solely based on tag names.
 
 All texts inside the given elements are verified, but possible text
-outside them is not. By default texts must match exactly, but setting
+outside them is not. By default, texts must match exactly, but setting
 ``normalize_whitespace`` to a true value makes text verification
 independent on newlines, tabs, and the amount of spaces. For more
 details about handling text see `Get Element Text` keyword and
@@ -873,11 +872,13 @@ only has text ``Text with``. The reason is that rest of the text
 inside ``&lt;p&gt;`` actually belongs to the child elements. This includes
 the ``.`` at the end that is the `tail` text of the ``&lt;i&gt;`` element.
 
-See also `Elements Should Match`.</doc>
+See also `Elements Should Match`.
+
+``sort_children`` is new in Robot Framework 7.0.</doc>
 <shortdoc>Verifies that the given ``source`` element is equal to ``expected``.</shortdoc>
 </kw>
-<kw name="Elements Should Match" lineno="923">
-<arguments repr="source, expected, exclude_children=False, normalize_whitespace=False">
+<kw name="Elements Should Match" lineno="917">
+<arguments repr="source, expected, exclude_children=False, normalize_whitespace=False, sort_children=False">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="source">
 <name>source</name>
 </arg>
@@ -890,6 +891,10 @@ See also `Elements Should Match`.</doc>
 </arg>
 <arg kind="POSITIONAL_OR_NAMED" required="false" repr="normalize_whitespace=False">
 <name>normalize_whitespace</name>
+<default>False</default>
+</arg>
+<arg kind="POSITIONAL_OR_NAMED" required="false" repr="sort_children=False">
+<name>sort_children</name>
 <default>False</default>
 </arg>
 </arguments>
@@ -910,7 +915,7 @@ Examples using ``${XML}`` structure from `Example`:
 See `Elements Should Be Equal` for more examples.</doc>
 <shortdoc>Verifies that the given ``source`` element matches ``expected``.</shortdoc>
 </kw>
-<kw name="Evaluate Xpath" lineno="1372">
+<kw name="Evaluate Xpath" lineno="1373">
 <arguments repr="source, expression, context=.">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="source">
 <name>source</name>
@@ -945,7 +950,7 @@ This keyword works only if lxml mode is taken into use when `importing`
 the library.</doc>
 <shortdoc>Evaluates the given xpath expression and returns results.</shortdoc>
 </kw>
-<kw name="Get Child Elements" lineno="596">
+<kw name="Get Child Elements" lineno="586">
 <arguments repr="source, xpath=.">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="source">
 <name>source</name>
@@ -971,7 +976,7 @@ Examples using ``${XML}`` structure from `Example`:
 | Should Be Empty  | ${children}        |        |             |</doc>
 <shortdoc>Returns the child elements of the specified element as a list.</shortdoc>
 </kw>
-<kw name="Get Element" lineno="531">
+<kw name="Get Element" lineno="521">
 <arguments repr="source, xpath=.">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="source">
 <name>source</name>
@@ -1007,7 +1012,7 @@ given as a string. The XML structure parsed based on the string and
 then modified is nevertheless returned.</doc>
 <shortdoc>Returns an element in the ``source`` matching the ``xpath``.</shortdoc>
 </kw>
-<kw name="Get Element Attribute" lineno="773">
+<kw name="Get Element Attribute" lineno="763">
 <arguments repr="source, name, xpath=., default=None">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="source">
 <name>source</name>
@@ -1044,7 +1049,7 @@ See also `Get Element Attributes`, `Element Attribute Should Be`,
 `Element Attribute Should Match` and `Element Should Not Have Attribute`.</doc>
 <shortdoc>Returns the named attribute of the specified element.</shortdoc>
 </kw>
-<kw name="Get Element Attributes" lineno="795">
+<kw name="Get Element Attributes" lineno="785">
 <arguments repr="source, xpath=.">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="source">
 <name>source</name>
@@ -1072,7 +1077,7 @@ Examples using ``${XML}`` structure from `Example`:
 Use `Get Element Attribute` to get the value of a single attribute.</doc>
 <shortdoc>Returns all attributes of the specified element.</shortdoc>
 </kw>
-<kw name="Get Element Count" lineno="614">
+<kw name="Get Element Count" lineno="604">
 <arguments repr="source, xpath=.">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="source">
 <name>source</name>
@@ -1090,7 +1095,7 @@ with `Get Elements` keyword that this keyword uses internally.
 See also `Element Should Exist` and `Element Should Not Exist`.</doc>
 <shortdoc>Returns and logs how many elements the given ``xpath`` matches.</shortdoc>
 </kw>
-<kw name="Get Element Text" lineno="656">
+<kw name="Get Element Text" lineno="646">
 <arguments repr="source, xpath=., normalize_whitespace=False">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="source">
 <name>source</name>
@@ -1135,7 +1140,7 @@ See also `Get Elements Texts`, `Element Text Should Be` and
 `Element Text Should Match`.</doc>
 <shortdoc>Returns all text of the element, possibly whitespace normalized.</shortdoc>
 </kw>
-<kw name="Get Elements" lineno="574">
+<kw name="Get Elements" lineno="564">
 <arguments repr="source, xpath">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="source">
 <name>source</name>
@@ -1161,7 +1166,7 @@ Examples using ``${XML}`` structure from `Example`:
 | Should Be Empty  |  ${children} |        |             |</doc>
 <shortdoc>Returns a list of elements in the ``source`` matching the ``xpath``.</shortdoc>
 </kw>
-<kw name="Get Elements Texts" lineno="705">
+<kw name="Get Elements Texts" lineno="695">
 <arguments repr="source, xpath, normalize_whitespace=False">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="source">
 <name>source</name>
@@ -1191,7 +1196,7 @@ Examples using ``${XML}`` structure from `Example`:
 | Should Be Equal  | @{texts}[1]        | ${EMPTY}  |             |</doc>
 <shortdoc>Returns text of all elements matching ``xpath`` as a list.</shortdoc>
 </kw>
-<kw name="Log Element" lineno="1318">
+<kw name="Log Element" lineno="1320">
 <arguments repr="source, level=INFO, xpath=.">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="source">
 <name>source</name>
@@ -1214,7 +1219,7 @@ resulting string is then logged using the given ``level``.
 The logged string is also returned.</doc>
 <shortdoc>Logs the string representation of the specified element.</shortdoc>
 </kw>
-<kw name="Parse Xml" lineno="488">
+<kw name="Parse Xml" lineno="478">
 <arguments repr="source, keep_clark_notation=False, strip_namespaces=False">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="source">
 <name>source</name>
@@ -1423,7 +1428,7 @@ Like `Remove Element Attributes` but removes all attributes of all
 elements matching the given ``xpath``.</doc>
 <shortdoc>Removes all attributes from the specified elements.</shortdoc>
 </kw>
-<kw name="Save Xml" lineno="1331">
+<kw name="Save Xml" lineno="1333">
 <arguments repr="source, path, encoding=UTF-8">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="source">
 <name>source</name>
@@ -1631,8 +1636,6 @@ matching the given ``xpath``.</doc>
 <shortdoc>Sets text and/or tail text of the specified elements.</shortdoc>
 </kw>
 </keywords>
-<datatypes>
-</datatypes>
 <typedocs>
 </typedocs>
 </keywordspec>

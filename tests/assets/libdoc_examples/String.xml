@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<keywordspec name="String" type="LIBRARY" format="ROBOT" scope="GLOBAL" generated="2023-04-17T12:52:22+00:00" specversion="4" source="/home/kali/Code/rfdocsindexer/.venv/lib/python3.10/site-packages/robot/libraries/String.py" lineno="29">
-<version>6.0.2</version>
+<keywordspec name="String" type="LIBRARY" format="ROBOT" scope="GLOBAL" generated="2024-07-26T11:05:34+00:00" specversion="6" source="C:\Users\maire\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0\LocalCache\local-packages\Python310\site-packages\robot\libraries\String.py" lineno="28">
+<version>7.0.1</version>
 <doc>A library for string manipulation and verification.
 
 ``String`` is Robot Framework's standard library for manipulating
@@ -25,7 +25,7 @@ Following keywords from ``BuiltIn`` library can also be used with strings:
 <inits>
 </inits>
 <keywords>
-<kw name="Convert To Lower Case" lineno="53">
+<kw name="Convert To Lower Case" lineno="52">
 <arguments repr="string">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="string">
 <name>string</name>
@@ -44,7 +44,7 @@ Examples:
 | Should Be Equal | ${str2} | 1a2c3d |</doc>
 <shortdoc>Converts string to lower case.</shortdoc>
 </kw>
-<kw name="Convert To Title Case" lineno="84">
+<kw name="Convert To Title Case" lineno="83">
 <arguments repr="string, exclude=None">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="string">
 <name>string</name>
@@ -89,12 +89,10 @@ The reason this keyword does not use Python's standard
 method is that it can yield undesired results, for example, if
 strings contain upper case letters or special characters like
 apostrophes. It would, for example, convert "it's an OK iPhone"
-to "It'S An Ok Iphone".
-
-New in Robot Framework 3.2.</doc>
+to "It'S An Ok Iphone".</doc>
 <shortdoc>Converts string to title case.</shortdoc>
 </kw>
-<kw name="Convert To Upper Case" lineno="68">
+<kw name="Convert To Upper Case" lineno="67">
 <arguments repr="string">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="string">
 <name>string</name>
@@ -113,7 +111,7 @@ Examples:
 | Should Be Equal | ${str2} | 1A2C3D |</doc>
 <shortdoc>Converts string to upper case.</shortdoc>
 </kw>
-<kw name="Decode Bytes To String" lineno="166">
+<kw name="Decode Bytes To String" lineno="163">
 <arguments repr="bytes, encoding, errors=strict">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="bytes">
 <name>bytes</name>
@@ -126,7 +124,7 @@ Examples:
 <default>strict</default>
 </arg>
 </arguments>
-<doc>Decodes the given ``bytes`` to a Unicode string using the given ``encoding``.
+<doc>Decodes the given ``bytes`` to a string using the given ``encoding``.
 
 ``errors`` argument controls what to do if decoding some bytes fails.
 All values accepted by ``decode`` method in Python are valid, but in
@@ -141,12 +139,12 @@ Examples:
 | ${string} = | Decode Bytes To String | ${bytes} | UTF-8 |
 | ${string} = | Decode Bytes To String | ${bytes} | ASCII | errors=ignore |
 
-Use `Encode String To Bytes` if you need to convert Unicode strings to
-byte strings, and `Convert To String` in ``BuiltIn`` if you need to
-convert arbitrary objects to Unicode strings.</doc>
-<shortdoc>Decodes the given ``bytes`` to a Unicode string using the given ``encoding``.</shortdoc>
+Use `Encode String To Bytes` if you need to convert strings to bytes,
+and `Convert To String` in ``BuiltIn`` if you need to
+convert arbitrary objects to strings.</doc>
+<shortdoc>Decodes the given ``bytes`` to a string using the given ``encoding``.</shortdoc>
 </kw>
-<kw name="Encode String To Bytes" lineno="143">
+<kw name="Encode String To Bytes" lineno="140">
 <arguments repr="string, encoding, errors=strict">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="string">
 <name>string</name>
@@ -159,7 +157,7 @@ convert arbitrary objects to Unicode strings.</doc>
 <default>strict</default>
 </arg>
 </arguments>
-<doc>Encodes the given Unicode ``string`` to bytes using the given ``encoding``.
+<doc>Encodes the given ``string`` to bytes using the given ``encoding``.
 
 ``errors`` argument controls what to do if encoding some characters fails.
 All values accepted by ``encode`` method in Python are valid, but in
@@ -176,11 +174,11 @@ Examples:
 
 Use `Convert To Bytes` in ``BuiltIn`` if you want to create bytes based
 on character or integer sequences. Use `Decode Bytes To String` if you
-need to convert byte strings to Unicode strings and `Convert To String`
-in ``BuiltIn`` if you need to convert arbitrary objects to Unicode.</doc>
-<shortdoc>Encodes the given Unicode ``string`` to bytes using the given ``encoding``.</shortdoc>
+need to convert bytes to strings and `Convert To String`
+in ``BuiltIn`` if you need to convert arbitrary objects to strings.</doc>
+<shortdoc>Encodes the given ``string`` to bytes using the given ``encoding``.</shortdoc>
 </kw>
-<kw name="Fetch From Left" lineno="579">
+<kw name="Fetch From Left" lineno="575">
 <arguments repr="string, marker">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="string">
 <name>string</name>
@@ -197,7 +195,7 @@ See also `Fetch From Right`, `Split String` and `Split String
 From Right`.</doc>
 <shortdoc>Returns contents of the ``string`` before the first occurrence of ``marker``.</shortdoc>
 </kw>
-<kw name="Fetch From Right" lineno="589">
+<kw name="Fetch From Right" lineno="585">
 <arguments repr="string, marker">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="string">
 <name>string</name>
@@ -214,7 +212,7 @@ See also `Fetch From Left`, `Split String` and `Split String
 From Right`.</doc>
 <shortdoc>Returns contents of the ``string`` after the last occurrence of ``marker``.</shortdoc>
 </kw>
-<kw name="Format String" lineno="190">
+<kw name="Format String" lineno="187">
 <arguments repr="template, *positional, **named">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="template">
 <name>template</name>
@@ -245,12 +243,10 @@ Examples:
 | ${to} = | Format String | To: {user.name} &lt;{user.email}&gt; | user=${user} |
 | ${xx} = | Format String | {:*^30}                        | centered     |
 | ${yy} = | Format String | {0:{width}{base}}              | ${42}        | base=X | width=10 |
-| ${zz} = | Format String | ${CURDIR}/template.txt         | positional   | named=value |
-
-New in Robot Framework 3.1.</doc>
+| ${zz} = | Format String | ${CURDIR}/template.txt         | positional   | named=value |</doc>
 <shortdoc>Formats a ``template`` using the given ``positional`` and ``named`` arguments.</shortdoc>
 </kw>
-<kw name="Generate Random String" lineno="599">
+<kw name="Generate Random String" lineno="595">
 <arguments repr="length=8, chars=[LETTERS][NUMBERS]">
 <arg kind="POSITIONAL_OR_NAMED" required="false" repr="length=8">
 <name>length</name>
@@ -288,7 +284,7 @@ Examples:
 Giving ``length`` as a range of values is new in Robot Framework 5.0.</doc>
 <shortdoc>Generates a string with a desired ``length`` from the given ``chars``.</shortdoc>
 </kw>
-<kw name="Get Line" lineno="255">
+<kw name="Get Line" lineno="250">
 <arguments repr="string, line_number">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="string">
 <name>string</name>
@@ -299,7 +295,7 @@ Giving ``length`` as a range of values is new in Robot Framework 5.0.</doc>
 </arguments>
 <doc>Returns the specified line from the given ``string``.
 
-Line numbering starts from 0 and it is possible to use
+Line numbering starts from 0, and it is possible to use
 negative indices to refer to lines from the end. The line is
 returned without the newline character.
 
@@ -310,7 +306,7 @@ Examples:
 Use `Split To Lines` if all lines are needed.</doc>
 <shortdoc>Returns the specified line from the given ``string``.</shortdoc>
 </kw>
-<kw name="Get Line Count" lineno="222">
+<kw name="Get Line Count" lineno="217">
 <arguments repr="string">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="string">
 <name>string</name>
@@ -319,16 +315,27 @@ Use `Split To Lines` if all lines are needed.</doc>
 <doc>Returns and logs the number of lines in the given string.</doc>
 <shortdoc>Returns and logs the number of lines in the given string.</shortdoc>
 </kw>
-<kw name="Get Lines Containing String" lineno="271">
-<arguments repr="string, pattern, case_insensitive=False">
-<arg kind="POSITIONAL_OR_NAMED" required="true" repr="string">
+<kw name="Get Lines Containing String" lineno="266">
+<arguments repr="string: str, pattern: str, case_insensitive: bool | None = None, ignore_case: bool = False">
+<arg kind="POSITIONAL_OR_NAMED" required="true" repr="string: str">
 <name>string</name>
+<type name="str" typedoc="string"/>
 </arg>
-<arg kind="POSITIONAL_OR_NAMED" required="true" repr="pattern">
+<arg kind="POSITIONAL_OR_NAMED" required="true" repr="pattern: str">
 <name>pattern</name>
+<type name="str" typedoc="string"/>
 </arg>
-<arg kind="POSITIONAL_OR_NAMED" required="false" repr="case_insensitive=False">
+<arg kind="POSITIONAL_OR_NAMED" required="false" repr="case_insensitive: bool | None = None">
 <name>case_insensitive</name>
+<type name="Union" union="true">
+<type name="bool" typedoc="boolean"/>
+<type name="None" typedoc="None"/>
+</type>
+<default>None</default>
+</arg>
+<arg kind="POSITIONAL_OR_NAMED" required="false" repr="ignore_case: bool = False">
+<name>ignore_case</name>
+<type name="bool" typedoc="boolean"/>
 <default>False</default>
 </arg>
 </arguments>
@@ -338,34 +345,44 @@ The ``pattern`` is always considered to be a normal string, not a glob
 or regexp pattern. A line matches if the ``pattern`` is found anywhere
 on it.
 
-The match is case-sensitive by default, but giving ``case_insensitive``
-a true value makes it case-insensitive. The value is considered true
-if it is a non-empty string that is not equal to ``false``, ``none`` or
-``no``. If the value is not a string, its truth value is got directly
-in Python.
+The match is case-sensitive by default, but that can be changed by
+giving ``ignore_case`` a true value. This option is new in Robot
+Framework 7.0, but with older versions it is possible to use the
+nowadays deprecated ``case_insensitive`` argument.
 
-Lines are returned as one string catenated back together with
-newlines. Possible trailing newline is never returned. The
-number of matching lines is automatically logged.
+Lines are returned as a string with lines joined together with
+a newline. Possible trailing newline is never returned. The number
+of matching lines is automatically logged.
 
 Examples:
 | ${lines} = | Get Lines Containing String | ${result} | An example |
-| ${ret} =   | Get Lines Containing String | ${ret} | FAIL | case-insensitive |
+| ${ret} =   | Get Lines Containing String | ${ret} | FAIL | ignore_case=True |
 
 See `Get Lines Matching Pattern` and `Get Lines Matching Regexp`
 if you need more complex pattern matching.</doc>
 <shortdoc>Returns lines of the given ``string`` that contain the ``pattern``.</shortdoc>
 </kw>
-<kw name="Get Lines Matching Pattern" lineno="302">
-<arguments repr="string, pattern, case_insensitive=False">
-<arg kind="POSITIONAL_OR_NAMED" required="true" repr="string">
+<kw name="Get Lines Matching Pattern" lineno="300">
+<arguments repr="string: str, pattern: str, case_insensitive: bool | None = None, ignore_case: bool = False">
+<arg kind="POSITIONAL_OR_NAMED" required="true" repr="string: str">
 <name>string</name>
+<type name="str" typedoc="string"/>
 </arg>
-<arg kind="POSITIONAL_OR_NAMED" required="true" repr="pattern">
+<arg kind="POSITIONAL_OR_NAMED" required="true" repr="pattern: str">
 <name>pattern</name>
+<type name="str" typedoc="string"/>
 </arg>
-<arg kind="POSITIONAL_OR_NAMED" required="false" repr="case_insensitive=False">
+<arg kind="POSITIONAL_OR_NAMED" required="false" repr="case_insensitive: bool | None = None">
 <name>case_insensitive</name>
+<type name="Union" union="true">
+<type name="bool" typedoc="boolean"/>
+<type name="None" typedoc="None"/>
+</type>
+<default>None</default>
+</arg>
+<arg kind="POSITIONAL_OR_NAMED" required="false" repr="ignore_case: bool = False">
+<name>ignore_case</name>
+<type name="bool" typedoc="boolean"/>
 <default>False</default>
 </arg>
 </arguments>
@@ -379,26 +396,25 @@ The ``pattern`` is a _glob pattern_ where:
 
 A line matches only if it matches the ``pattern`` fully.
 
-The match is case-sensitive by default, but giving ``case_insensitive``
-a true value makes it case-insensitive. The value is considered true
-if it is a non-empty string that is not equal to ``false``, ``none`` or
-``no``. If the value is not a string, its truth value is got directly
-in Python.
+The match is case-sensitive by default, but that can be changed by
+giving ``ignore_case`` a true value. This option is new in Robot
+Framework 7.0, but with older versions it is possible to use the
+nowadays deprecated ``case_insensitive`` argument.
 
-Lines are returned as one string catenated back together with
-newlines. Possible trailing newline is never returned. The
-number of matching lines is automatically logged.
+Lines are returned as a string with lines joined together with
+a newline. Possible trailing newline is never returned. The number
+of matching lines is automatically logged.
 
 Examples:
 | ${lines} = | Get Lines Matching Pattern | ${result} | Wild???? example |
-| ${ret} = | Get Lines Matching Pattern | ${ret} | FAIL: * | case_insensitive=true |
+| ${ret} = | Get Lines Matching Pattern | ${ret} | FAIL: * | ignore_case=True |
 
 See `Get Lines Matching Regexp` if you need more complex
 patterns and `Get Lines Containing String` if searching
 literal strings is enough.</doc>
 <shortdoc>Returns lines of the given ``string`` that match the ``pattern``.</shortdoc>
 </kw>
-<kw name="Get Lines Matching Regexp" lineno="338">
+<kw name="Get Lines Matching Regexp" lineno="339">
 <arguments repr="string, pattern, partial_match=False, flags=None">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="string">
 <name>string</name>
@@ -423,10 +439,7 @@ in Robot Framework data in particular.
 
 Lines match only if they match the pattern fully by default, but
 partial matching can be enabled by giving the ``partial_match``
-argument a true value. The value is considered true
-if it is a non-empty string that is not equal to ``false``, ``none`` or
-``no``. If the value is not a string, its truth value is got directly
-in Python.
+argument a true value.
 
 If the pattern is empty, it matches only empty lines by default.
 When partial matching is enabled, empty pattern matches all lines.
@@ -452,7 +465,7 @@ do not need the full regular expression powers (and complexity).
 The ``flags`` argument is new in Robot Framework 6.0.</doc>
 <shortdoc>Returns lines of the given ``string`` that match the regexp ``pattern``.</shortdoc>
 </kw>
-<kw name="Get Regexp Matches" lineno="387">
+<kw name="Get Regexp Matches" lineno="383">
 <arguments repr="string, pattern, *groups, flags=None">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="string">
 <name>string</name>
@@ -503,7 +516,7 @@ Examples:
 The ``flags`` argument is new in Robot Framework 6.0.</doc>
 <shortdoc>Returns a list of all non-overlapping matches in the given string.</shortdoc>
 </kw>
-<kw name="Get Substring" lineno="642">
+<kw name="Get Substring" lineno="638">
 <arguments repr="string, start, end=None">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="string">
 <name>string</name>
@@ -524,13 +537,13 @@ negative indices to refer to characters from the end.
 
 Examples:
 | ${ignore first} = | Get Substring | ${string} | 1  |    |
-| ${ignore last} =  | Get Substring | ${string} |    | -1 |
+| ${ignore last} =  | Get Substring | ${string} | 0  | -1 |
 | ${5th to 10th} =  | Get Substring | ${string} | 4  | 10 |
-| ${first two} =    | Get Substring | ${string} |    | 1  |
+| ${first two} =    | Get Substring | ${string} | 0  | 1  |
 | ${last two} =     | Get Substring | ${string} | -2 |    |</doc>
 <shortdoc>Returns a substring from ``start`` index to ``end`` index.</shortdoc>
 </kw>
-<kw name="Remove String" lineno="484">
+<kw name="Remove String" lineno="480">
 <arguments repr="string, *removables">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="string">
 <name>string</name>
@@ -559,7 +572,7 @@ Examples:
 | Should Be Equal | ${str}        | R Framewrk      |</doc>
 <shortdoc>Removes all ``removables`` from the given ``string``.</shortdoc>
 </kw>
-<kw name="Remove String Using Regexp" lineno="508">
+<kw name="Remove String Using Regexp" lineno="504">
 <arguments repr="string, *patterns, flags=None">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="string">
 <name>string</name>
@@ -589,7 +602,7 @@ Possible flags altering how the expression is parsed (e.g. ``re.IGNORECASE``,
 The ``flags`` argument is new in Robot Framework 6.0.</doc>
 <shortdoc>Removes ``patterns`` from the given ``string``.</shortdoc>
 </kw>
-<kw name="Replace String" lineno="432">
+<kw name="Replace String" lineno="428">
 <arguments repr="string, search_for, replace_with, count=-1">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="string">
 <name>string</name>
@@ -626,7 +639,7 @@ Examples:
 | Should Be Equal | ${str}         | Helo, world!   |       |          |</doc>
 <shortdoc>Replaces ``search_for`` in the given ``string`` with ``replace_with``.</shortdoc>
 </kw>
-<kw name="Replace String Using Regexp" lineno="456">
+<kw name="Replace String Using Regexp" lineno="452">
 <arguments repr="string, pattern, replace_with, count=-1, flags=None">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="string">
 <name>string</name>
@@ -668,7 +681,7 @@ Examples:
 The ``flags`` argument is new in Robot Framework 6.0.</doc>
 <shortdoc>Replaces ``pattern`` in the given ``string`` with ``replace_with``.</shortdoc>
 </kw>
-<kw name="Should Be Byte String" lineno="716">
+<kw name="Should Be Byte String" lineno="711">
 <arguments repr="item, msg=None">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="item">
 <name>item</name>
@@ -685,7 +698,7 @@ Use `Should Be String` if you want to verify the ``item`` is a string.
 The default error message can be overridden with the optional ``msg`` argument.</doc>
 <shortdoc>Fails if the given ``item`` is not a byte string.</shortdoc>
 </kw>
-<kw name="Should Be Lower Case" lineno="726">
+<kw name="Should Be Lower Case" lineno="721">
 <arguments repr="string, msg=None">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="string">
 <name>string</name>
@@ -706,7 +719,7 @@ The default error message can be overridden with the optional
 See also `Should Be Upper Case` and `Should Be Title Case`.</doc>
 <shortdoc>Fails if the given ``string`` is not in lower case.</shortdoc>
 </kw>
-<kw name="Should Be String" lineno="691">
+<kw name="Should Be String" lineno="687">
 <arguments repr="item, msg=None">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="item">
 <name>item</name>
@@ -721,7 +734,7 @@ See also `Should Be Upper Case` and `Should Be Title Case`.</doc>
 The default error message can be overridden with the optional ``msg`` argument.</doc>
 <shortdoc>Fails if the given ``item`` is not a string.</shortdoc>
 </kw>
-<kw name="Should Be Title Case" lineno="755">
+<kw name="Should Be Title Case" lineno="750">
 <arguments repr="string, msg=None, exclude=None">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="string">
 <name>string</name>
@@ -764,7 +777,7 @@ Framework data in particular.
 See also `Should Be Upper Case` and `Should Be Lower Case`.</doc>
 <shortdoc>Fails if given ``string`` is not title.</shortdoc>
 </kw>
-<kw name="Should Be Unicode String" lineno="707">
+<kw name="Should Be Unicode String" lineno="703">
 <arguments repr="item, msg=None">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="item">
 <name>item</name>
@@ -780,7 +793,7 @@ On Python 3 this keyword behaves exactly the same way `Should Be String`.
 That keyword should be used instead and this keyword will be deprecated.</doc>
 <shortdoc>Fails if the given ``item`` is not a Unicode string.</shortdoc>
 </kw>
-<kw name="Should Be Upper Case" lineno="740">
+<kw name="Should Be Upper Case" lineno="735">
 <arguments repr="string, msg=None">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="string">
 <name>string</name>
@@ -801,7 +814,7 @@ The default error message can be overridden with the optional
 See also `Should Be Title Case` and `Should Be Lower Case`.</doc>
 <shortdoc>Fails if the given ``string`` is not in upper case.</shortdoc>
 </kw>
-<kw name="Should Not Be String" lineno="699">
+<kw name="Should Not Be String" lineno="695">
 <arguments repr="item, msg=None">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="item">
 <name>item</name>
@@ -816,7 +829,7 @@ See also `Should Be Title Case` and `Should Be Lower Case`.</doc>
 The default error message can be overridden with the optional ``msg`` argument.</doc>
 <shortdoc>Fails if the given ``item`` is a string.</shortdoc>
 </kw>
-<kw name="Split String" lineno="530">
+<kw name="Split String" lineno="526">
 <arguments repr="string, separator=None, max_split=-1">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="string">
 <name>string</name>
@@ -850,7 +863,7 @@ from right, and `Fetch From Left` and `Fetch From Right` if
 you only want to get first/last part of the string.</doc>
 <shortdoc>Splits the ``string`` using ``separator`` as a delimiter string.</shortdoc>
 </kw>
-<kw name="Split String From Right" lineno="556">
+<kw name="Split String From Right" lineno="552">
 <arguments repr="string, separator=None, max_split=-1">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="string">
 <name>string</name>
@@ -874,7 +887,7 @@ Examples:
 | ${rest}  | ${last} = | Split String From Right | ${string} | - | 1 |</doc>
 <shortdoc>Splits the ``string`` using ``separator`` starting from right.</shortdoc>
 </kw>
-<kw name="Split String To Characters" lineno="571">
+<kw name="Split String To Characters" lineno="567">
 <arguments repr="string">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="string">
 <name>string</name>
@@ -886,7 +899,7 @@ Example:
 | @{characters} = | Split String To Characters | ${string} |</doc>
 <shortdoc>Splits the given ``string`` to characters.</shortdoc>
 </kw>
-<kw name="Split To Lines" lineno="228">
+<kw name="Split To Lines" lineno="223">
 <arguments repr="string, start=0, end=None">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="string">
 <name>string</name>
@@ -921,7 +934,7 @@ Examples:
 Use `Get Line` if you only need to get a single line.</doc>
 <shortdoc>Splits the given string to lines.</shortdoc>
 </kw>
-<kw name="Strip String" lineno="661">
+<kw name="Strip String" lineno="657">
 <arguments repr="string, mode=both, characters=None">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="string">
 <name>string</name>
@@ -957,8 +970,50 @@ Examples:
 <shortdoc>Remove leading and/or trailing whitespaces from the given string.</shortdoc>
 </kw>
 </keywords>
-<datatypes>
-</datatypes>
 <typedocs>
+<type name="boolean" type="Standard">
+<doc>Strings ``TRUE``, ``YES``, ``ON`` and ``1`` are converted to Boolean ``True``,
+the empty string as well as strings ``FALSE``, ``NO``, ``OFF`` and ``0``
+are converted to Boolean ``False``, and the string ``NONE`` is converted
+to the Python ``None`` object. Other strings and other accepted values are
+passed as-is, allowing keywords to handle them specially if
+needed. All string comparisons are case-insensitive.
+
+Examples: ``TRUE`` (converted to ``True``), ``off`` (converted to ``False``),
+``example`` (used as-is)
+</doc>
+<accepts>
+<type>string</type>
+<type>integer</type>
+<type>float</type>
+<type>None</type>
+</accepts>
+<usages>
+<usage>Get Lines Containing String</usage>
+<usage>Get Lines Matching Pattern</usage>
+</usages>
+</type>
+<type name="None" type="Standard">
+<doc>String ``NONE`` (case-insensitive) is converted to Python ``None`` object.
+Other values cause an error.
+</doc>
+<accepts>
+<type>string</type>
+</accepts>
+<usages>
+<usage>Get Lines Containing String</usage>
+<usage>Get Lines Matching Pattern</usage>
+</usages>
+</type>
+<type name="string" type="Standard">
+<doc>All arguments are converted to Unicode strings.</doc>
+<accepts>
+<type>Any</type>
+</accepts>
+<usages>
+<usage>Get Lines Containing String</usage>
+<usage>Get Lines Matching Pattern</usage>
+</usages>
+</type>
 </typedocs>
 </keywordspec>

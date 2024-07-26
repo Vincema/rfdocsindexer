@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<keywordspec name="Telnet" type="LIBRARY" format="ROBOT" scope="SUITE" generated="2023-04-17T12:52:22+00:00" specversion="4" source="/home/kali/Code/rfdocsindexer/.venv/lib/python3.10/site-packages/robot/libraries/Telnet.py" lineno="36">
-<version>6.0.2</version>
+<keywordspec name="Telnet" type="LIBRARY" format="ROBOT" scope="SUITE" generated="2024-07-26T11:05:34+00:00" specversion="6" source="C:\Users\maire\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0\LocalCache\local-packages\Python310\site-packages\robot\libraries\Telnet.py" lineno="36">
+<version>7.0.1</version>
 <doc>A library providing communication over Telnet connections.
 
 ``Telnet`` is Robot Framework's standard library that makes it possible to
@@ -889,8 +889,6 @@ the output in 5 seconds.</doc>
 <shortdoc>Writes the given ``text`` repeatedly, until ``expected`` appears in the output.</shortdoc>
 </kw>
 </keywords>
-<datatypes>
-</datatypes>
 <typedocs>
 </typedocs>
 </keywordspec>

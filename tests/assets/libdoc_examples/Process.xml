@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<keywordspec name="Process" type="LIBRARY" format="ROBOT" scope="GLOBAL" generated="2023-04-17T12:52:22+00:00" specversion="4" source="/home/kali/Code/rfdocsindexer/.venv/lib/python3.10/site-packages/robot/libraries/Process.py" lineno="30">
-<version>6.0.2</version>
+<keywordspec name="Process" type="LIBRARY" format="ROBOT" scope="GLOBAL" generated="2024-07-26T11:05:33+00:00" specversion="6" source="C:\Users\maire\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0\LocalCache\local-packages\Python310\site-packages\robot\libraries\Process.py" lineno="30">
+<version>7.0.1</version>
 <doc>Robot Framework library for running processes.
 
 This library utilizes Python's
@@ -54,7 +54,7 @@ Possible non-string arguments are converted to strings automatically.
 optional ``**configuration`` keyword arguments. Configuration arguments
 must be given after other arguments passed to these keywords and must
 use syntax like ``name=value``. Available configuration arguments are
-listed below and discussed further in sections afterwards.
+listed below and discussed further in sections afterward.
 
 |  = Name =  |                  = Explanation =                      |
 | shell      | Specifies whether to run the command in shell or not. |
@@ -75,7 +75,7 @@ See `Run Process` for an example.
 == Running processes in shell ==
 
 The ``shell`` argument specifies whether to run the process in a shell or
-not. By default shell is not used, which means that shell specific commands,
+not. By default, shell is not used, which means that shell specific commands,
 like ``copy`` and ``dir`` on Windows, are not available. You can, however,
 run shell scripts and batch files without using a shell.
 
@@ -108,8 +108,8 @@ Example:
 
 == Environment variables ==
 
-By default the child process will get a copy of the parent process's
-environment variables. The ``env`` argument can be used to give the
+The child process will get a copy of the parent process's environment
+variables by default. The ``env`` argument can be used to give the
 child a custom environment as a Python dictionary. If there is a need
 to specify only certain environment variable, it is possible to use the
 ``env:&lt;name&gt;=&lt;value&gt;`` format to set or override only that named variables.
@@ -122,12 +122,12 @@ Examples:
 
 == Standard output and error streams ==
 
-By default processes are run so that their standard output and standard
+By default, processes are run so that their standard output and standard
 error streams are kept in the memory. This works fine normally,
 but if there is a lot of output, the output buffers may get full and
 the program can hang.
 
-To avoid the above mentioned problems, it is possible to use ``stdout``
+To avoid the above-mentioned problems, it is possible to use ``stdout``
 and ``stderr`` arguments to specify files on the file system where to
 redirect the outputs. This can also be useful if other processes or
 other keywords need to read or manipulate the outputs somehow.
@@ -151,8 +151,6 @@ with ``&gt; /dev/null`` on UNIX-like operating systems or ``&gt; NUL`` on Window
 This way the process will not hang even if there would be a lot of output,
 but naturally output is not available after execution either.
 
-Support for the special value ``DEVNULL`` is new in Robot Framework 3.2.
-
 Examples:
 | ${result} = | `Run Process` | program | stdout=${TEMPDIR}/stdout.txt | stderr=${TEMPDIR}/stderr.txt |
 | `Log Many`  | stdout: ${result.stdout} | stderr: ${result.stderr} |
@@ -170,25 +168,23 @@ input stream of the started process. How its value is interpreted is
 explained in the table below.
 
 | = Value =        | = Explanation = |
-| String ``PIPE``  | Make stdin a pipe that can be written to. This is the default. |
-| String ``NONE``  | Inherit stdin from the parent process. This value is case-insensitive. |
+| String ``NONE``  | Inherit stdin from the parent process. This is the default. |
+| String ``PIPE``  | Make stdin a pipe that can be written to. |
 | Path to a file   | Open the specified file and use it as the stdin. |
 | Any other string | Create a temporary file with the text as its content and use it as the stdin. |
 | Any non-string value | Used as-is. Could be a file descriptor, stdout of another process, etc. |
 
-Values ``PIPE`` and ``NONE`` are internally mapped directly to
+Values ``PIPE`` and ``NONE`` are case-insensitive and internally mapped to
 ``subprocess.PIPE`` and ``None``, respectively, when calling
 [https://docs.python.org/3/library/subprocess.html#subprocess.Popen|subprocess.Popen].
-The default behavior may change from ``PIPE`` to ``NONE`` in future
-releases. If you depend on the ``PIPE`` behavior, it is a good idea to use
-it explicitly.
 
 Examples:
-| `Run Process` | command | stdin=NONE |
+| `Run Process` | command | stdin=PIPE |
 | `Run Process` | command | stdin=${CURDIR}/stdin.txt |
 | `Run Process` | command | stdin=Stdin as text. |
 
-The support to configure ``stdin`` is new in Robot Framework 4.1.2.
+The support to configure ``stdin`` is new in Robot Framework 4.1.2. Its default
+value used to be ``PIPE`` until Robot Framework 7.0.
 
 == Output encoding ==
 
@@ -277,8 +273,6 @@ False examples:
 | `Terminate Process` | kill=${EMPTY} | # Empty string is false.       |
 | `Terminate Process` | kill=${FALSE} | # Python ``False`` is false.   |
 
-Considering ``OFF`` and ``0`` false is new in Robot Framework 3.1.
-
 = Example =
 
 | ***** Settings *****
@@ -299,7 +293,7 @@ Considering ``OFF`` and ``0`` false is new in Robot Framework 3.1.
 <inits>
 </inits>
 <keywords>
-<kw name="Get Process Id" lineno="665">
+<kw name="Get Process Id" lineno="663">
 <arguments repr="handle=None">
 <arg kind="POSITIONAL_OR_NAMED" required="false" repr="handle=None">
 <name>handle</name>
@@ -315,7 +309,7 @@ the ``pid`` attribute of the ``subprocess.Popen`` object returned by
 `Start Process` like ``${process.pid}``.</doc>
 <shortdoc>Returns the process ID (pid) of the process as an integer.</shortdoc>
 </kw>
-<kw name="Get Process Object" lineno="676">
+<kw name="Get Process Object" lineno="674">
 <arguments repr="handle=None">
 <arg kind="POSITIONAL_OR_NAMED" required="false" repr="handle=None">
 <name>handle</name>
@@ -331,7 +325,7 @@ Starting from Robot Framework 5.0, `Start Process` returns the created
 mostly redundant.</doc>
 <shortdoc>Return the underlying ``subprocess.Popen`` object.</shortdoc>
 </kw>
-<kw name="Get Process Result" lineno="687">
+<kw name="Get Process Result" lineno="685">
 <arguments repr="handle=None, rc=False, stdout=False, stderr=False, stdout_path=False, stderr_path=False">
 <arg kind="POSITIONAL_OR_NAMED" required="false" repr="handle=None">
 <name>handle</name>
@@ -398,7 +392,7 @@ support returning the whole result object, but individual attributes
 can be returned without problems.</doc>
 <shortdoc>Returns the specified `result object` or some of its attributes.</shortdoc>
 </kw>
-<kw name="Is Process Running" lineno="419">
+<kw name="Is Process Running" lineno="421">
 <arguments repr="handle=None">
 <arg kind="POSITIONAL_OR_NAMED" required="false" repr="handle=None">
 <name>handle</name>
@@ -424,7 +418,7 @@ In resulting command line string arguments are delimited with a space,
 arguments containing spaces are surrounded with quotes, and possible
 quotes are escaped with a backslash.
 
-If this keyword is given only one argument and that is a list like
+If this keyword is given only one argument and that is a list-like
 object, then the values of that list are joined instead.
 
 Example:
@@ -432,7 +426,7 @@ Example:
 | Should Be Equal | ${cmd} | --option "value with spaces" |</doc>
 <shortdoc>Joins arguments into one command line string.</shortdoc>
 </kw>
-<kw name="Process Should Be Running" lineno="428">
+<kw name="Process Should Be Running" lineno="430">
 <arguments repr="handle=None, error_message=Process is not running.">
 <arg kind="POSITIONAL_OR_NAMED" required="false" repr="handle=None">
 <name>handle</name>
@@ -450,7 +444,7 @@ If ``handle`` is not given, uses the current `active process`.
 Fails if the process has stopped.</doc>
 <shortdoc>Verifies that the process is running.</shortdoc>
 </kw>
-<kw name="Process Should Be Stopped" lineno="439">
+<kw name="Process Should Be Stopped" lineno="441">
 <arguments repr="handle=None, error_message=Process is running.">
 <arg kind="POSITIONAL_OR_NAMED" required="false" repr="handle=None">
 <name>handle</name>
@@ -468,7 +462,7 @@ If ``handle`` is not given, uses the current `active process`.
 Fails if the process is still running.</doc>
 <shortdoc>Verifies that the process is not running.</shortdoc>
 </kw>
-<kw name="Run Process" lineno="328">
+<kw name="Run Process" lineno="322">
 <arguments repr="command, *arguments, **configuration">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="command">
 <name>command</name>
@@ -491,8 +485,14 @@ starting processes and waiting for them to finish. See `Process
 configuration` for more details about configuration related to starting
 processes. Configuration related to waiting for processes consists of
 ``timeout`` and ``on_timeout`` arguments that have same semantics as
-with `Wait For Process` keyword. By default there is no timeout, and
+with `Wait For Process` keyword. By default, there is no timeout, and
 if timeout is defined the default action on timeout is ``terminate``.
+
+Process outputs are, by default, written into in-memory buffers.
+If there is a lot of output, these buffers may get full causing
+the process to hang. To avoid that, process outputs can be redirected
+using the ``stdout`` and ``stderr`` configuration parameters. For more
+information see the `Standard output and error streams` section.
 
 Returns a `result object` containing information about the execution.
 
@@ -503,14 +503,14 @@ as ``**configuration``.
 Examples:
 | ${result} = | Run Process | python | -c | print('Hello, world!') |
 | Should Be Equal | ${result.stdout} | Hello, world! |
-| ${result} = | Run Process | ${command} | stderr=STDOUT | timeout=10s |
+| ${result} = | Run Process | ${command} | stdout=${CURDIR}/stdout.txt | stderr=STDOUT |
 | ${result} = | Run Process | ${command} | timeout=1min | on_timeout=continue |
 | ${result} = | Run Process | java -Dname\=value Example | shell=True | cwd=${EXAMPLE} |
 
 This keyword does not change the `active process`.</doc>
 <shortdoc>Runs a process and waits for it to complete.</shortdoc>
 </kw>
-<kw name="Send Signal To Process" lineno="612">
+<kw name="Send Signal To Process" lineno="610">
 <arguments repr="signal, handle=None, group=False">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="signal">
 <name>signal</name>
@@ -551,7 +551,7 @@ To send the signal to the whole process group, ``group`` argument can
 be set to any true value (see `Boolean arguments`).</doc>
 <shortdoc>Sends the given ``signal`` to the specified process.</shortdoc>
 </kw>
-<kw name="Split Command Line" lineno="768">
+<kw name="Split Command Line" lineno="766">
 <arguments repr="args, escaping=False">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="args">
 <name>args</name>
@@ -564,10 +564,12 @@ be set to any true value (see `Boolean arguments`).</doc>
 <doc>Splits command line string into a list of arguments.
 
 String is split from spaces, but argument surrounded in quotes may
-contain spaces in them. If ``escaping`` is given a true value, then
-backslash is treated as an escape character. It can escape unquoted
-spaces, quotes inside quotes, and so on, but it also requires using
-double backslashes when using Windows paths.
+contain spaces in them.
+
+If ``escaping`` is given a true value, then backslash is treated as
+an escape character. It can escape unquoted spaces, quotes inside
+quotes, and so on, but it also requires using doubling backslashes
+in Windows paths and elsewhere.
 
 Examples:
 | @{cmd} = | Split Command Line | --option "value with spaces" |
@@ -590,11 +592,13 @@ Examples:
 
 See `Specifying command and arguments` and `Process configuration`
 for more information about the arguments, and `Run Process` keyword
-for related examples.
+for related examples. This includes information about redirecting
+process outputs to avoid process handing due to output buffers getting
+full.
 
 Makes the started process new `active process`. Returns the created
 [https://docs.python.org/3/library/subprocess.html#popen-constructor |
-subprocess.Popen] object which can be be used later to active this
+subprocess.Popen] object which can be used later to activate this
 process. ``Popen`` attributes like ``pid`` can also be accessed directly.
 
 Processes are started so that they create a new process group. This
@@ -602,7 +606,7 @@ allows terminating and sending signals to possible child processes.
 
 Examples:
 
-Start process and wait for it to end later using alias:
+Start process and wait for it to end later using an alias:
 | `Start Process` | ${command} | alias=example |
 | # Other keywords |
 | ${result} = | `Wait For Process` | example |
@@ -624,7 +628,7 @@ Earlier versions returned a generic handle and getting the process object
 required using `Get Process Object` separately.</doc>
 <shortdoc>Starts a new process on background.</shortdoc>
 </kw>
-<kw name="Switch Process" lineno="746">
+<kw name="Switch Process" lineno="744">
 <arguments repr="handle">
 <arg kind="POSITIONAL_OR_NAMED" required="true" repr="handle">
 <name>handle</name>
@@ -643,7 +647,7 @@ Example:
 | # now active process is process1 |</doc>
 <shortdoc>Makes the specified process the current `active process`.</shortdoc>
 </kw>
-<kw name="Terminate All Processes" lineno="597">
+<kw name="Terminate All Processes" lineno="595">
 <arguments repr="kill=False">
 <arg kind="POSITIONAL_OR_NAMED" required="false" repr="kill=False">
 <name>kill</name>
@@ -660,7 +664,7 @@ configured to forcefully kill them immediately. See `Terminate Process`
 that this keyword uses internally for more details.</doc>
 <shortdoc>Terminates all still running processes started by this library.</shortdoc>
 </kw>
-<kw name="Terminate Process" lineno="530">
+<kw name="Terminate Process" lineno="528">
 <arguments repr="handle=None, kill=False">
 <arg kind="POSITIONAL_OR_NAMED" required="false" repr="handle=None">
 <name>handle</name>
@@ -702,7 +706,7 @@ Limitations:
   child processes.</doc>
 <shortdoc>Stops the process gracefully or forcefully.</shortdoc>
 </kw>
-<kw name="Wait For Process" lineno="450">
+<kw name="Wait For Process" lineno="452">
 <arguments repr="handle=None, timeout=None, on_timeout=continue">
 <arg kind="POSITIONAL_OR_NAMED" required="false" repr="handle=None">
 <name>handle</name>
@@ -760,15 +764,10 @@ Examples:
 | # Kill non-ending process   |                  |                  |
 | ${result} =                 | Wait For Process | timeout=1min 30s | on_timeout=kill |
 | Process Should Be Stopped   |                  |                  |
-| Should Be Equal As Integers | ${result.rc}     | -9               |
-
-Ignoring timeout if it is string ``NONE``, zero, or negative is new
-in Robot Framework 3.2.</doc>
+| Should Be Equal As Integers | ${result.rc}     | -9               |</doc>
 <shortdoc>Waits for the process to complete or to reach the given timeout.</shortdoc>
 </kw>
 </keywords>
-<datatypes>
-</datatypes>
 <typedocs>
 </typedocs>
 </keywordspec>
