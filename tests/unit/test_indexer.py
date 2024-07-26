@@ -191,7 +191,7 @@ def test_index_external_resources_valid_url():
     assert any(
         x.url == "http://url2.com" and x.name == "http://url2.com"
         for x in ext_resources
-    ), "URL1 should be returned"
+    ), "URL2 should be returned"
 
 
 def test_index_external_resources_stdout_should_contain_success(capsys):
