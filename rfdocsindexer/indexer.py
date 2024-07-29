@@ -186,7 +186,7 @@ def _index_external_resources(urls: List[str]) -> List[ExternalResource]:
         except ValueError:
             raise RuntimeError(f'Url format is invalid for url "{url}"')
 
-        ext_resources += [ExternalResource(url=url, name=name)]  # type: ignore
+        ext_resources += [ExternalResource(url=url, name=name)]
 
     print("Indexed external resources")
 
