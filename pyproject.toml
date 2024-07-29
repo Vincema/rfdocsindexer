@@ -49,7 +49,7 @@ mypy = "^1.2"
 pytest = "^7.0.1"
 robotframework-tidy = "^4.1"
 tox = "^3.24.0"
-tox-poetry-installer = "^0.10.0"
+tox-poetry-installer = {extras = ["poetry"], version = "^0.10.3"}
 types-toml = "^0.10.0"
 tox-gh-actions = "^2"
 
