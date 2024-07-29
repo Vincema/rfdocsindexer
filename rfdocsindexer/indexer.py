@@ -66,7 +66,7 @@ def _get_libdoc_from_libname_or_path(
     if isinstance(library_name_or_path, Path):
         library_name_or_path = str(library_name_or_path)
     try:
-        return DocumentationBuilder(library_name_or_path).build(library_name_or_path)
+        return DocumentationBuilder().build(library_name_or_path)
     except DataError as err:
         raise RuntimeError(
             f'Error generating documentation for library "{library_name_or_path}": '
